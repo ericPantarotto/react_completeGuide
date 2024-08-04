@@ -22,3 +22,28 @@ With React, in the example provided, in that app.js file, we just got that HTML 
 
 - React , you define the target UI states - not the steps to go there (Declarative)
 - with JavaScript, you define the steps, not the goal (Imperative)
+
+### Course Resources
+
+**<span style='color: #a3842c'>Link:** [https://github.com/academind/react-complete-guide-course-resources](https://github.com/academind/react-complete-guide-course-resources)
+
+<!---
+[comment]: it works with text, you can rename it how you want
+
+![image info](./1_sc1.png)
+
+**<span style='color:   #875c5c'>IMPORTANT:**
+**<span style='color: #495fcb'> Note:**
+**<span style='color: #a3842c'>Link:**
+
+<ins>text to underline</ins>
+
+--- : horizontal line
+
+| Property    | Description | Default |
+| -------- | ------- | ------- |
+| view engine  | The default engine extension to use when omitted. NOTE: Sub-apps will inherit the value of this setting.    | |
+| views |  A directory or an array of directories for the application's views. If an array, the views are looked up in the order they occur in the array. | `process.cwd() + '/views'` |
+
+-->
+
