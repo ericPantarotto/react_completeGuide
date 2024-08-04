@@ -43,6 +43,22 @@ if you prefer to use **VSCode** editor, you need to have installed *NodeJS*, as 
 - `npm i`
 - `npm run dev`
 
+### Why do we need a special project setup?
+
+Because when writing React code,
+
+you'll use this special HTML in JavaScript feature, this syntax is called **JSX**.
+
+It unfortunately doesn't work in the browser, So therefore the code you write actually must be transformed to code that does run in the browser.
+
+![image info](./1_sc1.png)
+
+That's the reason why you need to create React projects with extra tools like *Vite*.
+
+because it's those tools which do transform your code to code that can be executed efficiently in the browser.
+
+That's why you can't just create a basic HTML and script file but why you instead do need those extra tools.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
