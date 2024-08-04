@@ -27,6 +27,22 @@ With React, in the example provided, in that app.js file, we just got that HTML 
 
 **<span style='color: #a3842c'>Link:** [https://github.com/academind/react-complete-guide-course-resources](https://github.com/academind/react-complete-guide-course-resources)
 
+### Creating React Projects
+
+**<span style='color: #a3842c'>Link:** [Codesandbox_react](react.new)
+
+---
+
+if you prefer to use **VSCode** editor, you need to have installed *NodeJS*, as *ReactJS* uses tool such as *Vite*
+
+**<span style='color: #a3842c'>Link:** [https://vitejs.dev/guide/](https://vitejs.dev/guide/)
+
+`npm create vite@latest first_react_app -- --template react`
+
+- `cd` into project
+- `npm i`
+- `npm run dev`
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
