@@ -59,6 +59,23 @@ because it's those tools which do transform your code to code that can be execut
 
 That's why you can't just create a basic HTML and script file but why you instead do need those extra tools.
 
+## JavaScript Refresher
+
+### Adding JavaScript to a Page & How React Projects differ
+
+#### JavaScript can be executed in many environments
+
+![image info](./2_sc1.png)
+
+#### Adding JavaScript Code to a Website
+
+- between `<script>` tags
+- via `<script>` **Import**
+
+`<script src="assets/scripts/app.js" defer type="module"></script>` unlocks 1 very important syntax: *ES6 Import* syntax.
+
+**<span style='color: #495fcb'> Note:** when you're working on a React project, you will almost never add these script tags to your HTML file on your own, because React projects almost always use a build process which as part of that build process, injects these script tags into the HTML code for you.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
