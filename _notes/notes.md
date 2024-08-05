@@ -162,6 +162,13 @@ You can access fields and methods within this object using the `this` keyword.
 
 As an alternative to JS Objects, you can also create blueprints by using the special `class` keyword, that can then later be used to create the actual objects.
 
+### Arrays & Array Methods
+
+you can have arrays of arrays
+
+- push
+- findIndex
+- map
 <!---
 [comment]: it works with text, you can rename it how you want
 
