@@ -97,6 +97,46 @@ Because NodeJS is not just used to install packages with the NPM command or to c
 
 So NodeJS is also needed and used behind the scenes to make sure that your React code gets transformed.
 
+### Import & Export
+
+When working in React projects, you will actually see that the extension, `.js` typically, is omitted. That's the case again, because of that build process that's running behind the scenes, which will add the extension.
+
+If you are writing just JavaScript code without such a build process, you do need to add it on your own.
+
+For React projects, if you explore the automatically injected script text, you don't find this type module attribute on them.
+
+The reason for that simply is that this build process will actually take all your imports and exports and basically merge all these separate files that you have during development into one big file or a bunch of big files, which are then imported with the old school syntax in the right order.
+
+This is done to also make this code execute in browsers that don't natively support this import export syntax, and also so that the browser doesn't have to download dozens of small JavaScript files, but instead just a couple of bigger files, which typically is more efficient.
+
+But if you have a vanilla JavaScript app without such a build process, you do need to add this type module attribute here.
+
+**<span style='color:   #875c5c'>IMPORTANT:** If you use the default syntax, you must have only one `default export` per file.
+
+with the default export and the respective import syntax, it is especially useful if you only have one one function, or one value in the file to export.
+
+### Variables & Values
+
+#### There are different types of values
+
+- string (text)
+- number (positive or negative , with decimal point (float) or without (integer))
+- boolean
+- Null & undefined
+
+Variables store data, they are data containers, they have:
+
+- variable identifier
+- value (with a type)
+
+#### Why use variables?
+
+- reusability
+- readability
+
+if that value ever needs to change, I only need to change it in one place instead of multiple places.
+
+**<span style='color: #495fcb'> Note:** constants (`const`) work like variables (`let`), they are data containers. But the key differences that constants must not be reassigned.
 
 <!---
 [comment]: it works with text, you can rename it how you want
