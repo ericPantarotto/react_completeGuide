@@ -142,6 +142,15 @@ if that value ever needs to change, I only need to change it in one place instea
 ### Functions & Parameters
 
 Functions must only have one return statement at most, functions without `return` implicitly return `undefined`
+
+### More on the Arrow Function Syntax
+
+to return a JS object with an arrow function:
+
+```js
+    number => ({ age: number }); // wrapping the object in extra parentheses
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
