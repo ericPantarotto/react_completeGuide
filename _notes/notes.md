@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD033 -->
 # React - The Complete Guide 2024 (incl. Next.js, Redux)
 
 ## Getting Started
@@ -138,6 +139,9 @@ if that value ever needs to change, I only need to change it in one place instea
 
 **<span style='color: #495fcb'> Note:** constants (`const`) work like variables (`let`), they are data containers. But the key differences that constants must not be reassigned.
 
+### Functions & Parameters
+
+Functions must only have one return statement at most, functions without `return` implicitly return `undefined`
 <!---
 [comment]: it works with text, you can rename it how you want
 
@@ -158,3 +162,4 @@ if that value ever needs to change, I only need to change it in one place instea
 
 -->
 
+<!-- markdownlint-enable MD033 -->
