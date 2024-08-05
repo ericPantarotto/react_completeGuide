@@ -151,6 +151,17 @@ to return a JS object with an arrow function:
     number => ({ age: number }); // wrapping the object in extra parentheses
 ```
 
+### Object & Classes
+
+JS Objects can have:
+
+- fields
+- methods
+
+You can access fields and methods within this object using the `this` keyword.
+
+As an alternative to JS Objects, you can also create blueprints by using the special `class` keyword, that can then later be used to create the actual objects.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
