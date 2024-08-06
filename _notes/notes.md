@@ -169,6 +169,10 @@ you can have arrays of arrays
 - push
 - findIndex
 - map
+
+**<span style='color: #495fcb'> Note:** `npx live-server` allows you to run *live-server*.
+
+*npx* runs a command from a local or remote npm package
 <!---
 [comment]: it works with text, you can rename it how you want
 
