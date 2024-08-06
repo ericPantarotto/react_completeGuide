@@ -202,6 +202,11 @@ function storeOrder({id, currency}) { // destructuring
 }
 ```
 
+### Spread Operator
+
+**<span style='color: #a3842c'>Link:** [mdn webdocs/Spread_syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
