@@ -303,6 +303,10 @@ This allows you, the developer, to split up complex user interfaces into smaller
 - Related Code lives together: HTML + CSS + JS. Since JS influences the output, storing JS  + HTML together makes sense
 - separation of concerns: different components handle different data & logic. vastly simplifies the process of working on complex apps.
 
+### Setting-up the Project
+
+`npm outdated -l --include-dev`
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
