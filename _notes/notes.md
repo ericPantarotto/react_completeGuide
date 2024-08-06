@@ -245,6 +245,29 @@ When you define such an anonymous function, you're also not executing it yet. In
 you can execute the inside function within the parent function, but you can't execute it outside.
 
 Because it's scoped inside its parent function, which means it's only available in there, just as a variable you would define inside a scope would only be available inside of the scope it was defined in and not outside of it.
+
+### Reference vs. Primitives
+
+Strings, numbers, Booleans are all primitives.
+
+What's special about primitives in JavaScript is that we can't edit them.
+
+a new primitive is created each time:
+
+- you think you update them
+- apply any native methods to such types
+
+Arrays / Objects in JavaScript are so-called reference values, simply means that in a variable you don't store the value, but instead the address of that value in memory.
+
+So that array is stored somewhere in memory, so in the memory of your computer, and it's the address of that place in memory that's stored in this constant.
+
+If you apply any native methods on an Array. The array in memory changes, the address does not. That's all the reason why I can edit an array despite using declaration `const`.
+
+With primitive values like this string, you could instead say that the string itself is stored in the variable.
+
+#### Reference Value
+
+![image info](./2_sc2.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
