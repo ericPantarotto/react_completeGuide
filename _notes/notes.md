@@ -173,6 +173,35 @@ you can have arrays of arrays
 **<span style='color: #495fcb'> Note:** `npx live-server` allows you to run *live-server*.
 
 *npx* runs a command from a local or remote npm package
+
+### Destructuring
+
+**<span style='color: #a3842c'>Link:** [mdn webdocs/Destructuring_assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+
+### Destructuring in Function Parameter Lists
+
+The destructuring syntax explained in the previous lecture can also be used in function parameter lists.
+
+For example, if a function accepts a parameter that will contain an object it can be destructured to "pull out" the object properties and make them available as locally scoped variables (i.e., variables only available inside the function body).
+
+Here's an example:
+
+```javascript
+function storeOrder(order) {
+    localStorage.setItem('id', order.id);
+    localStorage.setItem('currency', order.currency);
+}
+```
+
+Instead of accessing the order properties via the "dot notation" inside the storeOrder function body, you could use destructuring like this:
+
+```javascript
+function storeOrder({id, currency}) { // destructuring
+    localStorage.setItem('id', id);
+    localStorage.setItem('currency', currency);
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
