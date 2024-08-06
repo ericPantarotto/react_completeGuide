@@ -11,3 +11,10 @@ setTimeout(handleTimeOut, 2000);
 const handleTimeOut2 = (_) => console.info(' Timed Out! Function as value.');
 
 setTimeout(handleTimeOut2, 2000);
+
+// passing a function as value, another example:
+function greeter(greetFn) {
+  greetFn();
+}
+
+greeter(() => console.log('Hi!'));

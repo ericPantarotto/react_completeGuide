@@ -236,6 +236,15 @@ const handleTimeOut2 = (_) => console.info(' Timed Out! Function as value.');
 setTimeout(handleTimeOut2, 2000);
 ```
 
+When you define such an anonymous function, you're also not executing it yet. Instead, you're also just defining it, and you're passing that defined function to set.Timeout. **You're passing a handler to that function, you're not executing it.**
+
+**<span style='color:   #875c5c'>IMPORTANT:** passing functions as values is not limited to built-in functions such as `setTimeout()`, but also to your own functions.
+
+### Functions Defined inside of functions
+
+you can execute the inside function within the parent function, but you can't execute it outside.
+
+Because it's scoped inside its parent function, which means it's only available in there, just as a variable you would define inside a scope would only be available inside of the scope it was defined in and not outside of it.
 <!---
 [comment]: it works with text, you can rename it how you want
 
