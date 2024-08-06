@@ -280,6 +280,29 @@ With primitive values like this string, you could instead say that the string it
 - slice()  => https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 - splice()  => https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 
+## React Essentials: Components, JSX, Props, State & More
+
+### It's all about Components
+
+So React apps are in the end built by combining Components.
+
+A component wraps:
+
+- HTML
+- CSS
+- JavaScript Logic
+
+**<span style='color: #495fcb'> Note:** And together, those languages and code pieces then define and control a part of the UI.
+
+This allows you, the developer, to split up complex user interfaces into smaller, more manageable parts, which, at least potentially, may also be reused in different places of the UI.
+
+#### Why Components?
+
+- Reusable Building blocks: Create small building blocks & Compose the UI from them.  
+  If needed: Reuse a building block in different parts of the UI
+- Related Code lives together: HTML + CSS + JS. Since JS influences the output, storing JS  + HTML together makes sense
+- separation of concerns: different components handle different data & logic. vastly simplifies the process of working on complex apps.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
