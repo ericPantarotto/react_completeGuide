@@ -206,6 +206,12 @@ function storeOrder({id, currency}) { // destructuring
 
 **<span style='color: #a3842c'>Link:** [mdn webdocs/Spread_syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
 
+### Manipulating DOM
+
+Being able to reach out to the loaded website and read and manipulate DOM Elements at runtime is of course a strength of JavaScript.
+
+But it is also something we won't do when using React, because React will do it for us, because we write React code in that declarative way
+
 
 <!---
 [comment]: it works with text, you can rename it how you want
