@@ -212,6 +212,29 @@ Being able to reach out to the loaded website and read and manipulate DOM Elemen
 
 But it is also something we won't do when using React, because React will do it for us, because we write React code in that declarative way
 
+### Functions as values
+
+if you define a function in advance and you pass it by just using its name,so you don't add parentheses here.
+
+You omit those parentheses because by just using the name here you're passing the function as a value to this function.
+
+If you would add parentheses here, you would instead make sure that this function handleTimeout here gets executed immediately at the point of time when this timer is set, in this case here, and therefore it would be the return value of that function.
+
+```javascript
+//anonymous function
+setTimeout(() => console.info(' Timed Out! Anonymous function'), 2000);
+
+// equivalent to:
+function handleTimeOut() {
+  console.info(' Timed Out! Function as value.');
+}
+setTimeout(handleTimeOut, 2000);
+
+// equivalent to:
+const handleTimeOut2 = (_) => console.info(' Timed Out! Function as value.');
+
+setTimeout(handleTimeOut2, 2000);
+```
 
 <!---
 [comment]: it works with text, you can rename it how you want
