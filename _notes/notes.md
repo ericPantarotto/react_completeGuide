@@ -364,6 +364,18 @@ But as a developer, you have the convenience of working with those individual bu
 ### Setting HTML Attributes Dynamically & Loading Image Files
 
 We optimize the import and loading of the image, thanks to the build process (this is not something you can normally do in JavaScript)
+
+### Making Components Reusable with Props
+
+React allows you to pass data to components via a concept called `Props`.
+
+#### Props accept all value types
+
+- string value
+- number value
+- object value
+- array value
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
