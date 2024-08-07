@@ -325,7 +325,7 @@ ReactDOM.createRoot(entryPoint).render(<App />);
 
 React projects come with a build process that transforms JSX code to code that work in *browsers*.
 
-`App.jsx` is a React component (a function). **Component Functions must follow 2 rules**:
+`App.jsx` is a React component, which are JavaScript functions. **Component Functions must follow 2 rules**:
 
 - name must start with an uppercase
 - returns **renderable** content (the function must return a value that can be rendered; displayed on screen by React)
