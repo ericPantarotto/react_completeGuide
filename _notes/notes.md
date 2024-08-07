@@ -307,6 +307,28 @@ This allows you, the developer, to split up complex user interfaces into smaller
 
 `npm outdated -l --include-dev`
 
+### JSX & React Components
+
+**<span style='color: #a8c62c'> index.html** loads a javascript file
+
+```html
+<script type="module" src="/src/index.jsx"></script>
+```
+
+**<span style='color: #a8c62c'> index.jsx**,
+
+```javascript
+ReactDOM.createRoot(entryPoint).render(<App />);
+```
+
+`.jsx`: JavaScript Synntax Extension, used to describe & crate HTML elements in JavaScript in a **declarative** way, but that browsers do not support.
+
+React projects come with a build process that transforms JSX code to code that work in *browsers*.
+
+`App.jsx` is a React component (a function). **Component Functions must follow 2 rules**:
+
+- name must start with an uppercase
+- returns **renderable** content (the function must return a value that can be rendered; displayed on screen by React)
 <!---
 [comment]: it works with text, you can rename it how you want
 
