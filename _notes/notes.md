@@ -360,6 +360,10 @@ But as a developer, you have the convenience of working with those individual bu
   - content/value is derived at runtime
 
 **<span style='color:   #875c5c'>IMPORTANT:** when using the `{}` syntax in JSX file, you can only use expressions that directly produce a value (if-statements, for-loops, function definitions and other block statements are not allowed here!)
+
+### Setting HTML Attributes Dynamically & Loading Image Files
+
+We optimize the import and loading of the image, thanks to the build process (this is not something you can normally do in JavaScript)
 <!---
 [comment]: it works with text, you can rename it how you want
 
