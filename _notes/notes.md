@@ -323,12 +323,16 @@ ReactDOM.createRoot(entryPoint).render(<App />);
 
 `.jsx`: JavaScript Synntax Extension, used to describe & crate HTML elements in JavaScript in a **declarative** way, but that browsers do not support.
 
-React projects come with a build process that transforms JSX code to code that work in *browsers*.
+React projects come with a build process that transforms JSX code to code that work in *browsers*. **It's important to understand that it's really just that build process that cares about this extension**.
 
 `App.jsx` is a React component, which are JavaScript functions. **Component Functions must follow 2 rules**:
 
 - name must start with an uppercase
 - returns **renderable** content (the function must return a value that can be rendered; displayed on screen by React)
+
+### Components & File Extensions
+
+you'll also find React projects that don't use .jsx but instead just .js as a file extension. And in those .js files, you'll also find JSX code. Because it simply depends on the underlying build process which extension is expected when using this JSX syntax in a file
 <!---
 [comment]: it works with text, you can rename it how you want
 
