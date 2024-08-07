@@ -349,6 +349,17 @@ But as a developer, you have the convenience of working with those individual bu
 
 - Built-in elements like div, image, or header start with lowercase characters (these are **valid, officially defined HTML elements**, and rendered as **DOM nodes** by React).
 - Custom components on the other hand, so components built by you or other developers must start with an uppercase character to tell React that it's not a built-in component. React traverses the component tree until it has only built-in components left
+
+### Using & Outputting Dynamic Values
+
+- static content
+  - content that's hardcoded into JSX code
+  - can't change at run time
+- dynamic content
+  - logic that produces the actual value is added to JSX
+  - content/value is derived at runtime
+
+**<span style='color:   #875c5c'>IMPORTANT:** when using the `{}` syntax in JSX file, you can only use expressions that directly produce a value (if-statements, for-loops, function definitions and other block statements are not allowed here!)
 <!---
 [comment]: it works with text, you can rename it how you want
 
