@@ -332,7 +332,23 @@ React projects come with a build process that transforms JSX code to code that w
 
 ### Components & File Extensions
 
-you'll also find React projects that don't use .jsx but instead just .js as a file extension. And in those .js files, you'll also find JSX code. Because it simply depends on the underlying build process which extension is expected when using this JSX syntax in a file
+you'll also find React projects that don't use .jsx but instead just .js as a file extension. And in those .js files, you'll also find JSX code. Because it simply depends on the underlying build process which extension is expected when using this JSX syntax in a file.
+
+### How React handles Component & How it builds a Component Tree
+
+#### How Components get rendered
+
+- `Root component`: the first component to be analyzed & rendered by React
+- `Nested component`: a child component of its parent component
+
+**<span style='color: #495fcb'> Note:** each component could then contain even more child components. ultimately you end up with a component hierarchy, which is often called a tree of components, a structure of components, which is then rendered to the screen via React.
+
+**<span style='color:   #875c5c'>IMPORTANT:** But what's important to understand about this tree of components is that your custom components are not showing up in the actual rendered DOM though. So your tree of components is just analyzed by React. And React then combines all the JSX code from all those components to generate the overall DOM.
+
+But as a developer, you have the convenience of working with those individual building blocks instead of a single potentially huge file that contains all markup.
+
+- Built-in elements like div, image, or header start with lowercase characters (these are **valid, officially defined HTML elements**, and rendered as **DOM nodes** by React).
+- Custom components on the other hand, so components built by you or other developers must start with an uppercase character to tell React that it's not a built-in component. React traverses the component tree until it has only built-in components left
 <!---
 [comment]: it works with text, you can rename it how you want
 
