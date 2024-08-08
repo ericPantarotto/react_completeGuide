@@ -487,7 +487,16 @@ The content between component opening and closing tags is used as a value for th
 
 React automatically passes a special prop named `children` to every custom component
 
-Where your Components can wrap other Components or other content is called component composition.
+Where your Components can wrap other Components or other content is called component composition. You can pass complex HTML elements using the children prop.
+
+### Reacting to Events
+
+When working with React as a developer, we really don't wanna start interacting with the DOM and with the page (**imperative code**). Instead, we wanna let React do that (**declarative code**).
+
+In React, you instead add event listeners to elements by adding a special attribute, a special prop to those elements. Those built-in elements are also just components, that are already provided and understood by React.
+
+**<span style='color: #495fcb'> Note:** You would typically use *inner-functions*, the advantage of defining these event handler functions inside the component function is that they then have access to the components props and state.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
