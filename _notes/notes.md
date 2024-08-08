@@ -497,6 +497,29 @@ In React, you instead add event listeners to elements by adding a special attrib
 
 **<span style='color: #495fcb'> Note:** You would typically use *inner-functions*, the advantage of defining these event handler functions inside the component function is that they then have access to the components props and state.
 
+### Passing Functions as Values to Props
+
+**<span style='color: #a8c62c'> App.jsx**,
+
+```javascript
+const handleSelect = ()=> { console.info('click - onSelect')}
+
+<TabButton onSelect={handleSelect}>Components</TabButton>
+```
+**<span style='color: #a8c62c'> TabButton.jsx**,
+
+```javascript
+export default ({ children, onSelect }) => (
+  <li>
+    <button onClick={onSelect}>{children}</button>
+  </li>
+);
+```
+
+We're passing a pointer at this `handleSelect` function. We're passing the function as a value, to the `onSelect` prop.
+
+And in our custom component, we're then in the end forwarding that function to the `onClick` prop (**React built-in**).
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
