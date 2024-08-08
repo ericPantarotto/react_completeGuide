@@ -469,6 +469,16 @@ This can easily be achieved since JavaScript supports default values when using 
     }
 ```
 
+### Storing Components Style Files Next to Components
+
+in **<span style='color: #a8c62c'> Header.jsx**, when we import the .css 
+
+`import './Header.css';`
+
+it's important to know that importing a CSS file in a Component file will not scope these styles to that Component, which simply means that if we would use a header element somewhere else on our page those styles here would be applied to that header element as well.
+
+There's a solution to scope style to a particular component.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

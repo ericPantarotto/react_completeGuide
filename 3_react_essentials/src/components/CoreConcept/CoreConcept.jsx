@@ -1,3 +1,5 @@
+import './CoreConcept.css';
+
 export default ({ image, title, description }) => {
   return (
     <li>
