@@ -112,7 +112,7 @@ This is done to also make this code execute in browsers that don't natively supp
 
 But if you have a vanilla JavaScript app without such a build process, you do need to add this type module attribute here.
 
-**<span style='color:   #875c5c'>IMPORTANT:** If you use the default syntax, you must have only one `default export` per file.
+**<span style='color: #875c5c'>IMPORTANT:** If you use the default syntax, you must have only one `default export` per file.
 
 with the default export and the respective import syntax, it is especially useful if you only have one one function, or one value in the file to export.
 
@@ -238,7 +238,7 @@ setTimeout(handleTimeOut2, 2000);
 
 When you define such an anonymous function, you're also not executing it yet. Instead, you're also just defining it, and you're passing that defined function to set.Timeout. **You're passing a handler to that function, you're not executing it.**
 
-**<span style='color:   #875c5c'>IMPORTANT:** passing functions as values is not limited to built-in functions such as `setTimeout()`, but also to your own functions.
+**<span style='color: #875c5c'>IMPORTANT:** passing functions as values is not limited to built-in functions such as `setTimeout()`, but also to your own functions.
 
 ### Functions Defined inside of functions
 
@@ -343,7 +343,7 @@ you'll also find React projects that don't use .jsx but instead just .js as a fi
 
 **<span style='color: #495fcb'> Note:** each component could then contain even more child components. ultimately you end up with a component hierarchy, which is often called a tree of components, a structure of components, which is then rendered to the screen via React.
 
-**<span style='color:   #875c5c'>IMPORTANT:** But what's important to understand about this tree of components is that your custom components are not showing up in the actual rendered DOM though. So your tree of components is just analyzed by React. And React then combines all the JSX code from all those components to generate the overall DOM.
+**<span style='color: #875c5c'>IMPORTANT:** But what's important to understand about this tree of components is that your custom components are not showing up in the actual rendered DOM though. So your tree of components is just analyzed by React. And React then combines all the JSX code from all those components to generate the overall DOM.
 
 But as a developer, you have the convenience of working with those individual building blocks instead of a single potentially huge file that contains all markup.
 
@@ -359,7 +359,7 @@ But as a developer, you have the convenience of working with those individual bu
   - logic that produces the actual value is added to JSX
   - content/value is derived at runtime
 
-**<span style='color:   #875c5c'>IMPORTANT:** when using the `{}` syntax in JSX file, you can only use expressions that directly produce a value (if-statements, for-loops, function definitions and other block statements are not allowed here!)
+**<span style='color: #875c5c'>IMPORTANT:** when using the `{}` syntax in JSX file, you can only use expressions that directly produce a value (if-statements, for-loops, function definitions and other block statements are not allowed here!)
 
 ### Setting HTML Attributes Dynamically & Loading Image Files
 
@@ -520,12 +520,21 @@ We're passing a pointer at this `handleSelect` function. We're passing the funct
 
 And in our custom component, we're then in the end forwarding that function to the `onClick` prop (**React built-in**).
 
+### How to NOT Update the UI - A look at behind the scenes of React
+
+**<span style='color: #875c5c'>IMPORTANT:** By default, React components execute **only once** (first time it is encountered in the JSX file). You have to *tell* React if a component should be executed again.
+
+#### How React checks if UI Update are needed
+
+React compares the old output (*old JSX code*) of your component function to the new output (*new JSX code*) and applies any differences to the actual website UI.
+
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
 ![image info](./1_sc1.png)
 
-**<span style='color:   #875c5c'>IMPORTANT:**
+**<span style='color: #875c5c'>IMPORTANT:**
 **<span style='color: #495fcb'> Note:**
 **<span style='color: #a3842c'>Link:**
 

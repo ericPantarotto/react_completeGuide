@@ -4,8 +4,10 @@ import TabButton from './components/TabButton/TabButton.jsx';
 import { CORE_CONCEPTS } from './data.js';
 
 function App() {
+  let tabContent = 'Please click a button';
   const handleSelect = (selectedButton) => {
     console.info(`click - ${selectedButton}`);
+    tabContent = selectedButton;
   };
   return (
     <div>
@@ -34,6 +36,7 @@ function App() {
             <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
             <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
           </menu>
+          {tabContent}
         </section>
       </main>
     </div>
