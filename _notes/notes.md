@@ -479,6 +479,15 @@ it's important to know that importing a CSS file in a Component file will not sc
 
 There's a solution to scope style to a particular component.
 
+### Component Composition; Special "children" Prop
+
+The content between component opening and closing tags is used as a value for the special `children` prop.
+
+#### Children Prop
+
+React automatically passes a special prop named `children` to every custom component
+
+Where your Components can wrap other Components or other content is called component composition.
 <!---
 [comment]: it works with text, you can rename it how you want
 
