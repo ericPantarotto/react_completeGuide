@@ -528,6 +528,31 @@ And in our custom component, we're then in the end forwarding that function to t
 
 React compares the old output (*old JSX code*) of your component function to the new output (*new JSX code*) and applies any differences to the actual website UI.
 
+### Managing State & Using Hooks
+
+**<span style='color: #495fcb'> Note:****<span style='color: #495fcb'> Note:** All functions starting with ***use\**** are React hooks. They're technically regular functions but they must only be called inside of React component functions or inside of other React Hooks.
+
+#### Rules of Hooks
+
+- only call hooks inside of component functions
+- only call hooks on top level 
+
+`useState` Hook is one of the most important Hooks offered by React because that's the Hook that will allow us to manage some component specific state which is simply some data stored by React, which when changed, will trigger this component function to which this Hook belongs to re-execute, to be reevaluated by React.
+
+`useState()` yields an array with 2 elements
+
+- the first element in this array will be the current data snapshot for this component execution cycle (**current state value**)
+- second element will always be a function; A function provided by React that can be executed to update this state, so to update this stored value. **<span style='color: #875c5c'>IMPORTANT:** calling this special function, this second element, will also tell React that this component function must be executed again.
+
+**<span style='color: #495fcb'> Note:** this logs the previous state even if it is logged after updating the state:
+
+```javascript
+const handleSelect = (selectedButton) => {
+    setSelectedTopic(selectedButton);
+    console.info(selectedTopic); 
+  };
+```
+The updated value will only be available after this app component function executed again. Only then the new value is available
 
 <!---
 [comment]: it works with text, you can rename it how you want

@@ -1,14 +1,17 @@
+import { useState } from 'react';
 import CoreConcept from './components/CoreConcept/CoreConcept.jsx';
 import Header from './components/Header/Header.jsx';
 import TabButton from './components/TabButton/TabButton.jsx';
 import { CORE_CONCEPTS } from './data.js';
 
 function App() {
-  let tabContent = 'Please click a button';
+  const [selectedTopic, setSelectedTopic] = useState('Please click a button');
+
   const handleSelect = (selectedButton) => {
-    console.info(`click - ${selectedButton}`);
-    tabContent = selectedButton;
+    setSelectedTopic(selectedButton);
+    // console.info(selectedTopic); //this logs the previous state even if it is logged after updating the state
   };
+
   return (
     <div>
       <Header />
@@ -36,7 +39,7 @@ function App() {
             <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
             <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
           </menu>
-          {tabContent}
+          {selectedTopic}
         </section>
       </main>
     </div>
