@@ -635,6 +635,25 @@ Our initial state is this *please click a button* text, And this is therefore wh
 
 in **JSX**, the class attribute is `className`, while in HTML it is `class`. most other attributes are the same though.
 
+### Outputting List Data Dynamically
+
+*JSX* is capable of dealing with array of renderable data:
+
+- array of `string`: `['Hello', 'World']`
+- array of `JSX elements`: `[<p>Hello</p>, <p>World</p>]`
+
+However JSX is not able to output an array of `JXS objects`.
+
+But since JSX is capable of outputting an array of JSX elements, we could try to transform this array of objects to an array of JSX elements.
+
+**<span style='color: #875c5c'>IMPORTANT:** that's another super useful feature and pattern because as it turns out, in React apps, you will often output lists of data. And you will almost always do that by using the `map` method to transform your data to JSX code.
+
+**<span style='color: #495fcb'> Note:** Warning: *Each child in a list should have a unique "key" prop*.
+
+```javascript
+{CORE_CONCEPTS.map(conceptItem => <CoreConcept key={conceptItem.title} {...conceptItem} /> )}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
