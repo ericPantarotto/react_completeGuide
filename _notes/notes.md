@@ -471,7 +471,7 @@ This can easily be achieved since JavaScript supports default values when using 
 
 ### Storing Components Style Files Next to Components
 
-in **<span style='color: #a8c62c'> Header.jsx**, when we import the .css 
+in **<span style='color: #a8c62c'> Header.jsx**, when we import the .css
 
 `import './Header.css';`
 
@@ -506,6 +506,7 @@ const handleSelect = ()=> { console.info('click - onSelect')}
 
 <TabButton onSelect={handleSelect}>Components</TabButton>
 ```
+
 **<span style='color: #a8c62c'> TabButton.jsx**,
 
 ```javascript
@@ -535,7 +536,7 @@ React compares the old output (*old JSX code*) of your component function to the
 #### Rules of Hooks
 
 - only call hooks inside of component functions
-- only call hooks on top level 
+- only call hooks on top level
 
 `useState` Hook is one of the most important Hooks offered by React because that's the Hook that will allow us to manage some component specific state which is simply some data stored by React, which when changed, will trigger this component function to which this Hook belongs to re-execute, to be reevaluated by React.
 
@@ -569,6 +570,65 @@ Our initial state is this *please click a button* text, And this is therefore wh
               <code>{EXAMPLES[selectedTopic]?.code}</code>
             </pre>
           </div>
+```
+
+### Rendering Content Conditionally
+
+**<span style='color: #495fcb'> Note:** `null` is something you can output in JSX code, it'll simply lead to nothing being rendered here.
+
+```javascript
+{!selectedTopic ? <p>Please select a topic.</p> : null}
+```
+
+- solution 1
+
+```javascript
+{!selectedTopic ? (
+  <p>Please select a topic.</p>
+) : (
+  <div id='tab-content'>
+    <h3>{EXAMPLES[selectedTopic].title}</h3>
+    <p>{EXAMPLES[selectedTopic].description}</p>
+    <pre>
+      <code>{EXAMPLES[selectedTopic].code}</code>
+    </pre>
+  </div>
+)}
+```
+
+- solution 2
+
+```javascript
+ {!selectedTopic && <p>Please select a topic.</p>}
+{selectedTopic && (
+  <div id='tab-content'>
+    <h3>{EXAMPLES[selectedTopic].title}</h3>
+    <p>{EXAMPLES[selectedTopic].description}</p>
+    <pre>
+      <code>{EXAMPLES[selectedTopic].code}</code>
+    </pre>
+  </div>
+)}
+```
+
+- solution 3
+
+```javascript
+  const tabContent = !selectedTopic ? (
+    <p>Please select a topic.</p>
+  ) : (
+    <div id='tab-content'>
+      <h3>{EXAMPLES[selectedTopic].title}</h3>
+      <p>{EXAMPLES[selectedTopic].description}</p>
+      <pre>
+        <code>{EXAMPLES[selectedTopic].code}</code>
+      </pre>
+    </div>
+  );
+///...
+</menu>
+{tabContent}
+</section>
 ```
 
 <!---
