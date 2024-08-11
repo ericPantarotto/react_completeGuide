@@ -631,6 +631,10 @@ Our initial state is this *please click a button* text, And this is therefore wh
 </section>
 ```
 
+### CSS Styling & Dynamic Styling
+
+in **JSX**, the class attribute is `className`, while in HTML it is `class`. most other attributes are the same though.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
