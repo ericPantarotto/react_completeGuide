@@ -552,7 +552,24 @@ const handleSelect = (selectedButton) => {
     console.info(selectedTopic); 
   };
 ```
+
 The updated value will only be available after this app component function executed again. Only then the new value is available
+
+### Deriving & Outputting Data Based on State
+
+We get an error in the console when the page first loads, because we're not selecting a valid element here.
+
+Our initial state is this *please click a button* text, And this is therefore what this program tries to find as a property name in this `examples` object.
+
+```javascript
+<div id='tab-content'>
+            <h3>{EXAMPLES[selectedTopic]?.title || 'Please click a button'}</h3>
+            <p>{EXAMPLES[selectedTopic]?.description}</p>
+            <pre>
+              <code>{EXAMPLES[selectedTopic]?.code}</code>
+            </pre>
+          </div>
+```
 
 <!---
 [comment]: it works with text, you can rename it how you want
