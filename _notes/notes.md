@@ -659,6 +659,44 @@ But since JSX is capable of outputting an array of JSX elements, we could try to
 
 but it's convinient, you could use standard JavaScript features, such as `createElement` method exposed by React.
 
+### Working with Fragments
+
+in our **<span style='color: #a8c62c'> App.jsx** component, we may think that this `div` is not necessary, but if we remove it, we get an error from `React.JSX.Element`: *JSX expression must have one parent element*. if we remove this `div`, we end up with 2 siblings elements: `<Header>` & `<main>`
+
+```javascript
+ return (
+    <div>
+      <Header />
+      <main>
+      //...
+      </main>
+    </div>
+  );
+```
+
+It's the same in *JavaScript* if you use a `return` statement in a function, you can return only one value. and JSX is just some synthetic sugar, code that you use in dev, but JavaScript rules apply! the below JavaScript alternative would fail too!
+
+```javascript
+ return (
+    React.createElement(Header)
+    React.createElement('main')
+  );
+```
+But of course this limitation or restriction also means that you do end up with an extra div in your DOM structure. If you inspect your code with the dev tools, you can see that extra div here.
+
+**<span style='color: #495fcb'> Note:** that's why React gives you an alternative. It gives you a special **fragment component**, which you can use as a wrapper if you do need a root component to wrap some sibling components, but you don't wanna render an actual element to the screen.
+
+```javascript
+return (
+    <Fragment>
+      <Header />
+      <main>
+      </main>
+    </Fragment>
+  );
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** you can use `<>` as an alternative to `<Fragment>`
 
 <!---
 [comment]: it works with text, you can rename it how you want
@@ -668,6 +706,8 @@ but it's convinient, you could use standard JavaScript features, such as `create
 **<span style='color: #875c5c'>IMPORTANT:**
 **<span style='color: #495fcb'> Note:**
 **<span style='color: #a3842c'>Link:**
+
+**<span style='color: #a8c62c'> TabButton.jsx**,
 
 <ins>text to underline</ins>
 
