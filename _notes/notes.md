@@ -739,6 +739,14 @@ And that is something you can do in React because JSX elements are in the end ju
 
 For a prop to be usable as a custom component in the receiving component, it must start with an uppercase character or it must be remapped to a constant or a variable that starts with an uppercase character.
 
+### Not all Content must go into Components
+
+**<span style='color: #495fcb'> Note:** with React, it's too easy to forget that you don't have to put everything into your component.
+
+Most of your web application's markup is going to go into your components, and all of your web application's logic is going to go in there.
+
+But if you have some static markups, some static data like a simple header, which does not depend on any data and which does not need to change, you can also put it right into that index.html file.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
