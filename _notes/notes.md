@@ -698,6 +698,12 @@ return (
 
 **<span style='color: #875c5c'>IMPORTANT:** you can use `<>` as an alternative to `<Fragment>`
 
+### Splitting Components By Feature & State
+
+After having split into sub-components, as we click the tabs, the text up here doesn't change anymore because now we're managing this selected topic state inside of the `Examples` component and therefore it's this component function that gets executed again whenever this state changes.
+
+And the `App` component function on the other hand is not going to be executed again. And therefore now this `Header` component function also isn't executed again anymore.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
