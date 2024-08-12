@@ -653,6 +653,12 @@ But since JSX is capable of outputting an array of JSX elements, we could try to
 ```javascript
 {CORE_CONCEPTS.map(conceptItem => <CoreConcept key={conceptItem.title} {...conceptItem} /> )}
 ```
+## Reacts Essentials - Deep Dive
+
+### You don't have to use JSX
+
+but it's convinient, you could use standard JavaScript features, such as `createElement` method exposed by React.
+
 
 <!---
 [comment]: it works with text, you can rename it how you want
