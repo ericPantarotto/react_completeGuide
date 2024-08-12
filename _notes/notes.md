@@ -704,6 +704,14 @@ After having split into sub-components, as we click the tabs, the text up here d
 
 And the `App` component function on the other hand is not going to be executed again. And therefore now this `Header` component function also isn't executed again anymore.
 
+### Problem: Props Are Not Forwarded To Inner Elements
+
+In React, when you are setting props, so attributes, on a custom component, those props are not automatically forwarded to the `JSX` code used inside of that component.
+
+**<span style='color: #495fcb'> Note:** destructuring each props inside your inner component to which they are forwarded is not very convinient nor scalable.
+
+the alternative pattern is called **forwarded props**, or **proxy props**.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
