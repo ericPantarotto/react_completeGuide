@@ -726,6 +726,11 @@ export default ({title, children, ...props}) => (
 ```
 the first `...` operator is grouping in one variable (*rest operator*), while the second one is the *spread operator*.
 
+### Working with Multiple JSX Slots
+
+**<span style='color: #875c5c'>IMPORTANT:** we can pass as a prop not only string, number, JavaScript objects, but even **JSX code**.
+
+And that is something you can do in React because JSX elements are in the end just regular values that can be used like values in your code.
 
 <!---
 [comment]: it works with text, you can rename it how you want
