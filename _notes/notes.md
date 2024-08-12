@@ -710,7 +710,22 @@ In React, when you are setting props, so attributes, on a custom component, thos
 
 **<span style='color: #495fcb'> Note:** destructuring each props inside your inner component to which they are forwarded is not very convinient nor scalable.
 
-the alternative pattern is called **forwarded props**, or **proxy props**.
+### Forwarding Props to Wrapped Elements
+
+The alternative pattern is called **forwarded props**, or **proxy props**.
+
+`...props`: this JavaScript feature is called *rest property*. This syntax groups all remaining object properties into a new object (you can choose its name, here we took *props*).
+
+```javascript
+export default ({title, children, ...props}) => (
+    <section {...props}>
+        <h2>{title}</h2>
+        {children}
+    </section>
+)
+```
+the first `...` operator is grouping in one variable (*rest operator*), while the second one is the *spread operator*.
+
 
 <!---
 [comment]: it works with text, you can rename it how you want
