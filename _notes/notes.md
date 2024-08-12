@@ -732,6 +732,13 @@ the first `...` operator is grouping in one variable (*rest operator*), while th
 
 And that is something you can do in React because JSX elements are in the end just regular values that can be used like values in your code.
 
+### Setting Component Types Dynamically
+
+- Custom components must be passed as a prop as a dynamic value, So with curly braces, and then your function name: `{Section}`
+- for built-in elements like `<menu>`, you simply pass the identifier as a string: `"menu"`
+
+For a prop to be usable as a custom component in the receiving component, it must start with an uppercase character or it must be remapped to a constant or a variable that starts with an uppercase character.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

@@ -1,6 +1,10 @@
-export default ({ children, buttons }) => (
-  <>
-    <menu>{buttons}</menu>
-    {children}
-  </>
-);
+// export default ({ children, buttons, buttonsContainer }) => {
+export default ({ children, buttons, ButtonsContainer }) => {
+//   const ButtonsContainer = buttonsContainer;
+  return (
+    <>
+      <ButtonsContainer>{buttons}</ButtonsContainer>
+      {children}
+    </>
+  );
+};
