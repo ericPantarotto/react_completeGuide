@@ -809,6 +809,8 @@ duplicating the line using the function form would yield the expected result (no
 
 **<span style='color: #495fcb'> Note:** By using this way of updating, the function form, you simply have a guarantee by React that you'll always be working with the latest available state value.
 
+**<span style='color: #875c5c'>IMPORTANT:** we should use this anonymous function form each time the new state depends on the old state
+
 ### User Input & Two-Way-Binding
 
 the `value` property of the `input` html element, blocks any input from a user. `defaultValue` allows for editing the input.
@@ -853,6 +855,14 @@ const handelSelectSquare = (rowIndex, colIndex) => {}
 ```
 
 **<span style='color: #495fcb'> Note:** we can use our trick with an anonymous function (which is pass as a value to `onClick` function) as we need to pass `rowIndex` and `colIndex` as arguments, so that we have full control over how `handleSelectSquare` will be called.
+
+### Lifting State Up
+
+both `Player` and `GameBoard` components will need to know the active player. For such situation, we must **lift the state up to the closest ancencestor componment that has access to all components that need to work with that state**. 
+- Ancestor passes the state value via props to the child component. 
+- Ancestor passes a function that eventually changes the state via props to the child component. this allows the child component to initiate the state change.
+
+in our case this is the `App` component, which can then pass the information which player is currently active to both the Player and the GameBoard components via *props*.
 
 <!---
 [comment]: it works with text, you can rename it how you want
