@@ -864,6 +864,10 @@ both `Player` and `GameBoard` components will need to know the active player. Fo
 
 in our case this is the `App` component, which can then pass the information which player is currently active to both the Player and the GameBoard components via *props*.
 
+### Avoiding Intersecting States!
+
+Adding a new state to store kind of the same information, just with a little bit of extra data, is something you typically wanna avoid as a React developer.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
