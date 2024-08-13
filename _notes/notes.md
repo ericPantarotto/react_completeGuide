@@ -785,6 +785,28 @@ if some child component like this `Player` component changes, the `App` componen
 
 **<span style='color: #875c5c'>IMPORTANT:** whenever you are using or reusing a component, React will basically create a new isolated instance.
 
+### Best Practise: Updating State based on old state correctly
+
+In React, when updating your state based on the previous value of that state, you should not do it like this:
+
+`setIsEditing(!isEditing);`
+
+The problem with this code here is that React behind the scenes is, in the end, scheduling those state updates you're triggering with those state updating functions, So this state update here is not performed instantly. Instead, it's scheduled by React to be performed in the future.
+
+so duplicating this line would cause issue as React is scheduling these state updates, both based on the current value of the variable used, and that state is not immmediately changed
+
+```javascript
+setIsEditing(!isEditing);
+setIsEditing(!isEditing);
+```
+
+Instead, when updating your state based on the previous value of that state, you should pass a function to that state updating function. Because this function which you pass here will be called by React and it will automatically get the current state value.
+So the value before this state update here as an input.
+
+`setIsEditing(editing => !editing);`
+
+duplicating the line using the function form would yield the expected result (nothing happening, as the second schedule would reverse the previous one correctly)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
