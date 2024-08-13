@@ -773,6 +773,14 @@ You should use the `public/` folder for any images that should **not be handled 
 
 On the other hand, images that are used inside of components should typically be stored in the `src/` folder (e.g., in `src/assets/`).
 
+### Concept Repetition: Working with State
+
+When wer're updating the state, calling this `state` updating function, it will then also cause React to re-execute this component function and it will cause React to reevaluate this JSX code and see if anything changed.
+
+And if anything did change, those changes will be reflected to the real DOM and other component functions.
+
+if some child component like this `Player` component changes, the `App` component, which is a parent component to the player component does not care about that and will not reevaluate.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
