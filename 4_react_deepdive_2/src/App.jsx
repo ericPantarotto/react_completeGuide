@@ -1,5 +1,6 @@
-import Player from './components/Player.jsx';
 import GameBoard from './components/GameBoard.jsx';
+import Player from './components/Player.jsx';
+
 function App() {
   return (
     <main>

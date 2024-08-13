@@ -814,6 +814,46 @@ duplicating the line using the function form would yield the expected result (no
 the `value` property of the `input` html element, blocks any input from a user. `defaultValue` allows for editing the input.
 
 a default approach is necessary as we need to get the changes the user tries to apply to that value
+
+### Best Practise: Updating Object State Immutability
+
+```javascript
+const handelSelectSquare = (rowIndex, colIndex) => {
+  setGameBoard((prevGameBoard) => {
+    prevGameBoard[rowIndex][colIndex] = 'X';
+    return prevGameBoard;
+  });
+};
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** **Object & Arrays** (which technically are objects) are reference values in JavaScript. You should therefore not mutate them directly - instead create a **(deep) copy** first. And it's that copy, not the original object, which is changed/updated.
+
+
+>**<span style='color: #495fcb'> Note:** And the reason for that recommendation is that if your state is an object or array you are dealing with a reference value in JavaScript.  
+And therefore if you would be updating it like this you would be updating the old value in-memory immediately, even before this scheduled state update was executed by React.  
+And this can again lead to strange bugs or side effects if you have multiple places in your application that are scheduling state updates for the same state.
+
+**Updating the state in an immutable way**:
+
+```javascript
+const handelSelectSquare = (rowIndex, colIndex) => {
+  setGameBoard((prevGameBoard) => {
+    const updatedBoard = [...prevGameBoard].map((innerArray) => [
+      ...innerArray,
+    ]);
+    updatedBoard[rowIndex][colIndex] = 'X';
+    return updatedBoard;
+  });
+};
+```
+
+```javascript
+const handelSelectSquare = (rowIndex, colIndex) => {}
+<button onClick={handelSelectSquare}>{playerSymbol}</button>` 
+```
+
+**<span style='color: #495fcb'> Note:** we can use our trick with an anonymous function (which is pass as a value to `onClick` function) as we need to pass `rowIndex` and `colIndex` as arguments, so that we have full control over how `handleSelectSquare` will be called.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
