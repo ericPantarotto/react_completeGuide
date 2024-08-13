@@ -781,6 +781,10 @@ And if anything did change, those changes will be reflected to the real DOM and 
 
 if some child component like this `Player` component changes, the `App` component, which is a parent component to the player component does not care about that and will not reevaluate.
 
+### Component Instances work in Isolation!
+
+**<span style='color: #875c5c'>IMPORTANT:** whenever you are using or reusing a component, React will basically create a new isolated instance.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
