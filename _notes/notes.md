@@ -877,7 +877,11 @@ Adding a new state to store kind of the same information, just with a little bit
 
 to make sure that when the schedule state update is performed, we are definitely working with the latest state but we don't have that guarantee for activePlayer because that's from a different state. Therefore, a better way of deriving the symbol of the currently activePlayer is to add a new variable 
 
+### Deriving State from Props
 
+We are producing some derived state, some computed value; `Gameboard` is a computed value that is derived from some state.
+
+**<span style='color: #875c5c'>IMPORTANT:** In React, you should manage as little state as needed and try to derive as much information and as many values as possible from that state.
 <!---
 [comment]: it works with text, you can rename it how you want
 

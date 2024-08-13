@@ -19,7 +19,7 @@ function App() {
         { square: { row: rowIndex, col: colIndex }, player: currentPlayer },
         ...prevTurns,
       ];
-      return updatedTurns
+      return updatedTurns;
     });
   };
 
@@ -38,10 +38,7 @@ function App() {
             isActive={activePlayer === 'O'}
           />
         </ol>
-        <GameBoard
-          onSelectSquare={handelSelectSquare}
-          // activePlayerSymbol={activePlayer}
-        />
+        <GameBoard onSelectSquare={handelSelectSquare} turns={gameTurns} />
       </div>
       <Log />
     </main>
