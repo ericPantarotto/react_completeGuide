@@ -868,6 +868,16 @@ in our case this is the `App` component, which can then pass the information whi
 
 Adding a new state to store kind of the same information, just with a little bit of extra data, is something you typically wanna avoid as a React developer.
 
+### Prefer Computed Values & avoid unnecessary State Management
+
+`setGameTurns(prevTurns => {
+      const updatedTurns = [{  square: {row: rowIndex, col: colIndex }, player: activePlayer },...prevTurns]
+    })
+`
+
+to make sure that when the schedule state update is performed, we are definitely working with the latest state but we don't have that guarantee for activePlayer because that's from a different state. Therefore, a better way of deriving the symbol of the currently activePlayer is to add a new variable 
+
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
