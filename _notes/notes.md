@@ -882,6 +882,11 @@ to make sure that when the schedule state update is performed, we are definitely
 We are producing some derived state, some computed value; `Gameboard` is a computed value that is derived from some state.
 
 **<span style='color: #875c5c'>IMPORTANT:** In React, you should manage as little state as needed and try to derive as much information and as many values as possible from that state.
+
+### Reducing State Management & Identifying Unnecessary State
+
+**<span style='color: #875c5c'>IMPORTANT:** when writing React code, You wanna manage as little state as possible, and derive and compute as many values as needed.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
