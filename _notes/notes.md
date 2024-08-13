@@ -807,6 +807,13 @@ So the value before this state update here as an input.
 
 duplicating the line using the function form would yield the expected result (nothing happening, as the second schedule would reverse the previous one correctly)
 
+**<span style='color: #495fcb'> Note:** By using this way of updating, the function form, you simply have a guarantee by React that you'll always be working with the latest available state value.
+
+### User Input & Two-Way-Binding
+
+the `value` property of the `input` html element, blocks any input from a user. `defaultValue` allows for editing the input.
+
+a default approach is necessary as we need to get the changes the user tries to apply to that value
 <!---
 [comment]: it works with text, you can rename it how you want
 
