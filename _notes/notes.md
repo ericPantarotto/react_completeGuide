@@ -922,6 +922,14 @@ And therefore, when I set a certain row-column combination of the `gameBoard` to
 Solution is to create a deep copy.
 
 `let gameBoard = [...initialGameBoard.map(arr => [...arr])];`
+
+### When NOT to lift State Up
+
+**<span style='color: #a8c62c'> Player.jsx**,
+
+`const [playerName, setPlayerName] = useState(initialName);`
+
+f we would move it out of the `Player` component, that would mean that the entire `App` component is reevaluated on every keystroke, which also means that the entire game board is reevaluated on every keystroke.
 <!---
 [comment]: it works with text, you can rename it how you want
 
