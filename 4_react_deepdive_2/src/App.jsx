@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import GameBoard from './components/GameBoard.jsx';
+import GameOver from './components/GameOver.jsx';
 import Log from './components/Log.jsx';
 import Player from './components/Player.jsx';
 import { WINNING_COMBINATIONS } from './winning-combinations.js';
@@ -48,6 +49,8 @@ function App() {
     }
   });
 
+  const hasDraw = gameTurns.length === 9 && !winner;
+
   const handelSelectSquare = (rowIndex, colIndex) => {
     // setActivePlayer((currActivePlayer) =>
     //   currActivePlayer === 'X' ? 'O' : 'X'
@@ -80,7 +83,7 @@ function App() {
           />
         </ol>
         {/* <GameBoard onSelectSquare={handelSelectSquare} turns={gameTurns} /> */}
-        {winner && <p>You won, { winner}!</p>}
+        {(winner || hasDraw) && <GameOver winner={winner} />}
         <GameBoard onSelectSquare={handelSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
