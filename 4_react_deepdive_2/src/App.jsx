@@ -30,12 +30,24 @@ function App() {
     gameBoard[row][col] = player;
   });
 
-  WINNING_COMBINATIONS.forEach((combination) => { 
-    const firstSquareSymbol = undefined;
-    const secondSquareSymbol = undefined;
-    const thirdSquareSymbol = undefined;
+  let winner;
+  WINNING_COMBINATIONS.forEach((combination) => {
+    const firstSquareSymbol =
+      gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol =
+      gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbol =
+      gameBoard[combination[2].row][combination[2].column];
+
+    if (
+      firstSquareSymbol &&
+      firstSquareSymbol === secondSquareSymbol &&
+      firstSquareSymbol === thirdSquareSymbol
+    ) {
+      winner = firstSquareSymbol;
+    }
   });
-  
+
   const handelSelectSquare = (rowIndex, colIndex) => {
     // setActivePlayer((currActivePlayer) =>
     //   currActivePlayer === 'X' ? 'O' : 'X'
@@ -68,6 +80,7 @@ function App() {
           />
         </ol>
         {/* <GameBoard onSelectSquare={handelSelectSquare} turns={gameTurns} /> */}
+        {winner && <p>You won, { winner}!</p>}
         <GameBoard onSelectSquare={handelSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />

@@ -1,4 +1,3 @@
-strict;
 // import { useState } from 'react';
 
 // const initialGameBoard = [
