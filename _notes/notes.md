@@ -887,6 +887,41 @@ We are producing some derived state, some computed value; `Gameboard` is a compu
 
 **<span style='color: #875c5c'>IMPORTANT:** when writing React code, You wanna manage as little state as possible, and derive and compute as many values as needed.
 
+### Why Immutability Matters - Always!
+
+our game is controlled by this `gameTurns` state.
+
+That's our single source of truth for this entire game.
+
+It's this `gameTurns` state which we use to derive the `gameBoard`.It's this state which we use to derive the `activePlayer` and it's this state which we use to check for a winner, and create `log`.
+
+And therefore, restarting the game simply means that we should reset `gameTurns` to an empty array and all the rest will automatically adjust since we're deriving all the other data from this state.
+
+**<span style='color: #875c5c'>IMPORTANT:** we have a bug, our board 
+
+>Arrays, like objects in JavaScript, are **reference values** and that means that they're stored in memory.  
+And if we're then using them, even if they're stored in different variables, we're always editing that same object or array in memory.
+
+in our code **<span style='color: #a8c62c'> App.jsx**,
+```javascript
+ let gameBoard = initialGameBoard;
+
+gameTurns.forEach((turn) => {
+  const {
+    square: { row, col },
+    player,
+  } = turn;
+  gameBoard[row][col] = player;
+});
+```
+
+The problem is that the gameBoard where we're setting this value is based on this initialGameBoard.
+
+And therefore, when I set a certain row-column combination of the `gameBoard` to the `player` symbol, I'm doing that in that original array in memory.
+
+Solution is to create a deep copy.
+
+`let gameBoard = [...initialGameBoard.map(arr => [...arr])];`
 <!---
 [comment]: it works with text, you can rename it how you want
 
