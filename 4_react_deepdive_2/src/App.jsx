@@ -2,7 +2,13 @@ import { useState } from 'react';
 import GameBoard from './components/GameBoard.jsx';
 import Log from './components/Log.jsx';
 import Player from './components/Player.jsx';
-import { WINNING_COMBINATIONS } from "./winning-combinations.js";
+import { WINNING_COMBINATIONS } from './winning-combinations.js';
+
+const initialGameBoard = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
+];
 
 const deriveActivePlayer = (gameTurns) => {
   let currentPlayer = 'X';
@@ -15,6 +21,21 @@ function App() {
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
 
+  let gameBoard = initialGameBoard;
+  gameTurns.forEach((turn) => {
+    const {
+      square: { row, col },
+      player,
+    } = turn;
+    gameBoard[row][col] = player;
+  });
+
+  WINNING_COMBINATIONS.forEach((combination) => { 
+    const firstSquareSymbol = undefined;
+    const secondSquareSymbol = undefined;
+    const thirdSquareSymbol = undefined;
+  });
+  
   const handelSelectSquare = (rowIndex, colIndex) => {
     // setActivePlayer((currActivePlayer) =>
     //   currActivePlayer === 'X' ? 'O' : 'X'
@@ -46,7 +67,8 @@ function App() {
             isActive={activePlayer === 'O'}
           />
         </ol>
-        <GameBoard onSelectSquare={handelSelectSquare} turns={gameTurns} />
+        {/* <GameBoard onSelectSquare={handelSelectSquare} turns={gameTurns} /> */}
+        <GameBoard onSelectSquare={handelSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
     </main>
