@@ -976,6 +976,11 @@ One advantage of this inline styling approach is of course that these styles her
 ### Dynamic & Conditional Inline Styles
 
 The disadvantage with inline styling still is that you often end up with a lot of duplication and that all your CSS code goes into the JSX code, which also isn't ideal.
+
+### Dynamic & Conditional Styling with CSS Files & CSS classes
+
+When adding a CSS class conditionally, it's just important to note that you should then use ternary expression and add `undefined` as a class name. You can't use `&&`, which will assign `false` as a class when negative and error.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
