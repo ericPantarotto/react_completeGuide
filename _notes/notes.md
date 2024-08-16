@@ -959,6 +959,9 @@ Therefore you could also split this file into multiple files where you attach th
 ```html
 <style type="text/css" data-vite-dev-id="/home/ecr/react_completeGuide/6_styling/src/components/Header.css">header {}
 ```
+### Styling React Apps with Vanilla CSS - Pros & Cons
+
+When using the **Vanilla-CSS** solution, then that code and those CSS rules are not scoped to components, which means you can have styling clashes between different components if you are using CSS rules that may affect JSX code stored in different components.
 
 <!---
 [comment]: it works with text, you can rename it how you want
