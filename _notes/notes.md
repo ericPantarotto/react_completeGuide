@@ -963,6 +963,12 @@ Therefore you could also split this file into multiple files where you attach th
 
 When using the **Vanilla-CSS** solution, then that code and those CSS rules are not scoped to components, which means you can have styling clashes between different components if you are using CSS rules that may affect JSX code stored in different components.
 
+### Vanilla CSS Styles Are NOT Scoped To Components!
+
+**<span style='color: #875c5c'>IMPORTANT:** it's really important to understand that even if you do split your CSS code in multiple files, and you then do import some of these files into certain component files, the CSS rules in those files will not be scoped to the components to which they belong, because they don't really belong to these components.
+
+Instead, if you open the developer tools again, keep in mind that all these styles are in the end just injected into the head section here by Vite, And therefore, they are applied globally to this page.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
