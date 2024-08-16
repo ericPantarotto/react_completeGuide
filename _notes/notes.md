@@ -930,6 +930,36 @@ Solution is to create a deep copy.
 `const [playerName, setPlayerName] = useState(initialName);`
 
 f we would move it out of the `Player` component, that would mean that the entire `App` component is reevaluated on every keystroke, which also means that the entire game board is reevaluated on every keystroke.
+
+## Styling React Components
+
+### Module Introduction
+
+- Styling with **Vanilla CSS**
+- **Scoping** Styles with **CSS MOodules**
+- **CSS-in-JS** Styling with **Styled Components**
+- Styling with **Tailwind CSS**
+- Static & **Dynamic (Conditional)** Styling
+
+### Splitting CSS Cde Across Multiple Files
+
+in a typical React project, which uses Vite as an underlying development and build tool, you can import CSS files into JavaScript files like this.
+
+**<span style='color: #a8c62c'> main.jsx**: `import './index.css';`
+
+And the build tool, so Vite in this case here, will identify such imports and in the end simply make sure that the CSS file you are trying to import here gets dynamically injected into the webpage / to the DOM, 
+
+```html
+<style type="text/css" data-vite-dev-id="/home/ecr/react_completeGuide/6_styling/src/index.css">* { }
+```
+
+and you can of course include as many vanilla CSS files as you want. You don't have to go with a single CSS file.  
+Therefore you could also split this file into multiple files where you attach the individual files to the Components to which they belong.
+
+```html
+<style type="text/css" data-vite-dev-id="/home/ecr/react_completeGuide/6_styling/src/components/Header.css">header {}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
