@@ -969,6 +969,9 @@ When using the **Vanilla-CSS** solution, then that code and those CSS rules are 
 
 Instead, if you open the developer tools again, keep in mind that all these styles are in the end just injected into the head section here by Vite, And therefore, they are applied globally to this page.
 
+The style prop does not take a string. as in *HTML*
+
+One advantage of this inline styling approach is of course that these styles here really only affect the JSX element on which you add them.
 <!---
 [comment]: it works with text, you can rename it how you want
 
