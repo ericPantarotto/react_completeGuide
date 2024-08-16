@@ -972,6 +972,10 @@ Instead, if you open the developer tools again, keep in mind that all these styl
 The style prop does not take a string. as in *HTML*
 
 One advantage of this inline styling approach is of course that these styles here really only affect the JSX element on which you add them.
+
+### Dynamic & Conditional Inline Styles
+
+The disadvantage with inline styling still is that you often end up with a lot of duplication and that all your CSS code goes into the JSX code, which also isn't ideal.
 <!---
 [comment]: it works with text, you can rename it how you want
 
