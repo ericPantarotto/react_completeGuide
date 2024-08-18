@@ -1034,6 +1034,15 @@ We can see that the styles were correctly applied to `<ControlContainer>`
 ![image info](./6_sc1.png)
 
 Under the hood, this styled-components package simply also creates unique CSS class names and defines the rules for these classes in the head section where this gets injected here. And then it also adds those created classes to your elements.
+
+### Creating Flexible Components with Styled Components
+
+since I'm now using styled components, though as you can, of course, see, for example, on the header, you can mix and match styled components with other styling approaches like CSS modules without problems, though typically, you will likely go for one approach that you then use for the entire app but you can mix them if you want to.
+
+These styled components, which you build with `styled.` do not just use the children prop so that you can wrap them around content like this texture.
+
+But in addition, they also forward all props you're setting on this styled component to the underlying *built-in JSX element (HTML)*, like `<label>`.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
