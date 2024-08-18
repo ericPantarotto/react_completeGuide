@@ -1062,6 +1062,13 @@ Instead, we just get these little wrapper components that we built with help of 
 and it turns out that the `invalid` prop we used, on the HTML `input` element, is a built-in prop.
 
 Now to work around that, since all the props you are setting on your styled components will be forwarded to the underlying built-in components, It is a common convention to *prefix* those props with a `$` sign
+
+### Styled Components: Pseudo Selectors, Nested Rules & Media Queries
+
+You don't need to convert every element to a styled component just to style it.
+
+Instead, you can just convert one wrapping parent component and then add the styles to it like that. And now for pseudo selectors, it's pretty similar.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
