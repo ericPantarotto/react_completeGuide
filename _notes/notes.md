@@ -1069,6 +1069,25 @@ You don't need to convert every element to a styled component just to style it.
 
 Instead, you can just convert one wrapping parent component and then add the styles to it like that. And now for pseudo selectors, it's pretty similar.
 
+### Creating Reusable Components & Component Combinations
+
+The `ControlContainer` component is unlikely to be used in other parts of the application. And in such cases, storing it here in that same file is fine.
+
+But for the `label` and the `input` and the `button` it's not unlikely that in a bigger application I might need those same components with the same styles in other parts of the application as well. And therefore you could consider creating separate component files for such kinds of components.
+
+It's so common to this combination of `label` and `input` that we might wanna merge them to gather into one single component.
+
+**<span style='color: #495fcb'> Note:** The main takeaway from this lecture, as a React developer, you should always look for opportunities like this where you can either outsource reusable components that have a certain styling applied to them, which you might need in different parts of the application, and/or components that maybe have certain combinations of JSX elements that you might need to reuse in other parts of the application.
+
+#### Styled Components: Advantages & Disadvantages
+
+- +: quick and easy to add
+- +: you continue thinking in React (configurable style functions)
+- +: styles are automatically scoped to components -> no CSS rule clashes
+
+- -: no strong separation of React & CSS code
+- -: you end up with many relatively small 'wrapper' components, nonetheless, creating all these extra small components just for styling purposes can sometimes also be annoying.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
