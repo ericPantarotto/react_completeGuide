@@ -1043,6 +1043,25 @@ These styled components, which you build with `styled.` do not just use the chil
 
 But in addition, they also forward all props you're setting on this styled component to the underlying *built-in JSX element (HTML)*, like `<label>`.
 
+### Dynamic & Conditional Styling with Styled Components
+
+The general idea behind **styled components**: it's all about building these small wrappers which you can then use in your application and which you of course also can reuse.
+
+And that's the advantage compared to inline styles. The styles now are closer to the JSX code, but they are not inside of the JSX code and we got no duplication in the JSX code.
+
+Instead, we just get these little wrapper components that we built with help of styled components.
+
+**<span style='color: #495fcb'> Note:** And as mentioned, even though you can blend styled components and vanilla CSS as we're doing it here, you will typically go for one solution which you then use for everything in your React projects.
+
+`<Label className={`label ${emailNotValid ? 'invalid' : ''}`}>`
+
+>**<span style='color: #495fcb'> Note:** one thing to note about injecting props into styled components is that you of course should make sure that you don't accidentally clash with default built-in props that might exist on certain elements.
+
+**Dev Tools**: *Warning: Received `false` for a non-boolean attribute `invalid`.*
+
+and it turns out that the `invalid` prop we used, on the HTML `input` element, is a built-in prop.
+
+Now to work around that, since all the props you are setting on your styled components will be forwarded to the underlying built-in components, It is a common convention to *prefix* those props with a `$` sign
 <!---
 [comment]: it works with text, you can rename it how you want
 
