@@ -653,6 +653,7 @@ But since JSX is capable of outputting an array of JSX elements, we could try to
 ```javascript
 {CORE_CONCEPTS.map(conceptItem => <CoreConcept key={conceptItem.title} {...conceptItem} /> )}
 ```
+
 ## Reacts Essentials - Deep Dive
 
 ### You don't have to use JSX
@@ -682,6 +683,7 @@ It's the same in *JavaScript* if you use a `return` statement in a function, you
     React.createElement('main')
   );
 ```
+
 But of course this limitation or restriction also means that you do end up with an extra div in your DOM structure. If you inspect your code with the dev tools, you can see that extra div here.
 
 **<span style='color: #495fcb'> Note:** that's why React gives you an alternative. It gives you a special **fragment component**, which you can use as a wrapper if you do need a root component to wrap some sibling components, but you don't wanna render an actual element to the screen.
@@ -724,6 +726,7 @@ export default ({title, children, ...props}) => (
     </section>
 )
 ```
+
 the first `...` operator is grouping in one variable (*rest operator*), while the second one is the *spread operator*.
 
 ### Working with Multiple JSX Slots
@@ -781,7 +784,7 @@ And if anything did change, those changes will be reflected to the real DOM and 
 
 if some child component like this `Player` component changes, the `App` component, which is a parent component to the player component does not care about that and will not reevaluate.
 
-### Component Instances work in Isolation!
+### Component Instances work in Isolation
 
 **<span style='color: #875c5c'>IMPORTANT:** whenever you are using or reusing a component, React will basically create a new isolated instance.
 
@@ -830,7 +833,6 @@ const handelSelectSquare = (rowIndex, colIndex) => {
 
 **<span style='color: #875c5c'>IMPORTANT:** **Object & Arrays** (which technically are objects) are reference values in JavaScript. You should therefore not mutate them directly - instead create a **(deep) copy** first. And it's that copy, not the original object, which is changed/updated.
 
-
 >**<span style='color: #495fcb'> Note:** And the reason for that recommendation is that if your state is an object or array you are dealing with a reference value in JavaScript.  
 And therefore if you would be updating it like this you would be updating the old value in-memory immediately, even before this scheduled state update was executed by React.  
 And this can again lead to strange bugs or side effects if you have multiple places in your application that are scheduling state updates for the same state.
@@ -858,13 +860,14 @@ const handelSelectSquare = (rowIndex, colIndex) => {}
 
 ### Lifting State Up
 
-both `Player` and `GameBoard` components will need to know the active player. For such situation, we must **lift the state up to the closest ancencestor componment that has access to all components that need to work with that state**. 
-- Ancestor passes the state value via props to the child component. 
+both `Player` and `GameBoard` components will need to know the active player. For such situation, we must **lift the state up to the closest ancencestor componment that has access to all components that need to work with that state**.
+
+- Ancestor passes the state value via props to the child component.
 - Ancestor passes a function that eventually changes the state via props to the child component. this allows the child component to initiate the state change.
 
 in our case this is the `App` component, which can then pass the information which player is currently active to both the Player and the GameBoard components via *props*.
 
-### Avoiding Intersecting States!
+### Avoiding Intersecting States
 
 Adding a new state to store kind of the same information, just with a little bit of extra data, is something you typically wanna avoid as a React developer.
 
@@ -875,7 +878,7 @@ Adding a new state to store kind of the same information, just with a little bit
     })
 `
 
-to make sure that when the schedule state update is performed, we are definitely working with the latest state but we don't have that guarantee for activePlayer because that's from a different state. Therefore, a better way of deriving the symbol of the currently activePlayer is to add a new variable 
+to make sure that when the schedule state update is performed, we are definitely working with the latest state but we don't have that guarantee for activePlayer because that's from a different state. Therefore, a better way of deriving the symbol of the currently activePlayer is to add a new variable
 
 ### Deriving State from Props
 
@@ -887,7 +890,7 @@ We are producing some derived state, some computed value; `Gameboard` is a compu
 
 **<span style='color: #875c5c'>IMPORTANT:** when writing React code, You wanna manage as little state as possible, and derive and compute as many values as needed.
 
-### Why Immutability Matters - Always!
+### Why Immutability Matters - Always
 
 our game is controlled by this `gameTurns` state.
 
@@ -897,12 +900,13 @@ It's this `gameTurns` state which we use to derive the `gameBoard`.It's this sta
 
 And therefore, restarting the game simply means that we should reset `gameTurns` to an empty array and all the rest will automatically adjust since we're deriving all the other data from this state.
 
-**<span style='color: #875c5c'>IMPORTANT:** we have a bug, our board 
+**<span style='color: #875c5c'>IMPORTANT:** we have a bug, our board
 
 >Arrays, like objects in JavaScript, are **reference values** and that means that they're stored in memory.  
 And if we're then using them, even if they're stored in different variables, we're always editing that same object or array in memory.
 
 in our code **<span style='color: #a8c62c'> App.jsx**,
+
 ```javascript
  let gameBoard = initialGameBoard;
 
@@ -947,7 +951,7 @@ in a typical React project, which uses Vite as an underlying development and bui
 
 **<span style='color: #a8c62c'> main.jsx**: `import './index.css';`
 
-And the build tool, so Vite in this case here, will identify such imports and in the end simply make sure that the CSS file you are trying to import here gets dynamically injected into the webpage / to the DOM, 
+And the build tool, so Vite in this case here, will identify such imports and in the end simply make sure that the CSS file you are trying to import here gets dynamically injected into the webpage / to the DOM,
 
 ```html
 <style type="text/css" data-vite-dev-id="/home/ecr/react_completeGuide/6_styling/src/index.css">* { }
@@ -959,11 +963,12 @@ Therefore you could also split this file into multiple files where you attach th
 ```html
 <style type="text/css" data-vite-dev-id="/home/ecr/react_completeGuide/6_styling/src/components/Header.css">header {}
 ```
+
 ### Styling React Apps with Vanilla CSS - Pros & Cons
 
 When using the **Vanilla-CSS** solution, then that code and those CSS rules are not scoped to components, which means you can have styling clashes between different components if you are using CSS rules that may affect JSX code stored in different components.
 
-### Vanilla CSS Styles Are NOT Scoped To Components!
+### Vanilla CSS Styles Are NOT Scoped To Components
 
 **<span style='color: #875c5c'>IMPORTANT:** it's really important to understand that even if you do split your CSS code in multiple files, and you then do import some of these files into certain component files, the CSS rules in those files will not be scoped to the components to which they belong, because they don't really belong to these components.
 
@@ -996,11 +1001,39 @@ import classes from './Header.module.css'
 ```
 
 #### CSS Modules
+
 +: your CSS code is decoupled from your JSX code
 +: you write vanilla-CSS code, as you know it
 +: CSS classes are scoped to the component (files) which import them -> no CSS class name clashes
 
+**<span style='color: #a3842c'>Link:** [https://styled-components.com/](https://styled-components.com/)
 
+### Introducing Styled Components (third-party package)
+
+And the idea behind this popular package is that you do not define your CSS rules and styles in separate CSS files, but also not as inline styles,but instead in special components that are built with help of that package.
+
+#### Tagged Templates
+
+**<span style='color: #a3842c'>Link:** [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates)
+
+```javascript
+const ControlContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+`;
+```
+
+And what this overall code will give you will be a component, a React component that automatically returns a div that has these styles applied to it.
+
+And it will be a div that internally also uses the special children prop so that it can be wrapped around other content.
+
+We can see that the styles were correctly applied to `<ControlContainer>`
+
+![image info](./6_sc1.png)
+
+Under the hood, this styled-components package simply also creates unique CSS class names and defines the rules for these classes in the head section where this gets injected here. And then it also adds those created classes to your elements.
 <!---
 [comment]: it works with text, you can rename it how you want
 
