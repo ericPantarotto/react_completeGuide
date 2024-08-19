@@ -1088,6 +1088,24 @@ It's so common to this combination of `label` and `input` that we might wanna me
 - -: no strong separation of React & CSS code
 - -: you end up with many relatively small 'wrapper' components, nonetheless, creating all these extra small components just for styling purposes can sometimes also be annoying.
 
+### Introducing Tailwind CSS For React App Styling
+
+**<span style='color: #a3842c'>Link:** [https://tailwindcss.com/]
+
+*Tailwind* is all about adding tiny utility CSS classes to HTML elements to apply styles step by step and therefore then style the overall component.
+
+In addition, *Tailwind* also sets up some base styles that will affect the overall document, but the main idea behind Tailwind really is to add these tiny utility classes.
+
+> **<span style='color: #495fcb'> Note:** *Tailwind* can look pretty ugly, you're going to add a lot of CSS classes into your JSX code.And for many developers working with Tailwind CSS is actually pretty **convenient**, because you don't need to know CSS in order to use it. That's the idea behind CSS frameworks like this.
+
+#### Installation
+
+**<span style='color: #a3842c'>Link:** [https://tailwindcss.com/docs/installation/framework-guides] 
+
+**<span style='color: #875c5c'>IMPORTANT:** to get *VSCode intellisence*, add **Tailwind CSS IntelliSence** extension.
+
+How should you know which class names exist and which class names do what? Well, with help of the **official documentation**, of course.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
