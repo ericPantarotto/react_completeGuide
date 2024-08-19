@@ -1106,6 +1106,17 @@ In addition, *Tailwind* also sets up some base styles that will affect the overa
 
 How should you know which class names exist and which class names do what? Well, with help of the **official documentation**, of course.
 
+### Tailwind CSS: Advantages & Disadvantages
+
+- +: you don't need to know a lot about CSS
+- +: rapid development
+- +: no style clahes between components since you don't define any CSS rules
+- +: highly configurable & extensible
+
+- -: relatively long className values
+- -: any style changes require editing JSX
+- -: you end up with relatively small 'wrapper' components or lots of copy & pasting
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
