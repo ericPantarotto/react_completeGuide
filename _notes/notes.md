@@ -1117,6 +1117,13 @@ How should you know which class names exist and which class names do what? Well,
 - -: any style changes require editing JSX
 - -: you end up with relatively small 'wrapper' components or lots of copy & pasting
 
+## Debugging React Apps
+
+### VSCode Integrated Debugger (web app)
+
+**<span style='color: #a3842c'>Link:** [youtube_debug_react](https://www.youtube.com/watch?v=FOXNlZFkbPk)
+
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
