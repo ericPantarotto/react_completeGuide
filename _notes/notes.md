@@ -1238,6 +1238,24 @@ More importantly, **it's that whenever a ref changes, the component function doe
 - do not cause component re-evaluation when changed
 - can be used to gain direct DOM element access (great for reading values or accessing certain browser APIs)
 
+### Using Refs for More Than "DOM Element Connections"
+
+As you know, whenever state changes, this component function re-executes. And that, of course, also means that this variable `let timer` is recreated.
+
+one solution would be to define  it outside of the component function because then it would not be recreated. but we then get a new bug, if we launch 2 timers and try to stop both, only the first one will stop.
+
+> **<span style='color: #495fcb'> Note:** I'm getting that behavior because this timer variable is now a variable defined in this TimerChallenge file outside of this component function.  
+And therefore, it's actually a variable that will be shared across all component instances that are based on this component function.  
+Initial timer  will be overwritten with a pointer at that one second timer.
+
+**refs can be a solution**,  because you cannot just use refs to connect to HTML elements, even though that is a very common use case, but you can also use refs to manage any kind of value.
+
+**<span style='color: #875c5c'>IMPORTANT:**
+
+- Every component instance of this TimerChallenge component will get its own timer ref that works totally independent from the other refs that belong to the other instances of that component.
+- But at the same time, unlike variables defined in component functions, this ref will not be reset or cleared when this component re-executes. Instead, just as with state values, React will store these timer values behind the scenes and make sure that they don't get lost as this component function re-executes.
+
+**And that's therefore another use case for refs if you have a value that must be managed but that isn't really a state because that timer itself has no direct impact on the UI and you still need to manage it such that it's not reset when the component is re-executed, then you might have a great use case for a ref.**
 <!---
 [comment]: it works with text, you can rename it how you want
 
