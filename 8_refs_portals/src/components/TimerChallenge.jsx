@@ -6,8 +6,8 @@ export default ({ title, targetTime }) => {
   const [timerStarted, setTimerStarted] = useState(false);
   //   let timer; //NOTE: will be recreated when state changes
 
-    const timer = useRef();
-    
+  const timer = useRef();
+
   const handleStart = () => {
     timer.current = setTimeout((_) => setTimerExpired(true), targetTime * 1000);
     setTimerStarted(true);
