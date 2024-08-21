@@ -1256,6 +1256,15 @@ Initial timer  will be overwritten with a pointer at that one second timer.
 - But at the same time, unlike variables defined in component functions, this ref will not be reset or cleared when this component re-executes. Instead, just as with state values, React will store these timer values behind the scenes and make sure that they don't get lost as this component function re-executes.
 
 **And that's therefore another use case for refs if you have a value that must be managed but that isn't really a state because that timer itself has no direct impact on the UI and you still need to manage it such that it's not reset when the component is re-executed, then you might have a great use case for a ref.**
+
+### Adding a Modal Component
+
+**<span style='color: #495fcb'> Note:**
+
+- if you add a form with the method set to dialog (which is not *React* specific), inside of a `<dialogue>`, with a button that submits the form, it will close this dialogue without any extra JavaScript or anything like that required.
+- the built-in dialog element by default is invisible. But it can be made visible by adding the `open` prop to it.
+- this dialog element actually comes with a built-in backdrop element that will be displayed behind the dialog but unfortunately this built-in backdrop will not be shown if you force the dialog to be visible by setting open to true like this. Instead we have to open this dialog programmatically by sending a command to the browser, to get this built-in backdrop. And that's again an example for a scenario where refs can help us.
+- 
 <!---
 [comment]: it works with text, you can rename it how you want
 
