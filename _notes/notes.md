@@ -1196,6 +1196,27 @@ if attached to an `<input>` HTML element, you can now access all methods and pro
 
 **<span style='color: #495fcb'> Note:** that's one of the reasons why this ref feature exists. For use cases like this where you just wanna read a value from an input field, for example, it can really save you a lot of code and lead to leaner Components.
 
+### Manipulating the DOM via Refs
+
+```javascript
+const handleClick = () => {
+    setEnteredPlayerName(playerName.current.value);
+    playerName.current.value = '';
+  };
+```
+
+You must not forget that React is about writing declarative code. And it's about not directly manipulating the DOM yourself. Instead, you wanna let React do that.
+
+in above first line, we're already crossing that line a little bit, but here we are just reading a value. We're not changing anything in the DOM.
+
+But in the next line, we definitely have imperative code. We're not in the declarative world anymore. Instead, we're clearly instructing the browser to set the value of that input to an empty string.
+
+And we're therefore basically violating that rule, that React should handle all those DOM interactions.
+
+**<span style='color: #495fcb'> Note:** Nonetheless, for a use case like this, where you just clear an input, which is then not really connected to any other state, you can definitely consider writing code like this.
+
+**<span style='color: #875c5c'>IMPORTANT:** But you should definitely be careful that you don't start using refs to read and manipulate all kinds of values on your page, because that's really not the idea behind React.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
