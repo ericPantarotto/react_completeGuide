@@ -1123,6 +1123,9 @@ How should you know which class names exist and which class names do what? Well,
 
 **<span style='color: #a3842c'>Link:** [youtube_debug_react](https://www.youtube.com/watch?v=FOXNlZFkbPk)
 
+### Using the Browser Debugger & Breakpoints
+
+in the browser, go to `Sources` tab
 
 <!---
 [comment]: it works with text, you can rename it how you want
