@@ -1188,6 +1188,14 @@ return (
 );
 ```
 
+### Introducing Refs: Connecting & Accessing HTML Elements via Refs
+
+`useRef()` returns a JavaScript object with a single `current` property.
+
+if attached to an `<input>` HTML element, you can now access all methods and properties of a built-in native `input` HTML element.
+
+**<span style='color: #495fcb'> Note:** that's one of the reasons why this ref feature exists. For use cases like this where you just wanna read a value from an input field, for example, it can really save you a lot of code and lead to leaner Components.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
