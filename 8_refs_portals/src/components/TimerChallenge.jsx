@@ -13,7 +13,9 @@ export default ({ title, targetTime }) => {
     timer.current = setTimeout((_) => {
       setTimerExpired(true);
       setTimerStarted(false);
-      dialog.current.showModal();
+
+      // dialog.current.showModal();
+      dialog.current.openDialog();
     }, targetTime * 1000);
 
     setTimerStarted(true);

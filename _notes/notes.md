@@ -1289,6 +1289,21 @@ export default forwardRef(({ result, targetTime }, ref) => (
 )
 ```
 
+### Exposing Component APIs via the useImperativeHandle Hook
+
+But keep in mind that you might eventually work on bigger React projects and that there you might be writing some components and other developers write other components and you might be working with some of those components written by other developers and vice versa.
+
+If you then always have to dive into those components to understand how they work internally, so that you use them correctly and you, for example, call the correct method on that ref here, that can be a problem.
+
+>Therefore, it might be preferable to build this ResultModal component such that it exposes its own function that can be called with help of a ref outside of that component, which will work independent of how this *JSX* code might work in the future, so that the person working on that **<span style='color: #a8c62c'>ResultModal.jsx** component can change it however they want, as long as they keep this one function which is exposed to you,
+
+`useImperativeHandle()`
+
+- first argument is the `ref` you get from `forwardRef()` argument
+- And the second value must be a function that then returns an object which groups all the properties and methods that should be exposed by this component to other components.
+
+But now the person working on that `ResultModal` component is totally free to change it however it wants as long as this component keeps on working and as long as it keeps on exposing a method called `openDialog`, because it's now this method which we're calling here.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
