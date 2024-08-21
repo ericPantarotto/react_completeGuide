@@ -1264,7 +1264,31 @@ Initial timer  will be overwritten with a pointer at that one second timer.
 - if you add a form with the method set to dialog (which is not *React* specific), inside of a `<dialogue>`, with a button that submits the form, it will close this dialogue without any extra JavaScript or anything like that required.
 - the built-in dialog element by default is invisible. But it can be made visible by adding the `open` prop to it.
 - this dialog element actually comes with a built-in backdrop element that will be displayed behind the dialog but unfortunately this built-in backdrop will not be shown if you force the dialog to be visible by setting open to true like this. Instead we have to open this dialog programmatically by sending a command to the browser, to get this built-in backdrop. And that's again an example for a scenario where refs can help us.
-- 
+
+### Forwarding Refs to Custom Components
+
+the problem is that we can't forward a `ref` to another component and then to an element in that component as I'm trying to do it here. This unfortunately doesn't work.
+
+```javascript
+<ResultModal targetTime={targetTime} result={'lost'} ref={dialog} />
+
+export default ({ result, targetTime, ref }) => (
+  <dialog ref={ref} className="result-modal">
+)
+```
+
+Instead, if we wanna pass a ref from one component to another component so that we can use it in that other component, we have to use a special function provided by React: `forwardRef`
+
+but now this component function will receive a second parameter, a ref parameter. And that's only the case because we wrapped this component function here with **forwardRef**.
+
+```javascript
+import { forwardRef } from 'react';
+
+export default forwardRef(({ result, targetTime }, ref) => (
+  <dialog ref={ref} className='result-modal'>
+)
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
