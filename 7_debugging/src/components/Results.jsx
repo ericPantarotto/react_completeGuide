@@ -1,12 +1,15 @@
 import { calculateInvestmentResults, formatter } from '../util/investment.js';
 
+// FIX: duplication of table results
+// const results = [];
 
 export default function Results({ input }) {
   const results = [];
+  
   calculateInvestmentResults(input, results);
 
   if (results.length === 0) {
-    return <p className='center'>Invalid input data provided</p>
+    return <p className='center'>Invalid input data provided.</p>;
   }
 
   const initialInvestment =
@@ -15,7 +18,7 @@ export default function Results({ input }) {
     results[0].annualInvestment;
 
   return (
-    <table id="result">
+    <table id='result'>
       <thead>
         <tr>
           <th>Year</th>

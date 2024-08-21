@@ -1127,6 +1127,21 @@ How should you know which class names exist and which class names do what? Well,
 
 in the browser, go to `Sources` tab
 
+### Understanding React's 'Strict Mode'
+
+Using `StrictMode` typically begins in Index.jsx.
+
+Though you can also enable it just for parts of your application if you wanted to, because StrictMode, in the end is simply a component you import from React, a built-in component provided by *React*.
+
+**<span style='color: #495fcb'> Note:** To be precise, it is a component that's meant to be wrapped around other components.
+
+You can wrap any single component, though it's not uncommon to wrap the **root component**.
+
+For example, one of the most important things the StrictMode component does is that it will execute every component function twice instead of just once. Now, it only does that during development.
+
+So if you would prepare your application for production and you would upload it to some server, StrictMode would no longer execute every component twice as this of course does slightly impact the performance of your application.
+
+And the error here is stemming from the fact that in my `Results` component, I'm creating this Results array outside of the component function and therefore only once because whilst this component function will be re-executed by React whenever the state in apparent component changes, but the creation of this array, will not be re-executed
 <!---
 [comment]: it works with text, you can rename it how you want
 
