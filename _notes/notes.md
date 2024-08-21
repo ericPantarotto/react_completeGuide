@@ -1100,7 +1100,7 @@ In addition, *Tailwind* also sets up some base styles that will affect the overa
 
 #### Installation
 
-**<span style='color: #a3842c'>Link:** [https://tailwindcss.com/docs/installation/framework-guides] 
+**<span style='color: #a3842c'>Link:** [https://tailwindcss.com/docs/installation/framework-guides]
 
 **<span style='color: #875c5c'>IMPORTANT:** to get *VSCode intellisence*, add **Tailwind CSS IntelliSence** extension.
 
@@ -1142,6 +1142,52 @@ For example, one of the most important things the StrictMode component does is t
 So if you would prepare your application for production and you would upload it to some server, StrictMode would no longer execute every component twice as this of course does slightly impact the performance of your application.
 
 And the error here is stemming from the fact that in my `Results` component, I'm creating this Results array outside of the component function and therefore only once because whilst this component function will be re-executed by React whenever the state in apparent component changes, but the creation of this array, will not be re-executed
+
+## Working with Refs & Portals
+
+### Repetition: Fragments
+
+**When writing JSX code, there's one important rule: A JSX value must have only one root element.**
+
+For example, the following code would be invalid and cause an error:
+
+```javascript
+return (
+  <h2>Welcome!</h2>
+  <p>React is awesome!</p>
+);
+
+// So would this code:
+const content = (
+  <h2>Welcome!</h2>
+  <p>React is awesome!</p>
+);
+```
+
+One solution would be to add a `div`. But it has a downside: You now have that extra `<div>` in your DOM - even though you don't really need it (besides for getting rid of the this error). That's why React offers a better solution: A special JSX element called **"React Fragment"**.
+
+It can be used as a wrapper to ensure that there's only one root JSX element whilst at the same time not rendering any DOM element.
+
+```javascript
+import { Fragment } from 'react';
+return (
+  <Fragment>
+    <h2>Welcome!</h2>
+    <p>React is awesome!</p>
+  </Fragment>
+);
+
+// Most React projects (e.g., projects created with Vite or create-react-app) offer an even shorter form:
+
+// no import needed    
+return (
+  <>
+    <h2>Welcome!</h2>
+    <p>React is awesome!</p>
+  </>
+);
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
