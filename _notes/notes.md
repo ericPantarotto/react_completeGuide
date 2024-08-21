@@ -1217,6 +1217,27 @@ And we're therefore basically violating that rule, that React should handle all 
 
 **<span style='color: #875c5c'>IMPORTANT:** But you should definitely be careful that you don't start using refs to read and manipulate all kinds of values on your page, because that's really not the idea behind React.
 
+### Refs vs State Values
+
+When the component gets rendered for the first time, the connection through this ref prop `useRef()` won't be established yet.
+
+So in that first component render cycle, when that component function is executed for the first time, `playerName.current` will simply be undefined.
+
+**<span style='color: #875c5c'>IMPORTANT:** the key difference between refs and state, tt's not just that this connection doesn't exist yet initially.
+
+More importantly, **it's that whenever a ref changes, the component function does not re-execute**. And for a state, that's of course different. Whenever you update state by calling that state updating function, the component function will be re-executed.
+
+#### State
+
+- causes component re-evaluation (re-execution) when changed
+- should be used for values that directly reflected in the UI
+- should not be used for *"behind the scenes" values* that have no direct UI impact
+
+#### Refs
+
+- do not cause component re-evaluation when changed
+- can be used to gain direct DOM element access (great for reading values or accessing certain browser APIs)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
