@@ -1304,6 +1304,19 @@ If you then always have to dive into those components to understand how they wor
 
 But now the person working on that `ResultModal` component is totally free to change it however it wants as long as this component keeps on working and as long as it keeps on exposing a method called `openDialog`, because it's now this method which we're calling here.
 
+### When to Use Refs & State
+
+```javascript
+if (timeRemaining <= 0) {
+  clearInterval(timer.current);
+  setTimeRemaining(targetTime * 1000);
+}
+```
+**<span style='color: #495fcb'> Note:** setting the state like this directly in a component function can be dangerous because you can create an infinite loop, because setting the state causes the component function to execute again which could cause this function here to run again and so on.
+
+But since I'm in a if condition here, which will not be met after updating the state like this, we are safe.
+
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
