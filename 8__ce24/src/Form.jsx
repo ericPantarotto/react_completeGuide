@@ -1,4 +1,6 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+
 import Input from './Input';
 import ResultModal from './ResultModal';
 
@@ -35,7 +37,7 @@ const Form = forwardRef(function (_, ref) {
     console.log(userData);
   }
 
-  return (
+  return createPortal(
     <>
       <ResultModal myInputs={inputs} ref={dialog} />
       <form ref={form}>
@@ -52,7 +54,8 @@ const Form = forwardRef(function (_, ref) {
           <li key={1}>{inputs.email}</li>
         </ul>
       </section>
-    </>
+    </>,
+    document.getElementById('modal')
   );
 });
 

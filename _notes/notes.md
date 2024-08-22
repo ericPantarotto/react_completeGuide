@@ -1329,7 +1329,27 @@ To make sure that onReset gets triggered when the dialog is closed via the escap
    ...
 </dialog>
 ```
+### Introducing Portals
 
+#### Portals 
+
+And it would make sense to have the dialogue on such a higher level because that would map its visual appearance to its location in the HTML structure which can be better for accessibility reasons and which can also help you avoid styling problems. but a deeply nested element could be hidden by other elements above it in certain circumstances.
+
+**<span style='color: #495fcb'> Note:** And therefore we might wanna control and kind of output this modal component in the TimerChallenge component because that's the component where we use it, but we'd like its JSX code to go somewhere else in our page. And that's exactly the kind of problem this portal feature solves.
+
+So for modals or similar scenarios where you have some JSX code that should actually not be rendered in the place where you are using it in your app, but somewhere else in your document.
+
+#### React-DOM
+
+- `react-dom` library is managed by the same team.
+- `react` library only exposes functions and features that work in all kinds of environments. For example, also, if you would build a Native app with React Native.
+- whereas the React DOM library includes a couple of features and functions that in the end allow React to then interact with the DOM. So with a website rendered in the browser.
+
+**<span style='color: #875c5c'>IMPORTANT:** The second argument for `createPortal()` is an HTML element to which this code should be teleported. So where this code should be rendered in the end. **And that should be an element that exists in your index HTML file**.
+
+![image info](./8_sc1.png)
+
+**<span style='color: #495fcb'> Note:** And by the way, there, you see multiple dialogues because we have multiple timer challenges, but only this first dialogue is visible at the moment.
 <!---
 [comment]: it works with text, you can rename it how you want
 
