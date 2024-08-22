@@ -1316,6 +1316,19 @@ if (timeRemaining <= 0) {
 
 But since I'm in a if condition here, which will not be met after updating the state like this, we are safe.
 
+### Closing the Modal via the ESC (Escape) Key
+
+The `<dialog>` element allows website visitors to close the opened dialog by pressing the ESC (Escape) key on their keyboard.
+
+Currently, this will not trigger the onReset function though (unlike closing the dialog with a button click).
+
+To make sure that onReset gets triggered when the dialog is closed via the escape key, you should add the built-in onClose prop to the `<dialog>` element and bind it to the onReset prop value.
+
+```javascript
+<dialog ref={dialog} className="result-modal" onClose={onReset}
+   ...
+</dialog>
+```
 
 <!---
 [comment]: it works with text, you can rename it how you want
