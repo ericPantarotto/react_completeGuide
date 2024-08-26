@@ -6,6 +6,10 @@ export default ({ onAddTask }) => {
   const handleChange = (event) => setEnteredTask(event.target.value);
 
   const handleClick = () => {
+    if (enteredTask.trim() === '') {
+      return;
+    }
+
     onAddTask(enteredTask);
     setEnteredTask('');
   };
