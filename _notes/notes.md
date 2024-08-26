@@ -1,4 +1,5 @@
 <!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD024 -->
 # React - The Complete Guide 2024 (incl. Next.js, Redux)
 
 ## Getting Started
@@ -1312,6 +1313,7 @@ if (timeRemaining <= 0) {
   setTimeRemaining(targetTime * 1000);
 }
 ```
+
 **<span style='color: #495fcb'> Note:** setting the state like this directly in a component function can be dangerous because you can create an infinite loop, because setting the state causes the component function to execute again which could cause this function here to run again and so on.
 
 But since I'm in a if condition here, which will not be met after updating the state like this, we are safe.
@@ -1329,9 +1331,10 @@ To make sure that onReset gets triggered when the dialog is closed via the escap
    ...
 </dialog>
 ```
+
 ### Introducing Portals
 
-#### Portals 
+#### Portals
 
 And it would make sense to have the dialogue on such a higher level because that would map its visual appearance to its location in the HTML structure which can be better for accessibility reasons and which can also help you avoid styling problems. but a deeply nested element could be hidden by other elements above it in certain circumstances.
 
@@ -1397,6 +1400,14 @@ So for modals or similar scenarios where you have some JSX code that should actu
 <button className="text-stone-700 hover:text-red-500">...</button>
 ```
 
+### Managing Tasks & Understanding Prop Drilling
+
+we need to extract the value that was entered by the user into that `input` when that button is clicked.
+
+I also want to clear this input and set it back to an empty input after we click Add Task. And whilst this could be done with a ref, we would kind of be violating that idea of React being in charge of the DOM and of DOM updates.
+
+And therefore I'll instead use `useState()`.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
@@ -1420,3 +1431,4 @@ So for modals or similar scenarios where you have some JSX code that should actu
 -->
 
 <!-- markdownlint-enable MD033 -->
+<!-- markdownlint-enable MD024 -->
