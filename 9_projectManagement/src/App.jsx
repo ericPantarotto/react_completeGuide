@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import NewProject from './components/NewProject';
 import NoProjectSelected from './components/noProjectSelected';
 import ProjectsSidebar from './components/ProjectsSidebar';
+import SelectedProject from './components/SelectedProject';
 
 function App() {
   const [projectState, setProjectState] = useState({
@@ -12,7 +13,7 @@ function App() {
 
   const handleStartAddProject = () =>
     setProjectState((prevState) => ({ ...prevState, selectedProjectId: null }));
-  
+
   const handleCancelAddProject = () =>
     setProjectState((prevState) => ({
       ...prevState,
@@ -27,9 +28,16 @@ function App() {
     }));
   };
 
-  console.log(projectState);
+  const handleSelectProject = (id) =>
+    setProjectState((prevState) => ({
+      ...prevState,
+      selectedProjectId: id,
+    }));
 
-  let content;
+  const selectedProject = projectState.projects.find(project => project.id === projectState.selectedProjectId)
+
+  let content = <SelectedProject project={selectedProject} />;
+  
   if (projectState.selectedProjectId === null) {
     content = (
       <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject} />
@@ -37,11 +45,13 @@ function App() {
   } else if (projectState.selectedProjectId === undefined) {
     content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
   }
+
   return (
     <main className='h-screen my-8 flex gap-8'>
       <ProjectsSidebar
         onStartAddProject={handleStartAddProject}
         projects={projectState.projects}
+        onSelectProject={handleSelectProject}
       />
       {content}
     </main>
