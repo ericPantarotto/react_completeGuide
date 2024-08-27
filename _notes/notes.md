@@ -1419,6 +1419,16 @@ This often means that you need to pass that shared data through multiple layers 
 - makes your Components a bit less reusable because they always must be used in a place where they can get that shared data.
 - And it also means that you have to write a lot of extra boilerplate code
 
+### Prop Drilling: Component Composition as a Solution
+
+we still have the shop component as a wrapper but we have the logic for outputting the products and the usage of that product component in the app component now, which now means that we no longer have to pass a pointer of the specific methods that were causing the *prop drilling*.
+
+**<span style='color: #495fcb'> Note:** And with that, we're embracing component composition, and we're using the shop component around the wrapper of that list of products. And we therefore kind of got rid of one layer of component nesting,
+
+**<span style='color: #875c5c'>IMPORTANT:** Though, and that's the downside of this solution, you typically don't want to use this solution for all your component layers.
+
+Because it would mean that in the end, all your components just end up in the app component and all the other components are just wrapper components.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
