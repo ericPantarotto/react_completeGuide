@@ -1408,6 +1408,17 @@ I also want to clear this input and set it back to an empty input after we click
 
 And therefore I'll instead use `useState()`.
 
+## React's Context API & useReducer - Advanced State Management
+
+### Understanding Prop Drilling
+
+**<span style='color: #875c5c'>IMPORTANT:** **State Lifting**, you often need to manage the state at some component that has access to all Components that need that state. And you then need to share it through props and also update it with help of props.
+
+This often means that you need to pass that shared data through multiple layers of Components. And that is something that's called **prop drilling**. even though most Components don't directly need that data. They just pass it on to some child component.
+
+- makes your Components a bit less reusable because they always must be used in a place where they can get that shared data.
+- And it also means that you have to write a lot of extra boilerplate code
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
