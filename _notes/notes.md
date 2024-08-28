@@ -1429,6 +1429,12 @@ we still have the shop component as a wrapper but we have the logic for outputti
 
 Because it would mean that in the end, all your components just end up in the app component and all the other components are just wrapper components.
 
+### Introducing the Context API
+
+This `Context` feature offered by React is that you create a context value and that you then provide that value that you wrap this context, you could say around multiple Components,possibly around all Components of your app.
+
+**<span style='color: #875c5c'>IMPORTANT:** Now, the great thing about this `Context` value that you provide to multiple Components is that it can easily be connected to `State`. So, you can connect your React state to that context value which is provided to the entire application.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
