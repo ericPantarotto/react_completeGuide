@@ -1478,6 +1478,70 @@ export const CartContext = createContext({
   addItemToCart: (_) => _,
 });
 ```
+###  A Different Way Of Consuming Context
+
+Below approach is a bit more cumbersome and also harder to read and it's therefore not the default approach you should use.
+
+It's just an approach I wanna show you because you might encounter it in other React projects.
+
+**<span style='color: #a8c62c'> Cart.jsx** 
+
+```javascript
+import { CartContext } from '../store/shopping-cart-context';
+
+export default function Cart({ onUpdateItemQuantity }) {
+  return (
+    <CartContext.Consumer>
+      {(cartCtx) => {
+        const totalPrice = cartCtx.items.reduce(
+          (acc, item) => acc + item.price * item.quantity,
+          0
+        );
+        const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
+        return (
+          <div id='cart'>
+            {cartCtx.items.length === 0 && <p>No items in cart!</p>}
+            {cartCtx.items.length > 0 && (
+              <ul id='cart-items'>
+                {cartCtx.items.map((item) => {
+                  const formattedPrice = `$${item.price.toFixed(2)}`;
+
+                  return (
+                    <li key={item.id}>
+                      <div>
+                        <span>{item.name}</span>
+                        <span> ({formattedPrice})</span>
+                      </div>
+                      <div className='cart-item-actions'>
+                        <button
+                          onClick={() => onUpdateItemQuantity(item.id, -1)}
+                        >
+                          -
+                        </button>
+                        <span>{item.quantity}</span>
+                        <button
+                          onClick={() => onUpdateItemQuantity(item.id, 1)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+            <p id='cart-total-price'>
+              Cart Total: <strong>{formattedTotalPrice}</strong>
+            </p>
+          </div>
+        );
+      }}
+    </CartContext.Consumer>
+  );
+}
+
+
+```
 
 <!---
 [comment]: it works with text, you can rename it how you want
