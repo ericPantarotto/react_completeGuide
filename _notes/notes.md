@@ -1441,6 +1441,14 @@ This `Context` feature offered by React is that you create a context value and t
 
 **<span style='color: #495fcb'> Note:** You cannot just use components like the Header or the Shop component, instead you can also use nested property values as components if those values are valid React components. And this `Provider` property does indeed hold a valid React component.
 
+### Consuming the Context
+
+Even though we're setting a default value in our `CartContext` context provider component, **you also must add a `value` prop **.
+
+**<span style='color: #495fcb'> Note:** The default value set when creating the context is only used if a component that was not wrapped by the provider component tries to access the context value.
+
+we set the default value is just helpful to get the auto-completion.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
