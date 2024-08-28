@@ -1539,9 +1539,18 @@ export default function Cart({ onUpdateItemQuantity }) {
     </CartContext.Consumer>
   );
 }
-
-
 ```
+
+### What Happens When Context Values Change?
+
+Now, there's one other thing you must know about consuming and using context values in components.
+
+When you do access a context value in a component and that value then changes, the component function that accesses the context value, will get re-executed by React, just as the component function would also get re-executed
+
+- if it would be using some internal state that was updated
+- or if its parent component were executed again.
+
+**<span style='color: #875c5c'>IMPORTANT:** React will re-execute a component function if it's connected context value changes so that that component function can then produce some new user interface.
 
 <!---
 [comment]: it works with text, you can rename it how you want
