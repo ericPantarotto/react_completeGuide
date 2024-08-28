@@ -1435,6 +1435,12 @@ This `Context` feature offered by React is that you create a context value and t
 
 **<span style='color: #875c5c'>IMPORTANT:** Now, the great thing about this `Context` value that you provide to multiple Components is that it can easily be connected to `State`. So, you can connect your React state to that context value which is provided to the entire application.
 
+### Creating & Providing the Context
+
+`<CartContext.Provider>`
+
+**<span style='color: #495fcb'> Note:** You cannot just use components like the Header or the Shop component, instead you can also use nested property values as components if those values are valid React components. And this `Provider` property does indeed hold a valid React component.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
