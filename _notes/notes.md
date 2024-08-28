@@ -1449,6 +1449,36 @@ Even though we're setting a default value in our `CartContext` context provider 
 
 we set the default value is just helpful to get the auto-completion.
 
+### Linking the Context to State
+
+#### Reading the Context through State
+
+`<CartContext.Provider value={shoppingCart}>`
+
+with the above change, we can use that context, read it (in the `Cart` component for example), but editing the state does actually not work through context yet.  
+Instead, I'm editing the state still by passing props to our components.
+
+#### Editing the Context through State
+
+```javascript
+ const ctxValue = {
+    items: shoppingCart.items,
+    addItemToCart: handleAddItemToCart,
+  };
+
+  return (
+    <CartContext.Provider value={ctxValue}>
+```
+
+**<span style='color: #495fcb'> Note:** to get the auto-completion, we need to go to our **<span style='color: #a8c62c'> shopping-cart-context.jsx** and add a dummy function: 
+
+```javascript
+export const CartContext = createContext({
+  items: [],
+  addItemToCart: (_) => _,
+});
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
