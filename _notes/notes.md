@@ -1552,6 +1552,30 @@ When you do access a context value in a component and that value then changes, t
 
 **<span style='color: #875c5c'>IMPORTANT:** React will re-execute a component function if it's connected context value changes so that that component function can then produce some new user interface.
 
+###  Introducing the useReducer Hook
+
+in state updating functions, I'm always passing a function to them because basically almost always if you are managing more complex state, an object or an array or anything like that you will need to update your state based on the previous state snapshot.
+
+```javascript
+const totalPrice = cartCtx.items.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+```
+
+here we use the built-in `reduce()` method that can be used on any array in *JavaScript* and totally independent of *React*, and from the `useReducer` React hook.
+
+**<span style='color: #495fcb'> Note:** the idea behind this useReducer hook is to use that same concept of reducing one or more values to a typically simpler value *for state management purposes*.
+
+I'm defining our dispatch reducer function  outside of this component function: 
+
+- because this function should not be recreated whenever the component function executes
+- because it also won't need direct access to any value defined or updated in the component function. It won't need access to props or anything like that.
+
+And we see that we got no items in cart here, which makes sense.
+
+Now, if I change my state, the cart doesn't update any longer of course because now I'm getting my value from that newly added reducer based state. And of course there we at the moment got no logic for updating that value,
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
