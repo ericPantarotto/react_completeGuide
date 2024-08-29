@@ -1643,6 +1643,39 @@ useEffect(() => {
 }, []);
 ```
 
+### Not All Side Effects Need useEffect
+
+not all side effects require the usage of `useEffect()` because overusing useEffect and using it unnecessarily is considered a **bad practice**, because you must not forget that this is an extra execution cycle that's triggered after the component execution cycle.
+
+#### Example of another side-effect
+
+Now all this code below, is just another example for a side effect because just as fetching the user's location, this code down here where we store data in the browser's storage is not directly related to rendering this JSX code.
+
+```javascript
+ function handleSelectPlace(id) {
+//...
+const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
+  storedIds.indexOf(id) === -1 &&
+    localStorage.setItem(
+      'selectedPlaces',
+      JSON.stringify([id, ...storedIds])
+    );
+}
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** Now, unlike with the navigator code,  we don't need to wrap this code down here with `useEffect()` though.  
+And indeed we can't use *useEffect* here, because we're inside of a function.  
+**And this usage here would violate the rules of hooks because you're not allowed to use React hooks in nested functions, if statements or anything like that. They must be used directly in the root level of your component function,**
+
+But we also don't need useEffect down here because there's nothing wrong with executing this code here because this code gets executed when this function here the handleSelectPlace function is executed which in the end happens when the user clicks on one of these items.
+
+And then this code does not enter an infinite loop because we're not updating any state here. And even if we were updating any state in relation to that localStorage data storage, we would not create an infinite loop because again, this code in this handleSelectPlace function only executes when a user clicks on one of these items.
+
+**<span style='color: #875c5c'>IMPORTANT:** Not every side effect needs useEffect. You basically only need the useEffect hook:
+
+- to prevent infinite loops
+- or if you have code that can only run after the component function executed at least once.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
