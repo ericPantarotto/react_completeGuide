@@ -1598,6 +1598,25 @@ navigator.geolocation.getCurrentPosition((position) => {
   );
 });
 ```
+
+### A Potential Problem with Side Effects: An Infinite
+
+We wanna use these sortedPlaces to show them on the screen.
+
+Specifically, it's this usage of the `Places` component where instead of `places={AVAILABLE_PLACES}`, I now wanna pass my sorted available places as input.
+
+And, of course, those sorted places are not available right at the start because this operation of getting the user's location will take some time. So the first app component render cycle will be finished at the point of time where we have this location.
+
+Therefore, we need `state` here. So once this operation of fetching the user's location finished and since **set** operations of `useState()` triggers a new render cycle, the state will be updated with those sorted places
+
+**<span style='color: #875c5c'>IMPORTANT:** That looks like a good solution, but this solution actually has a flaw because it would cause an infinite loop.
+
+And why is that? Well, because we're updating the state here, and as you learned, calling such a state updating function tells React to re-execute the component function to which the state belongs, so this app component in this case.
+
+Now, what happens if this component function executes again? Well, we fetch the user's location again and then we set the state and we execute the component function again and we fetch the location again and we set the state and you see where that is going.
+
+That will be an infinite loop and that would crash our application.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
