@@ -1443,7 +1443,7 @@ This `Context` feature offered by React is that you create a context value and t
 
 ### Consuming the Context
 
-Even though we're setting a default value in our `CartContext` context provider component, **you also must add a `value` prop **.
+Even though we're setting a default value in our `CartContext` context provider component, **you also must add a `value` prop**.
 
 **<span style='color: #495fcb'> Note:** The default value set when creating the context is only used if a component that was not wrapped by the provider component tries to access the context value.
 
@@ -1470,7 +1470,7 @@ Instead, I'm editing the state still by passing props to our components.
     <CartContext.Provider value={ctxValue}>
 ```
 
-**<span style='color: #495fcb'> Note:** to get the auto-completion, we need to go to our **<span style='color: #a8c62c'> shopping-cart-context.jsx** and add a dummy function: 
+**<span style='color: #495fcb'> Note:** to get the auto-completion, we need to go to our **<span style='color: #a8c62c'> shopping-cart-context.jsx** and add a dummy function:
 
 ```javascript
 export const CartContext = createContext({
@@ -1478,13 +1478,14 @@ export const CartContext = createContext({
   addItemToCart: (_) => _,
 });
 ```
-###  A Different Way Of Consuming Context
+
+### A Different Way Of Consuming Context
 
 Below approach is a bit more cumbersome and also harder to read and it's therefore not the default approach you should use.
 
 It's just an approach I wanna show you because you might encounter it in other React projects.
 
-**<span style='color: #a8c62c'> Cart.jsx** 
+**<span style='color: #a8c62c'> Cart.jsx**
 
 ```javascript
 import { CartContext } from '../store/shopping-cart-context';
@@ -1552,7 +1553,7 @@ When you do access a context value in a component and that value then changes, t
 
 **<span style='color: #875c5c'>IMPORTANT:** React will re-execute a component function if it's connected context value changes so that that component function can then produce some new user interface.
 
-###  Introducing the useReducer Hook
+### Introducing the useReducer Hook
 
 in state updating functions, I'm always passing a function to them because basically almost always if you are managing more complex state, an object or an array or anything like that you will need to update your state based on the previous state snapshot.
 
@@ -1567,7 +1568,7 @@ here we use the built-in `reduce()` method that can be used on any array in *Jav
 
 **<span style='color: #495fcb'> Note:** the idea behind this useReducer hook is to use that same concept of reducing one or more values to a typically simpler value *for state management purposes*.
 
-I'm defining our dispatch reducer function  outside of this component function: 
+I'm defining our dispatch reducer function  outside of this component function:
 
 - because this function should not be recreated whenever the component function executes
 - because it also won't need direct access to any value defined or updated in the component function. It won't need access to props or anything like that.
@@ -1576,6 +1577,27 @@ And we see that we got no items in cart here, which makes sense.
 
 Now, if I change my state, the cart doesn't update any longer of course because now I'm getting my value from that newly added reducer based state. And of course there we at the moment got no logic for updating that value,
 
+## Handling Side Effects & Working with the useEffect() Hook
+
+### What's a "Side Effect"? A Thorough Example
+
+Below, this entire code is actually a *side effect*.
+
+It's a side effect because this code is, of course needed by this application, we need the user's location but it's not directly related to the task, to the main goal of this component function. Because the main goal of every component function is to return renderable JSX code.
+
+Now this code here is a side effect because it's not directly related with that task. All the other code in this component is related because we're setting up click listeners, which we need in our JSX code, we're setting up the state which impacts what we see on the screen.
+
+**<span style='color: #495fcb'> Note:** But this code where we fetch a user's location is not directly related. Especially also because this code here does not finish instantly. Instead, this callback function will be called at some point in the future where this app component function most likely finished its execution already.
+
+```javascript
+navigator.geolocation.getCurrentPosition((position) => {
+  const sortedPlaces = sortPlacesByDistance(
+    AVAILABLE_PLACES,
+    position.coords.latitude,
+    position.coords.longitude
+  );
+});
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
