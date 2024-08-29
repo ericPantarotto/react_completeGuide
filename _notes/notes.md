@@ -1617,6 +1617,32 @@ Now, what happens if this component function executes again? Well, we fetch the 
 
 That will be an infinite loop and that would crash our application.
 
+### Using useEffect for Handling (Some) Side Effects
+
+If you change the code to look like this,  You will not run into this infinite loop problem.
+
+Because the idea behind *useEffect* is that this function which you pass as a first argument to useEffect will be executed by *React* **after every component execution**.
+
+So, if the app starts and the app component function executes, this code in the `useEffect()` block will not be executed right away. Instead, it's only after the app component function execution finished. So, after this JSX code here has been returned, That this side effect function you passed to `useEffect()` will be executed by React.
+
+**<span style='color: #875c5c'>IMPORTANT:** Now, if you then update the state within the `useEffect()`, the component function executes again as you learned. And in theory this effect function would execute again. But that's where this **dependencies array** comes into play. Then, React will actually take a look at the dependencies specified there. And it will only execute this effect function again, **if the dependency values changed**.
+
+In our case,  because we have no dependency `[]`, they obviously never change. Therefore, React actually never re-executes this effect function.
+
+```javascript
+useEffect(() => {
+  navigator.geolocation.getCurrentPosition((position) => {
+    const sortedPlaces = sortPlacesByDistance(
+      AVAILABLE_PLACES,
+      position.coords.latitude,
+      position.coords.longitude
+    );
+
+    setAvailablePlaces(sortedPlaces);
+  });
+}, []);
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
