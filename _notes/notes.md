@@ -1676,6 +1676,43 @@ And then this code does not enter an infinite loop because we're not updating an
 - to prevent infinite loops
 - or if you have code that can only run after the component function executed at least once.
 
+### useEffect Not Needed: Another Example
+
+```javascript
+useEffect(() => {
+    const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
+    const storedPlaces = storedIds.map((id) =>
+      AVAILABLE_PLACES.find((place) => place.id === id)
+    );
+    setPickedPlaces(storedPlaces);
+  }, []);
+```
+
+**But this here is now an example for a redundant usage of useEffect.**
+
+Now, why is using useEffect like this redundant and actually not recommended? Because this code here, where we use local storage, unlike this code here where we gut the user's location, runs synchronously. Which means it basically finishes instantly. It's executed line by line and once a line finished execution, it's done. We have the final result.
+
+And this was not the case here for `getCurrentPosition()` of the *navigator geolocation API*, Instead it was only done once this callback function here was executed by the browser and that happened at some point in the future.
+
+**But for local storage, that's not the case. We got no callback function or promise**.
+
+#### Cleaning the code
+
+we can actually even move that code out of the app component function, so that it only runs once in the entire application lifecycle, when this code file is parsed and executed for the first time.
+
+Because there's no reason to put this into the app component, which would only mean that it runs again and again every time the app component function is executed, which in the end means that we're wasting some performance. Instead, it's enough to run this once when the overall app starts
+
+```javascript
+  const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
+  const storedPlaces = storedIds.map((id) =>
+    AVAILABLE_PLACES.find((place) => place.id === id)
+  );
+function App() {
+//...
+const [pickedPlaces, setPickedPlaces] = useState([storedPlaces]);
+//...
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
