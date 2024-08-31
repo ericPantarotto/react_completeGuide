@@ -1884,6 +1884,23 @@ And since functions are objects in JavaScript, a new object is created. And as y
 *in this specific case, we don't enter the infinite loop because this component disappears.*
 
 to simulate an infinite loop in **<span style='color: #a8c62c'> App.jsx**, `handleRemovePlace` function , if you comment out `setModalIsOpen(false);`, you would end with an infinite loop until you close the modal.
+
+### UseCallback Hook
+
+**<span style='color: #875c5c'>IMPORTANT:** *React* offers a hook which you can use to make sure that this function is not recreated all the time
+
+`useCallback` also does something else. It returns a value, specifically, it returns that function which you wrapped, but now such that it's not recreated whenever this surrounding component function is executed again.
+
+React stores it internally in memory and reuses that stored function whenever the component function executes again
+
+**<span style='color: #495fcb'> Note:** that's why you should useCallback when passing functions as dependencies to useEffect.
+
+`useCallback` actually also takes a dependency array, and this dependency array indeed works exactly as the dependency array of `useEffect`.
+
+you should add any prop or state values that are used inside of this wrapped function. None needs to be added because they don't trigger this component to be rendered again. **it's prop or state values that should be added here, any other values depend on state values (e.g. context values, other functions)**
+
+*React* will now only recreate this function here with useCallback if your dependencies changed. But if you have an empty array of dependencies, there is nothing that could change and therefore, this function isn't recreated.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import logoImg from './assets/logo.png';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
@@ -56,7 +56,7 @@ function App() {
       );
   }
 
-  function handleRemovePlace() {
+  const handleRemovePlace = useCallback(function handleRemovePlace() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
@@ -67,7 +67,8 @@ function App() {
       'selectedPlaces',
       JSON.stringify(storedIds.filter((id) => id !== selectedPlace.current))
     );
-  }
+  },[]);
+  
   // console.log(availablePlaces);
 
   return (
