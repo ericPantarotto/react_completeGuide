@@ -68,7 +68,7 @@ function App() {
       JSON.stringify(storedIds.filter((id) => id !== selectedPlace.current))
     );
   }
-  console.log(availablePlaces);
+  // console.log(availablePlaces);
 
   return (
     <>

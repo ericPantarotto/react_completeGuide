@@ -1749,6 +1749,33 @@ And that's another scenario where you wanna use useEffect because useEffect can 
 
 **<span style='color: #495fcb'> Note:** we can think that using this modal as a *side effect*, because whilst calling these methods `shoeModal, close` will indeed have an impact on the UI, it does not have a direct impact on this JSX code `return createPortal(...)`.
 
+### Understanding Effect Dependencies
+
+Effect dependencies are in the end simply prop or state values that are used inside of this effect function. So put in our words, any value that causes the component function to execute again, which is the case in the end for props and state.
+
+any such value is a dependency if it's used inside of useEffect.
+
+Any other value like refs or as we have it here in the app component function objects and methods that are built into the browser, any such value are not considered dependencies because useEffect only cares about dependencies that would cause the component function to execute again.
+
+this effect function should run whenever the component function executed if one of its dependencies changed.
+
+Now as explained earlier, with an empty array, that will never be the case because if you don't have any dependencies, they also can't change.
+
+But now in the `modal` component, we're using the `open` prop in this effect function and this prop or the value we receive through that prop can, of course, change and it will change in this application.
+
+**<span style='color: #875c5c'>IMPORTANT:** with most recent *Javacript* & *React* versions, you actually get an error if you add `open` as a dependency:
+
+```javascript
+ useEffect(() => {
+    open && dialog.current.showModal();
+    !open && dialog.current.close();
+  }, [open]);
+```
+
+above would fail and instead you need to have an empty dependency `[]`.
+
+**<span style='color: #9e5231'>Error:** Throws the error  *Failed to execute 'showModal' on 'HTMLDialogElement': The dialog is already open as a non-modal dialog, and therefore cannot be opened as a modal dialog*
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
@@ -1757,6 +1784,7 @@ And that's another scenario where you wanna use useEffect because useEffect can 
 **<span style='color: #875c5c'>IMPORTANT:**
 **<span style='color: #495fcb'> Note:**
 **<span style='color: #a3842c'>Link:**
+**<span style='color: #9e5231'>Error:**
 
 **<span style='color: #a8c62c'> TabButton.jsx**,
 
