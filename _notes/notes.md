@@ -1901,6 +1901,25 @@ you should add any prop or state values that are used inside of this wrapped fun
 
 *React* will now only recreate this function here with useCallback if your dependencies changed. But if you have an empty array of dependencies, there is nothing that could change and therefore, this function isn't recreated.
 
+### useEffect's Cleanup Function: another Example
+
+by setting setInterval, right in the component function, we have the problem that we create an infinite loop here as explained in the section.
+
+So we should again `useEffect` hook, and then define our effect function and this dependencies array.
+
+```javascript
+export default function DeleteConfirmation({ onConfirm, onCancel }) {
+  const [remainingTime, setRemainingTime] = useState(TIMER);
+  
+  setInterval(() => {
+    setRemainingTime((prevTime) => prevTime - INTERVAL);
+  }, INTERVAL);
+//...
+}
+```
+
+**<span style='color: #495fcb'> Note:** to clean the interval, We have to return this cleanup function that will be executed by React, and we should then store a reference to this interval in a constant or variable.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
