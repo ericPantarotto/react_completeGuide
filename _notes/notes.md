@@ -1722,6 +1722,33 @@ const [pickedPlaces, setPickedPlaces] = useState([storedPlaces]);
 
 **<span style='color: #495fcb'> Note:** the backdrop disappeared because it only added when we call `dialog.current.showModal()`, so forwarding this `open{}` prop to the dialog doesn't really work.
 
+### Using useEffect for Syncing with Browser APIs
+
+```javascript
+const Modal = ({ open, children }) => {
+  const dialog = useRef();
+  open && dialog.current.showModal();
+  !open && dialog.current.close()
+  
+  return createPortal(
+    <dialog className='modal' ref={dialog} open={open}>
+      {children}
+    </dialog>,
+    document.getElementById('modal')
+  );
+};
+```
+
+we get an error *dialog.current is undefined*. And the problem here, of course, is that we're calling these methods, showModal and close, right inside of this component function.
+
+And we're using the `dialog ref` to interact with that dialog. But the first time this component function executes, this ref will not be set yet. It will not be connected yet because this JSX code hasn't executed yet.
+
+So this connection between a ref and dialog element hasn't been established yet and therefore calling close fails because initially, this ref is undefined.
+
+And that's another scenario where you wanna use useEffect because useEffect can help you synchronize *prop values* or *state values* to DOM APIs like this dialog showModal method or a close method, because as you learned, the effect function you define with useEffect will be executed right after the component function.
+
+**<span style='color: #495fcb'> Note:** we can think that using this modal as a *side effect*, because whilst calling these methods `shoeModal, close` will indeed have an impact on the UI, it does not have a direct impact on this JSX code `return createPortal(...)`.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
