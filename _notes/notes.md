@@ -1920,6 +1920,14 @@ export default function DeleteConfirmation({ onConfirm, onCancel }) {
 
 **<span style='color: #495fcb'> Note:** to clean the interval, We have to return this cleanup function that will be executed by React, and we should then store a reference to this interval in a constant or variable.
 
+### Optimizing State Updates
+
+on the performance, I am managing this interval in my `deleteConfirmation` component. And in this interval, we're updating the state every 20 milliseconds which means that this component runs every 20 milliseconds which also means that React has to compare the unconfirmed value here to figure out whether this effect function should run again.
+
+And React has to reevaluate this entire JSX code below in that component.
+
+**<span style='color: #495fcb'> Note:** It would be better to outsource this progress indicator and this related state logic and useEffect hook into a separate component, so that it's then just this one single component that should be re-executed all the time.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
