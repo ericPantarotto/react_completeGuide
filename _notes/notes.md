@@ -1833,6 +1833,16 @@ In the App component, we can now set the handleStopRemovePlace function as a val
   </Modal>
 ```
 
+### Intoducing useEffect's Cleanup Function
+
+we would not need this effect function because setting the timer wasn't the problem. Neither does this create an infinite loop as we did it with the user location earlier, nor do we have the problem we faced in the modal where we needed to work with some ref that wasn't connected yet.
+
+Instead here the problem is not setting the timer but cleaning it up, getting rid of it, when this component function disappears.
+
+**<span style='color: #875c5c'>IMPORTANT:** this `useEffect()` function can return another function which will then be executed:
+- by React right before this effect function runs again 
+- or, and that's the important part here, right before this component dismounts. So, before it's removed from the DOM.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
