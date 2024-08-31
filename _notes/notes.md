@@ -1776,6 +1776,63 @@ above would fail and instead you need to have an empty dependency `[]`.
 
 **<span style='color: #9e5231'>Error:** Throws the error  *Failed to execute 'showModal' on 'HTMLDialogElement': The dialog is already open as a non-modal dialog, and therefore cannot be opened as a modal dialog*
 
+**<span style='color: #875c5c'>IMPORTANT:** For anyone else who may run into this error, check to see if you still have `open={open}` in the dialog tag within **<span style='color: #a8c62c'> Modal.jsx**. With this in place the Modal function will execute with open=true and open the dialog as non-modal, after which useEffect will attempt to show the dialog as a modal and the error will occur. Removing the open attribute in the dialog tag should resolve the issue in this case.
+
+```javascript
+ <dialog className='modal' ref={dialog} open={open} onClose={onClose}>
+```
+
+```javascript
+ <dialog className='modal' ref={dialog} onClose={onClose}>
+```
+
+### Fixing small Bug
+
+The `<dialog>` element can also be closed by pressing the **ESC** key on the keyboard. In that case, the dialog will disappear but the state passed to the open prop (i.e., the modalIsOpen state) will not be set to false.
+
+Therefore, the modal can't be opened again (because modalIsOpen still is true - the UI basically now is not in sync with the state anymore).
+
+To fix this issue, we must listen to the modal being closed by adding the built-in onClose prop to the `<dialog>`. The event is then "forwarded" to the App component by accepting a custom onClose prop on the Modal component.
+
+The Modal component therefore should look like this:
+
+```javascript
+import { useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+  
+function Modal({ open, children, onClose }) {
+  const dialog = useRef();
+  
+  useEffect(() => {
+    if (open) {
+      dialog.current.showModal();
+    } else {
+      dialog.current.close();
+    }
+  }, [open]);
+  
+  return createPortal(
+    <dialog className="modal" ref={dialog} onClose={onClose}>
+      {children}
+    </dialog>,
+    document.getElementById('modal')
+  );
+}
+  
+export default Modal;
+```
+
+In the App component, we can now set the handleStopRemovePlace function as a value for the onClose prop on the `<Modal>` component:
+
+```javascript
+  <Modal open={modalIsOpen} onClose={handleStopRemovePlace}>
+    <DeleteConfirmation
+      onCancel={handleStopRemovePlace}
+      onConfirm={handleRemovePlace}
+    />
+  </Modal>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
@@ -1786,7 +1843,7 @@ above would fail and instead you need to have an empty dependency `[]`.
 **<span style='color: #a3842c'>Link:**
 **<span style='color: #9e5231'>Error:**
 
-**<span style='color: #a8c62c'> TabButton.jsx**,
+**<span style='color: #a8c62c'> TabButton.jsx**
 
 <ins>text to underline</ins>
 
