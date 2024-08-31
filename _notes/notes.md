@@ -1840,9 +1840,50 @@ we would not need this effect function because setting the timer wasn't the prob
 Instead here the problem is not setting the timer but cleaning it up, getting rid of it, when this component function disappears.
 
 **<span style='color: #875c5c'>IMPORTANT:** this `useEffect()` function can return another function which will then be executed:
-- by React right before this effect function runs again 
+
+- by React right before this effect function runs again
 - or, and that's the important part here, right before this component dismounts. So, before it's removed from the DOM.
 
+### The Problem with Object & Function Dependencies
+
+```javascript
+export default function DeleteConfirmation({ onConfirm, onCancel }) {
+  console.log('Timer set!');
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onConfirm();
+    }, 3000);
+
+    return () => {
+      console.log('Cleaning timer!');
+      clearTimeout(timer);
+    };
+  }, [onConfirm]);
+//...
+}
+```
+
+So `onConfirmed` is a function and when adding functions as dependencies, there is a danger of creating an infinite loop.
+
+because when you add a dependency to this array, you're telling React that this effect function should be re-executed whenever this modal component function executed.
+
+if the dependency would be a number or a string, the effect function would run again if that number or string changed.
+
+Now, when the dependency is a function, it's a bit trickier.
+
+you would probably say that it never changes, the code and the function is always the same, but technically, that's not correct because functions in JavaScript are just values.
+
+Specifically, they are objects.
+
+And this function object, this `handleRemovePlace` function object is indeed recreated every time this `App` component function executes because this entire function body then runs again. And all the values that are defined in this app component function are recreated whenever the app component function is executed again.
+
+And since functions are objects in JavaScript, a new object is created. And as you might know in JavaScript when you create two different objects even if they have the same shape or the same code as it's the case here with the function, even if that's the case, they're not the same.
+
+**<span style='color: #495fcb'> Note:** JavaScript does not treat these two functions as equal even though they have the same code, it would be exactly the same with 2 JavasScript objects.
+
+*in this specific case, we don't enter the infinite loop because this component disappears.*
+
+to simulate an infinite loop in **<span style='color: #a8c62c'> App.jsx**, `handleRemovePlace` function , if you comment out `setModalIsOpen(false);`, you would end with an infinite loop until you close the modal.
 <!---
 [comment]: it works with text, you can rename it how you want
 
