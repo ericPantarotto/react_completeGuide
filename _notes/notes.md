@@ -1713,6 +1713,15 @@ const [pickedPlaces, setPickedPlaces] = useState([storedPlaces]);
 //...
 ```
 
+### Preparing Another Use-Case for useEffect
+
+**<span style='color: #495fcb'> Note:** Switching from managing the modal in an imperative way to managing it in a declarative way
+
+`const modal = useRef();`
+`const [modalIsOpen, setModalIsOpen] = useState(false);`
+
+**<span style='color: #495fcb'> Note:** the backdrop disappeared because it only added when we call `dialog.current.showModal()`, so forwarding this `open{}` prop to the dialog doesn't really work.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
