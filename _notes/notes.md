@@ -1928,6 +1928,12 @@ And React has to reevaluate this entire JSX code below in that component.
 
 **<span style='color: #495fcb'> Note:** It would be better to outsource this progress indicator and this related state logic and useEffect hook into a separate component, so that it's then just this one single component that should be re-executed all the time.
 
+## Practise Project: Building a Quiz App
+
+### Deriving Values, Outputting Quesions & Registering Answers
+
+With React, you typically want to manage as little state as possible and derive as much state as possible instead.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
