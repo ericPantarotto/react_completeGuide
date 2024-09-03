@@ -2055,9 +2055,33 @@ As we move to a new question, it will jump back and reset. A new timer will be s
   onTimeout={handleSkipAnswer}
 />
 ```
+### Highlighting Selected Answers & Managing More State
 
 Because `handleSelectedAnswer` function is wrapped by `useCallback`, it should be recreated whenever the activeQuestionIndex value changed because we're using that value in that function body and we don't want to use an outdated value here. **Hence it must be added as a dependency**
 
+### Splitting Components Up to Solve Problems
+
+So why do these answers jump around as I select one?
+
+Well, they jump around, because in this `Quiz` component, we are shuffling those answers.
+
+And this code, of course, executes whenever this quiz component function executes.
+
+Thus far, this was no problem, because this function only executes again if the state changes, and up to this point, we only changed the state once we moved to a new question, but this is not the case anymore. Instead now we have this in-between state where we highlight the selected answer, so where we don't move to a new question right away. And therefore this quiz component function gets executed again, We only wanna shuffle those answers once.
+
+One way would be to add a new state, a `shuffledAnswersState`, which could initially be an empty array,  and then we could use the `useEffect` hook to make sure that this only gets updated when this component renders for the first time or if the active question index changed. And adding `activeQuestionIndex` as a dependency of `useEffect`.
+
+**<span style='color: #495fcb'> Note:** you should typically try to minimize the usage of use effect, because it happens relatively quickly that you use use effect wrong, and therefore potentially add bugs to your application.
+
+**<span style='color: #875c5c'>IMPORTANT:** you could instead use a ref with the `useRef` hook. Now not to connect some HTML element, but instead **to manage some value, which will not change if the component function is executed again.**
+
+>you can useRefs for managing values that are stored and managed independently from the component function lifecycle to which they belong.
+
+it would be great if the answers component would simply be recreated if the old one would be destroyed and a new instance would be created as the question index changes.
+
+If we could unmount and remount it, because then all that code here would execute again. **And that's the advantage of putting this here into a separate component**, because that's now fairly easy to achieve with help of that **key prop** again.
+
+**<span style='color: #9e5231'>Error:** you can't use the same key with 2 sibling components.
 <!---
 [comment]: it works with text, you can rename it how you want
 
