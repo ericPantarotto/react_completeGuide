@@ -5,8 +5,8 @@ export default ({ timeout, onTimeout }) => {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
-    setTimeout(onTimeout, timeout), [timeout, onTimeout];
-  });
+    setTimeout(onTimeout, timeout)
+  }, [timeout, onTimeout]);
 
   useEffect(() => {
     setInterval(() =>

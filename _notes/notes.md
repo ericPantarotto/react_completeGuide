@@ -1985,6 +1985,34 @@ But we should now of course also wrap this timeout code with useEffect, because 
 - the timeout prop 
 - and the onTimeout prop, which is a function, but still a prop.
 
+### Working with Effect Dependencies & UseCallback
+
+```javascript
+useEffect(() => {
+  setTimeout(onTimeout, timeout)
+}, [timeout, onTimeout]);
+```
+The `QuestionTimer` component is rendered once, here, when that quiz is being rendered but it's not getting recreated thereafter.
+
+Sure, the quiz component rerenders whenever an answer is selected, but this component instance of the question timer does not change. It was part of the old JSX code. It is part of the new JSX code.
+
+So in theory, this `useEffect` function shouldn't execute again (the one where there is `setTimeout`),
+
+So the fact that this effect function keeps on getting executed must be related to our dependencies.
+
+Now one dependency is the `timeout` and that value never changes. So that should not trigger the effect function to run again
+
+So it must be this function that changed: `onTimeout={() => handleSelectAnswer(null)}`
+
+That's the only possible explanation here. And indeed this is what's happening here, because functions in JavaScript are values, they are objects. And when a function is created like here, when this JSX code is evaluated, it is a new object in memory that's being created. And even if it contains the same logic and code as before it's still technically a new value in memory.
+
+So every time the JSX code in this quiz component gets reevaluated a new function gets created. And this JSX code gets reevaluated whenever the state in this quiz component is updated, which happens when the user picks an answer.
+
+**<span style='color: #875c5c'>IMPORTANT:** so we need to use the `useCallback`, which ensures that functions don't get recreated.
+
+- when using `useCallback()`, if the function you use calls another function, you also needs to wrapp that other function with `useCallback` too.
+- **<span style='color: #495fcb'> Note:** state updating functions don't have to be added though, because React will guarantee that they never change.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
