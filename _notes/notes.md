@@ -1934,6 +1934,57 @@ And React has to reevaluate this entire JSX code below in that component.
 
 With React, you typically want to manage as little state as possible and derive as much state as possible instead.
 
+### Adding Question Timers
+
+**<span style='color: #a8c62c'> QuestionTimer.jsx**
+
+```javascript
+export default ({ timeout, onTimeout }) => {
+  setTimeout(onTimeout, timeout);
+
+  return <progress id='question-time' />;
+};
+```
+
+Now, I'm not using `useEffect` here at this point because even though this is a side effect, it's at the moment not an effect that would require the usage of useEffect, 
+
+- because I'm not facing the danger of an infinite loop here
+- because I'm not updating any component state here, 
+- and I'm also not trying to interact with an element that wouldn't be available yet.
+
+```javascript
+export default ({ timeout, onTimeout }) => {
+  const [remainingTime, setRemainingTime] = useState();
+  setTimeout(onTimeout, timeout);
+  setInterval(
+    setRemainingTime((prevRemainingTime) => prevRemainingTime - INTERVAL),
+    INTERVAL
+  );
+  return <progress id='question-time' />;
+};
+```
+**<span style='color: #9e5231'>Error:** And this would now of course create an infinite loop, because we're updating the state here. This would re-execute this component function. We would create a new interval where we would also update the state again and we would quickly have multiple intervals up and running which all would call this component function.
+
+we don't have any dependencies that would need to be added here, because you basically only need to add props and state values, and we're using neither of those in this effect function.
+
+```javascript
+useEffect(
+  () =>
+    setInterval(
+      setRemainingTime((prevRemainingTime) => prevRemainingTime - INTERVAL),
+      INTERVAL
+    ),
+  []
+);
+```
+
+But we should now of course also wrap this timeout code with useEffect, because otherwise when we update the remaining time, which we will do every 100 milliseconds, this component function executes again and this timer would be recreated, and we therefore would quickly have multiple timers up and running.
+
+**<span style='color: #875c5c'>IMPORTANT:** And here we now do need to add a dependency, because we actually have two dependencies that are used in this effect function. Because we're using two props in there,
+
+- the timeout prop 
+- and the onTimeout prop, which is a function, but still a prop.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
