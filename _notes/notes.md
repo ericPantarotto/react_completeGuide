@@ -2013,6 +2013,49 @@ So every time the JSX code in this quiz component gets reevaluated a new functio
 - when using `useCallback()`, if the function you use calls another function, you also needs to wrapp that other function with `useCallback` too.
 - **<span style='color: #495fcb'> Note:** state updating functions don't have to be added though, because React will guarantee that they never change.
 
+### Using Effect Cleanup Functions & Using Keys for Resetting Components
+
+you'll see that the progress bar is empty after five seconds. And that's happening because this interval here is actually getting triggered twice and therefore we have two intervals running behind the scenes that keep on updating this state.
+
+And therefore the progress bar is empty in half the time. And that's happening as I mentioned before, because we have React's StrictMode turned on in main JSX.
+
+**<span style='color: #875c5c'>IMPORTANT:** Now during development, and only there, **this StrictMode will actually execute every component function twice**, which is done to help you catch certain errors in your app.
+
+Because in theory, your app should work in exactly the same way, no matter if a component function gets executed once when being rendered to the screen or 100 times. And clearly here, that's not the case, *which is an indicator for a bug we have in our code*.
+
+**So here in this case, StrictMode helps us identify that we have a bug**. And what's missing here in our code is a cleanup function. We have to clean up the existing interval if this effect function runs again.
+
+when adding that cleanup function as a return value in that `useEffect` function, this cleanup function will then automatically be executed by React: 
+
+- before it runs this effect function again, 
+- or when this component is unmounted from the DOM (so if it disappears from the screen)
+
+Now why is that timer and progress bar not reset when we move on to a new question?
+
+Well, because this question timer component doesn't get recreated. Keep in mind that we're using the question timer component in the `Quiz` component. And when we move on to a new question, we do that by storing a user answer, and then the act of question index changes because the length of user answers changed.
+
+But therefore, of course the JSX code of `Quiz.jsx` just gets updated. But the inner  `QuestionTimer` component is not being recreated because it hasn't changed. It was part of the DOM before. It is still part of the DOM now. The only thing that changed is the question text that's being displayed and the answers that are displayed.
+
+But this component `QuestionTimer` was there and is there, and therefore it's not unmounted, not remounted, and therefore the timers and intervals in that component are not reset.
+
+Now of course here in this application, we'd like to have this timer to be reset though, because of course it should reset when the question changed.
+
+**<span style='color: #875c5c'>IMPORTANT:** And there is a simple yet very powerful trick you can use in React to achieve this.
+
+**You can add a key to this component,** because this key prop can actually be added to any element and any component, because key is a built-in prop React is looking for. Just as we use these keys for list data, helping React to manage the list efficiently.
+
+>**<span style='color: #875c5c'>IMPORTANT:**But the key prop also has another purpose. Whenever it changes on a component, even if that component is not part of a list, whenever it changes React will destroy the old component instance and create a new one. So it will unmount and remount it basically.
+
+As we move to a new question, it will jump back and reset. A new timer will be set, a new interval will start!
+
+```javascript
+<QuestionTimer
+  key={activeQuestionIndex}
+  timeout={TIMER}
+  onTimeout={handleSkipAnswer}
+/>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

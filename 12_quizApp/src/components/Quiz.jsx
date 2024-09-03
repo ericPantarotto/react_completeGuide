@@ -8,16 +8,13 @@ export default () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const activeQuestionIndex = userAnswers.length;
 
-  const handleSelectAnswer = useCallback(
-    () => (selectedAnswer) =>
-      setUserAnswers((prevUserAnswers) => [...prevUserAnswers, selectedAnswer]),
-    []
-  );
+  const handleSelectAnswer = useCallback((selectedAnswer) => {
+    setUserAnswers((prevUserAnswers) => [...prevUserAnswers, selectedAnswer]);
+  }, []);
 
-  const handleSkipAnswer = useCallback(
-    () => () => handleSelectAnswer(null),
-    [handleSelectAnswer]
-  );
+  const handleSkipAnswer = useCallback(() => {
+    handleSelectAnswer(null);
+  }, [handleSelectAnswer]);
 
   const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
   if (quizIsComplete) {
@@ -35,7 +32,11 @@ export default () => {
   return (
     <div id='quiz'>
       <div id='question'>
-        <QuestionTimer timeout={TIMER} onTimeout={handleSkipAnswer} />
+        <QuestionTimer
+          key={activeQuestionIndex}
+          timeout={TIMER}
+          onTimeout={handleSkipAnswer}
+        />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul id='answers'>
           {shuffledAnswers.map((answer) => (

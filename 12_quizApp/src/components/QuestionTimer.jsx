@@ -5,14 +5,22 @@ export default ({ timeout, onTimeout }) => {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
-    setTimeout(onTimeout, timeout)
+    const timer = setTimeout(onTimeout, timeout);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [timeout, onTimeout]);
 
   useEffect(() => {
-    setInterval(() =>
-      setRemainingTime((prevRemainingTime) => prevRemainingTime - INTERVAL),
+    const interval = setInterval(
+      () =>
+        setRemainingTime((prevRemainingTime) => prevRemainingTime - INTERVAL),
       INTERVAL
     );
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return <progress id='question-time' value={remainingTime} max={timeout} />;
