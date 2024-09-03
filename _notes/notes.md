@@ -2032,7 +2032,7 @@ when adding that cleanup function as a return value in that `useEffect` function
 
 Now why is that timer and progress bar not reset when we move on to a new question?
 
-Well, because this question timer component doesn't get recreated. Keep in mind that we're using the question timer component in the `Quiz` component. And when we move on to a new question, we do that by storing a user answer, and then the act of question index changes because the length of user answers changed.
+Well, because this question timer component doesn't get recreated. Keep in mind that we're using the question timer component in the `Quiz` component. And when we move on to a new question, we do that by storing a user answer, and then the `activeQuestionIndex` changes because the length of user answers changed.
 
 But therefore, of course the JSX code of `Quiz.jsx` just gets updated. But the inner  `QuestionTimer` component is not being recreated because it hasn't changed. It was part of the DOM before. It is still part of the DOM now. The only thing that changed is the question text that's being displayed and the answers that are displayed.
 
@@ -2055,6 +2055,8 @@ As we move to a new question, it will jump back and reset. A new timer will be s
   onTimeout={handleSkipAnswer}
 />
 ```
+
+Because `handleSelectedAnswer` function is wrapped by `useCallback`, it should be recreated whenever the activeQuestionIndex value changed because we're using that value in that function body and we don't want to use an outdated value here. **Hence it must be added as a dependency**
 
 <!---
 [comment]: it works with text, you can rename it how you want
