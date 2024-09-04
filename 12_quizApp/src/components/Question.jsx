@@ -3,9 +3,18 @@ import QUESTIONS from '../questions.js';
 import Answers from './Answers';
 import QuestionTimer from './QuestionTimer';
 const TIMER = 10000;
-
+const TIMER_ANSWER = 1000;
+const TIMER_RESET_ANSWERSTATE = 2000;
 export default ({ questionIndex, onSelectAnswer, onSkipAnswer }) => {
   const [answer, setAnswer] = useState({ selectedAnswer: '', isCorrect: null });
+
+  let timer = TIMER;
+  if (answer.selectedAnswer) {
+    timer = TIMER_ANSWER;
+  }
+  if (answer.isCorrect !== null) {
+    timer = TIMER_RESET_ANSWERSTATE;
+  }
 
   const handleSelectAnswer = (answer) => {
     setAnswer({ selectedAnswer: answer, isCorrect: null });
@@ -18,8 +27,8 @@ export default ({ questionIndex, onSelectAnswer, onSkipAnswer }) => {
 
       setTimeout(() => {
         onSelectAnswer(answer);
-      }, 2000);
-    }, 1000);
+      }, TIMER_RESET_ANSWERSTATE);
+    }, TIMER_ANSWER);
   };
 
   let answerState = '';
@@ -31,7 +40,12 @@ export default ({ questionIndex, onSelectAnswer, onSkipAnswer }) => {
 
   return (
     <div id='question'>
-      <QuestionTimer timeout={TIMER} onTimeout={onSkipAnswer} />
+      <QuestionTimer
+        key={timer}
+        timeout={timer}
+        onTimeout={answer.selectedAnswer === '' ? onSkipAnswer : null}
+        mode={answerState}
+      />
       <h2>{QUESTIONS[questionIndex].text}</h2>
       <Answers
         answers={QUESTIONS[questionIndex].answers}

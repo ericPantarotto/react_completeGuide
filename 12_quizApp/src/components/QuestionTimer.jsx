@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 const INTERVAL = 100;
 
-export default ({ timeout, onTimeout }) => {
+export default ({ timeout, onTimeout, mode }) => {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
@@ -23,5 +23,12 @@ export default ({ timeout, onTimeout }) => {
     };
   }, []);
 
-  return <progress id='question-time' value={remainingTime} max={timeout} />;
+  return (
+    <progress
+      id='question-time'
+      value={remainingTime}
+      max={timeout}
+      className={mode}
+    />
+  );
 };

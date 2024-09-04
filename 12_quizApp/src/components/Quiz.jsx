@@ -3,9 +3,6 @@ import quizCompleteImg from '../assets/quiz-complete.png';
 import QUESTIONS from '../questions.js';
 import Question from './Question.jsx';
 
-const TIMER_ANSWER = 1000;
-const TIMER_RESET_ANSWERSTATE = 2000;
-
 export default () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const activeQuestionIndex = userAnswers.length;
