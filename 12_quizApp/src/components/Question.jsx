@@ -5,7 +5,8 @@ import QuestionTimer from './QuestionTimer';
 const TIMER = 10000;
 const TIMER_ANSWER = 1000;
 const TIMER_RESET_ANSWERSTATE = 2000;
-export default ({ questionIndex, onSelectAnswer, onSkipAnswer }) => {
+
+export default function Question({ questionIndex, onSelectAnswer, onSkipAnswer }) {
   const [answer, setAnswer] = useState({ selectedAnswer: '', isCorrect: null });
 
   let timer = TIMER;
@@ -56,3 +57,4 @@ export default ({ questionIndex, onSelectAnswer, onSkipAnswer }) => {
     </div>
   );
 };
+

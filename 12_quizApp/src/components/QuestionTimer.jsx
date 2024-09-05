@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 const INTERVAL = 100;
 
-export default ({ timeout, onTimeout, mode }) => {
+export default function QuestionTimer({ timeout, onTimeout, mode }) {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
@@ -31,4 +31,4 @@ export default ({ timeout, onTimeout, mode }) => {
       className={mode}
     />
   );
-};
+}

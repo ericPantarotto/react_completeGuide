@@ -2082,6 +2082,10 @@ it would be great if the answers component would simply be recreated if the old 
 If we could unmount and remount it, because then all that code here would execute again. **And that's the advantage of putting this here into a separate component**, because that's now fairly easy to achieve with help of that **key prop** again.
 
 **<span style='color: #9e5231'>Error:** you can't use the same key with 2 sibling components.
+
+## ESLINT
+
+**<span style='color: #a3842c'>Link:** [https://eslint.org/docs/latest/use/getting-started](https://eslint.org/docs/latest/use/getting-started)
 <!---
 [comment]: it works with text, you can rename it how you want
 
