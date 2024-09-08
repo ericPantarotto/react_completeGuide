@@ -2096,6 +2096,15 @@ JSX code is, in the end, translated to JavaScript code and translated to actual 
 
 #### React builds a component tree
 
+### Analyzing Component Function Executions via React's DevTools Profiler
+
+if we click on the *plus* or *minus* icon, React executes the `Counter` component function.
+
+- it has no impact on the parent component, the app component.
+- it does have an impact on the child components though, because of course all these custom component functions are executed again, and they do receive those prop values again
+
+**<span style='color: #495fcb'> Note:** all this can be seen in **React DevTools\Profiler\Flame Graph**
+
 ## ESLINT
 
 **<span style='color: #a3842c'>Link:** [https://eslint.org/docs/latest/use/getting-started](https://eslint.org/docs/latest/use/getting-started)
