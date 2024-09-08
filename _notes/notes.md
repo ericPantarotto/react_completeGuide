@@ -2157,6 +2157,53 @@ Another technique that is often even more powerful than `memo` is a clever compo
 **<span style='color: #875c5c'>IMPORTANT:** state changes and re-executions of child components don't trigger parent component executions.
 
 **<span style='color: #495fcb'> Note:** With the new `ConfigureCounter` component, we should remove `memo()` component wrapper to the `Counter` component, to avoid the **props** checks that will costs performance.
+
+### Understanding the useCallback() Hook
+
+Re-rendering the `IconButton` component within  **<span style='color: #a8c62c'> Counter.jsx** doesn't make sense as those button components and the values they output of course technically don't change.
+
+even though these components contain very little code, we could wrap icon button with `memo` to make sure it's not getting re‐executed unnecessarily. So we'll also prevent the execution of two components `PlusIcon` and `MinusIcon` by just wrapping `IconButton` with memo.
+
+**<span style='color: #495fcb'> Note:** though this doesn't work, by investigating the **props** accepted by `Counter.jsx`, neither *children* nor *icon* seem to be dynamic.
+
+`icon` prop is just the name of the components (PlusIcon & MinusIcon), not a pointer to the components themselves, because **MinusIcon and PlusIcon are NOT defined inside the `Counter` component function, instead they are imported from other files**.
+
+the problem then comes from the rest of the `...props` being forwarded to `IconButton`: 
+
+- `onClick={handleDecrement}`
+- `onClick={handleIncrement}`
+
+**<span style='color: #875c5c'>IMPORTANT:** keep in mind that they are created inside of the `Counter` component function.
+
+These are nested functions, and therefore, indeed they will technically be recreated every time this `Counter` component function executes, every time one of the **state changes**
+
+it does not matter that the code of the function is the same and does not change, the component function as a value, as an object in JavaScript is recreated. And it will be a different object in memory than before for the last execution of the `Counter` component function and therefore it technically is a new prop value.
+
+Now this recreation here can be prevented with help of a special hook provided by React, which we also already used before in conjunction with effects and the `useEffect` hook. It's the `useCallback` hook.
+
+This hook can be used to avoid the recreation of a function and it is sometimes needed:
+
+- if you have a function as a dependency of `useEffect`.
+- and it's also needed in conjunction with `memo` to avoid unnecessary re‐executions.
+
+you use useCallback by wrapping it around a function in your component function. And then by also as a second argument by passing an array of dependencies to useCallback. And here you would list:
+
+- all props
+- or state
+- or context values you would be using inside of this function
+
+>**<span style='color: #495fcb'> Note:** But here I'm only using `setCounter` which is a **state updating function.** And those state updating functions are guaranteed to never change by React, and therefore you don't need to add them to this dependencies array.
+
+```javascript
+const handleDecrement = useCallback(() => {
+  setCounter((prevCounter) => prevCounter - 1);
+}, []);
+
+const handleIncrement = useCallback(() => {
+  setCounter((prevCounter) => prevCounter + 1);
+}, []);
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
