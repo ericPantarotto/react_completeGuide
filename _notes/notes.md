@@ -2148,6 +2148,15 @@ If this `initialCount` prop value in this case  did not change, there is no reas
 **<span style='color: #875c5c'>IMPORTANT:** it makes sense to use `memo()`, to wrap it around a component that's as high up in the component tree as possible., because checking the props values  before it executes a component **costs performance**
 > That's why you shouldn't use it on components where **props will change frequently**
 
+### Avoiding Component Function Executions with Clever Structuring
+
+So `memo`, if used with care, can be useful, but it's not the only way of preventing unnecessary renders here.
+
+Another technique that is often even more powerful than `memo` is a clever component composition in your application.
+
+**<span style='color: #875c5c'>IMPORTANT:** state changes and re-executions of child components don't trigger parent component executions.
+
+**<span style='color: #495fcb'> Note:** With the new `ConfigureCounter` component, we should remove `memo()` component wrapper to the `Counter` component, to avoid the **props** checks that will costs performance.
 <!---
 [comment]: it works with text, you can rename it how you want
 

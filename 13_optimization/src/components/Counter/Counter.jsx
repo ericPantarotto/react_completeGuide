@@ -7,7 +7,11 @@ import PlusIcon from '../UI/Icons/PlusIcon.jsx';
 import CounterOutput from './CounterOutput.jsx';
 
 function isPrime(number) {
-  log('Calculating if is prime number', 2, 'other');
+  log(
+    'Calculating if is prime number',
+    2,
+    'other'
+  );
   if (number <= 1) {
     return false;
   }
@@ -54,4 +58,4 @@ export default memo(function Counter({ initialCount }) {
       </p>
     </section>
   );
-});
+}); 
