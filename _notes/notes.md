@@ -2256,6 +2256,71 @@ if I reload the page and the overall React app starts therefore and is rendered 
 - as a next step, React goes ahead and applies those changes to the real DOM and only those changes.
 
 **<span style='color: #875c5c'>IMPORTANT:** Just because a component function executes and it's JSX code therefore is evaluated, does not mean that this code is inserted or updated in the real DOM, because all those real DOM operations are quite performance intensive and therefore, React does not change the real DOM all the time. Instead, it just creates these snapshots, compares them and only makes the necessary changes to get to the target result.
+
+### Why Keys Matter When Managing State
+
+state you register in a component function is scoped to that component. And also is recreated whenever you reuse this component.
+
+**<span style='color: #875c5c'>IMPORTANT:** if we duplicate the `counter` component receives its own `[counter, setCounter]` state; this state is not shared!
+
+>And this is, of course, a super important concept because **that's what makes components reusable. State is scoped to a component.** And if you use the same component function to create multiple component instances based on that function, **every instance has its own isolated state.**
+
+**<span style='color: #875c5c'>IMPORTANT:** React tracks state by component type & position (of that component) in the component tree.
+
+So the state does not just belong to this component type, but also to the position where this component is used!
+
+Problem where the state can become wrong typically only occurs in lists because it can only occur if you have sibling components that are of the same type and the number or position of those components may change; with dynimically generated list.
+
+And we have that problem here because I am using a key, but I am setting it to my `index`. So to the index of the count value that's being output here and that index is in the end not a value that's strictly mapped to a specific count value. Instead, the index always stays the same.  
+those keys haven't changed, but the values that belong to those keys have.
+
+And that's why you typically shouldn't do that; using the `index` of a `map` function and why you instead should try to use a key value that is strictly connected to a specific value.
+
+**<span style='color: #9e5231'>Error:**
+**<span style='color: #a8c62c'> CounterHistory.jsx**
+
+```javascript
+return (
+  <ol>
+    {history.map((count, index) => (
+      <HistoryItem key={index} count={count} />
+    ))}**<span style='color: #a8c62c'> Counter.jsx**
+  </ol>
+);
+```
+
+**<span style='color: #a8c62c'> Counter.jsx**
+
+```javascript
+const handleDecrement = useCallback(function handleDecrement() {
+  setCounterChanges((prevCounterChanges) => [-1, ...prevCounterChanges]);
+}, []);
+```
+
+#### Implementing a correct key
+
+**<span style='color: #a8c62c'> CounterHistory.jsx**
+
+```javascript
+return (
+    <ol>
+      {history.map((count) => (
+        <HistoryItem key={count.id} count={count.value} />
+      ))}
+    </ol>
+  );
+```
+
+**<span style='color: #a8c62c'> Counter.jsx**
+
+```javascript
+const handleDecrement = useCallback(function handleDecrement() {
+  setCounterChanges((prevCounterChanges) => [{value: -1, id: uuidv4()}, ...prevCounterChanges]);
+}, []);
+```
+
+And that's why this **key** here matters, because it allows React to clearly identify a component if there is a dynamic list of similar components. And this then makes sure in this case, that the state moves together with this component instance.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
