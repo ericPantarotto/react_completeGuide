@@ -1946,10 +1946,10 @@ export default ({ timeout, onTimeout }) => {
 };
 ```
 
-Now, I'm not using `useEffect` here at this point because even though this is a side effect, it's at the moment not an effect that would require the usage of useEffect, 
+Now, I'm not using `useEffect` here at this point because even though this is a side effect, it's at the moment not an effect that would require the usage of useEffect,
 
 - because I'm not facing the danger of an infinite loop here
-- because I'm not updating any component state here, 
+- because I'm not updating any component state here,
 - and I'm also not trying to interact with an element that wouldn't be available yet.
 
 ```javascript
@@ -1963,6 +1963,7 @@ export default ({ timeout, onTimeout }) => {
   return <progress id='question-time' />;
 };
 ```
+
 **<span style='color: #9e5231'>Error:** And this would now of course create an infinite loop, because we're updating the state here. This would re-execute this component function. We would create a new interval where we would also update the state again and we would quickly have multiple intervals up and running which all would call this component function.
 
 we don't have any dependencies that would need to be added here, because you basically only need to add props and state values, and we're using neither of those in this effect function.
@@ -1982,7 +1983,7 @@ But we should now of course also wrap this timeout code with useEffect, because 
 
 **<span style='color: #875c5c'>IMPORTANT:** And here we now do need to add a dependency, because we actually have two dependencies that are used in this effect function. Because we're using two props in there,
 
-- the timeout prop 
+- the timeout prop
 - and the onTimeout prop, which is a function, but still a prop.
 
 ### Working with Effect Dependencies & UseCallback
@@ -1992,6 +1993,7 @@ useEffect(() => {
   setTimeout(onTimeout, timeout)
 }, [timeout, onTimeout]);
 ```
+
 The `QuestionTimer` component is rendered once, here, when that quiz is being rendered but it's not getting recreated thereafter.
 
 Sure, the quiz component rerenders whenever an answer is selected, but this component instance of the question timer does not change. It was part of the old JSX code. It is part of the new JSX code.
@@ -2025,9 +2027,9 @@ Because in theory, your app should work in exactly the same way, no matter if a 
 
 **So here in this case, StrictMode helps us identify that we have a bug**. And what's missing here in our code is a cleanup function. We have to clean up the existing interval if this effect function runs again.
 
-when adding that cleanup function as a return value in that `useEffect` function, this cleanup function will then automatically be executed by React: 
+when adding that cleanup function as a return value in that `useEffect` function, this cleanup function will then automatically be executed by React:
 
-- before it runs this effect function again, 
+- before it runs this effect function again,
 - or when this component is unmounted from the DOM (so if it disappears from the screen)
 
 Now why is that timer and progress bar not reset when we move on to a new question?
@@ -2055,6 +2057,7 @@ As we move to a new question, it will jump back and reset. A new timer will be s
   onTimeout={handleSkipAnswer}
 />
 ```
+
 ### Highlighting Selected Answers & Managing More State
 
 Because `handleSelectedAnswer` function is wrapped by `useCallback`, it should be recreated whenever the activeQuestionIndex value changed because we're using that value in that function body and we don't want to use an outdated value here. **Hence it must be added as a dependency**
@@ -2083,9 +2086,20 @@ If we could unmount and remount it, because then all that code here would execut
 
 **<span style='color: #9e5231'>Error:** you can't use the same key with 2 sibling components.
 
+## React & Optimization Techniques
+
+### React builds a component tree / How react works behind the scenes
+
+#### every component function must return something that can be rendered, typically JSX code, sometimes also a portal
+
+JSX code is, in the end, translated to JavaScript code and translated to actual elements that can be rendered on the screen.
+
+#### React builds a component tree
+
 ## ESLINT
 
 **<span style='color: #a3842c'>Link:** [https://eslint.org/docs/latest/use/getting-started](https://eslint.org/docs/latest/use/getting-started)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
