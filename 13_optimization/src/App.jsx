@@ -10,7 +10,9 @@ function App() {
 
   const [chosenCount, setChosenCount] = useState(0);
 
-  const handleSetCount = (newCount) => setChosenCount(newCount);
+  const handleSetCount = (newCount) => {
+    setChosenCount(newCount);
+  };
 
   return (
     <>

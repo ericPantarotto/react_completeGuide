@@ -2168,7 +2168,7 @@ even though these components contain very little code, we could wrap icon button
 
 `icon` prop is just the name of the components (PlusIcon & MinusIcon), not a pointer to the components themselves, because **MinusIcon and PlusIcon are NOT defined inside the `Counter` component function, instead they are imported from other files**.
 
-the problem then comes from the rest of the `...props` being forwarded to `IconButton`: 
+the problem then comes from the rest of the `...props` being forwarded to `IconButton`:
 
 - `onClick={handleDecrement}`
 - `onClick={handleIncrement}`
@@ -2204,6 +2204,23 @@ const handleIncrement = useCallback(() => {
 }, []);
 ```
 
+### Understanding the useMemo() Hook
+
+Just as you might want to prevent component function executions with `memo`, you also might want to **prevent the execution of normal functions that are called inside of component functions, unless their input changed.**
+
+And React gives us a hook that can be used for this scenario and problem, the `useMemo()` hook.
+
+`useMemo` is wrapped around normal functions that are executed in component functions to prevent their execution, while memo is wrapped around component functions.
+
+**<span style='color: #495fcb'> Note:** `useMemo` should really only be used if you have a complex calculation that you want to prevent.
+
+useMemo then also wants a dependencies array, just as useCallback wanted it. And it will only re-execute this function if one of those dependencies here changed. So if you have an empty dependencies array this will never re-execute.
+
+And indeed, if `initialCount` changes,  `isPrime` will yield a different result, and therefore you should add `initialCount` as a value here in this dependencies array.
+
+**<span style='color: #875c5c'>IMPORTANT:**  you really should not overuse `useMemo`. You should not start wrapping it around all your functions, because just like Memo, of course it does need to perform this extra dependency value comparison.
+
+And if you have a function that for example simply needs to be executed on basically every component function, re-execution. Adding this extra check doesn't make any sense and instead just cost extra performance.
 <!---
 [comment]: it works with text, you can rename it how you want
 
