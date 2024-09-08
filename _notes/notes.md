@@ -45,6 +45,12 @@ if you prefer to use **VSCode** editor, you need to have installed *NodeJS*, as 
 - `npm i`
 - `npm run dev`
 
+#### ESLINT
+
+By using `npm create vite...` above, you also enable **eslinting**.
+
+**<span style='color: #a3842c'>Link:** [https://eslint.org/docs/latest/use/getting-started](https://eslint.org/docs/latest/use/getting-started)
+
 ### Why do we need a special project setup?
 
 Because when writing React code,
@@ -2105,9 +2111,42 @@ if we click on the *plus* or *minus* icon, React executes the `Counter` componen
 
 **<span style='color: #495fcb'> Note:** all this can be seen in **React DevTools\Profiler\Flame Graph**
 
-## ESLINT
+### Avoiding Component Function Executions with memo()
 
-**<span style='color: #a3842c'>Link:** [https://eslint.org/docs/latest/use/getting-started](https://eslint.org/docs/latest/use/getting-started)
+if I type one character in the *Set Counter* section, you see in the **React Profiler, console** that a bunch of component functions were executed again. Basically all components that make up this app.
+
+And why is that happening here? that's happening because this input field here lives directly in the app component.
+
+**<span style='color: #a8c62c'> App.jsx**
+
+`<input type='number' onChange={handleChange} value={enteredNumber} />`
+
+I have an `onChange` handler on that input field. And therefore on every keystroke I update some state. And of course, as you learned, when the state changes, this component function gets executed again. That means all child component functions get executed again.
+
+**<span style='color: #495fcb'> Note:** Now this does not necessarily have an impact on the actual DOM that's rendered, so it's not that bad, but of course it's still not optimal because it is a bunch of code that's executed.
+
+#### To fix the problem
+
+*React* gives you a built-in function `memo()` that you can wrap around your component functions, that will prevent unnecessary component function executions. `export default memo(function Counter({ initialCount }) ...`  
+
+Whenever the component function would normally execute again for example, because the `App` component function executes, `memo` will take a look at the old prop value and at the new prop value that would be received now.
+
+if those prop values are exactly the same which for arrays and objects means that they really have to be exactly the same array or object in memory,  this component function execution here will be prevented by memo.
+
+**<span style='color: #875c5c'>IMPORTANT:**
+
+- if `initialCount` (prop) changed
+- or of course if its internal state changed, that's not affected by memo.
+- Memo only prevents function executions that are triggered by the parent component, so the `App` component.
+
+If this `initialCount` prop value in this case  did not change, there is no reason for the counter component to be executed again, just because the parent component executed again. Of course, if that internal state changes, that should definitely trigger this component function.
+
+`memo()` does not care about internal changes. But external changes of course only makes sense for this component here to be executed if the prop value changed.
+
+**<span style='color: #875c5c'>IMPORTANT:** of course, if this `Counter` component function is prevented from being executed again, these nested component functions  also won't be executed again!
+
+**<span style='color: #875c5c'>IMPORTANT:** it makes sense to use `memo()`, to wrap it around a component that's as high up in the component tree as possible., because checking the props values  before it executes a component **costs performance**
+> That's why you shouldn't use it on components where **props will change frequently**
 
 <!---
 [comment]: it works with text, you can rename it how you want
