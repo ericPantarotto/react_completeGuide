@@ -2321,6 +2321,21 @@ const handleDecrement = useCallback(function handleDecrement() {
 
 And that's why this **key** here matters, because it allows React to clearly identify a component if there is a dynamic list of similar components. And this then makes sure in this case, that the state moves together with this component instance.
 
+**<span style='color: #875c5c'>IMPORTANT:** using efficient keys helps with state management.
+
+### More Reasons Why Keys matter
+
+Now adding such a key here also has another benefit.
+
+**<span style='color: #9e5231'>Error:** You'll notice that every time I click a button *increment/decrement*, basically all list items change. They all flash, which means they all change, they're all touched by React. And that happens because at the moment, I'm using index as a key
+
+React  basically throws away the old list and re-renders the new list because everything changed. Now of course, to us humans it's clear that that's not really the case. Instead, it's only the first list item that was added when we click such a button, and the other items are just the old items moved down by one.
+
+Now, if we switch to that better key of `count.id`, it's now only parts of the list that are updated and the other elements are not updated, are not flashing.
+
+>because React does indeed now understand that the other elements were part of the DOM before as well because it knows that key from the previous virtual DOM snapshot because that key is also stored there. And it's therefore able to reuse those old DOM elements and instead of recreating them,
+
+**<span style='color: #875c5c'>IMPORTANT:** using efficient keys doesn't only help with state management, it also helps React render such lists in a more optimal way.
 <!---
 [comment]: it works with text, you can rename it how you want
 
