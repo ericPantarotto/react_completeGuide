@@ -2221,6 +2221,41 @@ And indeed, if `initialCount` changes,  `isPrime` will yield a different result,
 **<span style='color: #875c5c'>IMPORTANT:**  you really should not overuse `useMemo`. You should not start wrapping it around all your functions, because just like Memo, of course it does need to perform this extra dependency value comparison.
 
 And if you have a function that for example simply needs to be executed on basically every component function, re-execution. Adding this extra check doesn't make any sense and instead just cost extra performance.
+
+### React Uses A Virtual DOM - Time To Explore It
+
+Keep in mind that it's technically this `index.html` HTML file that is being loaded when you visit the website and this is a pretty empty page in the end. It just has one div and this script import.
+
+That's why if you view the page source code, you see nothing.
+
+And if you instead go to the elements tab, you see the, well, full DOM tree here.
+
+but if you then click a button (like *increment/decrement*), this is not all recreated and reinserted because that would be super inefficient.
+
+So just because a component function is executed again, like this `Counter` component function when we click one of the *increment/decrement* buttons, just because that happens does not mean that all the JSX code that's produced by that component function is reinserted in the DOM. The old code is not thrown away and replaced by new HTML code. And you can see that in the DevTools.
+
+if you expand in *DevTools/Inspector* the `counter section`, while clicking on *increment/decrement*, only the `counter-output` is updated: **only elements that flash were touched by React.**
+
+#### from React DevTools/Profiler
+
+![image info](./13_sc1.png)
+
+Even though technically, this `Counter` component also returns a paragraph and all of the buttons. Nonetheless, none of that flashes here, which means it's not changed in any way.
+
+>**<span style='color: #875c5c'>IMPORTANT:** And that's the case because React works with a so-called virtual DOM for finding out which parts of the actual DOM should be updated. And it's using this virtual DOM because working with such a virtual DOM, which lives only in memory is faster than working with that real DOM.
+
+#### how does Virtual DOM works?
+
+if I reload the page and the overall React app starts therefore and is rendered for the first time:
+
+- React creates that component tree
+- and then in the end derives the actual HTML code that should be rendered from that component tree
+- and it then creates a virtual DOM snapshot, So it's not reaching out to the real DOM yet. Instead, it just creates a virtual representation of how that real DOM should look like.
+- As a next step, React then compares that to that last virtual DOM snapshot it created. Now, if the app just started, there is no lost snapshot and therefore, React of course, sees that everything changed and it goes ahead to the real DOM and makes those changes, which means in this case, the entire virtual DOM is inserted into the real DOM, into this `div with id #root`
+- Now, when I click a button here, React in the end repeats that process: It again creates that component tree, and of course, it can quickly find out that only a part of that tree changed, that only some of those component functions were executed. and depending on if you are using memo or not, And React derives the updated HTML code. And it then compares that code with the old code, Still only virtually, it does not compare anything with the real DOM, it just compares this new virtual DOM snapshot with the old virtual DOM. And of course, it then quickly finds out which parts changed. And in our example, this is only the text inside of the span.
+- as a next step, React goes ahead and applies those changes to the real DOM and only those changes.
+
+**<span style='color: #875c5c'>IMPORTANT:** Just because a component function executes and it's JSX code therefore is evaluated, does not mean that this code is inserted or updated in the real DOM, because all those real DOM operations are quite performance intensive and therefore, React does not change the real DOM all the time. Instead, it just creates these snapshots, compares them and only makes the necessary changes to get to the target result.
 <!---
 [comment]: it works with text, you can rename it how you want
 
