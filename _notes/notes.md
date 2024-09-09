@@ -2364,6 +2364,31 @@ Therefore, a better way of forcing a component functional reset, which in the en
 **<span style='color: #495fcb'> Note:** it's an efficient pattern, which you should use if you have some state that may change in a parent component, that should then lead to some child component being reset. 
 
 we avoid this extra component function execution because now the old component is simply removed and a new component of the same type is reinserted, and re-executed only once.
+
+### State Scheduling & Batching
+
+**<span style='color: #875c5c'>IMPORTANT:** you should especially keep in mind that you can't use the new state value right after setting it.
+
+it's a common misconception that people think  that they update the state in one line and then in the next line they can use the updated state. You still get the old state.
+
+This state update is scheduled by React. And in the end it will of course be executed pretty much instantly, but it will not be executed right away and it will not magically change this value which belongs to the old component function execution.
+
+Instead, this will trigger a new component function execution and the new state will be available the next time this executes.
+
+it is considered a best practice to perform state updates that depend on the old state value using this function form which I also showed you before in this course where you pass a function to the state updating function.
+
+**React guarantees you that here you will always get the latest state snapshot available**. and you need to use this function form when you have to process multiple state updates, triggered simultaneously, in the same function.
+
+executing such a state updating function triggers the component function to run again, you could expect the component function to run twice because we have two state updates. But this is not what happens here, **because React also performs state batching**,
+
+**<span style='color: #495fcb'> State Batching:** multiple state updates that are triggered from the same function for example, are batched together and will only lead to one component function execution.
+
+```javascript
+function handleSetCout(newCount) {
+  setChosenCount(newCount);
+  setChosenCount((prevCount)=> prevCount+1);
+}
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
