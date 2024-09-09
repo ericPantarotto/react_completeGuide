@@ -2389,6 +2389,13 @@ function handleSetCout(newCount) {
   setChosenCount((prevCount)=> prevCount+1);
 }
 ```
+
+### Optimizing React with MillionJS
+
+**<span style='color: #a3842c'>Link:** [https://million.dev/](https://million.dev/)
+
+*Million.js* improves the performance by replacing React's virtual DOM mechanism with a more efficient mechanism, which is faster and derives required DOM updates faster than the existing algorithm that's built into React.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
