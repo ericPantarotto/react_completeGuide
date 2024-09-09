@@ -34,8 +34,12 @@ const Counter = memo(function Counter({ initialCount }) {
     [initialCount]
   );
 
+  // useEffect(() => {
+  //   setCounterChanges([{ value: initialCount, id: uuidv4() }]);
+  // }, [initialCount]);
+
   // const [counter, setCounter] = useState(initialCount);
-//   const [counterChanges, setCounterChanges] = useState([initialCount]);
+  //   const [counterChanges, setCounterChanges] = useState([initialCount]);
   const [counterChanges, setCounterChanges] = useState([
     { value: initialCount, id: uuidv4() },
   ]);

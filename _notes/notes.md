@@ -2336,6 +2336,34 @@ Now, if we switch to that better key of `count.id`, it's now only parts of the l
 >because React does indeed now understand that the other elements were part of the DOM before as well because it knows that key from the previous virtual DOM snapshot because that key is also stored there. And it's therefore able to reuse those old DOM elements and instead of recreating them,
 
 **<span style='color: #875c5c'>IMPORTANT:** using efficient keys doesn't only help with state management, it also helps React render such lists in a more optimal way.
+
+### Using Keys for Resetting Components
+
+**<span style='color: #a8c62c'> Counter.jsx** This initial value `initialCount` you pass to `useState` is never used after the first execution of this component function. It's really just used for initialization.
+
+But what if you now want to reset the counter, if this prop changes?
+
+Well, one thing you could do is you could use `useEffect`.
+
+```javascript
+useEffect(() => {
+  setCounterChanges([{ value: initialCount, id: uuidv4() }]);
+}, [initialCount]);
+```
+
+Now this approach would work, but you're actually encouraged to limit the usage of useEffect because it is often used in a suboptimal way **and it also triggers an extra component execution.**  this function `useEffect` runs after the component function execution.
+
+And that's not optimal.
+
+Therefore, a better way of forcing a component functional reset, which in the end is what we want to do here when `initialCount` changes, is to use a key on the component `Counter`.  **you can add the key prop to any component**
+
+**<span style='color: #495fcb'> Note:** if we wanted also to add a key to the second `Counter` component we added, we would need to find another unique key.
+
+>whenever the **key value** changes, so the `chosenCount` state value changes, React will basically throw away the old component instance. It will destroy it and recreate it. So as if it would be rendering this counter component for the first time.
+
+**<span style='color: #495fcb'> Note:** it's an efficient pattern, which you should use if you have some state that may change in a parent component, that should then lead to some child component being reset. 
+
+we avoid this extra component function execution because now the old component is simply removed and a new component of the same type is reinserted, and re-executed only once.
 <!---
 [comment]: it works with text, you can rename it how you want
 
