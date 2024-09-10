@@ -2402,6 +2402,12 @@ function handleSetCout(newCount) {
 
 Besides building components as functions, which is what we did up to this point, you can also define components with classes. You can build Class-based Components.
 
+### What and Why
+
+Functional components is the default & most modern approach
+
+Class component were required in the past, prior to React 16.8, introducing **React Hooks**, before *state* and *sideEffect* couldn't be managed with functional components,
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
