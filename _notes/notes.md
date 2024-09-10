@@ -2361,7 +2361,7 @@ Therefore, a better way of forcing a component functional reset, which in the en
 
 >whenever the **key value** changes, so the `chosenCount` state value changes, React will basically throw away the old component instance. It will destroy it and recreate it. So as if it would be rendering this counter component for the first time.
 
-**<span style='color: #495fcb'> Note:** it's an efficient pattern, which you should use if you have some state that may change in a parent component, that should then lead to some child component being reset. 
+**<span style='color: #495fcb'> Note:** it's an efficient pattern, which you should use if you have some state that may change in a parent component, that should then lead to some child component being reset.
 
 we avoid this extra component function execution because now the old component is simply removed and a new component of the same type is reinserted, and re-executed only once.
 
@@ -2428,9 +2428,15 @@ With class-based components, this is not optional, there you have to group all t
 
 when using `this.setState()`, it won't override the old state but instead *React* will behind the scenes merge the object you're passing here with your existing state.
 
-When you add the constructor to your class and you extend another class, you need to call super which calls the constructer of the super class 
+When you add the constructor to your class and you extend another class, you need to call super which calls the constructer of the super class
 so if the class were inheriting from.
 
+### Class Components Lifecycle (Class-based Components only!)
+
+- componentDidMount() ~useEffect(...,[]) with empty dependency
+- componentDidUpdate() ~useEffect(...,[val]) with dependency
+- componentWillUnmount() ~cleanup function of useEffect()
+- render()
 <!---
 [comment]: it works with text, you can rename it how you want
 
