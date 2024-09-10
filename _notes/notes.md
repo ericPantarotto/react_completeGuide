@@ -2408,6 +2408,14 @@ Functional components is the default & most modern approach
 
 Class component were required in the past, prior to React 16.8, introducing **React Hooks**, before *state* and *sideEffect* couldn't be managed with functional components,
 
+### Adding a First Class-based Component
+
+**<span style='color: #495fcb'> Note:** Class-based components can work together with functional components.
+
+In reality, you will most likely build a project by either sticking to just functional or to just class-based components though.
+
+You can mix and match, but that will mostly matter if you are working on an existing application and you're adding new features. If you're starting a brand new project, you will probably go with your favorite approach.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
