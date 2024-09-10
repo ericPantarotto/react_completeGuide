@@ -2416,6 +2416,21 @@ In reality, you will most likely build a project by either sticking to just func
 
 You can mix and match, but that will mostly matter if you are working on an existing application and you're adding new features. If you're starting a brand new project, you will probably go with your favorite approach.
 
+### Working with State & Events
+
+With class-based components, **your state always is an object.**
+
+**<span style='color: #495fcb'> Note:** It also has to be a property named `state`! This name is NOT up to you.
+
+With Functional components, you can use multiple `useState` calls, or create one state object and group it together there but that is optional with functional components.
+
+With class-based components, this is not optional, there you have to group all the states that makes up a component into one object.
+
+when using `this.setState()`, it won't override the old state but instead *React* will behind the scenes merge the object you're passing here with your existing state.
+
+When you add the constructor to your class and you extend another class, you need to call super which calls the constructer of the super class 
+so if the class were inheriting from.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
