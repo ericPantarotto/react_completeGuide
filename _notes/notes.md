@@ -2437,6 +2437,18 @@ so if the class were inheriting from.
 - componentDidUpdate() ~useEffect(...,[val]) with dependency
 - componentWillUnmount() ~cleanup function of useEffect()
 - render()
+
+### Lifecycle Methods In Action
+
+using `componentDidUpdate`, this method will be called automatically by *React* whenever this component is re-evaluated because it's state changed, for example,  also shows you how nice `useEffect` is.
+
+It's very short and by specifying the dependencies, we don't have to add an if check inside of it.
+
+Let's say our dummy users are loaded from a server from a database. So we're sending an HTTP request.
+
+Hence we can't use `componentDidUpdate` in this scenario because I don't wanna fetch the users over and over again. Instead, we wanna fetch the users when this component is rendered for the first time, and that is something we would typically do with `componentDidMount`.
+
+`ComponentDidMount` will only run once when the component initially was rendered for the first time. If then the component is updated thereafter, `componentDidMount` will not execute, instead, `componentDidUpdate` will execute.
 <!---
 [comment]: it works with text, you can rename it how you want
 
