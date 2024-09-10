@@ -2396,6 +2396,12 @@ function handleSetCout(newCount) {
 
 *Million.js* improves the performance by replacing React's virtual DOM mechanism with a more efficient mechanism, which is faster and derives required DOM updates faster than the existing algorithm that's built into React.
 
+## An Alternative way of buildding components: Class-based Components
+
+### Module Introduction
+
+Besides building components as functions, which is what we did up to this point, you can also define components with classes. You can build Class-based Components.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
