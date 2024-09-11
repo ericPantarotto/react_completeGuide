@@ -2449,6 +2449,16 @@ Let's say our dummy users are loaded from a server from a database. So we're sen
 Hence we can't use `componentDidUpdate` in this scenario because I don't wanna fetch the users over and over again. Instead, we wanna fetch the users when this component is rendered for the first time, and that is something we would typically do with `componentDidMount`.
 
 `ComponentDidMount` will only run once when the component initially was rendered for the first time. If then the component is updated thereafter, `componentDidMount` will not execute, instead, `componentDidUpdate` will execute.
+
+### Class-based Components & Context
+
+With `useContext`, you can listen to multiple context in one of the same component by calling use context multiple times and pointing at different contexts.
+
+This will not be possible with class based components, because there you can only connect a class based component to one context.
+
+`static contextType = UsersContext;`
+
+once so if there are two contexts which should be connected to one at the same component, this would simply not be an option, you would have to find some other work around like wrapping it in another component
 <!---
 [comment]: it works with text, you can rename it how you want
 
