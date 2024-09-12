@@ -2496,6 +2496,27 @@ So that your front-end React application, which runs on the browser, and where u
 **<span style='color: #495fcb'> Note:** And therefore it's quite common to have separate frontend and backend projects where you also don't have to use the same programming language.
 
 You can also build full-stack React apps where you kind of blend frontend and backend whilst still ensuring that the backend code can't be accessed with extra frameworks and libraries like *NextJS* or *Remix*.
+
+### Preparing the App For Data Fetching
+
+Previously in this course, we for example also fetched data from local storage with the `getItem` method.
+
+And the great thing about local storage is and was that you can access it synchronously, that the data you're fetching is there immediately. You don't need to wait for it.
+
+```javascript
+const places = localStorage.getItem('places');
+const [availablePlaces, setAvailablePlaces] = useState(places);
+```
+
+Now that works with local storage, but not when getting the data from a backend. Because when talking to a backend you are sending an HTTP request that needs to travel through the internet to that backend server and then that backend server needs to do some work and send back a response.
+
+And that all may take some time. It's not an instant process. But the problem is that if this process of getting places here takes milliseconds or seconds, you can't wait for that data here in this component because this component function does not wait for any data to arrive. Instead, it executes pretty much instantly in one single step you could say.
+
+So if this places data is not available initially,
+
+- you must first render this component without that data
+- and then update it once that data is available.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
