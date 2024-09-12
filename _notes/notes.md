@@ -2517,6 +2517,31 @@ So if this places data is not available initially,
 - you must first render this component without that data
 - and then update it once that data is available.
 
+### How NOT To Send HTTP Requests (And Why It's Wrong)
+
+built-in `fetch` function:  This is a function that's not provided by React but instead directly by the browser.
+
+And fetch is a function that can be used to send an HTTP request to some other server.
+
+Fetch returns a promise, it's a wrapper around an eventually received response object. So a promise is a standard JavaScript object that will yield different values depending on the state of that promise.
+
+And to access those different values, you can chain methods on the result of calling `fetch`. You can add the `then` method, and pass a function that should be executed once the promise is resolved.
+
+**<span style='color: #875c5c'>IMPORTANT:** Now in modern JavaScript, you can also use the `await` keyword to access this response and have a more readable syntax. But this is only available if the function in which this code executes is decorated with `async`, **which on the other hand is not allowed for component functions.** That's a restriction implied by React.
+
+`JSON` is the facto standard data format for exchanging data with backends.
+
+```javascript
+fetch('htto://localhost:3000/places')
+  .then((res) => res.json())
+  .then((resData) => setAvailablePlaces(resData.places));
+```
+
+**<span style='color: #9e5231'>Error:** This would cause an infinite loop, The problem is that in the second then block we then update the state, which of course causes this component function to execute again.
+
+So we would end up with a new request, a new state update, a new execution, a new request, a new state update, and so on.
+
+**<span style='color: #875c5c'>IMPORTANT:** *We can `useEffect` to wrap this code and to avoid this infinite loop*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
