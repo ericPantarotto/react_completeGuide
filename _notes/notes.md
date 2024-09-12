@@ -2478,6 +2478,24 @@ in regular *JavaScript*, we use `try/catch` blocks. Nonetheless, if an error is 
 the `Users` component is generating that error, but that is not a regular JavaScript statement above. Instead we have JSX code and the error is generated inside of that JSX code, inside of that `Users` component. 
 
 **<span style='color: #875c5c'>IMPORTANT:** Now, we can't wrap this JSX code with `try/catch`. that's why we have to use the concept of **Error Boundary**, and the specila lifecycle method `componentDidCatch()`
+
+## Sending HTTp Requests (e.g. Connecting to a database)
+
+### How (Not) To Connect To A Database
+
+You also have certain restrictions when writing front-end code, So code that runs in a browser.
+
+For example, you can't easily access a file system. Especially not a shared file system that lives on some central server or computer. You don't really have those capabilities in the browser.
+
+And therefore, instead of directly accessing a database or some file system that may hold shared data, you instead communicate with a backend server, which kind of acts as a middleman.
+
+So that your front-end React application, which runs on the browser, and where users can theoretically view the entire code, that application can reach out to a backend. So a separate project running on a separate server, a computer owned and operated by you, the developer. And it's then on that backend where you can interact with databases, because that backend code is inaccessible by the users of your website because only you, the owner and developer, only you have access to the code on such a backend server.
+
+**<span style='color: #875c5c'>IMPORTANT:** And to connect the frontend and the backend, you use **HTTP requests**. But what's super important, and a safety feature here, is that you can only send HTTP requests that are allowed and accepted by this backend. And if a backend doesn't want a certain request, it's not possible. And therefore you can control what users can do and can't do.
+
+**<span style='color: #495fcb'> Note:** And therefore it's quite common to have separate frontend and backend projects where you also don't have to use the same programming language.
+
+You can also build full-stack React apps where you kind of blend frontend and backend whilst still ensuring that the backend code can't be accessed with extra frameworks and libraries like *NextJS* or *Remix*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
