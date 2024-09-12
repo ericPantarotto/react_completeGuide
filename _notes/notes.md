@@ -2459,6 +2459,25 @@ This will not be possible with class based components, because there you can onl
 `static contextType = UsersContext;`
 
 once so if there are two contexts which should be connected to one at the same component, this would simply not be an option, you would have to find some other work around like wrapping it in another component
+
+### Introducing Error Boundaries
+
+As long as there are users, everything is fine, but if I search for something which is not part of any username, this will crash.
+```javascript
+componentDidUpdate() {
+  if (this.props.users.length === 0) throw new Error('No users provided!');
+}
+```
+
+**<span style='color: #495fcb'> Note:** Of course I could just simply not throw an error, but instead handle this case differently, but it's also quite common to use errors, not as a bad thing, but simply as a way of transporting the information that something went wrong from place A to place B in your application.
+
+in regular *JavaScript*, we use `try/catch` blocks. Nonetheless, if an error is generated inside of a component and we can't handle it in that component though, let's say we don't wanna handle this error in the `Users` component, but in a parent component instead, then we can't use `try/catch`
+
+`<Users users={this.state.filteredUsers} />`
+
+the `Users` component is generating that error, but that is not a regular JavaScript statement above. Instead we have JSX code and the error is generated inside of that JSX code, inside of that `Users` component. 
+
+**<span style='color: #875c5c'>IMPORTANT:** Now, we can't wrap this JSX code with `try/catch`. that's why we have to use the concept of **Error Boundary**, and the specila lifecycle method `componentDidCatch()`
 <!---
 [comment]: it works with text, you can rename it how you want
 

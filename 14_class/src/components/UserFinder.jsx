@@ -1,6 +1,7 @@
 import { Component, Fragment } from 'react';
 
 import UsersContext from '../store/users-context';
+import ErrorBoundary from './ErrorBoundary';
 import classes from './UserFinder.module.css';
 import Users from './Users';
 
@@ -14,6 +15,9 @@ class UserFinder extends Component {
       filteredUsers: [],
       searchTerm: '',
     };
+
+    this.clearSearch = this.clearSearch.bind(this);
+    this.searchChangeHandler = this.searchChangeHandler.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -37,14 +41,24 @@ class UserFinder extends Component {
     this.setState({ searchTerm: event.target.value });
   };
 
+  clearSearch() {
+    this.setState({ searchTerm: '' });
+  }
+
   render() {
     return (
       <Fragment>
         {/* <UsersContext.Consumer></UsersContext.Consumer> */}
         <div className={classes.finder}>
-          <input type='search' onChange={this.searchChangeHandler.bind(this)} />
+          <input
+            type='search'
+            onChange={this.searchChangeHandler.bind(this)}
+            value={this.state.searchTerm}
+          />
         </div>
-        <Users users={this.state.filteredUsers} />
+        <ErrorBoundary onDismiss={this.clearSearch}>
+          <Users users={this.state.filteredUsers} />
+        </ErrorBoundary>
       </Fragment>
     );
   }
