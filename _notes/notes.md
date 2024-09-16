@@ -2549,6 +2549,33 @@ So we would end up with a new request, a new state update, a new execution, a ne
 `useEffect` function will always execute immediately after this component function executed but only if it's dependency is changed.
 
 With an empty array of dependencies and therefore those dependencies of course never change because what's not there can't change. And therefore indeed in this case, this  component function will only execute once after this component function executed for the first time.
+
+### Handling Loading States
+
+```javascript
+useEffect(() => {
+    async function fetchPlaces() {
+      setIsFetching(true);
+      // NOTE: to simulate fetching
+      setTimeout(async () => {
+        const response = await fetch(`${url}places`);
+        const resData = await response.json();
+        setAvailablePlaces(resData.places);
+        setIsFetching(false);
+      }, 3000);
+    }
+
+    fetchPlaces();
+  }, []);
+```
+
+### Handling HTTP Errors
+
+2 main ways of how fetching data might fail:
+
+- network connection crash
+- backend sends back an error response
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
