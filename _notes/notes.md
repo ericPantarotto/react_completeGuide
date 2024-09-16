@@ -2463,6 +2463,7 @@ once so if there are two contexts which should be connected to one at the same c
 ### Introducing Error Boundaries
 
 As long as there are users, everything is fine, but if I search for something which is not part of any username, this will crash.
+
 ```javascript
 componentDidUpdate() {
   if (this.props.users.length === 0) throw new Error('No users provided!');
@@ -2475,7 +2476,7 @@ in regular *JavaScript*, we use `try/catch` blocks. Nonetheless, if an error is 
 
 `<Users users={this.state.filteredUsers} />`
 
-the `Users` component is generating that error, but that is not a regular JavaScript statement above. Instead we have JSX code and the error is generated inside of that JSX code, inside of that `Users` component. 
+the `Users` component is generating that error, but that is not a regular JavaScript statement above. Instead we have JSX code and the error is generated inside of that JSX code, inside of that `Users` component.
 
 **<span style='color: #875c5c'>IMPORTANT:** Now, we can't wrap this JSX code with `try/catch`. that's why we have to use the concept of **Error Boundary**, and the specila lifecycle method `componentDidCatch()`
 
@@ -2542,6 +2543,12 @@ fetch('htto://localhost:3000/places')
 So we would end up with a new request, a new state update, a new execution, a new request, a new state update, and so on.
 
 **<span style='color: #875c5c'>IMPORTANT:** *We can `useEffect` to wrap this code and to avoid this infinite loop*.
+
+### Sending HTTP Requests (GET Request) via useEffect
+
+`useEffect` function will always execute immediately after this component function executed but only if it's dependency is changed.
+
+With an empty array of dependencies and therefore those dependencies of course never change because what's not there can't change. And therefore indeed in this case, this  component function will only execute once after this component function executed for the first time.
 <!---
 [comment]: it works with text, you can rename it how you want
 
