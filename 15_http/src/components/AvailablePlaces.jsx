@@ -8,14 +8,22 @@ const url = `${
 }`;
 
 export default function AvailablePlaces({ onSelectPlace }) {
-  
   const [availablePlaces, setAvailablePlaces] = useState([]);
 
+  // useEffect(() => {
+  //   fetch(`${url}places`) // fetch('http://localhost:3000/places')
+  //     .then((res) => res.json())
+  //     .then((resData) => setAvailablePlaces(resData.places));
+  // }, []);
+
   useEffect(() => {
-    // fetch('http://localhost:3000/places')
-    fetch(`${url}places`)
-      .then((res) => res.json())
-      .then((resData) => setAvailablePlaces(resData.places));
+    async function fetchPlaces() {
+      const response = await fetch(`${url}places`);
+      const resData = await response.json();
+      setAvailablePlaces(resData.places);
+    }
+
+    fetchPlaces();
   }, []);
 
   return (
