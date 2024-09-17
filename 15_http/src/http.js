@@ -14,12 +14,22 @@ export const fetchAvailablePlaces = async () => {
   return resData.places;
 };
 
+export const fetchUserPlaces = async () => {
+  // const response = await fetch(`${url}user-placesXXX`); //ERROR: simulating an error
+  const response = await fetch(`${url}user-places`);
+  const resData = await response.json();
+  if (!response.ok) {
+    throw new Error('Failed to fetch user places');
+  }
+  return resData.places;
+};
+
 export const updateUserPlaces = async (places, componentName) => {
   const errorActionLabel = componentName === 'update' ? 'update' : 'delete';
   try {
     //ERROR: simulating an error
     // const response = await fetch(`${url}user-placesXXX`, {
-      const response = await fetch(`${url}user-places`, {
+    const response = await fetch(`${url}user-places`, {
       method: 'PUT',
       body: JSON.stringify({ places: places }),
       headers: { 'Content-Type': 'application/json' },
