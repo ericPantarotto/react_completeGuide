@@ -15,14 +15,21 @@ export const fetchAvailablePlaces = async () => {
 };
 
 export const updateUserPlaces = async (places) => {
-  const response = await fetch(`${url}user-places`, {
-    method: 'PUT',
-    body: JSON.stringify({places: places}),
-    headers: { 'Content-Type': 'application/json' },
-  });
-  const resData = await response.json();
-  if (!response.ok) {
-    throw new Error('Failed to fetch places');
+  try {
+    //ERROR: simulating an error
+    // const response = await fetch(`${url}user-placesXXX`, {
+    const response = await fetch(`${url}user-places`, {
+      method: 'PUT',
+      body: JSON.stringify({ places: places }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const resData = await response.json();
+    if (!response.ok) {
+      throw new Error('Failed to update places');
+    }
+    return resData.message;
+  } catch (err) {
+    console.error(err);
+    throw new Error('Failed to update places');
   }
-  return resData.message;
 };

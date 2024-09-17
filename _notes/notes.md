@@ -2576,6 +2576,69 @@ useEffect(() => {
 - network connection crash
 - backend sends back an error response
 
+### Optimistic Updating
+
+```javascript
+async function handleSelectPlace(selectedPlace) {
+  setUserPlaces((prevPickedPlaces) => {
+    if (!prevPickedPlaces) {
+      prevPickedPlaces = [];
+    }
+    if (prevPickedPlaces.some((place) => place.id === selectedPlace.id)) {
+      return prevPickedPlaces;
+    }
+    return [selectedPlace, ...prevPickedPlaces];
+  });
+
+  await updateUserPlaces([selectedPlace, ...userPlaces]);
+}
+```
+
+I'm updating my local state before I'm sending this request and before I'm waiting for the response.
+
+So when I pick a place here, as you can tell the UI updates instantly and the request is basically sent at the same time behind the scenes. **Now of course, sending that request could fail though.**
+
+```javascript
+async function handleSelectPlace(selectedPlace) {
+  setUserPlaces((prevPickedPlaces) => {
+    if (!prevPickedPlaces) {
+      prevPickedPlaces = [];
+    }
+    if (prevPickedPlaces.some((place) => place.id === selectedPlace.id)) {
+      return prevPickedPlaces;
+    }
+    return [selectedPlace, ...prevPickedPlaces];
+  });
+
+  try {
+    await updateUserPlaces([selectedPlace, ...userPlaces]);
+  } catch (err) {
+    console.error(err);
+    setUserPlaces(userPlaces)
+  }
+}
+```
+
+Alternatively, we could of course also move `await updateUserPlaces()` on top, before the state update `setUserPlaces`.
+
+And now this state update would wait until this request is done. But if we're doing that, we should be showing some loading text or loading spinner because otherwise it might seem to the user as if the application is stuck.
+
+```javascript
+<Modal open={errorUpdatingPlaces} onClose={handleError}>
+  {errorUpdatingPlaces && (
+  <Error
+    title={'An error occurred'}
+    message={errorUpdatingPlaces.message}
+    onConfirm={handleError}
+  />
+  )}
+</Modal>
+```
+
+I also wanna make sure that this error component, which is wrapped by Modal, is only rendered if `errorUpdatingPlaces` is truthy because otherwise trying to access message `message={errorUpdatingPlaces.message}` will fail.
+
+**<span style='color: #495fcb'> Note:** Even though it will only be visible if the modal is visible, it will actually be part of the DOM right away because the modal component is always part of the DOM as well. It's just not always open, but it's always there.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
