@@ -37,22 +37,37 @@ function App() {
     });
 
     try {
-      await updateUserPlaces([selectedPlace, ...userPlaces]);
+      await updateUserPlaces([selectedPlace, ...userPlaces], 'update');
     } catch (err) {
       setUserPlaces(userPlaces);
       setErrorUpdatingPlaces({
-        message: err.message || 'Failed to update places.',
+        message: err.message || 'Failed to add place.',
       });
     }
   }
 
-  const handleRemovePlace = useCallback(async function handleRemovePlace() {
-    setUserPlaces((prevPickedPlaces) =>
-      prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id)
-    );
-
-    setModalIsOpen(false);
-  }, []);
+  const handleRemovePlace = useCallback(
+    async function handleRemovePlace() {
+      setUserPlaces((prevPickedPlaces) =>
+        prevPickedPlaces.filter(
+          (place) => place.id !== selectedPlace.current.id
+        )
+      );
+      try {
+        await updateUserPlaces(
+          userPlaces.filter((place) => place.id !== selectedPlace.current.id),
+          'delete'
+        );
+      } catch (error) {
+        setUserPlaces(userPlaces);
+        setErrorUpdatingPlaces({
+          message: error.message || 'Failed to delete place',
+        });
+      }
+      setModalIsOpen(false);
+    },
+    [userPlaces]
+  );
 
   const handleError = () => {
     setErrorUpdatingPlaces(null);
