@@ -2715,6 +2715,10 @@ And the answer is no, because just as with components, whenever you use them, wh
 **<span style='color: #495fcb'> Note:** Now, we did not have to do that before using a custom hook because those state updating functions normally don't need to be added to dependency arrays of `useCallback` or `useEffect` because React guarantees for all those state updating functions that they will never change.
 
 But here in this case now the project simply doesn't understand that `setUserPlaces` in the end refers to a state updating function because all it sees here is that it's some property we're pulling out of some object.
+
+### Using A Custom Hook in Multiple Components
+
+**<span style='color: #875c5c'>IMPORTANT:** When updating the state in the `App` component, by adding a new place, that does not affect the available places because as mentioned before, **we have independent state values created through independent copies of this `useFetch` custom hook.**
 <!---
 [comment]: it works with text, you can rename it how you want
 

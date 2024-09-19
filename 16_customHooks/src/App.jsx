@@ -118,7 +118,6 @@ function App() {
             fallbackText='Select the places you would like to visit below.'
             isLoading={isFetching}
             loadingText='Fetching your places...'
-            // places={userPlaces}
             places={userPlaces}
             onSelectPlace={handleStartRemovePlace}
           />
