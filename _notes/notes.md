@@ -2569,6 +2569,8 @@ useEffect(() => {
   }, []);
 ```
 
+**<span style='color: #875c5c'>IMPORTANT:** as we can use `await` inside `useEffect()`, the trick is to create an **async function** within `useEffect` body and call it (omitting `await`)
+
 ### Handling HTTP Errors
 
 2 main ways of how fetching data might fail:
@@ -2639,6 +2641,34 @@ I also wanna make sure that this error component, which is wrapped by Modal, is 
 
 **<span style='color: #495fcb'> Note:** Even though it will only be visible if the modal is visible, it will actually be part of the DOM right away because the modal component is always part of the DOM as well. It's just not always open, but it's always there.
 
+## Building Custom React Hooks
+
+### Revisiting the 'Rules of Hooks' & Why to Use
+
+Only call Hooks 
+
+- in component
+- or **other hook functions**
+
+But why would you build custom Hooks and what should these custom Hooks do? The idea behind building custom Hooks is always to wrap and reuse code that goes into your Component functions.
+
+the code are quite similar in:
+
+- **<span style='color: #a8c62c'> App.jsx**
+- **<span style='color: #a8c62c'> AvailablePlaces.jsx**
+
+**<span style='color: #495fcb'> Note:** you might remember that the idea behind Components was to **reuse logic and JSX structure** 
+
+But this `useEffect` call with the logic inside of it in our case, we might want to reuse that, but we can't put it into a separate Component because this is just a part of a Component. It does not return JSX code and therefore this is the kind of problem we can solve with **custom React Hooks.**
+
+**<span style='color: #875c5c'>IMPORTANT:** Now of course, we could also try to outsource and reuse code like this by grabbing it and putting it into a separate function, because that is how you normally outsource logic in programming. But this does not work here because the code which I wanna outsource and share
+
+- actually uses Hooks inside of it
+- and it also needs to manipulate state.
+
+And these are things which can only be done inside of Components, not in some random shared function.
+
+There is no guarantee that I'll always use fetchData just in a Component and nowhere else
 <!---
 [comment]: it works with text, you can rename it how you want
 
