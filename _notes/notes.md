@@ -2691,6 +2691,14 @@ const useFetch = () => {
     // ...
   }}
 ```
+
+### Custom Hook: Managing State & Returning State Values
+
+custom hooks can return an **object or an array** (just like `useState` does for example)
+
+**<span style='color: #875c5c'>IMPORTANT:** And the great thing is that if you use a custom hook in a component, any state that is managed by that custom hook will also belong to the component in which you are using your custom hook.
+
+So therefore, if the state gets updated in the custom hook, when that happens, the component where your custom hook gets used also gets executed again.
 <!---
 [comment]: it works with text, you can rename it how you want
 
