@@ -23,7 +23,7 @@ const useFetch = (fetchFn, initialValue, errorMessage = 'Failed to fetch data.')
     fetchData();
   }, [fetchFn, errorMessage]);
 
-  return { isFetching, fetchedData, error };
+  return { isFetching, fetchedData, setFetchedData, error };
 };
 
 export default useFetch;

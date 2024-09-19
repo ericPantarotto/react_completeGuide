@@ -2699,6 +2699,22 @@ custom hooks can return an **object or an array** (just like `useState` does for
 **<span style='color: #875c5c'>IMPORTANT:** And the great thing is that if you use a custom hook in a component, any state that is managed by that custom hook will also belong to the component in which you are using your custom hook.
 
 So therefore, if the state gets updated in the custom hook, when that happens, the component where your custom hook gets used also gets executed again.
+
+### Exposing Nested Functions from the Custom Hook
+
+`return { isFetching, fetchedData, setFetchedData, error };`
+
+what happens if you use this `useFetch` hook in other components as well.
+
+If we use it in another component and we then update the state from inside this `App` component, will that affect those other components might be a valid question.
+
+And the answer is no, because just as with components, whenever you use them, whenever you use components and it's the same for custom hooks, whenever you use them, a brand new independent copy is created.
+
+>in our `useCallBack`, we now have to add `setUserPlaces` as a dependency. 
+
+**<span style='color: #495fcb'> Note:** Now, we did not have to do that before using a custom hook because those state updating functions normally don't need to be added to dependency arrays of `useCallback` or `useEffect` because React guarantees for all those state updating functions that they will never change.
+
+But here in this case now the project simply doesn't understand that `setUserPlaces` in the end refers to a state updating function because all it sees here is that it's some property we're pulling out of some object.
 <!---
 [comment]: it works with text, you can rename it how you want
 
