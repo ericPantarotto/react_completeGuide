@@ -2669,6 +2669,28 @@ But this `useEffect` call with the logic inside of it in our case, we might want
 And these are things which can only be done inside of Components, not in some random shared function.
 
 There is no guarantee that I'll always use fetchData just in a Component and nowhere else
+
+### Creatin a Custom Hook
+
+**<span style='color: #9e5231'>Error:** you get an *error* if you add a useState inside a callback. eslint informs: *React hooks must be called in a React function component or a custom React hook function*
+
+but technically, this would be valid JavaScript code  because useState is just a function and theoretically, you can call functions anywhere.
+
+most React projects are configured such that functions that start with `use` are treated as hooks and that those *rules of hooks* are enforced on such functions.
+
+- we get  error if we try to use them in the wrong place.
+- That's why your custom hook function also must start with use so that those rules are also enforced.
+
+React won't complain, as long as our custom hooks starts with *use* 
+
+```javascript
+import { useEffect } from 'react';
+
+const useFetch = () => {
+  useEffect(() => {
+    // ...
+  }}
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
