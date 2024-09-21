@@ -2719,6 +2719,40 @@ But here in this case now the project simply doesn't understand that `setUserPla
 ### Using A Custom Hook in Multiple Components
 
 **<span style='color: #875c5c'>IMPORTANT:** When updating the state in the `App` component, by adding a new place, that does not affect the available places because as mentioned before, **we have independent state values created through independent copies of this `useFetch` custom hook.**
+
+## Working with Forms & User Input
+
+### Handling Form Submission
+
+`htmlFor` is the *JSX* equivalent of the *HTML* `for`, just as `className` is the equivalent of `class` (*class* is a reserved word in *JavaScript*)
+
+the page is reloaded after clicking on the `submit` button of a `form`, and our *url* is also changed.
+
+And this is all happening because I am having a button here inside of a form element. And the default browser behavior for buttons in form elements is that those buttons will submit the form and technically that means that an HTTP request is created and is sent to the server that's serving the website. This is the default built-in behavior.
+
+And this is the default behavior because in many non-React apps, you indeed have a full stack application where every page is rendered by the server and sent to the client thereafter and where form submissions therefore should be sent back to the server so that they can be handled there.
+
+**<span style='color: #495fcb'> Note:** And you'll see this request here which was indeed generated and sent automatically by the browser.\
+
+![image info](./17_sc1.png)
+
+But in this case here for this React application, that's a problem and it will be a problem in many React applications you're building unless you are using some full stack React solution like *Next.js*.
+
+Because here the server that's serving this React website on this address is actually a pure development server. It's not prepared to handle this form submission. We have no code on that server that would deal with that submission.
+
+And even if you would deploy this React application on some real server that serves it to real users on the internet, that would be a server that only aims to serve this index HTML file and all these JavaScript files and it still wouldn't be a server that is prepared to handle incoming form requests.
+
+**<span style='color: #875c5c'>IMPORTANT:** to prevent such behavior:
+
+- `<button type='button' className='button' onClick={handleSubmit}>Login</button>` (the button would not anymore submit the form as the default type *submit* is now replaced)
+- remove `onClick` on the button, and add `<form onSubmit={handleSubmit}>`, giving back an `event` object
+
+```javascript
+const handleSubmit = (event) => {
+  event.preventDefault();
+  console.info('submitted');
+};
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
