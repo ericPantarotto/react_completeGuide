@@ -2792,6 +2792,31 @@ the event target does correspond to the form itself!
 
 **<span style='color: #495fcb'> Note:** grouped-inputs, mult- value input fields are lost when using entries and `fromEntries`.
 
+### Resetting Forms
+
+#### Resetting with native HTML Form reset prop
+
+```html
+<button type='reset' className='button button-flat'>
+  Reset
+</button>
+```
+
+With an *HTML button*, you have 3 built-in types:
+
+- submit (default)
+- button (It allows this button to act as a button that does not submit the form, and that also doesn't do anything else.)
+- reset
+
+#### Resetting with useState
+
+**<span style='color: #495fcb'> Note:** if you are managing the inputs with *state*, you can of course simply reset those state values.
+
+#### Resetting with useRef
+
+Now, when getting the entered values with refs you can reset the inputs by manually setting the value property of the connected input elements to empty strings. But this is a solution you should use with care because typically you should leave it up to React to update the DOM, and you should not imperatively perform updates or changes.
+
+Instead, when working with refs it's typically better to reset the form as you also can do it when using that `formData` approach for extracting the values: `event.target.reset()`, though this is again *imperative code*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
