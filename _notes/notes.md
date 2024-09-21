@@ -2753,6 +2753,20 @@ const handleSubmit = (event) => {
   console.info('submitted');
 };
 ```
+
+### Getting User Input via Refs
+
+We set up an *email* and *password* useRef.
+
+We then connect those ref values to those input fields by adding the special `ref` prop which can be set on all HTML elements. So which is supported by React on all elements.
+
+Now by setting the ref prop, a connection will be established between the DOM element, so this input element and the ref.
+
+**<span style='color: #495fcb'> Note:** The advantage of using this approach `useRef` is that it typically requires less code than when `usingState`.
+
+**<span style='color: #875c5c'>IMPORTANT:** The downside of this approach:  
+- is that resetting those values in a clean way is a bit harder  because you are actually discouraged to use *refs* for manipulating the *DOM*. **`email.current.value = '';` is discouraged**
+-  you'll still end up with quite a lot of refs if you have a more complex form
 <!---
 [comment]: it works with text, you can rename it how you want
 
