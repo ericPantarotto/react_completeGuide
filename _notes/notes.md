@@ -51,6 +51,10 @@ By using `npm create vite...` above, you also enable **eslinting**.
 
 **<span style='color: #a3842c'>Link:** [https://eslint.org/docs/latest/use/getting-started](https://eslint.org/docs/latest/use/getting-started)
 
+#### JavaScript in Visual Studio Code
+
+**<span style='color: #a3842c'>Link:** [https://code.visualstudio.com/Docs/languages/javascript#_intellisense] (<https://code.visualstudio.com/Docs/languages/javascript#_intellisense>)
+
 ### Why do we need a special project setup?
 
 Because when writing React code,
@@ -92,7 +96,7 @@ if you inspect a web page, you can find script elements, generated and injected 
 
 #### Your code is transformed before it's handed off to the browser / Why React projects typically require a build process that transforms your code
 
-**<span style='color: #495fcb'> Note:** *Vite*, *create-react-app, ... , give you such a build process (no custom setup or tweaking neede)
+**<span style='color: #495fcb'> Note:** *Vite*, *create-react-app, ... , give you such a build process (no custom setup or tweaking needed)
 
 - raw unprocessed React Code won't execute in the browser, mostly because *ReactJS* uses this special `JSX` feature (HTML code written in JavaScript files, this is not a standard JavaScript feature).
 - In addition, the could would not be optimized for production (e.g, not minified, though valid code that's highly optimized to be as short and small as possible to reduce the amount of code that has to be downloaded by the website visitor)
@@ -154,8 +158,8 @@ Functions must only have one return statement at most, functions without `return
 
 to return a JS object with an arrow function:
 
-```js
-    number => ({ age: number }); // wrapping the object in extra parentheses
+```javascript
+number => ({ age: number }); // wrapping the object in extra parentheses
 ```
 
 ### Object & Classes
@@ -2645,7 +2649,7 @@ I also wanna make sure that this error component, which is wrapped by Modal, is 
 
 ### Revisiting the 'Rules of Hooks' & Why to Use
 
-Only call Hooks 
+Only call Hooks:
 
 - in component
 - or **other hook functions**
@@ -2657,7 +2661,7 @@ the code are quite similar in:
 - **<span style='color: #a8c62c'> App.jsx**
 - **<span style='color: #a8c62c'> AvailablePlaces.jsx**
 
-**<span style='color: #495fcb'> Note:** you might remember that the idea behind Components was to **reuse logic and JSX structure** 
+**<span style='color: #495fcb'> Note:** you might remember that the idea behind Components was to **reuse logic and JSX structure**
 
 But this `useEffect` call with the logic inside of it in our case, we might want to reuse that, but we can't put it into a separate Component because this is just a part of a Component. It does not return JSX code and therefore this is the kind of problem we can solve with **custom React Hooks.**
 
@@ -2681,7 +2685,7 @@ most React projects are configured such that functions that start with `use` are
 - we get  error if we try to use them in the wrong place.
 - That's why your custom hook function also must start with use so that those rules are also enforced.
 
-React won't complain, as long as our custom hooks starts with *use* 
+React won't complain, as long as our custom hooks starts with *use*
 
 ```javascript
 import { useEffect } from 'react';
@@ -2710,7 +2714,7 @@ If we use it in another component and we then update the state from inside this 
 
 And the answer is no, because just as with components, whenever you use them, whenever you use components and it's the same for custom hooks, whenever you use them, a brand new independent copy is created.
 
->in our `useCallBack`, we now have to add `setUserPlaces` as a dependency. 
+>in our `useCallBack`, we now have to add `setUserPlaces` as a dependency.
 
 **<span style='color: #495fcb'> Note:** Now, we did not have to do that before using a custom hook because those state updating functions normally don't need to be added to dependency arrays of `useCallback` or `useEffect` because React guarantees for all those state updating functions that they will never change.
 
@@ -2764,9 +2768,30 @@ Now by setting the ref prop, a connection will be established between the DOM el
 
 **<span style='color: #495fcb'> Note:** The advantage of using this approach `useRef` is that it typically requires less code than when `usingState`.
 
-**<span style='color: #875c5c'>IMPORTANT:** The downside of this approach:  
+**<span style='color: #875c5c'>IMPORTANT:** The downside of this approach:
+
 - is that resetting those values in a clean way is a bit harder  because you are actually discouraged to use *refs* for manipulating the *DOM*. **`email.current.value = '';` is discouraged**
--  you'll still end up with quite a lot of refs if you have a more complex form
+- you'll still end up with quite a lot of refs if you have a more complex form
+
+### Getting Values via FormData & Native Browser APIs
+
+```javascript
+<form onSubmit={handleSubmit} />
+
+const handleSubmit = (event) => {
+  event.preventDefault;  
+  const fd = new FormData(event.target)
+};
+
+the event target does correspond to the form itself!
+```
+
+**<span style='color: #495fcb'> Note:** Now for this to work all those inputs for which you wanna extract values must have that name prop set on them though.
+
+`const data = Object.fromEntries(fd.entries());`: calling entries on the FormData object will give us kind of an array of all the input fields and their values and calling Object from entries on that array then will simply give us an object where we have key value pairs for all our input fields.
+
+**<span style='color: #495fcb'> Note:** grouped-inputs, mult- value input fields are lost when using entries and `fromEntries`.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
