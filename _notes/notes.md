@@ -2855,6 +2855,13 @@ Instead, when working with refs it's typically better to reset the form as you a
 **<span style='color: #9e5231'>Error:**  When performing validation on keystroke and upon blurring the inputs, if you only rely on that validation, you got a nice user experience as the user is interacting with those inputs. But you have a problem if the user simply clicks the submit button.
 
 That's why it's always a good idea to also add validation here in this `handleSubmit` function.
+
+**<span style='color: #875c5c'>IMPORTANT:** Adding submission-based validation is always a good idea even if you are already validating the user input on every keystroke.
+
+### Validating Input via Built-in validation props
+
+[https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
