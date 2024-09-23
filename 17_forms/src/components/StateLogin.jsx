@@ -7,8 +7,13 @@ export default function Login() {
     email: '',
     password: '',
   });
+  const [didEdit, setDidEdit] = useState({ email: false, password: false });
 
-  const emailIsInvalid = enteredValues.email !== '' && !enteredValues.email.includes('@');
+  const emailIsInvalid = didEdit.email && !enteredValues.email.includes('@');
+
+  const handleInputBlur = (identifier) => {
+    setDidEdit((prevEdit) => ({ ...prevEdit, [identifier]: true }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,6 +25,8 @@ export default function Login() {
     setEnteredValues((prevValues) => {
       return { ...prevValues, [identifier]: value };
     });
+    //NOTE: to let the check reset automatically
+    setDidEdit((prevEdit) => ({ ...prevEdit, [identifier]: false }));
   };
 
   // const handleEmailChange = (event) => {
@@ -43,6 +50,7 @@ export default function Login() {
             name='email'
             onChange={(event) => handleInputChange('email', event.target.value)}
             value={enteredValues.email}
+            onBlur={() => handleInputBlur('email')}
             // onChange={handleEmailChange}
             // value={enteredEmail}
           />
