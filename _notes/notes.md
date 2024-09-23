@@ -2862,6 +2862,20 @@ That's why it's always a good idea to also add validation here in this `handleSu
 
 [https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
 
+### Creating a Custom useInput Hook
+
+```javascript
+const handleInputChange = (identifier, value) => {
+  setEnteredValues((prevValues) => {
+    return { ...prevValues, [identifier]: value };
+  });
+  //NOTE: to let the check reset automatically
+  setDidEdit((prevEdit) => ({ ...prevEdit, [identifier]: false }));
+};
+```
+**<span style='color: #495fcb'> Note:** we also might want to outsource and reuse this code.
+
+And how could we do that? with help of a **custom hook**. And we need a custom hook because we are managing some state in that code that should be outsourced, and therefore we can't use a regular function.
 <!---
 [comment]: it works with text, you can rename it how you want
 
