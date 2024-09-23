@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { hasMinLength, isEmail, isNotEmpty } from '../util/validation';
 import Input from './Input';
 
 export default function Login() {
@@ -10,9 +11,13 @@ export default function Login() {
   });
   const [didEdit, setDidEdit] = useState({ email: false, password: false });
 
-  const emailIsInvalid = didEdit.email && !enteredValues.email.includes('@');
+  // const emailIsInvalid = didEdit.email && !enteredValues.email.includes('@');
+  const emailIsInvalid = didEdit.email && (!isEmail(enteredValues.email) || !isNotEmpty(enteredValues.email));
+
+  // const passwordIsInvalid =
+  //   didEdit.password && enteredValues.password.trim().length < 6;
   const passwordIsInvalid =
-    didEdit.password && enteredValues.password.trim().length < 6;
+    didEdit.password && !hasMinLength(enteredValues.password.trim(), 6);
 
   const handleInputBlur = (identifier) => {
     setDidEdit((prevEdit) => ({ ...prevEdit, [identifier]: true }));
