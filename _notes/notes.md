@@ -2876,6 +2876,11 @@ const handleInputChange = (identifier, value) => {
 **<span style='color: #495fcb'> Note:** we also might want to outsource and reuse this code.
 
 And how could we do that? with help of a **custom hook**. And we need a custom hook because we are managing some state in that code that should be outsourced, and therefore we can't use a regular function.
+
+### Third-Party Form Libraries
+
+- React Hook Form
+- Formik
 <!---
 [comment]: it works with text, you can rename it how you want
 
