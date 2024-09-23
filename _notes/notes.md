@@ -53,7 +53,39 @@ By using `npm create vite...` above, you also enable **eslinting**.
 
 #### JavaScript in Visual Studio Code
 
+- param
+
+```javascript
+export default function Signup() {
+  /**
+   * @param {Event} event
+   */
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // ...
+  }
+// ...
+}
+```
+- local variable
+
+```javascript
+const handleSubmit = (event) => {
+  event.preventDefault();
+  /**
+   @type {string}
+    */
+  const enteredEmail = email.current.value;
+  const enteredPassword = password.current.value;
+
+  const emailIsInvalid = !enteredEmail.includes('@');
+  console.info(enteredEmail, enteredPassword);
+};
+```
+
 **<span style='color: #a3842c'>Link:** [https://code.visualstudio.com/Docs/languages/javascript#_intellisense] (<https://code.visualstudio.com/Docs/languages/javascript#_intellisense>)
+
+**<span style='color: #a3842c'>Link:** [https://jsdoc.app/](https://jsdoc.app/)
 
 ### Why do we need a special project setup?
 
@@ -2817,6 +2849,12 @@ With an *HTML button*, you have 3 built-in types:
 Now, when getting the entered values with refs you can reset the inputs by manually setting the value property of the connected input elements to empty strings. But this is a solution you should use with care because typically you should leave it up to React to update the DOM, and you should not imperatively perform updates or changes.
 
 Instead, when working with refs it's typically better to reset the form as you also can do it when using that `formData` approach for extracting the values: `event.target.reset()`, though this is again *imperative code*.
+
+### Validating Input Upon Form Submission
+
+**<span style='color: #9e5231'>Error:**  When performing validation on keystroke and upon blurring the inputs, if you only rely on that validation, you got a nice user experience as the user is interacting with those inputs. But you have a problem if the user simply clicks the submit button.
+
+That's why it's always a good idea to also add validation here in this `handleSubmit` function.
 <!---
 [comment]: it works with text, you can rename it how you want
 

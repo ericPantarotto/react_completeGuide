@@ -19,6 +19,8 @@ export default function Login() {
     event.preventDefault();
     console.info(enteredValues);
     // console.info(`user email: ${enteredEmail}`);
+
+    //ERROR: add validation here too !
   };
 
   const handleInputChange = (identifier, value) => {
