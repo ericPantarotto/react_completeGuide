@@ -2914,6 +2914,26 @@ The only external thing it's using, is the `setloadedMeals` function, which is p
 ### Formatting & Outputting Numbers as Currency
 
 **<span style='color: #a3842c'>Link:** [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)
+
+### Creating a Configurable & Flexible Custom Button Component
+
+```javascript
+const Button = ({ children, textOnly, className, ...props }) => {
+  let cssClasses = textOnly ? 'text-button' : 'button';
+  cssClasses += ' ' + className;
+  return (
+    <button className={cssClasses} {...props}>
+      {children}
+    </button>
+  );
+};
+
+export default Button;
+```
+
+- `const Button = ({ children, textOnly, className, ...props }) => {`: here we're collecting all *native props of an HTML button*  and gathering them in a `props` object
+- `  <button className={cssClasses} {...props}>`: using the rest operator we are then spreading them
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
