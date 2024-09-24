@@ -2934,6 +2934,47 @@ export default Button;
 - `const Button = ({ children, textOnly, className, ...props }) => {`: here we're collecting all *native props of an HTML button*  and gathering them in a `props` object
 - `  <button className={cssClasses} {...props}>`: using the rest operator we are then spreading them
 
+### Getting Started with Cart Context & Reducer
+
+```javascript
+const cartReducer = (state, action) => {
+  if (action.type === 'ADD_ITEM') {
+    state.items.push(action.item); //ERROR: do not do this
+  }
+  // ...
+}
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** You should never mutate existing state, as the state value of items would change before this cart reducer is done executing.
+
+#### Updating the State in an immutable way (add item)
+
+```javascript
+const cartReducer = (state, action) => {
+  if (action.type === 'ADD_ITEM') {
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+
+    const updatedItems = [...state.items];
+
+    if (existingCartItemIndex > -1) {
+      const existingItem = state.items[existingCartItemIndex];
+      const updatedItem = {
+        ...existingItem,
+        quantity: existingItem.quantity++,
+      };
+      updatedItem[existingCartItemIndex] = updatedItem;
+    } else {
+      updatedItems.push({ ...action.item, quantity: 1 });
+    }
+
+    return { ...state, items: updatedItems };
+  }
+  // other methods
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
