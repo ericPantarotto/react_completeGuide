@@ -2910,6 +2910,10 @@ Now we also execute `fetchMeals` code  after the component function executed. Bu
 We don't have to add any dependencies because this `useEffect` function, is now not using any external *props* or *state* any other values that could change across renders.
 
 The only external thing it's using, is the `setloadedMeals` function, which is provided by the `useState` hook and which is guaranteed by React to never change.
+
+### Formatting & Outputting Numbers as Currency
+
+**<span style='color: #a3842c'>Link:** [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)
 <!---
 [comment]: it works with text, you can rename it how you want
 
