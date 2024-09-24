@@ -2881,6 +2881,35 @@ And how could we do that? with help of a **custom hook**. And we need a custom h
 
 - React Hook Form
 - Formik
+
+## Practise App: Building a Food Order App
+
+### Fetching Meals Data (get Http request)
+
+```javascript
+useEffect(() => {
+  const fetchMeals = async () => {
+    const response = await fetch('http://localhost:3000/meals');
+    if (!response.ok) {
+      //...
+    }
+    const meals = await response.json();
+    setLoadedMeals(meals);
+  };
+
+  fetchMeals();
+}, []);
+```
+
+**<span style='color: #495fcb'> Note:** Alternatively, we could also leave this `fetchMeals` function outside of this `useEffect` function, **but then we would have to add it as a dependency** because we're now using something in the `useEffect` that's defined outside of the effect.
+
+And we then might have to use `useCallback`  to avoid that `fetchMeals` changes every time the component function is re-executed.
+
+Now we also execute `fetchMeals` code  after the component function executed. But if we got no dependencies or if we got dependencies that never change, this code will never execute again and therefore, we won't have an infinite loop.
+
+We don't have to add any dependencies because this `useEffect` function, is now not using any external *props* or *state* any other values that could change across renders.
+
+The only external thing it's using, is the `setloadedMeals` function, which is provided by the `useState` hook and which is guaranteed by React to never change.
 <!---
 [comment]: it works with text, you can rename it how you want
 
