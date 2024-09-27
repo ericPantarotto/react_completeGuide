@@ -2974,6 +2974,31 @@ const cartReducer = (state, action) => {
   // other methods
 }
 ```
+### Opening the Cart in the Modal via a new Context
+
+**<span style='color: #a8c62c'> Modal.jsx**
+
+```javascript
+const Modal = ({ open, children, className = '' }) => {
+  const dialog = useRef();
+
+  useEffect(() => {
+    const modal = dialog.current;
+    if (open) {
+      modal.showModal();
+    }
+    //NOTE: using a cleanup fx that will execute whenever this useEffect is about to run again i.e. when open value changes
+    return () => modal.close();
+  }, [open]);
+  // ...
+}
+```
+
+**<span style='color: #495fcb'> Note:** It's recommended that you store the value of this ref `dialog.current`in some temporary constant, and that you then use this constant inside of this effect function.
+
+This approach is recommended because this cleanup function is of course going to run at a later point of time than this effect function when it runs for the first time because the cleanup function will then only run once this value changed at some point in the future. Therefore, at least theoretically, the value stored in this ref could have changed in between.
+
+Now that will not be the case here. It'll always refer to this `dialogue` but theoretically it could be assigned to a different value in between these function executions (`useEffect` and its cleanup function) and therefore it is recommended to lock inthe value this ref has when this effect function here runs.
 
 <!---
 [comment]: it works with text, you can rename it how you want
