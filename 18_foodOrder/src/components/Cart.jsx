@@ -15,11 +15,20 @@ export const Cart = () => {
     0
   );
 
+  const handleGoToCheckout = () => {
+    userProgressCtx.showCheckout();
+  };
+
   const handleCloseCart = () => {
     userProgressCtx.hideCart();
   };
+
   return (
-    <Modal className='cart' open={userProgressCtx.progress === 'cart'}>
+    <Modal
+      className='cart'
+      open={userProgressCtx.progress === 'cart'}
+      onClose={userProgressCtx.progress === 'cart' ? handleCloseCart : null}
+    >
       <h2>Your Cart</h2>
       <ul>
         {cartCtx.items.map((item) => (
@@ -36,8 +45,10 @@ export const Cart = () => {
       <p className='modal-actions'>
         <Button textOnly onClick={handleCloseCart}>
           Close
-        </Button>{' '}
-        <Button>Go to Checkout</Button>{' '}
+        </Button>
+        {cartCtx.items.length > 0 && (
+          <Button onClick={handleGoToCheckout}>Go to Checkout</Button>
+        )}
       </p>
     </Modal>
   );
