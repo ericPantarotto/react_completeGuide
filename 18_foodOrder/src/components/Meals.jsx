@@ -1,4 +1,5 @@
 import useHttp from '../hooks/useHttp';
+import Error from './Error';
 import MealItem from './MealItem';
 
 const requestConfig = { method: 'GET' };
@@ -7,16 +8,18 @@ const Meals = () => {
   const {
     data: loadedMeals,
     isLoading,
-    // error,
+    error,
   } = useHttp('http://localhost:3000/meals', requestConfig, []);
-
-  if (isLoading) {
-    return <p>Fetching meals...</p>;
-  }
+  //  } = useHttp('http://localhost:3000/mealsXXX', requestConfig, []); // ERROR:
 
   // if (!data) {
-  //   return <p>No meals found.</p>
-  // }
+  if (isLoading) {
+    return <p className='center'>Fetching meals...</p>;
+  }
+
+  if (error) {
+    return <Error title='Failed to fetch meals' message={error} />;
+  }
 
   return (
     <ul id='meals'>
