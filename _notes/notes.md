@@ -3000,6 +3000,86 @@ This approach is recommended because this cleanup function is of course going to
 
 Now that will not be the case here. It'll always refer to this `dialogue` but theoretically it could be assigned to a different value in between these function executions (`useEffect` and its cleanup function) and therefore it is recommended to lock inthe value this ref has when this effect function here runs.
 
+### Adding a Custom HTTP Hook & Avoiding Common Errors
+
+I'll actually build a **custom hook** because we have two components, the `Checkout` component and the `Meals` component, that both need to send requests, even though those requests are sent at different points of time, but they both do it.
+
+And they then also, both in the end need to deal with different request states:
+
+- failing requests
+- loading requests
+- and requests that succeeded.
+
+So we have that same logic which we in the end need in two different components to update the UI. And since it's some **stateful logic** that should impact the UI and where changes should impact the UI, we need a custom hook, because just creating a custom standard function won't do the trick.
+
+**<span style='color: #9e5231'>Error:** *Cannot read properties of undefined*
+
+**<span style='color: #a8c62c'> Meals.jsx**
+
+```javascript
+const Meals = () => {
+  const { data: loadedMeals, isLoadingState, errorState } = useHttp(
+    'http://localhost:3000/meals'
+  );
+
+  return (
+    <ul id='meals'>
+      {loadedMeals.map((meal) => (
+        <MealItem key={meal.id} meal={meal} /> //<li key={meal.id}>{meal.name}</li>
+      ))}
+    </ul>
+  );
+};
+```
+
+`const [data, setData] = useState();`
+
+Keep in mind that sending the request takes some time so the data won't be there initially. Instead, useState for the data sets the initial state to undefined because there is no initial value here for the data.
+
+So the initial value of `loadedMeals` will be undefined until the request is done, but that will take some time and the component function will not wait for the request to finish to do its work.
+
+Instead, this JSX code will be parsed and converted to HTML code right away, so to say, and of course it therefore fails to run this code `loadedMeals.map()`,
+
+Now, to work around that issue, we could try to check if we are in a loading state and in that case return something else.
+
+**<span style='color: #9e5231'>Error:** But even though you might think that this does the trick, you'll see that if you save this and reload, you still get the same error.
+
+The reason for that is that technically in our custom hook, `isLoading` is false initially.
+
+It is set to true once we start sending the request, but that's only the case once this effect function here runs which, as you learned, happens after the component rendered. **So the first time this component renders will be with isLoading set to false** and, therefore, will not return this here, but instead this code which fails for the reasons mentioned before.
+
+Therefore, the better workaround, the better solution is to accept a third parameter here, for example, which could be called initialData, which is the initial data we wanna set to that data state in our custom hook,  but then pass an empty array of meals as initial data for the `loadedMeals`.
+
+```javascript
+export default function useHttp(url, config, initialData) {
+  const [data, setData] = useState(initialData);
+  // ...
+}
+```
+Now, if we take a look at the `Meals` component, we'll see that we're passing the URL to it and this object `{}`.
+
+And also our `initialData` of course, but that's not interesting here, because that isn't a dependency of useCallback or useEffect.
+
+But this here is the config object we're passing to useHttp and that's the problem here.
+
+It doesn't look like a big problem here, but this is a plain JavaScript object. An empty object, but still an object value that is created here in our component function and that's, therefore, recreated in that component function every time this component function runs, which happens every time the request finishes.
+
+It is a new object being created all the time. The solution is to create it outside of this component function.
+
+`useHttp('http://localhost:3000/meals', {}, []);`
+
+```javascript
+const requestConfig = { method: 'GET' };
+
+const Meals = () => {
+  const {
+    data: loadedMeals,
+    isLoading,
+  } = useHttp('http://localhost:3000/meals', requestConfig, []);
+// ...
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
