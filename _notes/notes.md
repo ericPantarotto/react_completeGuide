@@ -3079,7 +3079,39 @@ const Meals = () => {
 // ...
 }
 ```
+## Diving into Redux (an alternative to the Context API)
 
+### Redux createStor() is (not) deprecated
+
+a so-called Redux store will be created with help of a function called `createStore()`.
+
+When using that function in your code, you might get a **deprecation warning** by your IDE or when running the app.
+
+**You should ignore this warning!**
+
+You can still use createStore() without issues.
+
+Indeed, the React Redux team now recommends the usage of an extra package called **Redux Toolkit** and another way of creating the Redux store. That package will indeed be covered a little bit later in the course
+
+### Exploring the Core Redux Concepts
+
+- `npm init -y`
+- `npm install redux`
+- `const store = redux.createStore();`
+
+That store should manage some data and the data which it manages is in the end determined by the *reducer function*, because it's the reducer function which will produce new state snapshots.
+
+The reducer has to go of spitting out a new state snapshot whenever an action reaches it.
+
+And when we run this code for the first time, the reducer will also be executed with a default action, so to say, that should spit out the initial state.
+
+#### Subscriber
+
+`getState()` is a method which is available on the store created with `createStore()`. And it will give us the latest state snapshot after it was updated.
+
+**So this subscription function will be triggered whenever the state changes.** And then when it is triggered, we can get to that latest state after it was changed with the get state method.
+
+The `subscribe()` method then wants such a subscriber function, which Redux will then execute whenever the data and the store changed.
 <!---
 [comment]: it works with text, you can rename it how you want
 
