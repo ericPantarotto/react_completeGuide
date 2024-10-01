@@ -3112,6 +3112,10 @@ And when we run this code for the first time, the reducer will also be executed 
 **So this subscription function will be triggered whenever the state changes.** And then when it is triggered, we can get to that latest state after it was changed with the get state method.
 
 The `subscribe()` method then wants such a subscriber function, which Redux will then execute whenever the data and the store changed.
+
+### More Redux Basics
+
+*Redux* indeed isn't a library restricted to React, you can use Redux in *any JavaScript project*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
