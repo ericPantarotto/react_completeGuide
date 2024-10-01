@@ -3122,6 +3122,14 @@ The `subscribe()` method then wants such a subscriber function, which Redux will
 `npm i react react-redux`
 
 This is a package which makes connecting react applications to Redux stores and reducers ends on very simple.
+
+### Providing the Store
+
+If the vast majority of your components need access to the store, if maybe your entire app, needs access to the store, you should typically provide on this highest level (`main.jsx` and wrap  the *<App>* component)
+
+`<Provider store={store }>`
+
+But now our components in this app, the app component, and any other child components, can tap into that store. They can get data out of the store. **They can set up a subscription to that data to be precise,** and they can also dispatch actions.
 <!---
 [comment]: it works with text, you can rename it how you want
 
