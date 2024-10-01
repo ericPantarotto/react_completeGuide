@@ -3130,6 +3130,19 @@ If the vast majority of your components need access to the store, if maybe your 
 `<Provider store={store }>`
 
 But now our components in this app, the app component, and any other child components, can tap into that store. They can get data out of the store. **They can set up a subscription to that data to be precise,** and they can also dispatch actions.
+
+### Using Redux Data in React Components
+
+- useStore
+- useSelector: t more convenient to use because that allows us to then automatically select a part of our state managed by the store.
+
+**<span style='color: #495fcb'> Note:** Now the great thing is that when you use use selector, React Redux will automatically set up a subscription to the Redux store for this component.
+
+So your component will be updated and will receive the latest counter automatically whenever that data changes in the Redux store.
+
+So it's an automatically reactive and changes to the Redux store will cause the component function to be re executed.
+
+If you ever would unmount a component, if it would be removed from the DOM, React Redux would also automatically clear the subscription for you.
 <!---
 [comment]: it works with text, you can rename it how you want
 
