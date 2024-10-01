@@ -3116,6 +3116,12 @@ The `subscribe()` method then wants such a subscriber function, which Redux will
 ### More Redux Basics
 
 *Redux* indeed isn't a library restricted to React, you can use Redux in *any JavaScript project*.
+
+### Preparing new Project
+
+`npm i react react-redux`
+
+This is a package which makes connecting react applications to Redux stores and reducers ends on very simple.
 <!---
 [comment]: it works with text, you can rename it how you want
 
