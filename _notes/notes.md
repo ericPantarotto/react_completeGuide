@@ -3182,6 +3182,13 @@ we still mutate the existing state because objects and arrays are reference valu
 in bigger applications where your state gets out of sync and suddenly the UI is not reflecting your state correctly anymore.
 
 And hence the simple rule is never mutate your state like this. Always return a brand new object (or array). you never just dive into an existing object and start manipulating its properties. Always copy and create new objects.
+
+### Introducing Redux Toolkit
+
+It's actually developed by the same team as React Redux and Redux itself
+
+**<span style='color: #a3842c'>Link:** [https://redux-toolkit.js.org/](https://redux-toolkit.js.org/)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
