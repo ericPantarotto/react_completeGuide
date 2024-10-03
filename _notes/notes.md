@@ -3157,6 +3157,31 @@ So let's assume that both the counter as well as the state whether the counter s
 **<span style='color: #495fcb'> Note:** Now when we `increment`, we are changing the counter, we don't care about `showCounter`.
 
 We still need to set the `showCounter` property here though because we are returning the overall state object and *Redux* won't merge your changes with the existing state.
+
+### How to work with Redux State correctly
+
+**<span style='color: #875c5c'>IMPORTANT:** So the objects which we return in the reducer will not, and that's super important will not be merged with the existing state.
+
+**They will overwrite the existing state.**
+
+So we must always set all the other states when we update a piece of state because we overwrite the old state.
+
+**<span style='color: #9e5231'>Error:** **You should never super important never mutate the state, the existing state. always override it by returning a brand new state object.**
+
+`state.counter++` instead of returning a new object is something you absolutely must not do when working with Redux.
+
+```javascript
+if (action.type === 'increment') {
+  state.counte++
+  return state,
+};
+```
+
+we still mutate the existing state because objects and arrays are reference values in JavaScript. This can lead to bugs, unpredictable behavior and it can make debugging your application harder as well.
+
+in bigger applications where your state gets out of sync and suddenly the UI is not reflecting your state correctly anymore.
+
+And hence the simple rule is never mutate your state like this. Always return a brand new object (or array). you never just dive into an existing object and start manipulating its properties. Always copy and create new objects.
 <!---
 [comment]: it works with text, you can rename it how you want
 
