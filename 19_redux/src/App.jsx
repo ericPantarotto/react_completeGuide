@@ -1,10 +1,10 @@
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import './App.css';
-import Counter from './components/Counter.jsx';
+// import Counter from './components/Counter.jsx';
+import CounterClass from './components/CounterClass.jsx';
 
 function App() {
-  return <Counter />;
+  // return <Counter />;
+  return <CounterClass />;
 }
 
 export default App;
