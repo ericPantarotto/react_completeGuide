@@ -3143,6 +3143,20 @@ So your component will be updated and will receive the latest counter automatica
 So it's an automatically reactive and changes to the Redux store will cause the component function to be re executed.
 
 If you ever would unmount a component, if it would be removed from the DOM, React Redux would also automatically clear the subscription for you.
+
+### Working with multiple State Properties
+
+Toggle Counter button, and when it's clicked,I wanna make sure that the counter is hidden and when it's clicked again, it should be shown again.
+
+we could use useState. So we could set up some local state in this component which we manage with useState, not with Redux. And that would be the proper way of doing it because showing or hiding the counter is something which only is interesting to this component, not to any other part of the application
+
+this is what we call **local state**, just like our `Counter` component is, but this is a simple demo. 
+
+So let's assume that both the counter as well as the state whether the counter should be visible or not, is a **global state** which is also the interesting to other components even though that's not the case here.
+
+**<span style='color: #495fcb'> Note:** Now when we `increment`, we are changing the counter, we don't care about `showCounter`.
+
+We still need to set the `showCounter` property here though because we are returning the overall state object and *Redux* won't merge your changes with the existing state.
 <!---
 [comment]: it works with text, you can rename it how you want
 
