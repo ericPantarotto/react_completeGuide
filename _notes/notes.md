@@ -3196,6 +3196,25 @@ It's actually developed by the same team as React Redux and Redux itself
 We still must not manipulate the existing state but the good thing is when using *Redux toolkit* and its functions like `createSlice`, we can't accidentally manipulate the existing state.
 
 Because *Redux toolkit* internally uses another package, **Immer**, which will detect code where state is mutated and which will automatically clone the existing state, create a new state object, keep all the state which we're not editing, and override the state which we are editing in an immutable way.
+
+### Connecting Redux Toolkit State
+
+```javascript
+const store = configureStore({
+  reducer: { counter: counterSlice.reducer },
+});
+```
+
+So we would create a map of reducers, and this map is then set as a value for the main reducer and behind the scenes `configureStore` will merge all those reducers into one big reducer.
+
+```javascript
+const store = configureStore({
+  reducer: counterSlice.reducer,
+});
+```
+
+here we only have one reducer so we can directly assign that reducer from the counterSlice as main reducer for `configureStore`
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
