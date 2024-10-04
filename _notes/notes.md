@@ -3189,6 +3189,13 @@ It's actually developed by the same team as React Redux and Redux itself
 
 **<span style='color: #a3842c'>Link:** [https://redux-toolkit.js.org/](https://redux-toolkit.js.org/)
 
+**<span style='color: #495fcb'> Note:** @redux/toolkit already contains redux, so you could uninstall the latter
+
+### Adding State SLices
+
+We still must not manipulate the existing state but the good thing is when using *Redux toolkit* and its functions like `createSlice`, we can't accidentally manipulate the existing state.
+
+Because *Redux toolkit* internally uses another package, **Immer**, which will detect code where state is mutated and which will automatically clone the existing state, create a new state object, keep all the state which we're not editing, and override the state which we are editing in an immutable way.
 <!---
 [comment]: it works with text, you can rename it how you want
 
