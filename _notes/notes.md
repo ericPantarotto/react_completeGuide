@@ -3221,6 +3221,23 @@ here we only have one reducer so we can directly assign that reducer from the co
 
 **<span style='color: #495fcb'> Note:** for *increase()* method, we pass our payload data. The only important thing to know here is  the argument you pass will be stored in an extra field named **payload**. And that field name is not up to you. That's the default Redux Toolkit uses here.
 
+### Working with Multiple Slices
+
+And unlike the *counter* state, which was a local state, the authentication is not just local state, which matters to one specific component but it is **application-wide state**, which matters to a lot of components in the application.
+
+**<span style='color: #a8c62c'> store/indexToolkt.js**
+
+- adding a new property *isAuthenticated* to the inital state
+- adding a new reducer method *login()*
+
+**<span style='color: #875c5c'>IMPORTANT:** Whilst it would technically work, but logically it makes no sense.
+
+The authentication status has nothing to do with the counter.
+
+in programming we typically want to separate our concerns.
+
+- We wanna make sure that the existing slice really focuses on the counter-related state and actions.
+- And we should create a brand new slice for the authentication state.
 <!---
 [comment]: it works with text, you can rename it how you want
 
