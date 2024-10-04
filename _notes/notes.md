@@ -3215,6 +3215,12 @@ const store = configureStore({
 
 here we only have one reducer so we can directly assign that reducer from the counterSlice as main reducer for `configureStore`
 
+### Migrating to Redux Toolkit
+
+**<span style='color: #a8c62c'> Counter.jsx**
+
+**<span style='color: #495fcb'> Note:** for *increase()* method, we pass our payload data. The only important thing to know here is  the argument you pass will be stored in an extra field named **payload**. And that field name is not up to you. That's the default Redux Toolkit uses here.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
