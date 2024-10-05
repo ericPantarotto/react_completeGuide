@@ -1,13 +1,14 @@
 import { useDispatch } from 'react-redux';
-import { authActions } from '../store/indexToolkit';
-import classes from './Auth.module.css';
+// import { authActions } from '../store/indexToolkit';
 import { useRef } from 'react';
+import { authActions } from '../store/auth.js';
+import classes from './Auth.module.css';
 
 const Auth = () => {
   const dispatch = useDispatch();
   const email = useRef();
   const password = useRef();
-  
+
   /**
    * @param {Event} ev
    */
@@ -15,7 +16,7 @@ const Auth = () => {
     ev.preventDefault();
     const enteredEmail = email.current.value;
     const enteredPassword = password.current.value;
-    
+
     if (enteredEmail && enteredPassword) {
       dispatch(authActions.login());
     }
