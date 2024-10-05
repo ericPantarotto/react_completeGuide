@@ -3189,7 +3189,9 @@ It's actually developed by the same team as React Redux and Redux itself
 
 **<span style='color: #a3842c'>Link:** [https://redux-toolkit.js.org/](https://redux-toolkit.js.org/)
 
-**<span style='color: #495fcb'> Note:** @redux/toolkit already contains redux, so you could uninstall the latter
+**<span style='color: #495fcb'> Note:** *@reduxjs/toolkit* already contains redux, so you could uninstall the latter, but you still need to install *react-redux*
+
+`npm i @reduxjs/toolkit`
 
 ### Adding State SLices
 
