@@ -3240,6 +3240,19 @@ in programming we typically want to separate our concerns.
 
 - We wanna make sure that the existing slice really focuses on the counter-related state and actions.
 - And we should create a brand new slice for the authentication state.
+
+### Redux & Asynx Code
+
+**<span style='color: #9e5231'>Error:** So when we have any code that produces a side effect or is asynchronous, like sending a HTTP request, such code must not go into our reducer functions.
+
+So we can't send our HTTP request via the `fetch` API inside of the reducers in our cart slice after we edited our state, like in `addItemToCart`.
+
+**Don't perform a side effect inside of your reducer, No matter if it's synchronous or asynchronous, don't do it inside of the reducer and never run any asynchronous code in the reducer in general.**
+
+So we can't send the HTTP request here after we are done updating our state.
+
+- We can execute it in the components (ignore *Redux*).
+- action creator, which also would allow us to run asynchronous code or generally any side effect code
 <!---
 [comment]: it works with text, you can rename it how you want
 
