@@ -3335,6 +3335,16 @@ Here is some general information about CORS:
 Important:
 
 In many cases when you get a CORS error, this is misleading. **The reason could just be a wrong URL (e.g. http instead of https, a forgotten .json extension for firebase**, or something like this).
+
+>**<span style='color: #9e5231'>Error:** We face one problem when using useEffect the way we currently do it: It will execute when our app starts. Why is this an issue? It's a problem because this will send the initial (i.e. empty) cart to our backend and overwrite any data stored there.
+
+### Handling Http States & Feedback with Redux
+
+for showing notifications, we could import `useState` and set up some local state and this component, some *isloading* state and maybe an *error state*.
+
+And we set those states as part of our Http requests cycle here. And we then use those states to conditionally rendered the notification component with the appropriate content.
+
+But since we already have a UI slice here in Redux why not use that? Why don't we add more to the state we're managing here with Redux and we managed the notification,
 <!---
 [comment]: it works with text, you can rename it how you want
 
