@@ -3282,6 +3282,59 @@ It's synchronous code and side effect free. So if we basically just have some da
 Now, if you personally have a different opinion if you like having your code in the component that of course is fine but generally it is considered a bit better to prefer reducers and **avoid** action creators.
 
 It would be different for asynchronous code or code with side effects. There you should prefer action creators or components and you absolutely must never use reducers.
+
+### Using useEffect with Redux
+
+We can first do the work on the front end and let Redux update its store.
+
+And then in a second step thereafter we send the request to the server but we don't necessarily need to do that here inside of the Reducer function where we wouldn't be allowed to do it.
+
+Instead, we can, for example do it in the ProductItem.jsx file or in a totally different file. Let's say in App.js
+
+**`useSelector` sets up a subscription to Redux.** So whenever our Redux store does change this component function will be re-executed and we will get to the latest state. So in this case, the latest cart.
+
+So that means that effect will also be re-evaluated and it will re-execute if our carts did change and that is exactly what we need.
+
+So with this simple addition here we will send this Http request whenever our cart changes and we can keep our logic for updating the cart inside of the reducer,
+
+```javascript
+function App() {
+  const showCart = useSelector((state) => state.ui.cartIsVisible);
+  const cart = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    fetch(
+      'https://reactredux-***-default-rtdb.europe-west1.firebasedatabase.app//cart.json',
+      { method: 'PUT', body: JSON.stringify(cart) }
+    );
+  }, [cart]);
+  
+  return (
+    <Layout>
+      {showCart && <Cart />}
+      <Products />
+    </Layout>
+  );
+}
+```
+
+and that's a very good way of having our side effect logic in a component and keeping all our data transformation logic inside of a Reducer, which is where we typically wanna have it when working with Redux.
+
+---
+**<span style='color: #9e5231'>Error:** if you get a CORS error, make sure that url ends, with `cart.jason`, 
+
+`'https://reactredux-***-default-rtdb.europe-west1.firebasedatabase.app/cart.json'`
+
+Udemy assistant: 
+Setting CORS headers correctly is always a pure server side task, so this can't be implemented in React. Firebase guarantees that CORS is implemented correctly on their end.
+
+Here is some general information about CORS:
+
+→ https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+
+Important:
+
+In many cases when you get a CORS error, this is misleading. **The reason could just be a wrong URL (e.g. http instead of https, a forgotten .json extension for firebase**, or something like this).
 <!---
 [comment]: it works with text, you can rename it how you want
 
