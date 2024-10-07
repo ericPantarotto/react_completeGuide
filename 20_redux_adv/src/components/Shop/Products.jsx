@@ -1,4 +1,5 @@
-import ProductItem from './ProductItem';
+// import ProductItem from './ProductItem';
+import ProductItem from './ProductItemSubOptimal';
 import classes from './Products.module.css';
 
 const DUMMY_PRODUCTS = [

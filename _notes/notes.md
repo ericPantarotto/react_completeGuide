@@ -3253,6 +3253,35 @@ So we can't send the HTTP request here after we are done updating our state.
 
 - We can execute it in the components (ignore *Redux*).
 - action creator, which also would allow us to run asynchronous code or generally any side effect code
+
+### Where to put our logic
+
+**<span style='color: #a8c62c'>ProductItemSubOptimal.jsx**
+
+**<span style='color: #495fcb'> Note:** I don't change it in the existing state because we must not mutate the state  and that's important.
+
+We can write this mutating code inside of the reducer function in our slice because *Redux toolkit* has this internal transformation for changing our code such that it doesn't mutate the state
+
+**<span style='color: #9e5231'>Error:** You must never mutate Redux state and especially don't do it outside of a reducer.
+
+
+**<span style='color: #495fcb'> Note:** We do the data transformation in some helper function and in the end directly in our components, we don't do the transformation in our reducers.
+
+that means that our redux reducers wouldn't do a lot of work. They'd just get some data and store it.
+
+because when it comes to the question of where to put our code, we often have the choice between:
+
+- fat reducers, 
+- fat components
+- or fat actions.
+
+All this code of **<span style='color: #a8c62c'>ProductItemSubOptimal.jsx** just transforms data.
+
+It's synchronous code and side effect free. So if we basically just have some data transformation, then you typically should prefer reducers.
+
+Now, if you personally have a different opinion if you like having your code in the component that of course is fine but generally it is considered a bit better to prefer reducers and **avoid** action creators.
+
+It would be different for asynchronous code or code with side effects. There you should prefer action creators or components and you absolutely must never use reducers.
 <!---
 [comment]: it works with text, you can rename it how you want
 
