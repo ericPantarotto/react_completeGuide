@@ -4,7 +4,7 @@ import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import Notification from './components/UI/Notification';
-import { sendCardData } from './store/cart-slice';
+import { fetchCartData, sendCartData } from './store/cart-actions';
 import { useStrictModeDetector } from './utils/hookUtils';
 
 let isInitial = true;
@@ -17,8 +17,11 @@ function App() {
   const showCart = useSelector((state) => state.ui.cartIsVisible);
   const cart = useSelector((state) => state.cart);
   const notification = useSelector((state) => state.ui.notification);
+// const hasPageBeenRendered = useRef({ effect1: false, effect2: false });
 
-  // const hasPageBeenRendered = useRef({ effect1: false, effect2: false });
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
 
   useEffect(() => {
     if (strictMode && loadNumber < 2) {
@@ -31,7 +34,7 @@ function App() {
       return;
     }
 
-    dispatch(sendCardData(cart));
+    dispatch(sendCartData(cart));
   }, [cart, dispatch, strictMode]);
 
   return (
