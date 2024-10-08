@@ -3285,6 +3285,8 @@ It would be different for asynchronous code or code with side effects. There you
 
 ### Using useEffect with Redux
 
+**<span style='color: #a3842c'>Link:** [firebase](https://console.firebase.google.com/u/0/project/reactredux-d73e0/database/reactredux-d73e0-default-rtdb/data)
+
 We can first do the work on the front end and let Redux update its store.
 
 And then in a second step thereafter we send the request to the server but we don't necessarily need to do that here inside of the Reducer function where we wouldn't be allowed to do it.
@@ -3382,6 +3384,31 @@ But the great thing about *Redux*, when using *Redux toolkit*, is that it's prep
 **<span style='color: #875c5c'>IMPORTANT:** **it will give us that dispatch argument automatically.** So that in that executed function, **we can dispatch again**, because there's a such a common pattern that we wanna have action creators that can perform side effects. *And that can then dispatch other actions, which eventually reached the reducers, as part of a flow off side-effects.*
 
 This component is now leaner. It only dispatches one action, not multiple actions. It doesn't care about sending the HTTP request, and all the hard work happens inside of our custom action creator function in our Redux files
+
+## Building a multi-page SPA with React Router
+
+### Routing: Multiple Pages in Single-Page
+
+Now, traditionally, you would implement Routing by simply loading different content, different HTML files for different paths, and that is how you would build a multi-page application which you typically would build without ReactJS.
+
+Now, with that, you get different content for different paths, but the disadvantage is that you always have to fetch new content. A new HTTP request is sent and a new response is received, and that can kind of break the user flow. It can introduce some lag and slow down your website and it can therefore lead to a suboptimal user experience.
+
+#### SPA
+
+So that's why we might wanna build a single page application when we're building more complex user interfaces. 
+
+- With those, you send only one initial HTML request and then this HTML file with a bunch of extra JavaScript is downloaded, 
+- and thereafter the extra JavaScript code that runs on the client will actually take care about adjusting what the user sees on the screen. That's how single page applications work.
+
+**<span style='color: #495fcb'> Note:** However, that does not mean that we can't bring back the illusion of a Routing and that we can support path changes in the URL and load different content based on the path. Instead, we can add client-side React code that basically watches the currently active URL and that triggers whenever the URL changes, and that then leads to different content being displayed on the screen when the URL changes.
+
+So instead of loading new HTML files from the backend, we could add some client-side code that simply watches the URL and then loads a different React component when that URL changes. With that, we're still in a single page application but we nonetheless support different URLs and therefore Routing.
+
+### Project setup
+
+**<span style='color: #a3842c'>Link:** [https://reactrouter.com/en/main](https://reactrouter.com/en/main)
+
+`npm i react-router-dom`
 <!---
 [comment]: it works with text, you can rename it how you want
 
