@@ -3345,6 +3345,43 @@ for showing notifications, we could import `useState` and set up some local stat
 And we set those states as part of our Http requests cycle here. And we then use those states to conditionally rendered the notification component with the appropriate content.
 
 But since we already have a UI slice here in Redux why not use that? Why don't we add more to the state we're managing here with Redux and we managed the notification,
+
+### Using an Action Creator Thunk
+
+#### What is a 'Thunk'
+
+And why would we wanna use that pattern? Well, it's simply an alternative to having that logic in your component.
+
+**<span style='color: #495fcb'> Note:** You can add that logic in your components. but it's also not a bad idea to keep your components lean, to not have too much logic in them.
+
+A function that **delays an action** until later.
+
+An *action creator function* that does **NOT return the action itself** but instead **another function** which **eventually** returns the action.
+
+To write an action creator, we return an action object, so object with a type, and maybe some payload.
+
+We never did this ourselves, because Redux toolkit, creates these action creators automatically for us, for all those **reducer methods**
+
+**<span style='color: #875c5c'>IMPORTANT:**But we could create, action creator which does not return, such a action object here, **but which instead returns another function.** And of course in JavaScript, you can write functions that return other functions.
+
+That should receive the `dispatch` function as a argument.
+
+>we can then therefore, dispatch, the actual action we wanna perform. Like for example, showing a notificationor adding a cart item,  
+but before we call dispatch, we can of course do other things, before we call dispatch, **we can perform any asynchronous code, any side effects,** because we will not yet have reached our reducer. We're not running this code in a reducer. It's a separate standalone JavaScript function instead.
+
+**<span style='color: #495fcb'> Note:** 
+
+- What we dispatched before, always were action creators. So functions that return an action object with a type and (reducer) actions.
+- Now in `cartSlice`, we are instead dispatching a function that returns another function.
+
+But the great thing about *Redux*, when using *Redux toolkit*, is that it's prepared for that.
+
+- It does not just accept action objects with a type property.
+- **Instead it also does accept, action creators that return functions**. And if it sees, that you're dispatching, a action which is actually a function, instead of action object, it will execute that function for you.
+
+**<span style='color: #875c5c'>IMPORTANT:** **it will give us that dispatch argument automatically.** So that in that executed function, **we can dispatch again**, because there's a such a common pattern that we wanna have action creators that can perform side effects. *And that can then dispatch other actions, which eventually reached the reducers, as part of a flow off side-effects.*
+
+This component is now leaner. It only dispatches one action, not multiple actions. It doesn't care about sending the HTTP request, and all the hard work happens inside of our custom action creator function in our Redux files
 <!---
 [comment]: it works with text, you can rename it how you want
 

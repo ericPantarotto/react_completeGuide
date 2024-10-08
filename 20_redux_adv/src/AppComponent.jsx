@@ -4,7 +4,7 @@ import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import Notification from './components/UI/Notification';
-import { sendCardData } from './store/cart-slice';
+import { uiActions } from './store/ui-slice';
 import { useStrictModeDetector } from './utils/hookUtils';
 
 let isInitial = true;
@@ -21,6 +21,40 @@ function App() {
   // const hasPageBeenRendered = useRef({ effect1: false, effect2: false });
 
   useEffect(() => {
+    const sendCardData = async () => {
+      dispatch(
+        uiActions.showNotification({
+          status: 'pending',
+          title: 'Sending...',
+          message: 'Sending cart data!',
+        })
+      );
+
+      const response = await fetch(
+        'https://reactredux-d73e0-default-rtdb.europe-west1.firebasedatabase.app/cart.json',
+        { method: 'PUT', body: JSON.stringify(cart) }
+      );
+
+      if (!response.ok) {
+        throw new Error('Sending cart data failed.');
+      }
+
+      // const responseData = await response.json();
+
+      dispatch(
+        uiActions.showNotification({
+          status: 'success',
+          title: 'Success...',
+          message: 'Sent cart data successfully!',
+        })
+      );
+    };
+
+    // if (!hasPageBeenRendered.current['effect1']) {
+    //   hasPageBeenRendered.current['effect1'] = true;
+    //   return;
+    // }
+
     if (strictMode && loadNumber < 2) {
       loadNumber++;
       return;
@@ -31,7 +65,15 @@ function App() {
       return;
     }
 
-    dispatch(sendCardData(cart));
+    sendCardData().catch(() => {
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          title: 'Error...',
+          message: 'Sending cart data failed!',
+        })
+      );
+    });
   }, [cart, dispatch, strictMode]);
 
   return (
