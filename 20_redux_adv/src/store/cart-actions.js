@@ -33,6 +33,10 @@ export const fetchCartData = () => {
           message: 'Fetching cart data failed!',
         })
       );
+
+      setTimeout(() => {
+        dispatch(uiActions.hideNotification());
+      }, 3000);
     }
   };
 };
@@ -74,6 +78,10 @@ export const sendCartData = (cart) => {
           message: 'Sent cart data successfully!',
         })
       );
+
+      setTimeout(() => {
+        dispatch(uiActions.hideNotification());
+      }, 3000);
     } catch (err) {
       console.error(err);
       dispatch(
@@ -83,6 +91,10 @@ export const sendCartData = (cart) => {
           message: 'Sending cart data failed!',
         })
       );
+
+      setTimeout(() => {
+        dispatch(uiActions.hideNotification());
+      }, 3000);
     }
   };
 };
