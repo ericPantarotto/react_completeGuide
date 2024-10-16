@@ -3505,6 +3505,15 @@ for **style**, this function form is also supported when using `NavLink`.
 ### Navigating Programmatically
 
 **<span style='color: #495fcb'> Note:** Of course, you should not create buttons and then navigate programmatically. Simply use a link instead, but a button is a great way for me to show you how this generally works here.
+
+### Defining & Using Dynamic Routes
+
+`{ path: '/products/:productId', element: <ProductDetailPage /> }`
+`const params = useParams();`
+
+So that's how we can get hold of that data that's encoded in the url.
+
+And typically you encode things like Ids of items or products in the URL because then here in product detail, we could reach out to a backend and fetch the data for this product.
 <!---
 [comment]: it works with text, you can rename it how you want
 
