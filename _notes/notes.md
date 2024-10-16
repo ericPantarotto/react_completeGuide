@@ -3585,6 +3585,15 @@ export default defineConfig({
 });
 ```
 
+### Working with Index Routes
+
+you should be aware of this feature called index routes, which allows you to define the default route that should be loaded if the parent routes path is active.
+
+```javascript
+{ index:true, element: <HomePage /> },
+      // { path: '', element: <HomePage /> },
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
