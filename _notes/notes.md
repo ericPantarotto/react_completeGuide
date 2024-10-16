@@ -3434,7 +3434,7 @@ const routeDefinitions = createRoutesFromElements(
 const router = createBrowserRouter(routeDefinitions);
 ```
 
-###
+### Navigating btw Pages with Links
 
 **<span style='color: #a8c62c'> pages/Home.jsx**
 
@@ -3469,6 +3469,10 @@ function HomePage() {
 - prevents the browser default of sending a HTTP request if the link is clicked,
 - and instead simply takes a look at the route definitions to update the page accordingly and load the appropriate content.
 - It will also change the URL but without sending a new HTTP request.
+
+### Showing Error Pages with errorElement
+
+When we enter a URL that doesn't exist, the react-router-dom package will generate an error, and that error will automatically bubble up to our root route definition. So to the route that is defined for path slash nothing. Therefore, here on this special slash nothing route, we can add the error element property as well.
 <!---
 [comment]: it works with text, you can rename it how you want
 
