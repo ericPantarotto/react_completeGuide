@@ -67,6 +67,7 @@ export default function Signup() {
 // ...
 }
 ```
+
 - local variable
 
 ```javascript
@@ -2873,6 +2874,7 @@ const handleInputChange = (identifier, value) => {
   setDidEdit((prevEdit) => ({ ...prevEdit, [identifier]: false }));
 };
 ```
+
 **<span style='color: #495fcb'> Note:** we also might want to outsource and reuse this code.
 
 And how could we do that? with help of a **custom hook**. And we need a custom hook because we are managing some state in that code that should be outsourced, and therefore we can't use a regular function.
@@ -2932,7 +2934,7 @@ export default Button;
 ```
 
 - `const Button = ({ children, textOnly, className, ...props }) => {`: here we're collecting all *native props of an HTML button*  and gathering them in a `props` object
-- `  <button className={cssClasses} {...props}>`: using the rest operator we are then spreading them
+- `<button className={cssClasses} {...props}>`: using the rest operator we are then spreading them
 
 ### Getting Started with Cart Context & Reducer
 
@@ -2974,6 +2976,7 @@ const cartReducer = (state, action) => {
   // other methods
 }
 ```
+
 ### Opening the Cart in the Modal via a new Context
 
 **<span style='color: #a8c62c'> Modal.jsx**
@@ -3056,6 +3059,7 @@ export default function useHttp(url, config, initialData) {
   // ...
 }
 ```
+
 Now, if we take a look at the `Meals` component, we'll see that we're passing the URL to it and this object `{}`.
 
 And also our `initialData` of course, but that's not interesting here, because that isn't a dependency of useCallback or useEffect.
@@ -3079,6 +3083,7 @@ const Meals = () => {
 // ...
 }
 ```
+
 ## Diving into Redux (an alternative to the Context API)
 
 ### Redux createStor() is (not) deprecated
@@ -3150,7 +3155,7 @@ Toggle Counter button, and when it's clicked,I wanna make sure that the counter 
 
 we could use useState. So we could set up some local state in this component which we manage with useState, not with Redux. And that would be the proper way of doing it because showing or hiding the counter is something which only is interesting to this component, not to any other part of the application
 
-this is what we call **local state**, just like our `Counter` component is, but this is a simple demo. 
+this is what we call **local state**, just like our `Counter` component is, but this is a simple demo.
 
 So let's assume that both the counter as well as the state whether the counter should be visible or not, is a **global state** which is also the interesting to other components even though that's not the case here.
 
@@ -3264,14 +3269,13 @@ We can write this mutating code inside of the reducer function in our slice beca
 
 **<span style='color: #9e5231'>Error:** You must never mutate Redux state and especially don't do it outside of a reducer.
 
-
 **<span style='color: #495fcb'> Note:** We do the data transformation in some helper function and in the end directly in our components, we don't do the transformation in our reducers.
 
 that means that our redux reducers wouldn't do a lot of work. They'd just get some data and store it.
 
 because when it comes to the question of where to put our code, we often have the choice between:
 
-- fat reducers, 
+- fat reducers,
 - fat components
 - or fat actions.
 
@@ -3323,16 +3327,16 @@ function App() {
 and that's a very good way of having our side effect logic in a component and keeping all our data transformation logic inside of a Reducer, which is where we typically wanna have it when working with Redux.
 
 ---
-**<span style='color: #9e5231'>Error:** if you get a CORS error, make sure that url ends, with `cart.jason`, 
+**<span style='color: #9e5231'>Error:** if you get a CORS error, make sure that url ends, with `cart.jason`,
 
 `'https://reactredux-***-default-rtdb.europe-west1.firebasedatabase.app/cart.json'`
 
-Udemy assistant: 
+Udemy assistant:
 Setting CORS headers correctly is always a pure server side task, so this can't be implemented in React. Firebase guarantees that CORS is implemented correctly on their end.
 
 Here is some general information about CORS:
 
-→ https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+→ [https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS]
 
 Important:
 
@@ -3371,7 +3375,7 @@ That should receive the `dispatch` function as a argument.
 >we can then therefore, dispatch, the actual action we wanna perform. Like for example, showing a notificationor adding a cart item,  
 but before we call dispatch, we can of course do other things, before we call dispatch, **we can perform any asynchronous code, any side effects,** because we will not yet have reached our reducer. We're not running this code in a reducer. It's a separate standalone JavaScript function instead.
 
-**<span style='color: #495fcb'> Note:** 
+**<span style='color: #495fcb'> Note:**
 
 - What we dispatched before, always were action creators. So functions that return an action object with a type and (reducer) actions.
 - Now in `cartSlice`, we are instead dispatching a function that returns another function.
@@ -3395,9 +3399,9 @@ Now, with that, you get different content for different paths, but the disadvant
 
 #### SPA
 
-So that's why we might wanna build a single page application when we're building more complex user interfaces. 
+So that's why we might wanna build a single page application when we're building more complex user interfaces.
 
-- With those, you send only one initial HTML request and then this HTML file with a bunch of extra JavaScript is downloaded, 
+- With those, you send only one initial HTML request and then this HTML file with a bunch of extra JavaScript is downloaded,
 - and thereafter the extra JavaScript code that runs on the client will actually take care about adjusting what the user sees on the screen. That's how single page applications work.
 
 **<span style='color: #495fcb'> Note:** However, that does not mean that we can't bring back the illusion of a Routing and that we can support path changes in the URL and load different content based on the path. Instead, we can add client-side React code that basically watches the currently active URL and that triggers whenever the URL changes, and that then leads to different content being displayed on the screen when the URL changes.
@@ -3453,7 +3457,7 @@ function HomePage() {
 
 **<span style='color: #875c5c'>IMPORTANT:** We have a problem with this approach.
 
-- If you watch this refresh icon here, as I click on the link, you will see that it briefly flashes and turns to a cross and back to a refresh icon. 
+- If you watch this refresh icon here, as I click on the link, you will see that it briefly flashes and turns to a cross and back to a refresh icon.
 - The reason for that is that technically, we're sending a new request to the server that's serving this website. Now, that server will serve back that single HTML page that makes up this single page application but what happens under the hood is that we, of course, load all the JavaScript code again, load the entire React application again and restart the React application.
 - That's a lot of unnecessary work under the hood that can also impact the site performance, which we typically wanna avoid because we already loaded all the JavaScript code.
 - We don't wanna load it again and we don't wanna restart the React application. **We would also lose any context or application-wide state if we do so**.
@@ -3485,9 +3489,10 @@ When we enter a URL that doesn't exist, the react-router-dom package will genera
   text-decoration: underline;
 }
 ```
+
 And we're targeting the anchor `a` here instead of `Link`, because as mentioned before, this link component provided by react-router-dom does render a regular anchor element
 
-To support links that should show us whether they led to the currently active page or not, react-router-dom has an alternative to the `Link` component, the `NavLink` component. 
+To support links that should show us whether they led to the currently active page or not, react-router-dom has an alternative to the `Link` component, the `NavLink` component.
 
 `NavLink` has one special behavior. If you add the class name prop to it, it's actually not the regular class name prop, which takes a string, but instead it's a prop that takes a function. And that function should return the class name. Now that function also automatically receives an object from which we can de-structure the `isActive` property.
 
@@ -3496,6 +3501,10 @@ react-router-dom also gives us another prop we can set here and that's the `end`
 This indicates that this link should only be considered active if the currently active route ends with this path after the URL. So now this link will only be considered active if we are on our domain *slash nothing* and not if we're on *slash products*.
 
 for **style**, this function form is also supported when using `NavLink`.
+
+### Navigating Programmatically
+
+**<span style='color: #495fcb'> Note:** Of course, you should not create buttons and then navigate programmatically. Simply use a link instead, but a button is a great way for me to show you how this generally works here.
 <!---
 [comment]: it works with text, you can rename it how you want
 
