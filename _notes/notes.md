@@ -3409,6 +3409,31 @@ So instead of loading new HTML files from the backend, we could add some client-
 **<span style='color: #a3842c'>Link:** [https://reactrouter.com/en/main](https://reactrouter.com/en/main)
 
 `npm i react-router-dom`
+
+### Exploring an Alternative way of defining Routes
+
+```javascript
+const router = createBrowserRouter([
+  { path: '/', element: <HomePage /> },
+  { path: '/products', element: <ProductsPage />  },
+]);
+```
+
+if you worked with older versions of react-router-dom, you actually defined all your routes with help of components and JSX code instead of JavaScript Objects in array.
+
+```javascript
+import { createRoutesFromElements, Route } from 'react-router-dom';
+
+const routeDefinitions = createRoutesFromElements(
+  <Route>
+    <Route path="/" element={<HomePage />} />
+    <Route path="/products" element={<ProductsPage />} />
+  </Route>
+);
+
+const router = createBrowserRouter(routeDefinitions);
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
