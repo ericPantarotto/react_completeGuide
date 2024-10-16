@@ -3434,6 +3434,41 @@ const routeDefinitions = createRoutesFromElements(
 const router = createBrowserRouter(routeDefinitions);
 ```
 
+###
+
+**<span style='color: #a8c62c'> pages/Home.jsx**
+
+```javascript
+function HomePage() {
+  return (
+    <>
+      <h1>My Home Page</h1>
+      <p>
+        Go to <a href='/products'>the list of products</a>
+      </p>
+    </>
+  );
+}
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** We have a problem with this approach.
+
+- If you watch this refresh icon here, as I click on the link, you will see that it briefly flashes and turns to a cross and back to a refresh icon. 
+- The reason for that is that technically, we're sending a new request to the server that's serving this website. Now, that server will serve back that single HTML page that makes up this single page application but what happens under the hood is that we, of course, load all the JavaScript code again, load the entire React application again and restart the React application.
+- That's a lot of unnecessary work under the hood that can also impact the site performance, which we typically wanna avoid because we already loaded all the JavaScript code.
+- We don't wanna load it again and we don't wanna restart the React application. **We would also lose any context or application-wide state if we do so**.
+- So we don't wanna switch the page by sending a new HTTP request to the server. With that, we lose all the benefits of single page applications after all.
+- Instead, we wanna have a link like this but under the hood, it should just change the URL and set it to the URL we're trying to navigate to but it should then prevent the default of sending a request and instead let React Router know about the new URL and ensure that React Router loads the appropriate element for that new URL.
+
+**<span style='color: #495fcb'> Note:** The new component we wanna import from react-router-dom is called `Link`. And as the name suggests, we can use it to construct a link. **We use it instead of the default anchor element.**
+
+`import { Link } from 'react-router-dom';`
+`Go to <Link to='/products'>the list of products</Link>.`
+
+- Now, what the link component does under the hood is it does render an anchor element but it basically listens for clicks on that element,
+- prevents the browser default of sending a HTTP request if the link is clicked,
+- and instead simply takes a look at the route definitions to update the page accordingly and load the appropriate content.
+- It will also change the URL but without sending a new HTTP request.
 <!---
 [comment]: it works with text, you can rename it how you want
 
