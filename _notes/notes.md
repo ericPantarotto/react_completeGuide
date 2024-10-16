@@ -3514,6 +3514,77 @@ for **style**, this function form is also supported when using `NavLink`.
 So that's how we can get hold of that data that's encoded in the url.
 
 And typically you encode things like Ids of items or products in the URL because then here in product detail, we could reach out to a backend and fetch the data for this product.
+
+### Understanding Relative & Absolute Paths
+
+#### absolute paths
+
+```javascript
+{
+  path: '/',
+  element: <RootLayout />,
+  errorElement: <ErrorPage />,
+  children: [
+    { path: '/', element: <HomePage /> },
+    { path: '/products', element: <ProductsPage /> },
+    { path: '/products/:productId', element: <ProductDetailPage /> },
+  ],
+}
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** absolute paths all start with a slash. This simply means that they're always seen from after the domain name.
+
+#### relative paths
+
+```javascript
+const router = createBrowserRouter([
+  {
+    path: '/root',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: '', element: <HomePage /> },
+      { path: 'products', element: <ProductsPage /> },
+      { path: 'products/:productId', element: <ProductDetailPage /> },
+    ],
+  },
+]);
+```
+
+Now, when defining routes like this, this simply means that these paths defined here are appended after the path of the wrapper route.
+
+[http://localhost:5173/root/products/p1]
+
+And when using the `Link` component, you also have a special `relative` prop. And this can be set to one of two values:
+
+- path
+- route
+
+**<span style='color: #495fcb'> Note:** this route definition, which is responsible for the *product details*, is a direct child of this *root* route, not of this *products* route. It's a sibling to the *products* route.
+
+**<span style='color: #a8c62c'> pages/ProductDetail.jsx**
+
+`<Link to='..'>Back</Link>`
+
+you will notice that I go back to the homepage by default. this relative path is resolved relative to the route definitions. this product detail page route definition is a child of the root route and a sibling to /products. So when we go up one level, if we go back to the previous route path, it means that we go back to the parent's route path, not to this sibling here.
+
+So we don't just remove one segment from the path but instead we go back to the parent route path, which means we remove two segments, in this case */products* and */productId*.
+
+Now if we want to change this behavior, we can do so with the `relative` prop, which default value is *route*.  if we set this to *path*, React Router will instead take a look at the currently active path and simply remove **one segment** from that path.
+
+#### Vite - Configuring base Url
+
+for testing relative url, starting with */root* and avoiding the client to render an error when starting page */* loads, you can use the `vite.config.js` file
+
+**<span style='color: #a3842c'>Link:** [https://v2.vitejs.dev/config/#base]
+
+```javascript
+export default defineConfig({
+  plugins: [react()],
+  base: '/root/',
+});
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
