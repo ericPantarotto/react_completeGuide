@@ -3473,6 +3473,29 @@ function HomePage() {
 ### Showing Error Pages with errorElement
 
 When we enter a URL that doesn't exist, the react-router-dom package will generate an error, and that error will automatically bubble up to our root route definition. So to the route that is defined for path slash nothing. Therefore, here on this special slash nothing route, we can add the error element property as well.
+
+### Working with Navigation Links (NavLink)
+
+**<span style='color: #a8c62c'> componens/MainNavigation.jsx**
+
+```css
+.list a:hover,
+.list a.active {
+  color: var(--color-primary-800);
+  text-decoration: underline;
+}
+```
+And we're targeting the anchor `a` here instead of `Link`, because as mentioned before, this link component provided by react-router-dom does render a regular anchor element
+
+To support links that should show us whether they led to the currently active page or not, react-router-dom has an alternative to the `Link` component, the `NavLink` component. 
+
+`NavLink` has one special behavior. If you add the class name prop to it, it's actually not the regular class name prop, which takes a string, but instead it's a prop that takes a function. And that function should return the class name. Now that function also automatically receives an object from which we can de-structure the `isActive` property.
+
+react-router-dom also gives us another prop we can set here and that's the `end` prop which we can set to true or false but we can also just add it to set it to true.
+
+This indicates that this link should only be considered active if the currently active route ends with this path after the URL. So now this link will only be considered active if we are on our domain *slash nothing* and not if we're on *slash products*.
+
+for **style**, this function form is also supported when using `NavLink`.
 <!---
 [comment]: it works with text, you can rename it how you want
 
