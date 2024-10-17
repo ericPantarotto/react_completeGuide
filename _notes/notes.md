@@ -3603,6 +3603,28 @@ you should be aware of this feature called index routes, which allows you to def
 **<span style='color: #495fcb'> Note:** whenever we enter */events/new* in the URL bar, React Router could actually load *events/:eventId* route instead because it treats new as a value for eventId. And therefore, this route would never get activated. This could happen in theory.
 
 but actually React Router is smart and understands that this route path is more specific than this route path. So indeed, if you would visit /events/new, it would prefer this route definition over the other route definition.
+
+### Data Fetching with a loader()
+
+**<span style='color: #a8c62c'> pages/Events.jsx**
+
+there is nothing wrong with this code, but of course it is worth noting that it's quite some boiler plate code, which you have to repeat every time you are sending a request to a backend.
+
+Though you could kind of mitigate that by creating a custom hook and you could outsource that logic into a custom hook. But nonetheless, it's quite some code that must be written to handle these different http request states and to fetch that data.
+
+And in addition, what's worth noting is that of course this request will only be sent once we reached this page. So once we navigate it to this *events page*.
+
+And that of course means that this entire events page component must be rendered before this request is sent.
+
+**<span style='color: #875c5c'>IMPORTANT:** But of course, in more complex applications this component could be rather complex and it could also have a bunch of nested child components and having to render and evaluate all these components before we actually start sending that request for that data which we absolutely need, is **suboptimal**.
+
+You could argue that it would be much nicer if React router would initiate the data fetching as soon as we start navigating to this page. So as soon as we start rendering this component, so to say or even before we render the component and we then render the component with the fetched data instead of first rendering the component without the fetched data with the loading state fallback instead and then fetching data after it has been rendered as it's currently happening.
+
+**<span style='color: #495fcb'> Note:** 
+
+- With React router at least if you're using version six or higher you don't have to write all that code for fetching data and for handling these different states, with the `loader` property.
+- when you define such a loader function, React router will automatically take any value you return in that function, for example, the response data and will make that data available in that page that's being rendered here as well as any other components where you need it.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
