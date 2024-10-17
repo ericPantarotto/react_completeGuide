@@ -3625,6 +3625,25 @@ You could argue that it would be much nicer if React router would initiate the d
 - With React router at least if you're using version six or higher you don't have to write all that code for fetching data and for handling these different states, with the `loader` property.
 - when you define such a loader function, React router will automatically take any value you return in that function, for example, the response data and will make that data available in that page that's being rendered here as well as any other components where you need it.
 
+### Using Data From A Loader In The Route Component
+
+**<span style='color: #a8c62c'> App.jsx**
+
+```javascript
+loader: async () => {
+  const response = await fetch('http://localhost:8080/events');
+
+  if (!response.ok) {
+    // ...
+  } else {
+    const resData = await response.json();
+    return resData.events;
+  }
+},
+```
+since I'm using *async/await*, technically this `loader` function will return a promise. Any data returned in that function will be wrapped by a promise, that's how *async/await* works.
+
+But React Router will actually check if a promise is returned and automatically get the resolved data from that promise for you. So you don't need to worry about whether you are returning a promise here or not.
 <!---
 [comment]: it works with text, you can rename it how you want
 
