@@ -3593,7 +3593,16 @@ you should be aware of this feature called index routes, which allows you to def
 { index:true, element: <HomePage /> },
       // { path: '', element: <HomePage /> },
 ```
+### Time to Practise: Solution
 
+```javascript
+{ path: ':eventId', element: <EventDetailPage /> },
+{ path: 'new', element: <NewEventPage /> },
+```
+
+**<span style='color: #495fcb'> Note:** whenever we enter */events/new* in the URL bar, React Router could actually load *events/:eventId* route instead because it treats new as a value for eventId. And therefore, this route would never get activated. This could happen in theory.
+
+but actually React Router is smart and understands that this route path is more specific than this route path. So indeed, if you would visit /events/new, it would prefer this route definition over the other route definition.
 <!---
 [comment]: it works with text, you can rename it how you want
 
