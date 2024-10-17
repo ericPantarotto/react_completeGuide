@@ -3644,6 +3644,18 @@ loader: async () => {
 since I'm using *async/await*, technically this `loader` function will return a promise. Any data returned in that function will be wrapped by a promise, that's how *async/await* works.
 
 But React Router will actually check if a promise is returned and automatically get the resolved data from that promise for you. So you don't need to worry about whether you are returning a promise here or not.
+
+### More loader() Data Usage
+
+as an alternative, our `loader` function could be used in `components/EventsList.jsx`
+
+**<span style='color: #495fcb'> Note:** Now, one place where we can't get those events is in a higher level route. So for example, if you would go to the `RootLayout.jsx`, which is part of my root route.
+
+**<span style='color: #875c5c'>IMPORTANT:** The reason for that is that I'm trying to get data from a route that's actually defined on a lower level `element: <EventsPage />`, and I'm trying to get data that's loaded from the  route `element: <RootLayout />`, in this root route, which is on a much higher level.
+
+Instead, you can access loaded data with help of `useLoaderData` in any component on the same level or lower level, than the component where you added the loader, so the route on which you added the loader.
+
+That means: You can use `useLoaderData()` in the element that's assigned to a route AND in all components that might be used inside that element.
 <!---
 [comment]: it works with text, you can rename it how you want
 
