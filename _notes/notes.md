@@ -3683,6 +3683,31 @@ The loader for a page will be called right when we start navigating to that page
 It's important to recognize that the loading indicator won't be added on the page which you're transitioning to, but instead on some page, or a component, which is already visible on the screen when the transition is started.
 
 That's different compared to what we had before with use Effect and a separate loading state.
+
+### Returning Responses in loader()
+
+**<span style='color: #a8c62c'> pages/EventLoader.jsx**
+
+`const res = new Response('any data', { status: 201 })`
+
+we can instantiate the built-in response constructor function. this is built into the browser. This is a modern browser feature. You can build your own responses. this loader code will not execute on a server. This is still all happening in the browser, even though it's not in a component,  it's still in the browser. This is still client-side code.
+
+
+when you reach out to a backend with the browser's built-in `fetch()` function, this fetch function actually returns a promise that resolves to a response. Combined with React Router's support for these response objects and **its automatic data extraction**, that simply means that you can take that response and return that in your loader. You don't need to manually extract the data from the response.
+
+**<span style='color: #495fcb'> Note:** But with that, we can reduce our loader code and leverage this built-in support for response objects.
+
+```javascript
+export const loader = async () => {
+  const response = await fetch('http://localhost:8080/events');
+
+  if (!response.ok) {
+    // ...
+  } else {
+    return response;
+  }
+};
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
