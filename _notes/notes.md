@@ -3656,6 +3656,16 @@ as an alternative, our `loader` function could be used in `components/EventsList
 Instead, you can access loaded data with help of `useLoaderData` in any component on the same level or lower level, than the component where you added the loader, so the route on which you added the loader.
 
 That means: You can use `useLoaderData()` in the element that's assigned to a route AND in all components that might be used inside that element.
+
+### Where Should loader() Code Be Stored?
+
+- it actually made this app.js file a bit more bloated,And especially if we would add more loaders to more and more routes
+- You could also argue that the logic for fetching data for the events page belongs to the events page and not to the app.js file
+
+And for those reasons, common pattern and a recommendation, is that you do actually put that loader code into your component file where you need it.
+
+**<span style='color: #495fcb'> Note:** because of *eslint*, you have to store the loader function in a dedicated function to not impact the React fast refresh functionality.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
