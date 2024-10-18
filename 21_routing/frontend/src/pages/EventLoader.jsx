@@ -4,9 +4,7 @@ export const loader = async () => {
   if (!response.ok) {
     // ...
   } else {
-      const resData = await response.json();
-      console.log(resData.events);
-      
+    const resData = await response.json();
     return resData.events;
   }
 };

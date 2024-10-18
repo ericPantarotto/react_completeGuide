@@ -3666,6 +3666,17 @@ And for those reasons, common pattern and a recommendation, is that you do actua
 
 **<span style='color: #495fcb'> Note:** because of *eslint*, you have to store the loader function in a dedicated function to not impact the React fast refresh functionality.
 
+### When Are loader() Functions Executed?
+
+The loader for a page will be called right when we start navigating to that page. So not after the page component has been rendered, but before we actually go there.
+
+- data fetching is initiated as soon as we initiate the route transition.
+- by default, React router will actually wait for the data to be fetched, so for the loader to be finished before it then renders the page with the fetched data.
+
+**<span style='color: #495fcb'> Note:** 
+
+- The advantage of this approach is that you can rely on the data being there once the events page component is being rendered. Therefore you don't need to render a loading state on this event's page component.
+- The downside, of course, is that we have this delay where it looks to the user as if nothing is happening.
 <!---
 [comment]: it works with text, you can rename it how you want
 
