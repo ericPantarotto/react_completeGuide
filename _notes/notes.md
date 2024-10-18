@@ -3712,6 +3712,32 @@ export const loader = async () => {
 >**<span style='color: #875c5c'>IMPORTANT:**  
 - As this code runs in the browser, this means that you can use any browser APIs in your loader functions. You can, for example, access `localStorage` here.
 - What you can't do in your loader function is, for example, use React Hooks like `useState`. That does not work because those *Hooks are only available in React components* and the loader function is not a React component.
+
+### Error Handling with Custom Errors
+
+**<span style='color: #a8c62c'> pages/EventLoader.jsx**
+
+`throw {message: 'Could not fetch events.'};`
+
+we could throw any other kind of **object as an error**.
+
+Now, when an error gets thrown in a `loader()`, something special happens. React router will simply **render the closest error element**.
+
+**<span style='color: #a8c62c'> App.jsx**
+
+```javascript
+{
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      // ...
+    ]
+}
+```
+
+- if the `errorElement` is added with error element on that `Root` path,  this error page, will be displayed whenever we basically have any kind of error anywhere in our routes because even though I'm throwing an error here in the loader of the events page, in a deeply nested route, **errors will bubble up.**
+- We could add error element to a specific route as well. And in that case, this error element would be rendered if this specific page (loader in our case) threw an error.
 <!---
 [comment]: it works with text, you can rename it how you want
 
