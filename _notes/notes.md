@@ -3708,6 +3708,10 @@ export const loader = async () => {
   }
 };
 ```
+
+>**<span style='color: #875c5c'>IMPORTANT:**  
+- As this code runs in the browser, this means that you can use any browser APIs in your loader functions. You can, for example, access `localStorage` here.
+- What you can't do in your loader function is, for example, use React Hooks like `useState`. That does not work because those *Hooks are only available in React components* and the loader function is not a React component.
 <!---
 [comment]: it works with text, you can rename it how you want
 
