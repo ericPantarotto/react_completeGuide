@@ -12,11 +12,11 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const events = await getAll();
-    res.json({ events: events });
-    //NOTE: testing React frontend loader execution
-    // setTimeout(() => {
-    //   res.json({ events: events });
-    // }, 2500);
+    // res.json({ events: events });
+    // NOTE: testing React frontend loader execution
+    setTimeout(() => {
+      res.json({ events: events });
+    }, 500);
   } catch (error) {
     next(error);
   }

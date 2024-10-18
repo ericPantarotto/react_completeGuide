@@ -3677,6 +3677,12 @@ The loader for a page will be called right when we start navigating to that page
 
 - The advantage of this approach is that you can rely on the data being there once the events page component is being rendered. Therefore you don't need to render a loading state on this event's page component.
 - The downside, of course, is that we have this delay where it looks to the user as if nothing is happening.
+
+### Reflecting The Current Navigation State in the UI
+
+It's important to recognize that the loading indicator won't be added on the page which you're transitioning to, but instead on some page, or a component, which is already visible on the screen when the transition is started.
+
+That's different compared to what we had before with use Effect and a separate loading state.
 <!---
 [comment]: it works with text, you can rename it how you want
 
