@@ -3812,6 +3812,14 @@ So that's how you can get access to a higher level loader from a route that does
 **<span style='color: #a8c62c'> App.jsx**
 
 `{ path: 'edit', element: <EditEventPage /> },`
+
+### Working with action() Functions
+
+**<span style='color: #495fcb'> Note:** the great thing about react-router is that it helps handling form submissions and extracting data from that form. For that, you should go to that form and make sure that all your inputs have the **name attribute**, because those names will later be used for extracting the data.
+
+You should also replace the *html form element* by the *react-router* `Form` element. Now this form tag will make sure that the browser default of sending a request to the backend will be omitted but it will take that request that would've been sent and give it to your action. And that's pretty useful because that request will contain all the data that was submitted as part of the form.
+
+The request will not be sent to the backend automatically, but instead to your action. And it will include all the form data if you use this special form component.
 <!---
 [comment]: it works with text, you can rename it how you want
 
