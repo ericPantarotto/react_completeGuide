@@ -1,8 +1,8 @@
 import { json } from 'react-router-dom';
 
 export const loader = async () => {
-  const response = await fetch('http://localhost:8080/eventsINCORRECT'); //HACK: testing Errors
-  // const response = await fetch('http://localhost:8080/events');
+  // const response = await fetch('http://localhost:8080/eventsINCORRECT'); //HACK: testing Errors
+  const response = await fetch('http://localhost:8080/events');
 
   if (!response.ok) {
     // return {isError: true, message: 'Could not fetch events.' };

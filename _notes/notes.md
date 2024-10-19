@@ -3776,6 +3776,22 @@ throw json(
 ```
 
 **<span style='color: #495fcb'> Note:** in the place where you use that response data, you also don't have to parse the json format manually.
+
+### Dynamic Routes & loader()
+
+[https://reactrouter.com/en/main/route/loader]
+[https://developer.mozilla.org/en-US/docs/Web/API/Request]
+
+**<span style='color: #a8c62c'> pages/EventDetailLoader.jsx**
+
+```javascript
+/**
+ * @param {Request} request
+ */
+export async function loader({ request, params }) {
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
