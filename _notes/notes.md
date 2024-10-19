@@ -3792,6 +3792,26 @@ export async function loader({ request, params }) {
 }
 ```
 
+### useRouteLoaderData() Hook & Accessing Data From Other Routes
+
+You can also use this nested routes feature:
+
+- not just to use a wrapper layout component
+- but also to use a shared loader for example.
+
+by default when we use loader data, it searches for the closest available loader data, and the highest level at which it looks for data is the route definition of the route for which this component was loaded.
+
+So in this case, the highest level it looks for data is this `EditEventPage` route here.
+
+**Now we actually want loader data from `loader:eventDetailLoader` route** and to make sure that we use this loader's data instead.So the data from this parent route, we should add a special `Id` property which we can add to our route definition
+
+**<span style='color: #875c5c'>IMPORTANT:** And then instead of using `useLoaderData`, we use a slightly different hook which is called `useRouteLoaderData`, taking an *id* as argument.
+
+So that's how you can get access to a higher level loader from a route that doesn't have a loader, But now we can reuse that loader across multiple routes which all need the same data.
+
+**<span style='color: #a8c62c'> App.jsx**
+
+`{ path: 'edit', element: <EditEventPage /> },`
 <!---
 [comment]: it works with text, you can rename it how you want
 
