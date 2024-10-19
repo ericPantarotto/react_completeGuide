@@ -3593,6 +3593,7 @@ you should be aware of this feature called index routes, which allows you to def
 { index:true, element: <HomePage /> },
       // { path: '', element: <HomePage /> },
 ```
+
 ### Time to Practise: Solution
 
 ```javascript
@@ -3620,7 +3621,7 @@ And that of course means that this entire events page component must be rendered
 
 You could argue that it would be much nicer if React router would initiate the data fetching as soon as we start navigating to this page. So as soon as we start rendering this component, so to say or even before we render the component and we then render the component with the fetched data instead of first rendering the component without the fetched data with the loading state fallback instead and then fetching data after it has been rendered as it's currently happening.
 
-**<span style='color: #495fcb'> Note:** 
+**<span style='color: #495fcb'> Note:**
 
 - With React router at least if you're using version six or higher you don't have to write all that code for fetching data and for handling these different states, with the `loader` property.
 - when you define such a loader function, React router will automatically take any value you return in that function, for example, the response data and will make that data available in that page that's being rendered here as well as any other components where you need it.
@@ -3641,6 +3642,7 @@ loader: async () => {
   }
 },
 ```
+
 since I'm using *async/await*, technically this `loader` function will return a promise. Any data returned in that function will be wrapped by a promise, that's how *async/await* works.
 
 But React Router will actually check if a promise is returned and automatically get the resolved data from that promise for you. So you don't need to worry about whether you are returning a promise here or not.
@@ -3673,7 +3675,7 @@ The loader for a page will be called right when we start navigating to that page
 - data fetching is initiated as soon as we initiate the route transition.
 - by default, React router will actually wait for the data to be fetched, so for the loader to be finished before it then renders the page with the fetched data.
 
-**<span style='color: #495fcb'> Note:** 
+**<span style='color: #495fcb'> Note:**
 
 - The advantage of this approach is that you can rely on the data being there once the events page component is being rendered. Therefore you don't need to render a loading state on this event's page component.
 - The downside, of course, is that we have this delay where it looks to the user as if nothing is happening.
@@ -3692,7 +3694,6 @@ That's different compared to what we had before with use Effect and a separate l
 
 we can instantiate the built-in response constructor function. this is built into the browser. This is a modern browser feature. You can build your own responses. this loader code will not execute on a server. This is still all happening in the browser, even though it's not in a component,  it's still in the browser. This is still client-side code.
 
-
 when you reach out to a backend with the browser's built-in `fetch()` function, this fetch function actually returns a promise that resolves to a response. Combined with React Router's support for these response objects and **its automatic data extraction**, that simply means that you can take that response and return that in your loader. You don't need to manually extract the data from the response.
 
 **<span style='color: #495fcb'> Note:** But with that, we can reduce our loader code and leverage this built-in support for response objects.
@@ -3710,8 +3711,8 @@ export const loader = async () => {
 ```
 
 >**<span style='color: #875c5c'>IMPORTANT:**  
-- As this code runs in the browser, this means that you can use any browser APIs in your loader functions. You can, for example, access `localStorage` here.
-- What you can't do in your loader function is, for example, use React Hooks like `useState`. That does not work because those *Hooks are only available in React components* and the loader function is not a React component.
+    - As this code runs in the browser, this means that you can use any browser APIs in your loader functions. You can, for example, access `localStorage` here.
+    - What you can't do in your loader function is, for example, use React Hooks like `useState`. That does not work because those *Hooks are only available in React components* and the loader function is not a React component.
 
 ### Error Handling with Custom Errors
 
@@ -3738,6 +3739,28 @@ Now, when an error gets thrown in a `loader()`, something special happens. React
 
 - if the `errorElement` is added with error element on that `Root` path,  this error page, will be displayed whenever we basically have any kind of error anywhere in our routes because even though I'm throwing an error here in the loader of the events page, in a deeply nested route, **errors will bubble up.**
 - We could add error element to a specific route as well. And in that case, this error element would be rendered if this specific page (loader in our case) threw an error.
+
+### Extracting Error Data & Throwing Responses
+
+To differentiate between errors, what we can do is instead of throwing a object, we can throw a response by creating a new response.
+
+And then we can include some data into that response. For this, we have to call JSON stringify if we want to pass an object.
+
+**<span style='color: #a8c62c'> pages/EventLoader.jsx**
+
+```javascript
+// throw { message: 'Could not fetch events.' };
+
+throw new Response(JSON.stringify({ message: 'Could not fetch events.' }), {
+  status: 500,
+});
+```
+
+you can actually get hold of the data that's being thrown as an error inside of the component that's being rendered as an error element.
+
+And for that, React-Router-Dom gives you another special hook: `useRouteError` hook.
+
+**<span style='color: #495fcb'> Note:** 404; default status set by React router if you enter a path that's not supported.
 <!---
 [comment]: it works with text, you can rename it how you want
 
