@@ -3761,6 +3761,21 @@ you can actually get hold of the data that's being thrown as an error inside of 
 And for that, React-Router-Dom gives you another special hook: `useRouteError` hook.
 
 **<span style='color: #495fcb'> Note:** 404; default status set by React router if you enter a path that's not supported.
+
+### json() Utility Function
+
+```javascript
+import { json } from 'react-router-dom';
+
+throw json(
+      { message: 'Could not fetch events.' },
+      {
+        status: 500,
+      }
+    );
+```
+
+**<span style='color: #495fcb'> Note:** in the place where you use that response data, you also don't have to parse the json format manually.
 <!---
 [comment]: it works with text, you can rename it how you want
 
