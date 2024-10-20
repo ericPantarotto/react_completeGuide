@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 import classes from './EventForm.module.css';
 
-// function EventForm({ method, event }) {
-function EventForm({ event }) {
+// function EventForm({ event }) {
+function EventForm({ method, event }) {
   const data = useActionData();
   const navigate = useNavigate();
   const navigation = useNavigation();
@@ -19,7 +19,8 @@ function EventForm({ event }) {
   }
 
   return (
-    <Form method='post' className={classes.form}>
+    // <Form method='post' className={classes.form}>
+    <Form method={method} className={classes.form}>
       {data && data.errors && (
         <ul>
           {Object.values(data.errors).map((err) => (

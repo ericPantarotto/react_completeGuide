@@ -3892,6 +3892,41 @@ So with that, in event form, I get this data object here and if I return a respo
 
 **<span style='color: #495fcb'> Note:** for testing the error(s) display on screen, we can use the *web developer tools*, and remove the `required` attribute.
 
+### Reusing Actions via Request Methods
+
+#### CORS/OPTIONS issue
+
+**<span style='color: #a3842c'>Link:** [https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS#preflighted_requests_in_cors]
+
+**<span style='color: #875c5c'>IMPORTANT:** `OPTIONS` CORS request will not send the preflighted requested, hence if we want to test our component `Error.jxs` with dummy url when testing editing/creating new event, we will default to the generic error message.
+
+**<span style='color: #a8c62c'> pages/EventAction.jsx**
+
+the solution is to use `try/catch` block for our `await fetch()` request, and use the `json()` method from *react-router-dom*. The `if(!request.ok)` becomes obsolete.
+
+```javascript
+try {
+  const response = await fetch(url, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(eventData),
+  });
+
+  if (response.status === 422) {
+    return response;
+  }
+  return redirect('/events');
+} catch (error) {
+  throw json(
+    { message: `Could not ${method === 'PATCH' ? 'edit' : 'save'} event.` },
+    { status: 500 },
+    { initialError: error }
+  );
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
