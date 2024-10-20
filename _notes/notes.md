@@ -3853,6 +3853,45 @@ if (proceed) {
 
 - **<span style='color: #a8c62c'> pages/Root.jsx:** *loading* state; a transition from one route to another if we click a link.
 - **<span style='color: #a8c62c'> components/EventForm.jsx:** *submitting* state; transition if we submit a form
+
+### Validating User Input & Outputting Validation Errors
+
+**<span style='color: #875c5c'>IMPORTANT:** you should never rely on just client side validation, you should always have server side validation because client side validation can, for example be turned off and disabled with the dev tools, with the browser dev tools. Nonetheless, it's good to have both to provide a good user experience.
+
+But I of course want to show the user any errors, any validation errors that I gathered on the back-end in case some validation errors were detected here. For example, because the user did disable client side validation.
+
+To do that, I wanna leverage the fact that on the back-end I'm sending back an error response with *status code **422*** if I found some validation errors there.
+
+And I wanna react by not showing my default error page, so I don't want to throw an error response, but instead I wanna show such validation errors here right above this form because that makes more sense than showing an error page, because that would discard all the values entered by the user and not really offer a good user experience.
+
+And you can easily do this in actions by returning the data you wanna output above the form, instead of throwing an error response
+
+**<span style='color: #a8c62c'> pages/NewEventAction.jsx**
+
+```javascript
+if (response.status === 422) {
+  return response;
+}
+
+if (!response.ok) {
+  throw json({ message: 'Could not save event.' }, { status: 500 });
+}
+
+return redirect('/events');
+```
+
+Now what does returning a response in an action due though? Well, just as we can return responses in loaders and then use the response data in our components and pages, we can also use returned action data in our pages and components.
+
+It's just less common but it's very common for such validation error responses where you don't wanna show an error page.
+
+**<span style='color: #a8c62c'> components/EventForm.jsx**
+
+`const data = useActionData();`
+
+So with that, in event form, I get this data object here and if I return a response in an action this response is automatically parsed by React router for me, just as it is the case for loaders.
+
+**<span style='color: #495fcb'> Note:** for testing the error(s) display on screen, we can use the *web developer tools*, and remove the `required` attribute.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
