@@ -3820,6 +3820,31 @@ So that's how you can get access to a higher level loader from a route that does
 You should also replace the *html form element* by the *react-router* `Form` element. Now this form tag will make sure that the browser default of sending a request to the backend will be omitted but it will take that request that would've been sent and give it to your action. And that's pretty useful because that request will contain all the data that was submitted as part of the form.
 
 The request will not be sent to the backend automatically, but instead to your action. And it will include all the form data if you use this special form component.
+
+### Submitting Data Programmatically
+
+The typical and default way is to use this special form component offered by React Router, that's the standard way you should use. This form will automatically trigger the action function of the currently active route, so the route for which this form was loaded.
+
+you could send the request to a different route by adding the `action` prop here to this form component and setting this to any other path. but if you wanna trigger the action of the currently active route, you don't need the action prop.
+
+we create our delete action in `pages/EventDetailAction.jsx`, but how do we trigger it from *component/EventItem.jsx*.
+
+We could wrap the button *delete* inside a form with an action *prop*, but then the `window.confirm` would work anymore. We wouldn't see this confirmation prompt, and I wanna see that to give the user a chance of canceling the deletion process.
+
+>So we need to trigger that action, and submit some data, so to say, programmatically. And just as we can navigate programmatically, we can also submit data and trigger an action programmatically with the special `useSubmitHook`.
+
+**<span style='color: #a8c62c'> components/EventItem.jsx**
+
+```javascript
+if (proceed) {
+  submit(null, { method: 'delete' });
+}
+```
+
+- The first argument is the data that we wanna submit, and that data will automatically be wrapped in a form data object, which we then could extract with this special `formData` method
+- The second argument then allows us to basically set the same values we could set on a form, for example the *method* which we can set to delete in this case
+- And we could set the `action` key to a different path if our action would be defined on a different route path. In our case, it's defined on the same route to which this component belongs, or for which this component is rendered, and therefore we don't need to set the action.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
