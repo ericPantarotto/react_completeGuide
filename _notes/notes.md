@@ -3845,6 +3845,14 @@ if (proceed) {
 - The second argument then allows us to basically set the same values we could set on a form, for example the *method* which we can set to delete in this case
 - And we could set the `action` key to a different path if our action would be defined on a different route path. In our case, it's defined on the same route to which this component belongs, or for which this component is rendered, and therefore we don't need to set the action.
 
+### Updating the UI State Based on the Submission Status
+
+#### navigation.state
+
+[https://reactrouter.com/en/main/hooks/use-navigation]
+
+- **<span style='color: #a8c62c'> pages/Root.jsx:** *loading* state; a transition from one route to another if we click a link.
+- **<span style='color: #a8c62c'> components/EventForm.jsx:** *submitting* state; transition if we submit a form
 <!---
 [comment]: it works with text, you can rename it how you want
 

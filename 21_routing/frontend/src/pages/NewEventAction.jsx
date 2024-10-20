@@ -3,7 +3,7 @@ import { json, redirect } from 'react-router-dom';
 export const action = async ({request}) => {
 
   const data = await request.formData();
-  console.log(data);
+  // console.log(data);
   
   const eventData = {
     title: data.get('title'),
