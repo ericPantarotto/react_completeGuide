@@ -3,15 +3,17 @@ import './App.css';
 
 import EditEventPage from './pages/EditEvent';
 import ErrorPage from './pages/Error';
+import { action as eventAction } from './pages/EventAction';
 import EventDetailPage from './pages/EventDetail';
+import { action as deleteEventAction } from './pages/EventDetailAction';
 import { loader as eventDetailLoader } from './pages/EventDetailLoader';
 import { loader as eventsLoader } from './pages/EventLoader';
 import EventsPage from './pages/Events';
 import EventsRootLayout from './pages/EventsRoot';
 import HomePage from './pages/Home';
 import NewEventPage from './pages/NewEvent';
-import { action as eventAction } from './pages/EventAction';
-import { action as deleteEventAction } from './pages/EventDetailAction';
+import NewsletterPage from './pages/Newsletter';
+import { action as newsletterAction } from './pages/NewsletterAction';
 import RootLayout from './pages/Root';
 
 const router = createBrowserRouter([
@@ -52,6 +54,11 @@ const router = createBrowserRouter([
           { path: 'new', element: <NewEventPage />, action: eventAction },
           // { path: 'new', element: <NewEventPage />, action: newEventAction },
         ],
+      },
+      {
+        path: 'newsletter',
+        element: <NewsletterPage />,
+        action: newsletterAction,
       },
     ],
   },

@@ -3927,6 +3927,42 @@ try {
 }
 ```
 
+### Behind-the-Scenes Work with useFetcher()
+
+we wanna trigger this action this `newsletterAction` whenever this newsletter form is submitted.
+
+And if we are on the newsletter page, that would be quite straightforward to do. All we had to do is go to the `newsletterSignup` component which is where we have this form and use **React Router's form component here which starts with a capital F**. **<span style='color: #875c5c'>IMPORTANT:** That would automatically trigger the action that belongs to the currently active route.
+
+The problem is however, that this form is included on all routes because it's part of the main navigation. This `NewsletterSignup` component is part of the main navigation.
+
+Therefore, we would have to add the action to all routes and that would of course be a lot of code duplication and also clash with other actions that we might need for other routes.
+
+>Now this is such a common use case that React Router has a solution for it. There is a special hook which you can import from react-router-dom, and that is the `useFetcher` hook.
+
+if we use this `Fetcher.Form` component, this will actually still trigger an action but it will not initialize a route transition.
+
+So Fetcher should basically be used whenever you wanna trigger, an action, or also a loader with help of the load function without actually navigating to the page to which the loader belongs or the page to which the action belongs.
+
+if we used a simple *react-router-dom* `Form` component, if I go to Events and I then enter some email address here I'm forwarded to the Events page after submitting this. And that's not the behavior I want. Now, it changes if I use `fetcher.Form` because as I mentioned with Fetcher, we don't transition, we don't move to a different route.
+
+we could bring back `useEffect` from React and trigger a function whenever *data and state changed*.
+
+So whenever one of these two values changed and we can check if state is equal to **idle**, which means we're not executing an action or a loader anymore.
+
+**<span style='color: #875c5c'>IMPORTANT:** For the action to work correctly, you need to have your form `input` with a **name** attribute.
+
+```javascript
+<input
+  type='email'
+  name='email'
+  placeholder='Sign up for newsletter...'
+  aria-label='Sign up for newsletter'
+/>
+```
+
+#### reset form with React useState & useEffect
+
+**<span style='color: #a3842c'>Link:** [https://stackoverflow.com/questions/54895883/reset-to-initial-state-with-react-hooks]
 <!---
 [comment]: it works with text, you can rename it how you want
 
