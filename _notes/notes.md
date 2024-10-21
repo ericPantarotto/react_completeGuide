@@ -3963,6 +3963,36 @@ So whenever one of these two values changed and we can check if state is equal t
 #### reset form with React useState & useEffect
 
 **<span style='color: #a3842c'>Link:** [https://stackoverflow.com/questions/54895883/reset-to-initial-state-with-react-hooks]
+
+### Deferring Data Fetching with defer()
+
+sometimes you wanna load a page before the data is there and show parts of the page already until all the data is there. For example, here it would make sense to show these buttons already:
+
+- the *all events*
+- *new event*
+
+**<span style='color: #a8c62c'> pages/EventLoader-defer.jsx**
+
+```javascript
+export const loader = () => {
+  return defer({
+    events: loadEvents(),
+  });
+}
+```
+
+**<span style='color: #9e5231'>Error:** in our `loadEvents()` function, called by `defer()`, we can't anymore return the *response* as we did before, as we now have this defer in between, we have to manually parse as we did before.
+
+**<span style='color: #495fcb'> Note:** what `loadEvents()` returns must be a promise, otherwise there would be nothing to defer!
+
+`Suspense` is a *React* component, that is used by *react-router-dom* and by the `Await` component to show a fallback whilst we're waiting for the data to be fetched
+
+**<span style='color: #a8c62c'> pages/Events-defer.jsx**
+
+```javascript
+<Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
