@@ -14,7 +14,9 @@ function EventsList({ events }) {
         {events.map((event) => (
           <li key={event.id} className={classes.item}>
             {/* <a href="..."> */}
-            <Link to={event.id}>
+            {/* ERROR: this would now fail as it's used also within the EventDetail-defer*/}
+            {/* <Link to={event.id}> */}
+            <Link to={`/events/${event.id}`}>
               <img src={event.image} alt={event.title} />
               <div className={classes.content}>
                 <h2>{event.title}</h2>

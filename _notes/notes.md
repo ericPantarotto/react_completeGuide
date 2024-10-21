@@ -3993,6 +3993,25 @@ export const loader = () => {
 <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
 ```
 
+### Controlling which data should be Deferred
+
+**<span style='color: #9e5231'>Error:** since our `components/EventList.jsx` can now be used from different pages/components, we need to switch the path from *relative* to *absolute* of our `Link` react-router-dom element.
+
+**<span style='color: #875c5c'>IMPORTANT:** if we have several loaders within a **defer loader**, and you want the page to load only one loader has fetched the data, but then load the page, before the second is ready, you can make use of `await`.
+
+**<span style='color: #a8c62c'> pages/EventDetailLoader-defer.jsx**
+
+```javascript
+export  const loader = async ({ params }) => {
+  const id = params.eventId;
+
+  return defer({
+    // event: loadEvent(id),
+    event: await loadEvent(id), //INFO: waiting for this loader to fetch data before loading the Event detail page
+    events: loadEvents(),
+  });
+};
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
