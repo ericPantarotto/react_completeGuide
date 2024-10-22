@@ -4012,6 +4012,34 @@ export  const loader = async ({ params }) => {
   });
 };
 ```
+
+## Adding Authenticaton to React Apps
+
+### How Authentication Works
+
+For Authentication, there are 2 main solutions for that.
+
+#### Server side sessions
+
+We could use server side sessions or authentication tokens.
+
+Now, server side sessions are a very popular solution especially for full stack applications where you don't have a decoupled front end and back end as we do often have it with React though. So it's not ideal for React.
+
+The idea behind server side sessions would be that on the server, after a user was logged in and authenticated we store a unique identifier on the server. We stored it on the server and mapped that to a specific client with help of an id that's then sent back to the client. And the client then sends that ID with future requests which do try to access protected resources.
+
+And since this *id* mapped to that idea on the server, the server is able to check whether that client really does have permission to access protected resources.
+
+Now, server side sessions are a great way of solving authentication or of enabling authentication but they do require a **tight coupling between backend and frontend** because the backend must store information about the client. **And with React apps you are often talking to decoupled backend APIs which are not closely coupled to a client** and which don't store any client site information.
+
+**<span style='color: #495fcb'> Note:** And that's where authentication tokens come into play.
+
+#### JSON Web Token
+
+The idea behind authentication tokens is that on the server after a user was authenticated, so after a user sent a valid pair of credentials, for example, **we create but don't store a permission token**, which is basically a string that is created according to some algorithm and that includes some information.
+
+So we create such a token on the backend and we send that token back to the client. Now, the **special thing about that token is that it's validity can only be checked and proven by the backend that created that token because the token is created with help of some private key which is only known by the backend**.
+
+So in future requests from the client to the backend we attach that token to those requests, and the backend is able to take a look at that token, validated and see if it is a token that was created by that backend.
 <!---
 [comment]: it works with text, you can rename it how you want
 
