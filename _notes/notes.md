@@ -4040,6 +4040,42 @@ The idea behind authentication tokens is that on the server after a user was aut
 So we create such a token on the backend and we send that token back to the client. Now, the **special thing about that token is that it's validity can only be checked and proven by the backend that created that token because the token is created with help of some private key which is only known by the backend**.
 
 So in future requests from the client to the backend we attach that token to those requests, and the backend is able to take a look at that token, validated and see if it is a token that was created by that backend.
+
+### Working with Query Parameters
+
+to send different different request, depending if the user wants to login, or register as a new user,  we are able to switch between those two modes, but at the moment, this is implemented with help of `useState`.
+
+**<span style='color: #a8c62c'> components/AuthForm.jsx**
+
+```javascript
+function AuthForm() {
+  const [isLogin, setIsLogin] = useState(true);
+
+  function switchAuthHandler() {
+    setIsLogin((isCurrentlyLogin) => !isCurrentlyLogin);
+  }
+  //...
+}
+```
+**<span style='color: #495fcb'> Note:** However, we could also leverage a standard web concept for managing this. We could leverage **query parameters**, **search parameters** as they're also called.
+
+Now, a query parameter is in the end a parameter that's appended in the URL after a question mark.
+
+**<span style='color: #875c5c'>IMPORTANT:** So it's the same route, it's the same path, the path is always */auth*, but we get this extra parameter which defines how exactly this component should be rendered.
+
+And that's not uncommon to do and an advantage of using query parameters would be that we can directly link to this page:
+
+- in signup 
+- or log in mode so that we could link a user directly to the signup page
+
+`useSearchParams` returns an array
+
+- a first element is an object that gives us access to the currently set query parameters
+- function that allows to update the currently set parameters
+
+```javascript
+const [searchParams, setSearchParams] = useSearchParams()
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
