@@ -4081,6 +4081,9 @@ const [searchParams, setSearchParams] = useSearchParams()
 
 `useParams()` cannot be used in action, it can only be used in a React component function or a React Hook function. But we can use the **built-in URL constructor**, which is provided by the browser,
 
+### Validating User Input & Outputting Validation Errors
+
+We can get that data returned by that action function that was submitted by that form with help of the `useActionData()` hook. **we only get that data if our action returns something, if it returns something else, then a redirect.**
 <!---
 [comment]: it works with text, you can rename it how you want
 

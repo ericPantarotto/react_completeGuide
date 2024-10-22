@@ -6,6 +6,10 @@
     text-align: left;
 }
 
+.form li, .form p {
+  text-align: left;
+}
+
 .form label,
 .form input,
 .form textarea {
