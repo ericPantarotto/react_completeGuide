@@ -12,6 +12,7 @@ import { loader as eventDetailLoader } from './pages/EventDetailLoader-defer';
 // import { loader as eventsLoader } from './pages/EventsLoader';
 import { loader as eventsLoader } from './pages/EventsLoader-defer';
 // import EventsPage from './pages/Events';
+import AuthenticationPage from './pages/Authentication';
 import EventsPage from './pages/Events-defer';
 import EventsRootLayout from './pages/EventsRoot';
 import HomePage from './pages/Home';
@@ -59,6 +60,7 @@ const router = createBrowserRouter([
           // { path: 'new', element: <NewEventPage />, action: newEventAction },
         ],
       },
+      { path: 'auth', element: <AuthenticationPage /> },
       {
         path: 'newsletter',
         element: <NewsletterPage />,
