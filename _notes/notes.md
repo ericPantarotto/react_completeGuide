@@ -4076,6 +4076,11 @@ And that's not uncommon to do and an advantage of using query parameters would b
 ```javascript
 const [searchParams, setSearchParams] = useSearchParams()
 ```
+
+### Implementing the Auth Action
+
+`useParams()` cannot be used in action, it can only be used in a React component function or a React Hook function. But we can use the **built-in URL constructor**, which is provided by the browser,
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
