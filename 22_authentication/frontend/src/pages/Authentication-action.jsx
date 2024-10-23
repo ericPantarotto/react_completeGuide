@@ -38,5 +38,11 @@ export async function action({ request }) {
   const token = resData.token;
   localStorage.setItem('token', token);
 
+  //INFO: this is only used with util/auth.jsx - not used with util/aut-jwt.jsx
+  const expiration = new Date();
+  // expiration.setMinutes(expiration.getMinutes() + 1); // HACK: for testing
+  expiration.setHours(expiration.getHours() + 1);
+  localStorage.setItem('expiration', expiration.toISOString());
+
   return redirect('/');
 }

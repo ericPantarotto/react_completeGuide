@@ -4153,6 +4153,17 @@ when logged out, we can still access the route `http://localhost:5173/events/new
 But it would be even better if we wouldn't be able to reach that form at all if we're not logged in. So what we need is some route protection.
 
 **<span style='color: #495fcb'> Note:** So how can we add this kind of protection then? We could utilize a loader. A loader that simply checks if we have a token. And if we don't have a token, redirects us away.
+
+### Adding Automatic Logout
+
+**<span style='color: #a8c62c'> pages/Root.jsx**, we could add `useEffect()` to set a timer, whenever the root layout is rendered, which happens when the app starts, as it's the very first component we load for all our routes.
+
+**<span style='color: #495fcb'> Note:** if we had multiple sibling routes, this approach wouldn't work though.
+
+### Module Resources
+
+**<span style='color: #a3842c'>Link:** [https://www.npmjs.com/package/jsonwebtoken]
+**<span style='color: #a3842c'>Link:** [https://www.npmjs.com/package/jwt-decode]
 <!---
 [comment]: it works with text, you can rename it how you want
 

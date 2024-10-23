@@ -6,6 +6,7 @@ const KEY = 'supersecret';
 
 function createJSONToken(email) {
   return sign({ email }, KEY, { expiresIn: '1h' });
+  // return sign({ email }, KEY, { expiresIn: 60 * 1 * 1000 }); // HACK: for testing; 1 minute
 }
 
 function validateJSONToken(token) {

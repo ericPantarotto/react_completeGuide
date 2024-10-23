@@ -21,8 +21,10 @@ import { action as logoutAction } from './pages/Logout';
 import NewEventPage from './pages/NewEvent';
 import NewsletterPage from './pages/Newsletter';
 import { action as newsletterAction } from './pages/NewsletterAction';
-import RootLayout from './pages/Root';
-import { tokenLoader, checkAuthLoader } from './util/auth';
+// import RootLayout from './pages/Root';
+import RootLayout from './pages/Root-autoLogout';
+// import { checkAuthLoader, tokenLoader } from './util/auth';
+import { checkAuthLoader, tokenLoader } from './util/auth-jwt';
 
 const router = createBrowserRouter([
   {
