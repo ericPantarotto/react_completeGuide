@@ -4095,6 +4095,24 @@ But we can also use the more official React Routing embracing approach, and I'll
 
 I'll add a new file in my pages folder called `Logout.jsx` This file won't contain any component because there is no log out page. Instead, I'll just export a function, an **action** to be precise, which will clear my local storage, which will get rid of the token.
 
+### Updating the UI Based on Auth Status
+
+So now to update the UI based on the existence of the token, I wanna make the token easily available in my entire application on all my routes.
+
+we also want that if the token would be removed because we log out, the UI automatically updates.
+
+And we could use React context for managing that token across the entire application.That would be a perfectly fine way of doing that. But since we're using React-router, we can also again leverage it to that package for doing that.
+
+- We could add a loader, which simply takes a look at local storage and extracts the token from local storage.
+- That token would then be available through the loader data of that root route in all other routes.
+- The best thing about that is that React router will automatically reevaluate that if we for example, log out, if we submit that logout form. So it will then re fetch that token and for example determine that the token doesn't exist and then update all the pages that use that loader data from that root route.
+
+```javascript
+```
+
+So now this will be called whenever a new navigation action occurs, for example, because we triggered a logout and therefore we will check the current status of the token whenever the user does anything on the page whenever the user submits a form or navigates around. And that therefore ensures that we always have the latest information about that token.
+
+In order to use data from that loader and easily get access to it, I'll assign an `id` to that route.
 <!---
 [comment]: it works with text, you can rename it how you want
 

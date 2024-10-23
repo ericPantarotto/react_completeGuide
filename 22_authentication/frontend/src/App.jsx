@@ -22,12 +22,15 @@ import NewEventPage from './pages/NewEvent';
 import NewsletterPage from './pages/Newsletter';
 import { action as newsletterAction } from './pages/NewsletterAction';
 import RootLayout from './pages/Root';
+import { tokenLoader } from './util/auth';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    id:'root',
+    loader: tokenLoader,
     children: [
       { index: true, element: <HomePage /> },
       {
