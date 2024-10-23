@@ -50,7 +50,9 @@ router.post('/login', async (req, res) => {
   try {
     user = await get(email);
   } catch (error) {
-    return res.status(401).json({ message: 'Authentication failed.' });
+    return res
+      .status(401)
+      .json({ message: `${error.message || 'Authentication failed.'} ` });
   }
 
   const pwIsValid = await isValidPassword(password, user.password);
