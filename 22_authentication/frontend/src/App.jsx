@@ -22,14 +22,14 @@ import NewEventPage from './pages/NewEvent';
 import NewsletterPage from './pages/Newsletter';
 import { action as newsletterAction } from './pages/NewsletterAction';
 import RootLayout from './pages/Root';
-import { tokenLoader } from './util/auth';
+import { tokenLoader, checkAuthLoader } from './util/auth';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
-    id:'root',
+    id: 'root',
     loader: tokenLoader,
     children: [
       { index: true, element: <HomePage /> },
@@ -52,7 +52,12 @@ const router = createBrowserRouter([
                 element: <EventDetailPage />,
                 action: deleteEventAction,
               },
-              { path: 'edit', element: <EditEventPage />, action: eventAction },
+              {
+                path: 'edit',
+                element: <EditEventPage />,
+                action: eventAction,
+                loader: checkAuthLoader,
+              },
             ],
           },
           // {
@@ -61,7 +66,12 @@ const router = createBrowserRouter([
           //   loader: eventDetailLoader,
           // },
           // { path: ':eventId/edit', element: <EditEventPage /> },
-          { path: 'new', element: <NewEventPage />, action: eventAction },
+          {
+            path: 'new',
+            element: <NewEventPage />,
+            action: eventAction,
+            loader: checkAuthLoader,
+          },
           // { path: 'new', element: <NewEventPage />, action: newEventAction },
         ],
       },

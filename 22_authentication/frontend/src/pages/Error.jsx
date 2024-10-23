@@ -19,6 +19,11 @@ function ErrorPage() {
     message = 'Could not find resource or page.';
   }
 
+  if (error.status === 401) {
+    title = 'Not Authenticated!';
+    message = error.data.message;
+  }
+
   return (
     <>
       <MainNavigation />

@@ -4057,6 +4057,7 @@ function AuthForm() {
   //...
 }
 ```
+
 **<span style='color: #495fcb'> Note:** However, we could also leverage a standard web concept for managing this. We could leverage **query parameters**, **search parameters** as they're also called.
 
 Now, a query parameter is in the end a parameter that's appended in the URL after a question mark.
@@ -4065,7 +4066,7 @@ Now, a query parameter is in the end a parameter that's appended in the URL afte
 
 And that's not uncommon to do and an advantage of using query parameters would be that we can directly link to this page:
 
-- in signup 
+- in signup
 - or log in mode so that we could link a user directly to the signup page
 
 `useSearchParams` returns an array
@@ -4108,11 +4109,50 @@ And we could use React context for managing that token across the entire applica
 - The best thing about that is that React router will automatically reevaluate that if we for example, log out, if we submit that logout form. So it will then re fetch that token and for example determine that the token doesn't exist and then update all the pages that use that loader data from that root route.
 
 ```javascript
+{
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    id:'root',
+    loader: tokenLoader,
+    children: [
+//..
+    ]
+}
 ```
 
 So now this will be called whenever a new navigation action occurs, for example, because we triggered a logout and therefore we will check the current status of the token whenever the user does anything on the page whenever the user submits a form or navigates around. And that therefore ensures that we always have the latest information about that token.
 
 In order to use data from that loader and easily get access to it, I'll assign an `id` to that route.
+
+### Important: loader()s must return null or any other value
+
+**<span style='color: #875c5c'>IMPORTANT:** In the next lecture, I set up a route loader that doesn't return a value under certain circumstances.
+
+You should make sure that you do add an extra `return null` statement in all `if` statement branches where nothing would be returned otherwise to avoid errors.
+
+To be precise, in the `checkAuthLoader()` function that will be added in the next lecture, you should add `return null` after the `if` statment:
+
+```javascript
+export function checkAuthLoader() {
+  // this function will be added in the next lecture, make sure it looks like this in the end
+  const token = getAuthToken();
+  
+  if (!token) {
+    return redirect('/auth');
+  }
+  
+  return null; // this is missing in the next lecture video and should be added by you
+}
+```
+
+### Adding Route Protection
+
+when logged out, we can still access the route `http://localhost:5173/events/new`, of course submitting the form would fail because we actually wouldn't be able to attach a token to the outgoing request.
+
+But it would be even better if we wouldn't be able to reach that form at all if we're not logged in. So what we need is some route protection.
+
+**<span style='color: #495fcb'> Note:** So how can we add this kind of protection then? We could utilize a loader. A loader that simply checks if we have a token. And if we don't have a token, redirects us away.
 <!---
 [comment]: it works with text, you can rename it how you want
 
