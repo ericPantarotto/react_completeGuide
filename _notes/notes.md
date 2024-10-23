@@ -4084,6 +4084,17 @@ const [searchParams, setSearchParams] = useSearchParams()
 ### Validating User Input & Outputting Validation Errors
 
 We can get that data returned by that action function that was submitted by that form with help of the `useActionData()` hook. **we only get that data if our action returns something, if it returns something else, then a redirect.**
+
+### Adding User Logout
+
+We could add a logout button, that should then trigger an action or whatever that deletes the token.
+
+There are different ways of handling this. We could simply add a on click listener and trigger a function that reaches out to local storage and deletes the token.
+
+But we can also use the more official React Routing embracing approach, and I'll add a new route.
+
+I'll add a new file in my pages folder called `Logout.jsx` This file won't contain any component because there is no log out page. Instead, I'll just export a function, an **action** to be precise, which will clear my local storage, which will get rid of the token.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

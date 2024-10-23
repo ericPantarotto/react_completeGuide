@@ -17,11 +17,11 @@ import { action as authAction } from './pages/Authentication-action';
 import EventsPage from './pages/Events-defer';
 import EventsRootLayout from './pages/EventsRoot';
 import HomePage from './pages/Home';
+import { action as logoutAction } from './pages/Logout';
 import NewEventPage from './pages/NewEvent';
 import NewsletterPage from './pages/Newsletter';
 import { action as newsletterAction } from './pages/NewsletterAction';
 import RootLayout from './pages/Root';
-
 
 const router = createBrowserRouter([
   {
@@ -62,11 +62,15 @@ const router = createBrowserRouter([
           // { path: 'new', element: <NewEventPage />, action: newEventAction },
         ],
       },
-      { path: 'auth', element: <AuthenticationPage />, action: authAction},
+      { path: 'auth', element: <AuthenticationPage />, action: authAction },
       {
         path: 'newsletter',
         element: <NewsletterPage />,
         action: newsletterAction,
+      },
+      {
+        path: 'logout',
+        action: logoutAction,
       },
     ],
   },
