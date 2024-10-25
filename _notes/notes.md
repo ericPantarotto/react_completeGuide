@@ -4234,6 +4234,21 @@ loader: ({params}) =>
 
 Or we simply take that overall meta object which we get from React router which contains this params key and we forward this meta object here to this loader.
 
+### Build the Code for Production
+
+Now, this build step here is required because the application we're building is not the application we're going to upload at least not like this. This is not the code we're going to upload.
+
+This is the code which we use during development.
+
+It's very readable and it sometimes even uses features which aren't supported like that in the browser. Like this JSX code that's not supported in browsers. It must be transformed before we can upload this on a server that serves it to end users.
+
+**<span style='color: #495fcb'> Note:** By the way, here during development when we preview this page we also get a transformed version of that code. **This development server**, which we started with `npm run dev` is transforming the code as we're writing it. **kind of a live transformation process**.
+
+`npm run build` for **Vite React** applications will build our project, in a *dist folder*. And it's the content of that *dist/build* folder that should be deployed to a server. It's of course not very readable but it's a valid code that can be executed.
+
+- you have your optimized JavaScript file with those different dynamically loaded chunks.js files for the lazy loading
+- but also with that main chunk that's downloaded initially. (index)
+  - And that file contains all the code you wrote plus all the third party package code you're using including the React library itself.
 <!---
 [comment]: it works with text, you can rename it how you want
 
