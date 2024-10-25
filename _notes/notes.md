@@ -4164,6 +4164,21 @@ But it would be even better if we wouldn't be able to reach that form at all if 
 
 **<span style='color: #a3842c'>Link:** [https://www.npmjs.com/package/jsonwebtoken]
 **<span style='color: #a3842c'>Link:** [https://www.npmjs.com/package/jwt-decode]
+
+## Deploying React Apps
+
+### Understanding Lazy Loading
+
+Lazy loading  means that we wanna load certain pieces of code only when it's needed.
+
+without lazy loading, it's important to understand that we have all these import statements in our various files where we import code from other files into the file where the import statement was added. if we have `import * from react-router-dom`, that simply means that when this component file is evaluated by the browser, this code for this hook will be imported because this code is needed in order to handle this component.
+
+**<span style='color: #875c5c'>IMPORTANT:** So all these imports in the end connect these different files. And when this application is served to end users, all these imports must be resolved before something's shown on the screen.
+
+Now the theoretical problem with that is, that of course, this means all code files must be loaded before anything's shown on the screen. In more complex applications in bigger apps with dozens or even hundreds of routes and components, that could be a problem. Having to load all the code initially will slow down that initial page load. *When the user visits that website for the first time*, all that code must be downloaded before anything's showing up on the screen.
+
+The idea behind lazy loading is that we load certain components in the end only when they're needed instead of ahead of time.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
