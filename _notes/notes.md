@@ -4179,6 +4179,61 @@ Now the theoretical problem with that is, that of course, this means all code fi
 
 The idea behind lazy loading is that we load certain components in the end only when they're needed instead of ahead of time.
 
+### Adding Lazy loading
+
+with traditional `import` statement, it's always loaded. **It's loaded eagerly**, as it's called.
+
+you can actually also call import as a function and in that case it will **import something dynamically, only when it's needed**.
+
+```javascript
+loader: () =>
+  import('./pages/Blog').then((module) => module.loader()),
+}
+```
+
+we can either use `.then()` or `async/await`.
+
+in the end `module.loader()` will return the expected *Promise* of `loader: ...`
+
+We could try the same approach for loading lazily component function. However, this alone won't do the trick because this here is not a valid functional component. Because, whilst you can write components as functions, after all that is what we did throughout this course, **a function is only a valid component if it returns JSX code**. While our *import using a function* however, returns a promise because import actually yields a promise. **And that's not a valid React component function**.
+
+To solve this problem React gives us a special function which we have to wrap around this function and that's the `lazy()` function
+
+`Suspense` can be used:
+
+- when we use `defer` in our loader
+- it can also be used by components to wait for content to be loaded before actually rendering the content
+
+suspense is used to wrap it around this lazily loaded component so that we can show a fallback which is specified with help of the `fallback` prop on `suspense` until that component code is there.
+
+![image info](./23_sc1.png)
+
+Now if you reload on the homepage, you can see how lazy loading works by opening your *developer tools* and there go to the **network tab**.
+
+Make sure you clear the tab so that you have no requests in there, and then if you click on blog, you will see that actually here it has **downloaded this JavaScript file** here. This JavaScript file was downloaded dynamically. (And that JavaScript file which was loaded lazily here includes the code for the loader and for the blog page component.)
+
+**That was downloaded dynamically because we added lazy loading.**
+
+**<span style='color: #a8c62c'> pages/Post.jsx**
+
+```javascript
+export function loader({ params }) {
+  const postId = params.id;
+  return fetch('<https://jsonplaceholder.typicode.com/posts/>' + postId);
+}
+```
+
+**<span style='color: #a8c62c'> App.jsx**
+
+we get params by React router in this loader function, and here we should simply forward that under a params key to this loader.
+
+```javascript
+loader: ({params}) =>
+  import('./pages/Post').then((module) => module.loader({params})),
+```
+
+Or we simply take that overall meta object which we get from React router which contains this params key and we forward this meta object here to this loader.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
