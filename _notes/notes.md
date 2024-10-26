@@ -4256,6 +4256,30 @@ It's very readable and it sometimes even uses features which aren't supported li
 
 to disable *Firebase* website `firebase hosting:disable`
 
+
+You might remember that when we deployed this website we were asked whether we want to configure it as a single page application, and we chose yes.
+
+Now this is important, but why? Well, keep in mind that on that website we have navigation, provided by *react-router-dom'.
+
+And that code for evaluating the URL and loading different components executes in the browser. So it's a client side package. It's not executing on a server. This project has no code that executes on the server.
+
+Now clicking on links is one thing though. What if we enter a URL like the domain /posts, then it also loads this blog page as it should, but we shouldn't take this for granted.
+
+Because actually when you have your application deployed on a server and a user enters a URL in the browser, what happens technically is that the browser sends a request to the server. That always happens because the browser must request the website for which we just entered the address.
+
+Now the server then sends back a response, which of course, is in the end is this React application. So the HTML file, but also the JavaScript code that makes up this application.
+
+Now if we did not just send a request to main domain, but maybe also to some path like /posts or whatever path we have on our website, then that path also reaches the server on this initial request. And by default, the server would try to find the fitting response for the path we requested in our request. For example, by searching for a folder with a name of some route.
+
+And of course, the server in this case would fail to find a fitting file because it doesn't have any server side logic for handling requests with different paths.
+
+What the server should instead do is always return exactly the same HTML file and the same JavaScript code so that this path, which we requested, can be resolved on the client side by that JavaScript code we requested, so by our React app that's using *React Router*.
+
+**<span style='color: #875c5c'>IMPORTANT:** However, the default behavior is not that the server always returns the same file. Instead by default, it would look for a fitting file in a fitting folder based on the request we sent.
+
+>And that's why we got this question whether we want to configure this as a single page application. By answering this question with **yes**, Firebase set up some configuration which is respected by the Firebase server, which basically tells Firebase to always return `index.html`, which then will always request the same JavaScript files. **So this makes sure that client side routing is used instead of server side routing**.
+
+**<span style='color: #495fcb'> Note:** hosting providers might not ask you whether you want to configure this as a single page application. you manually must set up some redirection rule that basically forwards all requests to *index.html*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
