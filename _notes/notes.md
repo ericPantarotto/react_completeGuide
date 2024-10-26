@@ -4249,6 +4249,13 @@ It's very readable and it sometimes even uses features which aren't supported li
 - you have your optimized JavaScript file with those different dynamically loaded chunks.js files for the lazy loading
 - but also with that main chunk that's downloaded initially. (index)
   - And that file contains all the code you wrote plus all the third party package code you're using including the React library itself.
+
+### Deployment Example
+
+**<span style='color: #a3842c'>Link:** [firebase landing page](https://console.firebase.google.com/u/0/)
+
+to disable *Firebase* website `firebase hosting:disable`
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
