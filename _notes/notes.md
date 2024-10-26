@@ -4254,8 +4254,7 @@ It's very readable and it sometimes even uses features which aren't supported li
 
 **<span style='color: #a3842c'>Link:** [firebase landing page](https://console.firebase.google.com/u/0/)
 
-to disable *Firebase* website `firebase hosting:disable`
-
+To disable *Firebase* website `firebase hosting:disable`
 
 You might remember that when we deployed this website we were asked whether we want to configure it as a single page application, and we chose yes.
 
@@ -4280,6 +4279,12 @@ What the server should instead do is always return exactly the same HTML file an
 >And that's why we got this question whether we want to configure this as a single page application. By answering this question with **yes**, Firebase set up some configuration which is respected by the Firebase server, which basically tells Firebase to always return `index.html`, which then will always request the same JavaScript files. **So this makes sure that client side routing is used instead of server side routing**.
 
 **<span style='color: #495fcb'> Note:** hosting providers might not ask you whether you want to configure this as a single page application. you manually must set up some redirection rule that basically forwards all requests to *index.html*.
+
+## React Query / Tanstack Query: Handling HTTP Requests with Ease
+
+### Module Set-up
+
+**<span style='color: #a3842c'>Link:** [Tanstack](https://tanstack.com/query/latest)
 <!---
 [comment]: it works with text, you can rename it how you want
 
