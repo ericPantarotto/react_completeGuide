@@ -4285,6 +4285,17 @@ What the server should instead do is always return exactly the same HTML file an
 ### Module Set-up
 
 **<span style='color: #a3842c'>Link:** [Tanstack](https://tanstack.com/query/latest)
+
+### React Query: Why?
+
+We have to write all this code here in the useEffect hook to make sure that we fetch the data and then trigger and set our different states. We have to manage all these states, and we have to do that, basically, in every component that wants to send HTTP requests.
+
+Now to be fair, we could simplify this code and reuse code by building a custom hook, though.
+
+but below features could be implemented with Tanstack:
+
+- refetching/re-updating the UI after changing tab in the browser, if we found out that the data we're currently displaying is outdated
+- caching: so that the data once fetched is cached, stored in memory, and we can then reuse that data if we need it again.
 <!---
 [comment]: it works with text, you can rename it how you want
 
