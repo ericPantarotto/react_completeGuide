@@ -4343,6 +4343,33 @@ function App() {
 *Developer tool/Network*: *Tanstack* already provides a better user's experience, if we change tab in our browser and come back to our website, then we see and HTTP request sent, by *Tanstack Query*, which for example reacts to us going away from this screen and coming back to it.
 
 And the advantage of this, of course is that, if some data should change, for example if in my backend, **the updated data is fetched**!
+
+### Understanding & Configuring Query Behaviors - Cache & Stale Data
+
+**React Query caches response data**. if we're on our website, we can, for example, go to a different page by clicking *View Details*. And if we then go back by clicking *View All Events*, the events here are available instantly.
+
+with `useEffect`, if we went to a different page and came back, a brand new request was sent and all the data was fetched again.
+
+Now here with React Query, the data is available instantly. Though, if you take a look at the Network Tab, you will actually see that as I click on *View All Events*, there is another request being sent. And nonetheless, the data is available instantly.
+
+Going to the *Network Tab in the Developer Tools*, and by then, Throttling this a little bit and going to Slow 3G, which means network requests will take a bit longer, because we're Throttling the network.
+
+With that enabled, you'll see that still, if I go back to View All Events, the data is available instantly. Just the images were not available instantly, because those of course, still had to be re-fetched. These are not fetched by useQuery and not cached by React Query. Instead, these are simply included through links and fetched by the browser.
+
+**<span style='color: #495fcb'> Note:** Images are fetched and (potentially) cached by the browser - React & React Query are not involved!
+
+There is another request being sent Behind the Scenes here, but this is not the request that's needed to display data instantly. Instead, React Query caches the response data you are getting back from your requests and it will reuse that data whenever it encounters a never useQuery execution with the same *Query Key*.
+
+**<span style='color: #495fcb'> Note:**
+
+- *React Query* will see that this *queryKey* has been used before and that it did already cache data for that key. And it will then instantly yield that data, but at the same time, also send this request again Behind the Scenes to see if updated data is available.
+- And then it will kind of silently replace that data with the updated data so that after a couple of seconds or however long it takes to fetch that data, so that we have the best of both worlds.
+
+By setting a `staleTime` on your queries: this controls after which time React Query will send such a Behind the Scenes request to get updated data if it found data in your cache. **and the default is 0**, which means it will use data form the cache, but it will then always also send such a Behind the Scenes request to get updated data. *You can see this happening via Developer Tools/Network*.
+
+The staleTime with which you can make sure that no unnecessary requests are sent.
+
+`gcTime`: garbage collection time, how long the data in the cache will kept around. `gcTime: 30000`, cache will only be kept 1/2 minute. So thereafter, if this component needs to render again, there would be no cached data, and therefore, React Query would always need to send a new request to get some data before it can show anything.
 <!---
 [comment]: it works with text, you can rename it how you want
 
