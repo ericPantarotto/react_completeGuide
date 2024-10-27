@@ -4296,6 +4296,53 @@ but below features could be implemented with Tanstack:
 
 - refetching/re-updating the UI after changing tab in the browser, if we found out that the data we're currently displaying is outdated
 - caching: so that the data once fetched is cached, stored in memory, and we can then reuse that data if we need it again.
+
+### Installing & Using Tanstack Query
+
+`npm i @tanstack/react-query`
+
+`useQuery()` hook will:
+
+- send an HTTP request; get us this events data
+- also give us information about the loading state
+- and potential errors
+
+`queryFn` property, you define the actual code that will be executed that will send the actual request, **it must return a promise**.
+
+**<span style='color: #875c5c'>IMPORTANT:** Tanstack Query does not come with some built-in logic to send HTTP requests. **The code for sending the requests must come from the developper side** (we use fetch, but we could also use *axios*). Instead it comes with logic for:
+
+- managing those requests,
+- keeping track of the data
+- and the possible errors that are yielded by these requests
+
+`queryKey`: to cache the data that's yielded by that request so that the response from that request could be reused in the future. You can configure how long data can be stored and reused by *React Query*. This makes sure that data can be shown to the user quicker if you already have it because it doesn't need to be refetched all the time.
+
+`useQuery` returns an *queryObject*, on which we can use destructuring to pull out:
+
+- *data*, return by our custom fetching functions
+- *ispEnding* property; returns if the request/response is still on its way, or if we do have a response
+- *isError* & error message
+- *refetch*
+
+**<span style='color: #9e5231'>Error:** *No QueryClient set, use QueryClientProvider to set one.*
+
+**<span style='color: #a8c62c'> App.jsx** In that App component I got some routes set up, the goal now is to wrap the *RouterProvider*, which is in the end responsible for rendering the different components that make up our website, with another provider component provided by *Tanstack Query*
+
+```javascript
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />;
+    </QueryClientProvider>
+  );
+}
+```
+
+*Developer tool/Network*: *Tanstack* already provides a better user's experience, if we change tab in our browser and come back to our website, then we see and HTTP request sent, by *Tanstack Query*, which for example reacts to us going away from this screen and coming back to it.
+
+And the advantage of this, of course is that, if some data should change, for example if in my backend, **the updated data is fetched**!
 <!---
 [comment]: it works with text, you can rename it how you want
 
