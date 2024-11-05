@@ -4417,9 +4417,30 @@ const response = await fetch(url, { signal: signal });
 ```javascript
 const { data, isLoading, isError, error } = useQuery({
   queryKey: ['events', { search: searchTerm }],
-    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
-  });
+  queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
+});
 ```
+
+### Enabled & Disabled Queries
+
+But now one thing where this component maybe does not behave exactly as expected is when I reload this page or when I visit it for the first time. Because in that case I see all those events. which kind of makes sense because no search term was entered and therefore of course we have no criteria to narrow those events down.
+
+we might want to make sure that we don't send this query in the find event section component *if we did not enter any search term at all*.
+
+```javascript
+const { data, isLoading, isError, error } = useQuery({
+  queryKey: ['events', { search: searchTerm }],
+  queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
+  enabled: searchTerm !== undefined
+});
+```
+
+`useQuery()` configuration object takes an `enabled` property
+
+- if you set this two false, the query is disabled and will not be sent, so the request will not be sent
+- if you send it to true, it will be sent and that's the default
+
+If I don't want a loading spinner if we're waiting for the user to enter something, instead of using `isPending` in `useQuery()` object destructuring, *React Query* gives us an alternative, `isLoading`.
 
 <!---
 [comment]: it works with text, you can rename it how you want
