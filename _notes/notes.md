@@ -4370,6 +4370,25 @@ By setting a `staleTime` on your queries: this controls after which time React Q
 The staleTime with which you can make sure that no unnecessary requests are sent.
 
 `gcTime`: garbage collection time, how long the data in the cache will kept around. `gcTime: 30000`, cache will only be kept 1/2 minute. So thereafter, if this component needs to render again, there would be no cached data, and therefore, React Query would always need to send a new request to get some data before it can show anything.
+
+### Dynamic Query Functions & Query Keys
+
+in our `useQuery()` function, by constructing a query key dynamically, *React Query* can cache (and reuse) different data for different keys based on the same query.
+
+**<span style='color: #a8c62c'> components/Events/FindEventSection.jsx**
+
+`queryKey: ['events', { search: searchTerm }],`
+
+**<span style='color: #495fcb'> Note:** we can either pass our *searchTerm* as dynamic value, or pass an object.
+
+But using this `ref` value for fetchEvents and for this key is actually not ideal, because refs, unlike `state` in React don't cause this component function to re-execute which means that as the value entered into this input here changes, this query is not updated and not sent again.
+
+But of course we would wanna send it again to get new data if the user did enter a different search term. Therefore, here in this component I will also manage some state with the `useState` hook.
+
+**<span style='color: #9e5231'>Error:** in the network tab of the browser, is this request where I am sending some request to my backend API and then the search query parameter is set to **object-object**, which is a invalid value.
+
+![image info](./24_sc1.png)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

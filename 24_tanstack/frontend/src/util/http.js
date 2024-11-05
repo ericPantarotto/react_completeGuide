@@ -1,5 +1,12 @@
-export const fetchEvents = async () => {
-  const response = await fetch('http://localhost:3000/events');
+export const fetchEvents = async (searchTerm) => {
+   console.log(searchTerm);
+   let url = 'http://localhost:3000/events';
+
+   if (searchTerm) {
+     url += '?search=' + searchTerm;
+   }
+
+  const response = await fetch(url);
 
   // NOTE: response status 400/500
   if (!response.ok) {
