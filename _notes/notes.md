@@ -4389,6 +4389,38 @@ But of course we would wanna send it again to get new data if the user did enter
 
 ![image info](./24_sc1.png)
 
+### The Query Configuration Object & Aborting Requests
+
+**<span style='color: #875c5c'>IMPORTANT:** React Query by default passes some data to your Query function.
+
+- it is an object that gives us information about the Query key that was used for that query
+- and a signal, which is required for aborting that request, If you, for example, navigate away from this page before the request was finished
+
+Therefore here we should actually accept such an object and we can use object destructuring here to pull out the different things we will get here:
+
+- signal
+- and pass it to the built-in fetch function by adding a second argument to fetch, a configuration object, which takes a signal property and wants a signal of that shape as React Query gives it to us so that the browser then can use that abort signal internally to stop the request if it receives that signal
+- searchTerm, we can pass the name we want. And now we just have to make sure that in `FindEventSection.jsx` section where I'm wrapping fetch events with an anonymous function, I'm passing an object to fetch events and I'm setting a property named *searchTerm* in the objec I set, this makes sure that this *searchTerm* property exists here when it's needed.
+
+**<span style='color: #a8c62c'> util/http.js**
+
+```javascript
+export const fetchEvents = async ({ signal, searchTerm }) => { 
+  //...
+const response = await fetch(url, { signal: signal });
+//...
+}
+```
+
+**<span style='color: #a8c62c'> components/Events/FindEventSection.jsx**
+
+```javascript
+const { data, isLoading, isError, error } = useQuery({
+  queryKey: ['events', { search: searchTerm }],
+    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
+  });
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
