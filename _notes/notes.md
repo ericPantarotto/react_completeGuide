@@ -4506,6 +4506,44 @@ app.get('/events/images', async (req, res) => {
 </div>
 ```
 
+### Acting on Mutation Success & Invalidating Queries
+
+we don't have any code that would define what should happen after we mutate.
+
+Now we could navigate away programmatically, for example, with help of the `useNavigate` hook provided by React Router.
+`navigate('/events')`
+
+But we also might want to wait for this mutation to be finished until we do that so that we don't close this screen whilst the request is still on its way.
+
+In `useMutation()` function, using `onSuccess` makes sure that the code defined will only execute if the mutation did succeed. If we instead would `navigate` away here in handleSubmit we would always do that no matter if the mutation succeeds or fails.
+
+In addition to navigating away, when submitting a new event, you would see that it is submitted but it's not showing up here under my recently added events, It's not showing up here until I, for example, switch to a different page and come back because as you learned, this triggers React Query to refetch data.
+
+But of course, if I know that the data just changed because I added a new event, for example, I want React Query to immediately refetch data.
+
+And we can achieve this by calling a method that's provided by *React Query* that allows us to **invalidate one or more queries**. So that allows us to tell React Query that **the data that's connected to some queries is outdated and that it should be refetched**.
+
+to do so, we need the `QueryClient` object, so we now export it from our `http.js`, rather than `App.jsx`.
+
+And to target specific queries, invalidate queries takes an object as an input where we have to define the `queryKey` which we wanna target (an array value).
+
+**<span style='color: #a8c62c'> components/Events/NewEvent.jsx**
+
+```javascript
+const { mutate, isPending, isError, error } = useMutation({
+  mutationFn: createNewEvent,
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['events'] });
+    navigate('/events');
+  },
+});
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** by passing `{ queryKey: ['events'] }`, we invalidate all queries that **contain events**. for example, query of `FindEventSection.jsx` would also be invalidated. (`queryKey: ['events', { search: searchTerm }]`). Alternatively, we can pass the `exact` property to target with `true` value and have only queries with exactly the same key would be invalidated.
+
+**<span style='color: #495fcb'> Note:** But since you should build your Query keys such that they kind of describe the data you are fetching, it makes sense to invalidate all queries that include events because all those queries would otherwise be dealing with old data.
+
+Now when I click Create, you see it shows up down basically instantly because it's refetched behind the scenes immediately because I'm invalidating queries.
 <!---
 [comment]: it works with text, you can rename it how you want
 
