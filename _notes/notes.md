@@ -4561,6 +4561,14 @@ isError: isErrorDeleting,
 error: deleteError,
 ```
 
+### React Query Advantages in Action
+
+to simulate an error in the edit page and get our custom error message, we can manually enter a wrong url [http://localhost:5173/events/XXX]
+
+**<span style='color: #495fcb'> Note:** It's also worth noting that if I load this details page, it takes a short while, but then once I got this data, this *Modal* page for editing an event opens up pretty much instantly and that's the case because this data is cached. Because I'm using the same query with the same `queryKey`, `queryKey: ['events', params.id],`
+
+- in EditEvent component
+- and in the event details component
 <!---
 [comment]: it works with text, you can rename it how you want
 
