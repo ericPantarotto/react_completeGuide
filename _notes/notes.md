@@ -4544,6 +4544,12 @@ const { mutate, isPending, isError, error } = useMutation({
 **<span style='color: #495fcb'> Note:** But since you should build your Query keys such that they kind of describe the data you are fetching, it makes sense to invalidate all queries that include events because all those queries would otherwise be dealing with old data.
 
 Now when I click Create, you see it shows up down basically instantly because it's refetched behind the scenes immediately because I'm invalidating queries.
+
+### Disabling Automatic Refetching after Invalidations
+
+Well, because for deleting an event, we were on that details page here and when then after deleting an event, we invalidated all event related queries. We still were on that page. And therefore, technically, since we invalidated all queries, *React Query* went ahead and immediately triggered a refetch for this details query with that specific id we had cached.
+
+Now, to avoid this behavior, we should go back to invalidate queries and add a second property to this configuration object for invalidate queries: `refetchTypw: 'none'`
 <!---
 [comment]: it works with text, you can rename it how you want
 
