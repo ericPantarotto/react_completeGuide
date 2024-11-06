@@ -4569,6 +4569,20 @@ to simulate an error in the edit page and get our custom error message, we can m
 
 - in EditEvent component
 - and in the event details component
+
+### Updating Data with Mutations
+
+Instead of pulling the usual *isPending, isError, error* properties, there is an alternative way of handling mutation, and the different mutation states it goes through.
+
+**<span style='color: #a3842c'>Link:** components/events/EditEvent.jsx
+
+```javascript
+function handleClose() {
+  navigate('../');
+}
+```
+
+To close the modal, we're going up one level to basically go to the page I'm coming from, which is the detail page for the event I tried to edit.
 <!---
 [comment]: it works with text, you can rename it how you want
 
