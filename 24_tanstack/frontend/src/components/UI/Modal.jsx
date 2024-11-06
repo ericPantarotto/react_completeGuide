@@ -10,9 +10,11 @@ export default function Modal({ children, onClose }) {
     const modal = dialog.current;
     modal.showModal();
 
-    return () => {
-      modal.close(); // needed to avoid error being thrown
-    };
+    // NOTE: StrictMode causes a rerender which triggers the return function of the useEffect to close the modal. 
+    // When the modal closes, the onClose prop which is set to() => navigate('../') causes the route to exit the new route.
+    // return () => {
+    //   modal.close(); // needed to avoid error being thrown
+    // };
   }, []);
 
   return createPortal(

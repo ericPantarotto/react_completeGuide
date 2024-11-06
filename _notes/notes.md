@@ -4442,6 +4442,37 @@ const { data, isLoading, isError, error } = useQuery({
 
 If I don't want a loading spinner if we're waiting for the user to enter something, instead of using `isPending` in `useQuery()` object destructuring, *React Query* gives us an alternative, `isLoading`.
 
+### Changing Data with Mutations
+
+This `useMutation()` hook is optimized for such data changing queries.
+
+```javascript
+const { mutate, isPending, isError, error } = useMutation({
+  mutationFn: createNewEvent,
+});
+```
+
+it returns an object which has a `mutate` property, which is extremely important because this is now a function which you can call anywhere in this component to actually send this request because as mentioned, useMutation, unlike useQuery does not automatically send this request when this component here is rendered but instead only when you tell it to send that request, which you do with help of that mutate function.
+
+![image info](./24_sc2.png)
+
+**<span style='color: #9e5231'>Error:** from the network tab, we see that we get an error response, because our backend will send an error response if any of below fields are empty:
+
+**<span style='color: #a8c62c'> backend/app.js**
+
+```javascript
+if (
+  !event.title?.trim() ||
+  !event.description?.trim() ||
+  !event.date?.trim() ||
+  !event.time?.trim() ||
+  !event.image?.trim() ||
+  !event.location?.trim()
+) {
+  return res.status(400).json({ message: 'Invalid data provided.' });
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
