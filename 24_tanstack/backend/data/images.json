@@ -20,7 +20,11 @@
     "caption": "A group of women coding."
   },
   {
-    "path:": "fighter-rooftop.png",
-    "caption": "A fighter on rooftop in a dark night."
+    "path": "fighter-rooftop.jpg",
+    "caption": "A dark fighter on a rooftop."
+  },
+  {
+    "path": "funny-balloons.jpg",
+    "caption": "A balloon."
   }
 ]

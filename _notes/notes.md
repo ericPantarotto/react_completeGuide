@@ -4473,6 +4473,39 @@ if (
 }
 ```
 
+### Fetching More Data & Testing the Mutation
+
+the way the backend works, there an event's images route, to which a get request can be sent to get back a list of images from which the user can choose.
+
+because those actual images that will be displayed are stored on the backend in that public folder, they're not part of the frontend project.
+
+Therefore I can't just include them in my frontend code. Instead, a request must be sent to this backend route here so that we get that list of images that we can display and we can then render that list on the frontend.
+
+**<span style='color: #a8c62c'> backend/app.js**
+
+```javascript
+app.get('/events/images', async (req, res) => {
+  const imagesFileContent = await fs.readFile('./data/images.json');
+  const images = JSON.parse(imagesFileContent);
+
+  res.json({ images });
+});
+```
+
+`EventForm.jsx` uses `ImagePicker.jsx`, which needs to receive an array of images, but currently set to an empty array.
+
+**<span style='color: #a8c62c'> components/EventForm.js**
+
+```javascript
+<div className="control">
+  <ImagePicker
+    images={[]}
+    onSelect={handleSelectImage}
+    selectedImage={selectedImage}
+  />
+</div>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
