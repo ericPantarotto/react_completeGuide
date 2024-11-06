@@ -63,7 +63,6 @@ export async function fetchSelectableImages({ signal }) {
   return images;
 }
 
-
 export async function fetchEvent({ id, signal }) {
   const response = await fetch(`http://localhost:3000/events/${id}`, {
     signal,
@@ -82,6 +81,7 @@ export async function fetchEvent({ id, signal }) {
 }
 
 export async function deleteEvent({ id }) {
+  // const response = await fetch(`http://localhost:3000/events/${id}ZZZ`, { HACK: testing error in the modal form
   const response = await fetch(`http://localhost:3000/events/${id}`, {
     method: 'DELETE',
   });

@@ -4550,6 +4550,17 @@ Now when I click Create, you see it shows up down basically instantly because it
 Well, because for deleting an event, we were on that details page here and when then after deleting an event, we invalidated all event related queries. We still were on that page. And therefore, technically, since we invalidated all queries, *React Query* went ahead and immediately triggered a refetch for this details query with that specific id we had cached.
 
 Now, to avoid this behavior, we should go back to invalidate queries and add a second property to this configuration object for invalidate queries: `refetchTypw: 'none'`
+
+### Enhancing Demo App & Repeating Mutation Concepts
+
+in our `useMutation()` hook, we can assign alias if in the file we have already used *isPending*, *isLoading*, *isError*
+
+```javascript
+isPending: isPendingDeletion,
+isError: isErrorDeleting,
+error: deleteError,
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
