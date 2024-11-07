@@ -4614,6 +4614,24 @@ For example, if I delete the entire title, now it's automatically updated on the
 - get and store the old data: `const previousEvent = queryClient.getQueryData(['events', params.id]);`
 - `onError: (error, data, context) => { queryClient.setQueryData(['events', params.id], context.previousEvent);},`. `onError()` has a couple of inputs that are passed automatically by *React Query*. the `context` object contains the previous event, but it must have been returned inside `onMutate()` function. `return { previousEvent };`
 - `onSettled: () => { queryClient.invalidateQueries(['events', params.id]);}`: this will be called whenever the mutation is done, no matter if it failed or succeeded. And in that case, just to be sure that you really got the same data in your front end as you have on your backend. You should also, again use query client to invalidate your relevant queries.
+
+### Using the Query Key as Query Function Input
+
+to limit the number of events displayed in the *recently added section*, we can control how our query function will be executed by wrapping it in an anonymous function. we also need to update our query key.
+
+as we pass the same information to the `queryKey` and the `fetchEvents`, which is redudant as we automatically get the *query key* in the `queryFn`function, responsible for triggering the *fetchEvents* function. we need to make use of *Javascript spread operator*
+
+```javascript
+// queryKey: ['events'],
+// queryFn: fetchEvents,
+
+// queryKey: ['events', { max: 3 }],
+// queryFn: ({ signal, queryKey }) => fetchEvents({ signal, max: 3 }),
+
+queryKey: ['events', { max: 3 }],
+queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }),
+
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
