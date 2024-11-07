@@ -4715,6 +4715,12 @@ const { data, isError, error } = useQuery({
   });
 ```
 
+## Introduction to Next.js
+
+### Module Introduction
+
+*Next.js*, a React framework, allowing to build full-stack applications with React. Application where the front-end is still controlled by React, but this front-end seamlessly blends with the back-end.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
