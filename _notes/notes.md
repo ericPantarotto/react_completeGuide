@@ -4632,6 +4632,89 @@ queryKey: ['events', { max: 3 }],
 queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }),
 
 ```
+
+###
+
+you can also combine those *React Router* features, fetching and manipulating data, with *React Query*.
+
+we can use `loader` function to tell *React Router* to execute the code in this function before it actually loads and renders this component. And that allows us to fetch data before the component even appears on the screen.
+
+```javascript
+export function loader({ params }) {
+  return queryClient.fetchQuery({
+    queryKey: ['events', params.id],
+    queryFn: ({ signal }) => fetchEvent({ signal, id: params.id }),
+  });
+}
+```
+
+**<span style='color: #495fcb'> Note:** `fetchQuery` returns a promise and wait for that promise to resolve before React Router goes ahead and renders the component.
+
+And you could now, for example, think that we should now remove `useQuery` from that component because we're using *React Router* now.
+
+But this is actually not the case, because whilst you could use `useLoaderData`, a hook provided by *React Router*, to get access to the data that's returned by the loader, it is better to keep useQuery around.
+
+Because when we use `fetchQuery` here in the loader, React Query will go ahead and send that request and we'll then store that response data in the cache. Therefore, when `useQuery` is executed again here in the component, it's this cached data that will be used, but we keep all the other advantages *React Query* has to offer.
+
+that's why in addition to our newly `export function loader({ params })`, I want to keep on using *React Query* `useQuery()` here directly in the component.
+
+we get rid of `isPending` input, and we could also remove `isError`, and use *React Router* capability.
+
+after such changes, if I reload this page, it waits until everything was loaded until it displays this page.
+
+But if you wanna use React Router you are not limited to fetching data. Instead, you can also use it for editing data for performing mutations.
+
+we create `export async function action({ request, params })` and it's now this *updatedEventData* that should be sent to the backend (`formData`).
+
+Now to do that, we can directly call `updateEvent` method, which we're importing from *http.js*, we can directly call this function in this `action` function without creating or triggering a mutation because this `useMutation` hook was in the end also just a wrapper around this function, a wrapper that then gave us extra access to information like whether this was currently pending, had error, etc.
+
+```javascript
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  const updatedEventData = Object.fromEntries(formData);
+  await updateEvent({ id: params.id, event: updatedEventData });
+  await queryClient.invalidateQueries(['events']);
+  return redirect('../');
+}
+```
+
+we should of course change our component and make sure we don't use anymore `mutate`, and replace with:
+
+```javascript
+ function handleSubmit(formData) {
+  submit(formData, { method: 'PUT' });
+}
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** even though it might look like it we're not sending an HTTP request here. Instead, **this code will simply trigger this client site action function**, and the code of our `action` will be executed.
+
+#### useIsFetching @tanstack
+
+**<span style='color: #a8c62c'> components/Header.jsx**
+
+it's also weird that If I click on edit, it takes a short while until something happens. To provide a better user experience, we can use `useIsFetching` hook provided by React Query.
+
+#### avoiding unnecessary Requests
+
+I also wanna make sure that we avoid redundant HTTP requests when using *React Router* in conjunction with *React Query*.
+
+From the network tab, If I reload the details page and then click edit, you'll notice that we got 2 requests,
+
+- which in the end is initiated by React Router
+- then also a second request to the same URL, coming from React Query, which we're still using in that EditEvent page.
+
+And even though we, of course, will have cached data here, as you learned *React Query* will still go ahead and send an extra request behind the scenes to make sure that the cached data that's currently being used is the most recent data. Now that's of course kind of redundant here, because we know that we just loaded the latest data with help of the loader a second ago. So re-fetching it again behind the scenes is really unnecessary here. we can make use of `staleTime` with 10 seconds value.
+
+**<span style='color: #a8c62c'> components/Events/EditEvent.jsx**
+
+```javascript
+const { data, isError, error } = useQuery({
+    queryKey: ['events', params.id],
+    queryFn: ({ signal }) => fetchEvent({ signal, id: params.id }),
+    staleTime: 10000,
+  });
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
