@@ -4572,7 +4572,11 @@ to simulate an error in the edit page and get our custom error message, we can m
 
 ### Updating Data with Mutations
 
-Instead of pulling the usual *isPending, isError, error* properties, there is an alternative way of handling mutation, and the different mutation states it goes through.
+there is an alternative way of handling mutation, and the different mutation states it goes through, instead of what we saw so far:
+
+- pulling the usual *isPending, isError, error* properties
+- using `query.invalidateQueries()`, and `navigate()` once mutation succedeed
+- in the mean time displaying a loading spinner
 
 **<span style='color: #a3842c'>Link:** components/events/EditEvent.jsx
 
@@ -4583,6 +4587,33 @@ function handleClose() {
 ```
 
 To close the modal, we're going up one level to basically go to the page I'm coming from, which is the detail page for the event I tried to edit.
+
+### Optimistic Updating
+
+by pressing this update button, I want to update this UI here instantly without waiting for the response of my backend. And if my backend then turns out to fail, *if the update fails for whatever reason, I simply want to roll back the optimistic update I performed*.
+
+`queryClient.setQueryData` will manipulate the already stored data without waiting for a response. Normally it's manipulated by *React Query* whenever you got a new response that's being cached. But you can also manipulate that stored data yourself by calling `setQueryData`.
+
+Arguments are:
+
+- the key of the query we want to edit
+- the new data to store under that query key; the data we send to our backend
+
+**<span style='color: #495fcb'> Note:** *Tanstack* automatically passes the data that you pass to `mutate({ id: params.id, event: formData });` (as a value to `mutate()`). We automatically get this data that you submit, to your backendas, as an input.
+
+**this will manipulate the data without waiting for a valid response**.
+
+`await queryClient.cancelQueries({ queryKey: ['events', params.id] });`
+
+when performing optimistic updating, you should also use to query client to cancel all active queries for a specific key by passing an object to cancel queries, and then setting a query key for which you want to cancel queries. **This avoids to have clashing response data from those queries**.
+
+when performing optimistic updating, the updating process on the backend could fail. And in that case, we would now have outdated data on the UI.
+
+For example, if I delete the entire title, now it's automatically updated on the page, but if I reload it's actually back because my backend code blocks this, my backend code does require an input for every field. So we wanna make sure that we roll back our optimistic update if it does fail on the backend. Currently that's not what's happening, we have to reload the page.
+
+- get and store the old data: `const previousEvent = queryClient.getQueryData(['events', params.id]);`
+- `onError: (error, data, context) => { queryClient.setQueryData(['events', params.id], context.previousEvent);},`. `onError()` has a couple of inputs that are passed automatically by *React Query*. the `context` object contains the previous event, but it must have been returned inside `onMutate()` function. `return { previousEvent };`
+- `onSettled: () => { queryClient.invalidateQueries(['events', params.id]);}`: this will be called whenever the mutation is done, no matter if it failed or succeeded. And in that case, just to be sure that you really got the same data in your front end as you have on your backend. You should also, again use query client to invalidate your relevant queries.
 <!---
 [comment]: it works with text, you can rename it how you want
 
