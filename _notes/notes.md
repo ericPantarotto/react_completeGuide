@@ -4721,6 +4721,9 @@ const { data, isError, error } = useQuery({
 
 *Next.js*, a React framework, allowing to build full-stack applications with React. Application where the front-end is still controlled by React, but this front-end seamlessly blends with the back-end.
 
+we need project that comes with NextJS pre-installed and that has a certain structure and setup that's needed by NextJS.
+
+**<span style='color: #a3842c'>Link:** [https://nextjs.org/](https://nextjs.org/)
 <!---
 [comment]: it works with text, you can rename it how you want
 
