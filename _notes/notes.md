@@ -4724,6 +4724,20 @@ const { data, isError, error } = useQuery({
 we need project that comes with NextJS pre-installed and that has a certain structure and setup that's needed by NextJS.
 
 **<span style='color: #a3842c'>Link:** [https://nextjs.org/](https://nextjs.org/)
+
+### Understanding File-based Routing & React Server Components
+
+`page.js` & `layout.js` are reserved file names.
+
+**<span style='color: #a8c62c'> app/page.js**
+
+**<span style='color: #875c5c'>IMPORTANT:** on the surface, it's a regular component. There's nothing special about it, but NextJS ensures that this component is actually rendered on the server, that this component function is executed on the server.
+
+in your `page.js`, if you add a `console.log()`, it will not appear on the browser console, instead you can see it on the terminal of the backend/server.
+
+- So it's a regular React component, but treated in a special way by NextJS.
+- It is treated as a server component and executed on the server,
+- and it's then the returned JSX code that's sent over the wire to the browser to be rendered as *HTML*
 <!---
 [comment]: it works with text, you can rename it how you want
 

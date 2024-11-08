@@ -1,4 +1,6 @@
 export default function Home() {
+  console.info('testing where this gets printed');
+
   return (
     <main>
       <img src='/logo.png' alt='A server surrounded by magic sparkles.' />
