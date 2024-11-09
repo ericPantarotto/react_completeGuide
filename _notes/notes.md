@@ -4719,6 +4719,11 @@ const { data, isError, error } = useQuery({
 
 ### Module Introduction
 
+**<span style='color: #a3842c'>Link:**
+
+- [http://192.168.1.30:3000/]
+- [http://localhost:3000/]
+
 *Next.js*, a React framework, allowing to build full-stack applications with React. Application where the front-end is still controlled by React, but this front-end seamlessly blends with the back-end.
 
 we need project that comes with NextJS pre-installed and that has a certain structure and setup that's needed by NextJS.
@@ -4765,7 +4770,26 @@ Now, you might wonder where the `head` element is, which is also typically neede
 
 **<span style='color: #495fcb'> Note:** `metadata` is a reserved name while `RootLayout` name is not.
 
-`{childre}` will simply be the content of the page that's currently active. Because the layout is a wrapper around one or more pages.
+`{children}` will simply be the content of the page that's currently active. Because the layout is a wrapper around one or more pages.
+
+### Reserved File Names, Custom Components & How To Organize A NextJS Project
+
+**<span style='color: #a8c62c'> app/global.css**
+
+This file is being imported into the layout.js file, so that it's essentially available on every loaded page.
+
+**<span style='color: #a8c62c'> app/icon.png**
+
+We can still also add regular React components, which are not treated as pages. For that, let's say that we wanna put this image into this header into a separate component, you can use either `.js` or `.jsx` extension.
+
+**<span style='color: #495fcb'> Note:** because we are still working with React with *NextJs* , we are still working with components, and JSX just enhanced with some extra features.
+
+```javascript
+// import Header from '../components/header';
+import Header from '@/components/header';
+```
+
+you can take advantage of another *NextJs* feature, where you can use an `@` symbol in your import paths to refer to the root project, defined in `jsconfig.json`.
 <!---
 [comment]: it works with text, you can rename it how you want
 
