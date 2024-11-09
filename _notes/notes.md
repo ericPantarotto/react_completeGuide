@@ -4738,6 +4738,19 @@ in your `page.js`, if you add a `console.log()`, it will not appear on the brows
 - So it's a regular React component, but treated in a special way by NextJS.
 - It is treated as a server component and executed on the server,
 - and it's then the returned JSX code that's sent over the wire to the browser to be rendered as *HTML*
+
+### Navigating between Pages
+
+With *Next.js*, you can get the best of both worlds, a highly interactive, reactive client-side application once it's active, but a finished page being served if you are visiting the page for the first time, so, if you did not navigate around on it yet.
+
+However, With a link and anchor element, the page is always reloading, and we're not in that single-page application.
+
+```javascript
+{/* <a href='/about'>About Us</a> */}
+<Link href='/about'>About us</Link>
+```
+
+With `Link`, we're not leaving the page, we're not loading a brand new page. Instead, behind the scenes, the content of the next page will still be rendered on the server, but it'll then be sent to the client, and there it'll be handled by client-side JavaScript code to update what we see on the screen.
 <!---
 [comment]: it works with text, you can rename it how you want
 
