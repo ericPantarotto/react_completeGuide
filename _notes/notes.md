@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD033 -->
 <!-- markdownlint-disable MD024 -->
-# React - The Complete Guide 2024 (incl. Next.js, Redux)
+# React - The Complete Guide 2024 (incl. NextJS, Redux)
 
 ## Getting Started
 
@@ -50,6 +50,9 @@ if you prefer to use **VSCode** editor, you need to have installed *NodeJS*, as 
 By using `npm create vite...` above, you also enable **eslinting**.
 
 **<span style='color: #a3842c'>Link:** [https://eslint.org/docs/latest/use/getting-started](https://eslint.org/docs/latest/use/getting-started)
+
+**<span style='color: #a3842c'>Link:** *NextJS*: [https://www.youtube.com/watch?v=AsM0oxyJ6I8]
+**<span style='color: #a3842c'>Link:** *NextJS/Typescript*: [https://www.youtube.com/watch?v=ILzEhHJVAQ4]
 
 #### JavaScript in Visual Studio Code
 
@@ -2773,7 +2776,7 @@ And this is the default behavior because in many non-React apps, you indeed have
 
 ![image info](./17_sc1.png)
 
-But in this case here for this React application, that's a problem and it will be a problem in many React applications you're building unless you are using some full stack React solution like *Next.js*.
+But in this case here for this React application, that's a problem and it will be a problem in many React applications you're building unless you are using some full stack React solution like *NextJS*.
 
 Because here the server that's serving this React website on this address is actually a pure development server. It's not prepared to handle this form submission. We have no code on that server that would deal with that submission.
 
@@ -4715,7 +4718,7 @@ const { data, isError, error } = useQuery({
   });
 ```
 
-## Introduction to Next.js
+## Introduction to NextJS
 
 ### Module Introduction
 
@@ -4724,11 +4727,11 @@ const { data, isError, error } = useQuery({
 - [http://192.168.1.30:3000/]
 - [http://localhost:3000/]
 
-*Next.js*, a React framework, allowing to build full-stack applications with React. Application where the front-end is still controlled by React, but this front-end seamlessly blends with the back-end.
+*NextJS*, a React framework, allowing to build full-stack applications with React. Application where the front-end is still controlled by React, but this front-end seamlessly blends with the back-end.
 
 we need project that comes with NextJS pre-installed and that has a certain structure and setup that's needed by NextJS.
 
-**<span style='color: #a3842c'>Link:** [https://nextjs.org/](https://nextjs.org/)
+**<span style='color: #a3842c'>Link:** [https://NextJS.org/](https://NextJS.org/)
 
 ### Understanding File-based Routing & React Server Components
 
@@ -4746,7 +4749,7 @@ in your `page.js`, if you add a `console.log()`, it will not appear on the brows
 
 ### Navigating between Pages
 
-With *Next.js*, you can get the best of both worlds, a highly interactive, reactive client-side application once it's active, but a finished page being served if you are visiting the page for the first time, so, if you did not navigate around on it yet.
+With *NextJS*, you can get the best of both worlds, a highly interactive, reactive client-side application once it's active, but a finished page being served if you are visiting the page for the first time, so, if you did not navigate around on it yet.
 
 However, With a link and anchor element, the page is always reloading, and we're not in that single-page application.
 
@@ -4782,14 +4785,37 @@ This file is being imported into the layout.js file, so that it's essentially av
 
 We can still also add regular React components, which are not treated as pages. For that, let's say that we wanna put this image into this header into a separate component, you can use either `.js` or `.jsx` extension.
 
-**<span style='color: #495fcb'> Note:** because we are still working with React with *NextJs* , we are still working with components, and JSX just enhanced with some extra features.
+**<span style='color: #495fcb'> Note:** because we are still working with React with *NextJS* , we are still working with components, and JSX just enhanced with some extra features.
 
 ```javascript
 // import Header from '../components/header';
 import Header from '@/components/header';
 ```
 
-you can take advantage of another *NextJs* feature, where you can use an `@` symbol in your import paths to refer to the root project, defined in `jsconfig.json`.
+you can take advantage of another *NextJS* feature, where you can use an `@` symbol in your import paths to refer to the root project, defined in `jsconfig.json`.
+
+### Reserved Filenames
+
+there are some reserved filenames when working with *NextJS*.
+
+Important: These filenames are only reserved when creating them inside of the `app/` folder (or any subfolder). Outside of the `app/` folder, these filenames are not treated in any special way.
+
+Here's a list of reserved filenames in *NextJS*:
+
+- `page.js` => Create a new page (e.g., `app/about/page.js` creates a `<your-domain>/about` page)
+- `layout.js` => Create a new layout that wraps sibling and nested pages
+- `not-found.js` => Fallback page for "Not Found" errors (thrown by sibling or nested pages or layouts)
+- `error.js` => Fallback page for other errors (thrown by sibling pages or nested pages or layouts)
+- `loading.js` => Fallback page which is shown whilst sibling or nested pages (or layouts) are fetching data
+- `route.js` => Allows you to create an API route (i.e., a page which does NOT return JSX code but instead data, e.g., in the JSON format)
+
+You also find a list with all supported filenames & detailed explanations in the official docs: [https://NextJS.org/docs/app/api-reference/file-conventions]
+
+### Dynamic Routes & Using Route Parameters
+
+Because *NextJS* actually passes a `props` object to all those page components. And all these page components get one special prop, which you can pull out with help of destructuring, and that's a `{params}` prop, which again, is set by *NextJS*.
+
+And the value stored under that key will be the concrete value encoded in the *URL*
 <!---
 [comment]: it works with text, you can rename it how you want
 
