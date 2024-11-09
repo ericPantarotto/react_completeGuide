@@ -4751,6 +4751,21 @@ However, With a link and anchor element, the page is always reloading, and we're
 ```
 
 With `Link`, we're not leaving the page, we're not loading a brand new page. Instead, behind the scenes, the content of the next page will still be rendered on the server, but it'll then be sent to the client, and there it'll be handled by client-side JavaScript code to update what we see on the screen.
+
+### Working with Pages & Layouts
+
+- Every next project needs at least one root layout JS file. So, one layout JS file at the top of the app folder.
+- You can also have nested layout JS files.
+
+we're also exporting a React component just as we did it in that page file. This component then uses the standard children prop, which in React can be used by every component, to inject some content between the body tags.
+
+**<span style='color: #495fcb'> Note:** This component actually renders an `html` and a `body` tag. Some elements which you don't normally use in your React components. **but you actually need to do that in your next project in the root layout to set up the general HTML skeleton of the website.**
+
+Now, you might wonder where the `head` element is, which is also typically needed to set a title and some metadata, and that's actually not rendered here because that can be populated in a different way in *NextJS* by exporting a special variable called metadata constant/variable, an object that can many different metadata fields.
+
+**<span style='color: #495fcb'> Note:** `metadata` is a reserved name while `RootLayout` name is not.
+
+`{childre}` will simply be the content of the page that's currently active. Because the layout is a wrapper around one or more pages.
 <!---
 [comment]: it works with text, you can rename it how you want
 
