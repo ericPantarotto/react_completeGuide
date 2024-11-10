@@ -1,3 +1,4 @@
+import React from 'react';
 import './globals.css';
 
 export const metadata = {
@@ -12,3 +13,6 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+RootLayout.propTypes = {
+  children: React.ReactNode,
+};

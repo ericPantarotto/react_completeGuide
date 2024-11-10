@@ -7,5 +7,7 @@ const BlogPostPage = async ({ params }) => {
     </main>
   );
 };
-
+BlogPostPage.propTypes = {
+  params: Promise,
+};
 export default BlogPostPage;

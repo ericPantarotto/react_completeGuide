@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const BlogPage = ({params}) => (
+const BlogPage = () => (
   <main>
     <h1>The Blog</h1>
     <p>

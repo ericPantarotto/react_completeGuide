@@ -52,6 +52,20 @@ By using `npm create vite...` above, you also enable **eslinting**.
 **<span style='color: #a3842c'>Link:** [https://eslint.org/docs/latest/use/getting-started](https://eslint.org/docs/latest/use/getting-started)
 
 **<span style='color: #a3842c'>Link:** *NextJS*: [https://www.youtube.com/watch?v=AsM0oxyJ6I8]
+
+```bash
+npm init @eslint/config@latest`
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** make sure to add your rules at the end, so that they don't get overriden by other **recommended rules of other plugins**. **<span style='color: #a3842c'>Link:** [https://stackoverflow.com/questions/72295153/how-to-turn-off-react-react-in-jsx-scope-rule]
+
+Eslint react/prop-types: [https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md]
+Eslint react/react-in-jsx-scope: [https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md]
+
+`npm run lint`
+
+`CTRL+SHIFT+P: Eslint Restart Eslint Server`
+
 **<span style='color: #a3842c'>Link:** *NextJS/Typescript*: [https://www.youtube.com/watch?v=ILzEhHJVAQ4]
 
 #### JavaScript in Visual Studio Code
@@ -4816,6 +4830,21 @@ You also find a list with all supported filenames & detailed explanations in the
 Because *NextJS* actually passes a `props` object to all those page components. And all these page components get one special prop, which you can pull out with help of destructuring, and that's a `{params}` prop, which again, is set by *NextJS*.
 
 And the value stored under that key will be the concrete value encoded in the *URL*
+
+**<span style='color: #a3842c'>Link:** [https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes]
+
+```javascript
+const BlogPostPage = async ({ params }) => {
+  const slug = (await params).slug;
+  return (
+    <main>
+      <h1>Blog Post</h1>
+      <p>{slug}</p>
+    </main>
+  );
+};
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
