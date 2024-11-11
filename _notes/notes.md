@@ -4847,6 +4847,12 @@ const BlogPostPage = async ({ params }) => {
 };
 ```
 
+### Revising the concept of Layouts
+
+with the special *React* `{children}` property, you can either pass:
+
+- other layouts (nested layouts)
+- pages
 <!---
 [comment]: it works with text, you can rename it how you want
 
