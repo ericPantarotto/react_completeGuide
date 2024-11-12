@@ -4867,6 +4867,16 @@ with the special *React* `{children}` property, you can either pass:
 **<span style='color: #a3842c'>Link:** [https://nextjs.org/docs/13/app/building-your-application/styling/css-modules]
 
 It's general standard CSS code, but scoped to specific components by assigning special names to your CSS files.
+
+### Optimizing Images with the NextJS Component
+
+**<span style='color: #a3842c'>Link:** [https://nextjs.org/docs/pages/api-reference/components/image]
+
+in NextJS, you have a special built-in `Image` component, which exists to help you output images in a more optimized way. For example, by lazy loading images under the hood, so that they're only displayed if they're really visible on the page.
+
+from the *Network* tab, we see under *Headers*, the type is not *png*, but *image/webp*, which is a more optimized format.
+
+Adding `priority` property to that image should always be loaded as quickly as possible to make sure that we got no unnecessary content shift or flickering when the page loads and make sure that this is loaded with priority.
 <!---
 [comment]: it works with text, you can rename it how you want
 
