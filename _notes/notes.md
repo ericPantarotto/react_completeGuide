@@ -4853,6 +4853,20 @@ with the special *React* `{children}` property, you can either pass:
 
 - other layouts (nested layouts)
 - pages
+
+### Styling NextJS Project: Your options & using CSS modules
+
+`import './globals.css';`: Any CSS file that's being imported into this `RootLayout.js` file will be available on every page.
+
+#### Tailwind framework guide for NextJS
+
+**<span style='color: #a3842c'>Link:** [https://tailwindcss.com/docs/guides/nextjs]
+
+#### Another solution: CSS Modules
+
+**<span style='color: #a3842c'>Link:** [https://nextjs.org/docs/13/app/building-your-application/styling/css-modules]
+
+It's general standard CSS code, but scoped to specific components by assigning special names to your CSS files.
 <!---
 [comment]: it works with text, you can rename it how you want
 
