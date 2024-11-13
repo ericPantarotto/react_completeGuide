@@ -4900,16 +4900,16 @@ useEffect(() => {
 
 ### React Server Components vs Client Components - When To Use What
 
-**<span style='color: #875c5c'>IMPORTANT:** 
+**<span style='color: #875c5c'>IMPORTANT:**
 
-*NextJS* knows: 
+*NextJS* knows:
 
 - Server components / React Server components
 - Client Components
 
 And actually that's technically not just *NextJS*, instead, *React* itself has this differentiation though in most React apps, in all those vanilla React apps which you are building with help of `create-react-app` or with help of `Vite`, **you are using client components out of the box. Because in those projects, React.js is a pure client side library, running code in the browser on the client.**
 
-With *NextJS*, that changes because NextJS is a **full stack framework**. It has a backend, not just a front end, and therefore code also executes on that backend when working with NextJS. 
+With *NextJS*, that changes because NextJS is a **full stack framework**. It has a backend, not just a front end, and therefore code also executes on that backend when working with NextJS.
 
 By default, all those React components you have in your *NextJS* project, no matter if they're pages, layouts or standard  components are **only rendered on the server**. That's why they're called *React Server components*.
 
@@ -4928,13 +4928,13 @@ Even if you are in that single page application mode and you're navigating aroun
 
 In *NextJS project* that's different. If you take a look at the source code *DevTools*, you will see that all the content is in there. All that text that's visible on the screen is part of the actual page source code, and that is also what web search engine crawlers will see.
 
-Nonetheless, in NextJS projects, you can still also build client components, and that would be components: 
+Nonetheless, in NextJS projects, you can still also build client components, and that would be components:
 
-- that are still technically pre-rendered on the server 
+- that are still technically pre-rendered on the server
 - but then also potentially rendered on the client
 - and most importantly, **these are components that must be rendered on the client** because they contain some code or use some features that are only available on the client
 
-**<span style='color: #a8c62c'> app/components/images/image-slideshow.js** 
+**<span style='color: #a8c62c'> app/components/images/image-slideshow.js**
 
 **<span style='color: #875c5c'>IMPORTANT:** `useState` & `useEffect`: these hooks are not available on the Server side, which kind of makes sense if you think about it because we're not interested in setting this interval on the server side, we wanna run this in the browser.
 
@@ -4943,6 +4943,14 @@ Another example would be **event handlers**: `onClick`, obviously since you are 
 **<span style='color: #875c5c'>IMPORTANT:** But since by default in NextJS, all components are **server components**. You have to explicitly tell NextJS if you wanna build a client component by using a special directive at the top of the file that holds that component: `'use client';`
 
 And it's super important to know about this difference and to understand that these two component types exist in general in *React*, but really only work and can be used when using a framework like *NextJS*.
+
+### Using Client Components Efficiently
+
+a convenient feature of *NextJS*, it will tell you if you're using a feature that doesn't work in server components, so that you can then add that `use client` directive.
+
+**<span style='color: #875c5c'>IMPORTANT:** the majority of your components must stay server components and rendered on the server so that you don't lose those server component advantages for most of your components.
+
+we can then extract just the section with *Link* of our `main-header` file, and create a dedicated `NavLink` component, and only that part should be marked with `'useClient';`.
 <!---
 [comment]: it works with text, you can rename it how you want
 
