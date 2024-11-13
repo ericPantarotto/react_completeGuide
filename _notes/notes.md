@@ -4877,6 +4877,72 @@ in NextJS, you have a special built-in `Image` component, which exists to help y
 from the *Network* tab, we see under *Headers*, the type is not *png*, but *image/webp*, which is a more optimized format.
 
 Adding `priority` property to that image should always be loaded as quickly as possible to make sure that we got no unnecessary content shift or flickering when the page loads and make sure that this is loaded with priority.
+
+### Preparing an Image Slideshow
+
+```javascript
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex < images.length - 1 ? prevIndex + 1 : 0
+    );
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, []);
+```
+
+**<span style='color: #495fcb'> Note:** the interval is cleared only when the component unmounts, by using the *cleanup function* of `useEffect()`.
+
+**<span style='color: #9e5231'>Error:**
+
+![image info](./25_sc1.png)
+
+### React Server Components vs Client Components - When To Use What
+
+**<span style='color: #875c5c'>IMPORTANT:** 
+
+*NextJS* knows: 
+
+- Server components / React Server components
+- Client Components
+
+And actually that's technically not just *NextJS*, instead, *React* itself has this differentiation though in most React apps, in all those vanilla React apps which you are building with help of `create-react-app` or with help of `Vite`, **you are using client components out of the box. Because in those projects, React.js is a pure client side library, running code in the browser on the client.**
+
+With *NextJS*, that changes because NextJS is a **full stack framework**. It has a backend, not just a front end, and therefore code also executes on that backend when working with NextJS. 
+
+By default, all those React components you have in your *NextJS* project, no matter if they're pages, layouts or standard  components are **only rendered on the server**. That's why they're called *React Server components*.
+
+Now as mentioned, that's actually technically a feature built into *React*, but it must be unlocked, with a certain behind the scenes *build process and structure*, that's not part of most React projects. But it is unlocked and it is the standard with *NextJS*. Therefore, thereby default, all React components are such React Server components and are only rendered on the Server.
+
+So that means that this component `page.js` and this `layout.js` component, but also the `iamge-slideshow.js` component and the `main-header` component, all those components do not execute in the browser, but instead on the server. And you can see that's the case if you **console log**.
+
+**<span style='color: #495fcb'> Note:** It's not only the case for initial page load, but also for subsequent navigations, even though using that *NextJS* `Link` component and we therefore stayed in that single page application, we did not fetch a brand new page. Instead we see it in the backend log.
+
+Even if you are in that single page application mode and you're navigating around, all the components will still be rendered on the Server on the backend, and in the end it's kind of the finished HTML code that's then sent to the client to be rendered there.
+
+**<span style='color: #875c5c'>IMPORTANT:** NextJS embraces this concept of having those Server components. Now that's an important concept and an important advantage of NextJS projects,
+
+- because with Server components you have potentially less client side JavaScript code that must be downloaded
+- it's also great for search engine optimization, because web search crawlers now see pages that contain the complete finished content. Compare that with a Vanilla JavaScript project where you are not using a framework like NextJS. There, if you take a look at the source code of a page, you'll see that it's essentially an empty page because all the content is created and populated on the client side by client side code with help of those client side components.
+
+In *NextJS project* that's different. If you take a look at the source code *DevTools*, you will see that all the content is in there. All that text that's visible on the screen is part of the actual page source code, and that is also what web search engine crawlers will see.
+
+Nonetheless, in NextJS projects, you can still also build client components, and that would be components: 
+
+- that are still technically pre-rendered on the server 
+- but then also potentially rendered on the client
+- and most importantly, **these are components that must be rendered on the client** because they contain some code or use some features that are only available on the client
+
+**<span style='color: #a8c62c'> app/components/images/image-slideshow.js** 
+
+**<span style='color: #875c5c'>IMPORTANT:** `useState` & `useEffect`: these hooks are not available on the Server side, which kind of makes sense if you think about it because we're not interested in setting this interval on the server side, we wanna run this in the browser.
+
+Another example would be **event handlers**: `onClick`, obviously since you are waiting for some user interaction here, that would require to be a client component because that would require code that runs on the client.
+
+**<span style='color: #875c5c'>IMPORTANT:** But since by default in NextJS, all components are **server components**. You have to explicitly tell NextJS if you wanna build a client component by using a special directive at the top of the file that holds that component: `'use client';`
+
+And it's super important to know about this difference and to understand that these two component types exist in general in *React*, but really only work and can be used when using a framework like *NextJS*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
