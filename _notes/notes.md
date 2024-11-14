@@ -68,6 +68,12 @@ Eslint react/react-in-jsx-scope: [https://github.com/jsx-eslint/eslint-plugin-re
 
 `CTRL+SHIFT+P: Eslint Restart Eslint Server`
 
+PropTypes validation:
+
+- **<span style='color: #a3842c'>Link:** *npm package prop-types*: [https://www.npmjs.com/package/prop-types]
+- **<span style='color: #a3842c'>Link:** *Legacy React Typechecking migraiton v15.5*: [https://legacy.reactjs.org/docs/typechecking-with-proptypes.html]
+- **<span style='color: #a3842c'>Link:** *ESLint react/proptypes*: [https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md]
+
 **<span style='color: #a3842c'>Link:** *NextJS/Typescript*: [https://www.youtube.com/watch?v=ILzEhHJVAQ4]
 
 #### JavaScript in Visual Studio Code
@@ -4951,6 +4957,28 @@ a convenient feature of *NextJS*, it will tell you if you're using a feature tha
 **<span style='color: #875c5c'>IMPORTANT:** the majority of your components must stay server components and rendered on the server so that you don't lose those server component advantages for most of your components.
 
 we can then extract just the section with *Link* of our `main-header` file, and create a dedicated `NavLink` component, and only that part should be marked with `'useClient';`.
+
+### Outputting Meals Data & Images With Unknown Dimensions
+
+Later, users will be able to upload their own images and share their own meals, and that's something we have to keep in mind when using this *NextJS* `Image` component because this `Image` component needs to know the underlying width and height of the image that's being output.
+
+So not the width and height you wanna have on the screen, but the width and height of the image you are trying to render. And it's able to detect that automatically when you are using the `Image` component as we did it in the header on an image that's imported from the *local filesystem* as we're doing with the logo. In that case, NextJS is able to look up the width and height.
+
+But for those meal items, we'll load them dynamically from a database. And then in the database, we'll have a path pointing to some image, and *NextJS* will not be able to resolve the width and height of such an image, **simply because the information is not available at build time, as it's the case for all imported images, but only at runtime**.
+
+**<span style='color: #495fcb'> Note:** And that's why I added this special `fill` prop. You can use `fill` prop instead of setting a 'width' and 'height' whenever you have an image where you don't know the dimensions in advance. This then tells *NextJS* that it should simply fill the available space with that image as defined by its parent components. (with the appropriate CSS styles)
+
+**<span style='color: #a8c62c'> components/meals/meal-item.js**
+
+```javascript
+<header>
+  <div className={classes.image}>
+    <Image src={image} alt={title} fill />
+    {/* <Image src={image} alt={title} width={} height={} /> */}
+  </div>
+  
+</header>
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
