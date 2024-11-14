@@ -4987,6 +4987,43 @@ But for those meal items, we'll load them dynamically from a database. And then 
 `npm i better-sqlite3`
 `node initdb.js`
 
+### Fetching Data by Leveraging NextJS & Fullstack capabilities
+
+when it comes to loading data in a *NextJS* application, we get a couple of different options.
+
+- We could fetch the data as we would do it in any *vanilla React* application. We could use the `useEffect` hook and then in there use the `fetch` function to send a request to a backend.
+- Now, in a *NextJS* application, we actually already have a backend. We have backend and frontend combined, blended seamlessly together. in *NextJS*, **all your components are by default server components that only execute on the server** unless you're using a feature that requires them to be a client component like `useEffect`. But actually, because we have those server components
+as a default, we don't need *useEffect* and we don't need to send a *fetch request* to get data. **Instead, since this component by default runs on the server and only there, we can directly reach out to the database from here**.
+
+**<span style='color: #a8c62c'> lib/meals.js**
+
+```javascript
+const getMeals = () => {
+  return db.prepare('SELECT * FROM meals;').all();
+};
+```
+
+`better-SQLite3` package doesn't use *promises*, we could use them in our component `MealsPage` with ease because server component functions can actually be converted to **async functions.** You can use the `async` keyword in the definition of the function, something you normally also can't do on your React components, but you can do it on server component
+
+**wrapping it in a promise**:
+
+**<span style='color: #a8c62c'> lib/meals.js**
+
+```javascript
+const getMeals = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return db.prepare('SELECT * FROM meals;').all();
+};
+```
+
+**<span style='color: #a8c62c'> app/meals/page.js**
+
+```javascript
+const MealsPage = async () => {
+const meals = await getMeals();
+// ...
+}
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
