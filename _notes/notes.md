@@ -5024,6 +5024,20 @@ const meals = await getMeals();
 // ...
 }
 ```
+### Adding a Loading Page
+
+you might notice that if you then go to another page and you come back, the *meals page* is there instantly, we don't have to wait those 2 seconds, and that's the case because *NextJS* performs some pretty aggressive caching under the hood.
+
+To be precise, it caches any page you visited, including the data of that page, and if you then go to another page and come back, it loads that existing page from the cache,so that it can show it to you as quickly as possible.
+
+And only if you reload this page, if you leave the page, and you come back, essentially, only then is the page being recreated.
+
+To improve the user's experience we have to manage the loading state.
+
+**<span style='color: #495fcb'> Note:** 
+
+- `loading.js`, just like `layout` and `page` is a reserved file name.
+- this file will become active if the page next to it or any nested page or layout is loading data. And in that case, that `loading.js` content is shown as a fallback until the data is there.
 <!---
 [comment]: it works with text, you can rename it how you want
 
