@@ -5038,6 +5038,35 @@ To improve the user's experience we have to manage the loading state.
 
 - `loading.js`, just like `layout` and `page` is a reserved file name.
 - this file will become active if the page next to it or any nested page or layout is loading data. And in that case, that `loading.js` content is shown as a fallback until the data is there.
+
+### Using Suspense & Streamed Responses For Granular Loading State Management
+
+`Suspense` is a component provided by *React* that allows you to handle loading states and show fallback content until some data or resource has been loaded. it takes a property `fallback`. We create a separate component, in the same file, as it's closely related, in charge of downloading the data, and returning that piece of UI.
+
+And in the end, this `loading.js` file, which we used before, is doing the same thing just behind the scenes. It's wrapping the page content with this suspense component, and it's then showing this loading content here as a fallback. Now we can do this manually.
+
+```javascript
+const Meals = async () => {
+  const meals = await getMeals();
+  return <MealsGrid meals={meals} />;
+};
+
+const MealsPage = () => {
+  return (
+    <>
+      {/* ... */}
+
+      <main className={classes.main}>
+        <Suspense
+          fallback={<p className={classes.loading}>Fetching meals...</p>}
+        >
+          <Meals />
+        </Suspense>
+      </main>
+    </>
+  );
+};
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
