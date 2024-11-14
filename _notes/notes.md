@@ -5067,6 +5067,19 @@ const MealsPage = () => {
   );
 };
 ```
+### Handling Errors
+
+![image info](./25_sc2.png)
+
+The error screen we see here is just a development version of this error screen. In production, this would look differently. We see this screen during development so that it's easier for us as a developer to find and fix the error.
+
+In a `error.js` file, you then set up a component that will be rendered by NextJS whenever an error occurs. Though, it'll only handle errors that occur in the page that sits in the same folder as this error.js file or any nested page or layout.
+
+Therefore, you could of course also add this on the root level of your application to catch any error  in any of your pages.
+
+**<span style='color: #495fcb'> Note:** *NextJS* will pass some props to that component. Most importantly, it will provide an `error` prop.
+
+**<span style='color: #875c5c'>IMPORTANT:** This error component that's stored in an `error.js` file must be a client component simply because NextJS basically ensures that you can catch any errors with that component, including errors that happen on the client side so after the pages were rendered on the server.
 <!---
 [comment]: it works with text, you can rename it how you want
 
