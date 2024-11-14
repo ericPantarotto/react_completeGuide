@@ -4979,6 +4979,14 @@ But for those meal items, we'll load them dynamically from a database. And then 
   
 </header>
 ```
+
+### Setting Up a SQLite Database
+
+**<span style='color: #a3842c'>Link:** [https://www.npmjs.com/package/better-sqlite3]
+
+`npm i better-sqlite3`
+`node initdb.js`
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
