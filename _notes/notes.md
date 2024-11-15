@@ -5080,6 +5080,25 @@ Therefore, you could of course also add this on the root level of your applicati
 **<span style='color: #495fcb'> Note:** *NextJS* will pass some props to that component. Most importantly, it will provide an `error` prop.
 
 **<span style='color: #875c5c'>IMPORTANT:** This error component that's stored in an `error.js` file must be a client component simply because NextJS basically ensures that you can catch any errors with that component, including errors that happen on the client side so after the pages were rendered on the server.
+
+### Loading & Rendering Meal Details via Dynamic Routes & Route Parameters
+
+**<span style='color: #875c5c'>IMPORTANT:** insecure sql statement; opening ourself to **SQL injection**
+
+```javascript
+const getMeal = async (slug) => {
+  return db.prepare('SELECT * FROM meals WHERE slug = ' + slug)
+}
+```
+
+to protect ourself from **SQL injection**, we need to add dynamic values in our SQL statements.
+
+```javascript
+const getMeal = async (slug) => {
+  return db.prepare('SELECT * FROM meals WHERE slug = ?').get(slug);
+};
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
