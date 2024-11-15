@@ -46,6 +46,7 @@ const ImagePicker = ({ label, name }) => {
           name={name}
           ref={imageInput}
           onChange={handleImageChange}
+          required //INFO: form can't be submitted without an image
         />
         <button
           className={classes.button}
