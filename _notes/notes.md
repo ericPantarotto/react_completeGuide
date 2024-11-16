@@ -5139,6 +5139,20 @@ The `action` prop:
 - instead, we're setting it to an action, to such a *server action function*.
 
 And that's a pattern that's supported by *Next* and *React* here that will ensure that when this form is submitted, *NextJS* will, behind the scenes, create a request and send it to this *NextJS* server that's serving the website so that this function gets triggered, and you can then handle the form submission there, **but on the server, not in the client**. This function  will then automatically receive that `formData` that was submitted.
+
+### Storing Server Actions in Separate Files
+
+**<span style='color: #495fcb'> Note:** using **server action**  can only be added it in a component like this, but this will only work if the component in which you are adding it is **not a client component**.
+
+**<span style='color: #9e5231'>Error:** server actions in a client component file.
+
+In addition, you also might not want to have your server-side form submission handling logic in the same file as your JSX code. You might want to separate that. And for those reasons, you can also store server actions in separate files.
+
+**<span style='color: #495fcb'> Note:** When adding `'use server';` at the top of a file, all the functions you might define in that file will be treated as *server actions*.
+
+And now you would be able to convert this component to a client component `'use client'` if you needed to.
+
+You would not get an error when doing that, and that might sound strange, but the problem before was simply that you were defining client and server-side code in the same file, and the build process that's used by *NextJS* is essentially not able to separate that in a clean way, and therefore server-side code could accidentally end up on the client side, which could pose security issues and cause other problems as well. That's why for technical reasons, you can't mix both in the same file. but you can absolutely import a server action from another file and then use it in such a client component.
 <!---
 [comment]: it works with text, you can rename it how you want
 
