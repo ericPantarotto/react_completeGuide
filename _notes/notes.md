@@ -5245,6 +5245,14 @@ instead, you should:
 `useFormStatus` must be inside of the form if we want to get the submission status of that form, so we need a dedicated component.
 
 We create a `meals-form-submit.js` file
+
+### Adding Server-Side Input Validation
+
+**<span style='color: #875c5c'>IMPORTANT:** you should typically do when handling user data and form submissions is validate the values you are getting.
+
+We're getting some errors automatically by the browser. And that's a useful behavior, but it's not enough, because I can disable that by going through the `DevTools`, **that's why client-side validation is not enough**.
+
+**<span style='color: #495fcb'> Note:** Throwing an error as we do it here works, but it also means that we destroy the entire input of the user. That's not necessarily a great user experience.
 <!---
 [comment]: it works with text, you can rename it how you want
 
