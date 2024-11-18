@@ -5294,6 +5294,17 @@ Because of `useFormState` we have to turn the component into a client component,
 In the build process *NextJS* generates/ pre-render all the pages of the app that can be pre-generated; all non-dynamic pages, such as the *meals* page. NextJS does this pre-rendering, so that these pages are available right from the start, after being deployed, and very first visitor can see the finished page, without having to wait for anything to render. *NextJS* then cashes these pre-rendered pages, to be served to all visitors.
 
 **<span style='color: #875c5c'>IMPORTANT:** The downside is that it never re-fetches the component.
+
+### Triggering Cache Re-validations
+
+`revalidatePath('/meals');` tells *NextJS* to revalidate the cache that belongs to a certain route path.
+
+second argument:
+
+- `layout` would also revalidate nested routes; which wraps nested pages
+- default is `page`, only that path is cached again
+
+**<span style='color: #495fcb'> Note:** To revalidate all page of a website: `revalidatePath('/', 'layout')`
 <!---
 [comment]: it works with text, you can rename it how you want
 
