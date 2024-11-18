@@ -5305,6 +5305,20 @@ second argument:
 - default is `page`, only that path is cached again
 
 **<span style='color: #495fcb'> Note:** To revalidate all page of a website: `revalidatePath('/', 'layout')`
+
+### Don't store files locally on the filesystem
+
+![image info](./25_sc4.png)
+
+The image was missing because we store those images in this `public/images` folder
+
+The problem with this approach just is that this folder is available during development, but for production, it's actually copied into this `.next` folder which also contains all those cached pages, that will be used by the running *NextJS* production server. If you then thereafter add new images into the `public` folder, those will be ignored because the production server doesn't care.
+
+So when you deploy your next project, you therefore technically don't even have to deploy the public folder. *NextJS* is not interested in it.
+
+in the official *NextJS* documentation, they recommend that you should store any files that are generated at run time, essentially, using extra file storage services like **AWS S3 / Vercel Blob**.
+
+**<span style='color: #a3842c'>Link:** [https://nextjs.org/docs/pages/building-your-application/optimizing/static-assets]
 <!---
 [comment]: it works with text, you can rename it how you want
 
