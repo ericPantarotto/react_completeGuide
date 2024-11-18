@@ -5253,6 +5253,35 @@ We create a `meals-form-submit.js` file
 We're getting some errors automatically by the browser. And that's a useful behavior, but it's not enough, because I can disable that by going through the `DevTools`, **that's why client-side validation is not enough**.
 
 **<span style='color: #495fcb'> Note:** Throwing an error as we do it here works, but it also means that we destroy the entire input of the user. That's not necessarily a great user experience.
+
+### Working with Server Action Response & useFormState
+
+In Server Actions:
+
+- you are not limited to redirecting
+- or throwing errors
+- you can also return values, you can return response objects: any simple values like strings, numbers, nested objects or nested arrays, those values all work.
+
+How can we then use that response in the page where we trigger that *server action*?
+
+`useFormState()`, the first argument is the actual server action, the second argument is the initial state of this component.
+
+**<span style='color: #a8c62c'> app/meals/share/page.js**
+
+```javascript
+const [state,  formAction] = useFormState(shareMeal, { message: null });
+{/* <form className={classes.form} action={shareMeal}> */}
+<form className={classes.form} action={formAction}>
+```
+
+Because of `useFormState` we have to turn the component into a client component, though we could again try to outsource this into some nested component.
+
+**<span style='color: #9e5231'>Error:** *ReactDOM.useFormState has been renamed to React.useActionState. Please update ShareMealPage to use React.useActionState.*
+
+**<span style='color: #a3842c'>Link:**
+
+- [https://www.youtube.com/watch?v=GgyP0_b-WPY]
+- [https://react.dev/reference/react/useActionState]
 <!---
 [comment]: it works with text, you can rename it how you want
 

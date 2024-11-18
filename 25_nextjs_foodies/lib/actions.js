@@ -7,7 +7,9 @@ const isInvalidText = (text) => {
   return !text || text.trim() === '';
 };
 
-const shareMeal = async (formData) => {
+export async function shareMeal(previousState, formData) {
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+
   const meal = {
     title: formData.get('title'),
     summary: formData.get('summary'),
@@ -27,12 +29,13 @@ const shareMeal = async (formData) => {
     !meal.image ||
     meal.image.size === 0
   ) {
-    throw new Error('Failed to create meal. Invalid Input');
+    // throw new Error('Failed to create meal. Invalid Input');
+    return {
+      message: 'Invalid input.',
+    };
   }
 
   // console.info(meal);
   await saveMeal(meal);
   redirect('/meals');
-};
-
-export { shareMeal };
+}
