@@ -5238,6 +5238,13 @@ instead, you should:
 
 ![image info](./25_sc3.png)
 
+### Managing the Form Submission Status with useFormStatus
+
+`import { useFormStatus } from 'react-dom';`
+
+`useFormStatus` must be inside of the form if we want to get the submission status of that form, so we need a dedicated component.
+
+We create a `meals-form-submit.js` file
 <!---
 [comment]: it works with text, you can rename it how you want
 
