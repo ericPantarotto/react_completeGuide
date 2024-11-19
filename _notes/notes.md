@@ -5319,6 +5319,35 @@ So when you deploy your next project, you therefore technically don't even have 
 in the official *NextJS* documentation, they recommend that you should store any files that are generated at run time, essentially, using extra file storage services like **AWS S3 / Vercel Blob**.
 
 **<span style='color: #a3842c'>Link:** [https://nextjs.org/docs/pages/building-your-application/optimizing/static-assets]
+
+### Storing Uploaded Images in the Cloud
+
+**<span style='color: #495fcb'> Note:** Since AWS S3 is not free anymore, substitute is `nginx`
+
+- installation: [https://nginx.org/en/linux_packages.html#Ubuntu]
+- beginners guide: [https://nginx.org/en/docs/beginners_guide.html]
+- main folder: */etc/nginx*, config: */etc/nginx/nginx.conf*, server configurations: */etc/nginx/sites-available/default*
+- logs: */var/log/nginx/error.log*
+- useful commands
+  - `sudo nginx -s reload`
+  - `systemctl status nginx`
+  - you can add configurations under corresponding folder, as there is this command in `nginx.conf`: `include /etc/nginx/sites-enabled/*`
+- youtube links:
+  - [https://www.youtube.com/watch?v=ZyQRqa8I6bU]
+  - [https://www.youtube.com/watch?v=f1OOaDI5cxE]
+  - [https://www.youtube.com/watch?v=GCznXfbfMq0]
+
+**<span style='color: #495fcb'> Note:**
+
+- all pictures saved under `/var/www/images`
+- *nginx configuration* file to serve the image path located: `/etc/nginx/sites-available/default`
+  - pictures will served as: [http://192.168.1.30/images/burger.jpg]
+- `next.config.mjs`, adding a key for *images*
+- delete `images/` inside of `/public/`
+- delete `.next/` folder
+- delete `meals.db` and run `node initdb.js` after modifying the image property within that file (removing *images/* prefix)
+- code of `meal-item.js` and `lib/meals.js` must be changed to provide a new *src* for the image and folder where to save the image
+- `npm run build` to recompile project
 <!---
 [comment]: it works with text, you can rename it how you want
 
