@@ -1,4 +1,5 @@
 'use client';
+import Form from 'next/form';
 
 import ImagePicker from '@/components/meals/image-picker';
 // import { shareMeal } from '@/lib/actions';
@@ -11,6 +12,7 @@ import classes from './page.module.css';
 export default function ShareMealPage() {
   // const [state, formAction] = useFormState(shareMeal, { message: null });
   const [error, action, isPending] = useActionState(shareMeal, {
+    meal: null,
     message: null,
   });
 
@@ -25,24 +27,48 @@ export default function ShareMealPage() {
       <main className={classes.main}>
         {/* <form className={classes.form} action={shareMeal}> */}
         {/* <form className={classes.form} action={formAction}> */}
-        <form className={classes.form} action={action}>
+        <Form className={classes.form} action={action}>
           <div className={classes.row}>
             <p>
               <label htmlFor='name'>Your name</label>
-              <input type='text' id='name' name='name' required />
+              <input
+                type='text'
+                id='name'
+                name='name'
+                required
+                defaultValue={error?.meal?.creator || ''}
+              />
             </p>
             <p>
               <label htmlFor='email'>Your email</label>
-              <input type='email' id='email' name='email' required />
+              <input
+                type='email'
+                id='email'
+                name='email'
+                required
+                defaultValue={error?.meal?.creator_email || ''}
+              />
             </p>
           </div>
           <p>
             <label htmlFor='title'>Title</label>
-            <input type='text' id='title' name='title' required />
+            <input
+              type='text'
+              id='title'
+              name='title'
+              required
+              defaultValue={error?.meal?.title || ''}
+            />
           </p>
           <p>
             <label htmlFor='summary'>Short Summary</label>
-            <input type='text' id='summary' name='summary' required />
+            <input
+              type='text'
+              id='summary'
+              name='summary'
+              required
+              defaultValue={error?.meal?.summary || ''}
+            />
           </p>
           <p>
             <label htmlFor='instructions'>Instructions</label>
@@ -51,6 +77,7 @@ export default function ShareMealPage() {
               name='instructions'
               rows='10'
               required
+              defaultValue={error?.meal?.instructions || ''}
             ></textarea>
           </p>
           <ImagePicker label='Your image' name='image' />
@@ -61,7 +88,7 @@ export default function ShareMealPage() {
             {/* <button type='submit'>Share Meal</button> */}
             <MealsFormSubmit />
           </p>
-        </form>
+        </Form>
       </main>
     </>
   );

@@ -1,14 +1,14 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { saveMeal } from './meals';
-import { revalidatePath } from 'next/cache';
 
 const isInvalidText = (text) => {
   return !text || text.trim() === '';
 };
 
-export async function shareMeal(previousState, formData) {
+export async function shareMeal(prevState, formData) {
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
   const meal = {
@@ -32,12 +32,13 @@ export async function shareMeal(previousState, formData) {
   ) {
     // throw new Error('Failed to create meal. Invalid Input');
     return {
+      meal: meal,
       message: 'Invalid input.',
     };
   }
 
   // console.info(meal);
   await saveMeal(meal);
-  revalidatePath('/meals', 'page'); 
+  revalidatePath('/meals', 'page');
   redirect('/meals');
 }
