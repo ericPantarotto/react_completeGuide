@@ -5348,6 +5348,17 @@ in the official *NextJS* documentation, they recommend that you should store any
 - delete `meals.db` and run `node initdb.js` after modifying the image property within that file (removing *images/* prefix)
 - code of `meal-item.js` and `lib/meals.js` must be changed to provide a new *src* for the image and folder where to save the image
 - `npm run build` to recompile project
+
+### Adding Static Metadata
+
+**<span style='color: #a3842c'>Link:** [https://nextjs.org/docs/app/api-reference/functions/generate-metadata]
+This metadata constant allows you to add a bunch of metadata, which is then, for example, exposed to search engine crawlers or which shows up when you are sharing a link to a page on X or Facebook.
+
+if you add this metadata to a layout, it will automatically be added to all the pages that are wrapped by that layout unless a page specifies its own metadata.
+
+This would update the browser tab description with the `title` property of the metadata.
+
+**<span style='color: #495fcb'> Note:** with dynamic metadata, if we enter some invalid slug (*meal detail page*), we now get an error though instead of the `not found` page because the metadata is actually generated first.
 <!---
 [comment]: it works with text, you can rename it how you want
 
