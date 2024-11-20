@@ -5359,6 +5359,10 @@ if you add this metadata to a layout, it will automatically be added to all the 
 This would update the browser tab description with the `title` property of the metadata.
 
 **<span style='color: #495fcb'> Note:** with dynamic metadata, if we enter some invalid slug (*meal detail page*), we now get an error though instead of the `not found` page because the metadata is actually generated first.
+
+### About NextJS Pages Router
+
+App Router is the more modern and recommended way.
 <!---
 [comment]: it works with text, you can rename it how you want
 
