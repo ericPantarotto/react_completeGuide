@@ -45,11 +45,13 @@ if you prefer to use **VSCode** editor, you need to have installed *NodeJS*, as 
 - `npm i`
 - `npm run dev`
 
-#### ESLINT
+#### ESLINT REACT/VITE
 
 By using `npm create vite...` above, you also enable **eslinting**.
 
 **<span style='color: #a3842c'>Link:** [https://eslint.org/docs/latest/use/getting-started](https://eslint.org/docs/latest/use/getting-started)
+
+#### ESLINT NEXTJS
 
 **<span style='color: #a3842c'>Link:** *NextJS*: [https://www.youtube.com/watch?v=AsM0oxyJ6I8]
 
