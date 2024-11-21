@@ -54,9 +54,26 @@ By using `npm create vite...` above, you also enable **eslinting**.
 **<span style='color: #a3842c'>Link:** *NextJS*: [https://www.youtube.com/watch?v=AsM0oxyJ6I8]
 
 ```bash
-mpx create-next-app@latest 25_nextjs_foodies //NOTE: possibly, don't set-up Eslint from the configuation menu
+npx create-next-app@latest 25_nextjs_foodies //NOTE: to avoid any conflict, DON'T set-up Eslint in the configuration menu
 npm init @eslint/config@latest
-npm i @next/eslint-plugin-next     
+npm i @next/eslint-plugin-next //NOTE: optional     
+```
+
+If you have not configured eslint from the `npx` command above, and not run `@next/eslint-plugin-next`, the `eslint.config.mjs` should be like below, after adding the *react-in-jsx-scope* rule:
+
+```javascript
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  { files: ['**/*.{js,mjs,cjs,jsx}'] },
+  { languageOptions: { globals: globals.browser } },
+  pluginJs.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  {
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+    },
+  },
+];
 ```
 
 **<span style='color: #875c5c'>IMPORTANT:** make sure to add your rules at the end, so that they don't get overriden by other **recommended rules of other plugins**. **<span style='color: #a3842c'>Link:** [https://stackoverflow.com/questions/72295153/how-to-turn-off-react-react-in-jsx-scope-rule]
