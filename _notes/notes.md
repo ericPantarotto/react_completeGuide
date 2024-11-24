@@ -5434,6 +5434,12 @@ Another important *prop* is `transition` prop which is a prop that can be used t
 **<span style='color: #495fcb'> Note:** if I change to `tween` here you'll see that now there is no bouncing no matter which bounce factor you set.
 
 >**<span style='color: #495fcb'> Note:** We can also use the *JavaScript* shortcut of just using this name once, and it'll automatically be expanded to the longer version behind the scenes by *JavaScript*.
+
+### Adding Entry Animations
+
+Animating to a different value in our `modal.jsx` file will be tricky  because we got no indicator for whether this modal was just added to the DOM or if it's already visible. So unlike in `challenge-item.jsx`, where we had this `isExpanded` prop that could be used to switch between different values. We have no such prop or state in here.
+
+But *Frame motion* also give us access to another pretty useful prop that we can set on them. We can set the `initial` prop, and this initial prop allows us to define an **initial state for the to-be-performed animations that will be assumed immediately after this element has been added to the DOM.**
 <!---
 [comment]: it works with text, you can rename it how you want
 
