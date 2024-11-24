@@ -5388,6 +5388,18 @@ App Router is the more modern and recommended way.
 ### Animating with CSS Transitions
 
 **CSS Transitions** can be used by adding the transition property to the base rule, the rule that's always **active**.
+
+### Animating with CSS Animations
+
+if you inspect the body with the *Dev Tools*, this div with the ID modal, you find the backdrop behind the modal and the modal dialogue when the modal is open. but as I close the modal, both are gone.
+
+Now, this also means that we can't use a CSS transition because we can't transition and animate from any initial value as this modal opens because there is no initial value, But we can still animate it by using another feature *that's built into CSS*, **CSS animations**.
+
+The animation defined will then automatically be triggered by CSS whenever this **element appears in the DOM**.
+
+`animation: slide-up-fade-in 0.3s ease-out forwards;`
+
+*forwards*: simply means that I want to keep the end state once the animation is done.
 <!---
 [comment]: it works with text, you can rename it how you want
 
