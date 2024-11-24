@@ -5382,6 +5382,12 @@ This would update the browser tab description with the `title` property of the m
 ### About NextJS Pages Router
 
 App Router is the more modern and recommended way.
+
+## Animating React Apps
+
+### Animating with CSS Transitions
+
+**CSS Transitions** can be used by adding the transition property to the base rule, the rule that's always **active**.
 <!---
 [comment]: it works with text, you can rename it how you want
 
