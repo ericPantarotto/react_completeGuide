@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useContext } from 'react';
 
 // import { ChallengesContext } from '../store/challenges-context.jsx';
@@ -29,31 +30,38 @@ export default function ChallengeItem({
 
   return (
     <li>
-      <article className="challenge-item">
+      <article className='challenge-item'>
         <header>
           <img {...challenge.image} />
-          <div className="challenge-item-meta">
+          <div className='challenge-item-meta'>
             <h2>{challenge.title}</h2>
             <p>Complete until {formattedDate}</p>
-            <p className="challenge-item-actions">
-              <button onClick={handleCancel} className="btn-negative">
+            <p className='challenge-item-actions'>
+              <button onClick={handleCancel} className='btn-negative'>
                 Mark as failed
               </button>
               <button onClick={handleComplete}>Mark as completed</button>
             </p>
           </div>
         </header>
-        <div className={`challenge-item-details ${isExpanded ? 'expanded' : ''}`}>
+        {/* <div className={`challenge-item-details ${isExpanded ? 'expanded' : ''}`}> //NOTE: CSS */}
+        <div className='challenge-item-details'>
           <p>
             <button onClick={onViewDetails}>
               View Details{' '}
-              <span className="challenge-item-details-icon">&#9650;</span>
+              {/* <span className='challenge-item-details-icon'>&#9650;</span> */}
+              <motion.span
+                animate={{ rotate: isExpanded ? 180 : 0 }}
+                className='challenge-item-details-icon'
+              >
+                &#9650;
+              </motion.span>
             </button>
           </p>
 
           {isExpanded && (
             <div>
-              <p className="challenge-item-description">
+              <p className='challenge-item-description'>
                 {challenge.description}
               </p>
             </div>
