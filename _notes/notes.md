@@ -5400,6 +5400,22 @@ The animation defined will then automatically be triggered by CSS whenever this 
 `animation: slide-up-fade-in 0.3s ease-out forwards;`
 
 *forwards*: simply means that I want to keep the end state once the animation is done.
+
+### Introducing Framer Motion
+
+Now CSS transitions and animations are really powerful but they also have limitations.
+
+For example, one limitation is that you can use CSS animations to animate the appearance of an element in the DOM, **but not the disappearance**, another would be more complex animations.
+
+#### Framer Motion
+
+It is an extremely powerful animation library for React.
+
+**<span style='color: #a3842c'>Links:**
+
+- [https://motion.dev/blog/framer-motion-is-now-independent-introducing-motion]
+- [https://motion.dev/]
+- `npm i framer-motion`
 <!---
 [comment]: it works with text, you can rename it how you want
 
