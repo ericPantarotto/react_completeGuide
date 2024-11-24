@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { ChallengesContext } from '../store/challenges-context.jsx';
+// import { ChallengesContext } from '../store/challenges-context.jsx';
+import { ChallengesContext } from '../store/ChallengesContext';
 
 export default function ChallengeItem({
   challenge,

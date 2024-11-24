@@ -1,6 +1,7 @@
 import { useContext, useRef, useState } from 'react';
 
-import { ChallengesContext } from '../store/challenges-context.jsx';
+// import { ChallengesContext } from '../store/challenges-context.jsx';
+import { ChallengesContext } from '../store/ChallengesContext';
 import Modal from './Modal.jsx';
 import images from '../assets/images.js';
 
