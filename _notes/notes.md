@@ -5416,6 +5416,24 @@ It is an extremely powerful animation library for React.
 - [https://motion.dev/blog/framer-motion-is-now-independent-introducing-motion]
 - [https://motion.dev/]
 - `npm i framer-motion`
+
+### Framer Motion Basics & Fundamentals
+
+`<motion.div id="box" />`: this will then still render a div on the page but a div with extra capabilities that can be controlled by *Framer Motion* to animate it in a highly performant way. It's really built to give you high performance animations not animations that cause unnecessary component re-render cycles or that slow down the application.
+
+There is not just motion `div`, of course, instead if you press the dot after motion, you see that you basically got all `HTML elements` as motion versions so that you can really animate anything.
+
+That's another feature built into Framer Motion. It gives you this natural look and feel for your animations.
+
+Another important *prop* is `transition` prop which is a prop that can be used to configure the animation that will be played.
+
+- duration
+- type: the default was `spring` (if nothing's set) (`tween`)
+- bounce: 0.8
+
+**<span style='color: #495fcb'> Note:** if I change to `tween` here you'll see that now there is no bouncing no matter which bounce factor you set.
+
+>**<span style='color: #495fcb'> Note:** We can also use the *JavaScript* shortcut of just using this name once, and it'll automatically be expanded to the longer version behind the scenes by *JavaScript*.
 <!---
 [comment]: it works with text, you can rename it how you want
 

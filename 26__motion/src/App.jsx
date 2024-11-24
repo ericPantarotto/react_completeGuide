@@ -1,38 +1,44 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 function App() {
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
+  const [xState, setXState] = useState(0);
+  const [yState, setYState] = useState(0);
   const [rotate, setRotate] = useState(0);
 
   return (
-    <div id="demo">
-      <div id="box" />
+    <div id='demo'>
+      {/* <div id="box" /> */}
+      <motion.div
+        id='box'
+        animate={{ x: xState, y: yState, rotate }}
+        transition={{ duration: 0.3, type: 'spring', bounce: 0.5 }}
+      />
 
-      <div id="inputs">
+      <div id='inputs'>
         <p>
-          <label htmlFor="x">X</label>
+          <label htmlFor='x'>X</label>
           <input
-            type="number"
-            id="x"
-            onChange={(event) => setX(+event.target.value)}
+            type='number'
+            id='x'
+            onChange={(event) => setXState(+event.target.value)}
           />
         </p>
 
         <p>
-          <label htmlFor="y">Y</label>
+          <label htmlFor='y'>Y</label>
           <input
-            type="number"
-            id="y"
-            onChange={(event) => setY(+event.target.value)}
+            type='number'
+            id='y'
+            onChange={(event) => setYState(+event.target.value)}
           />
         </p>
 
         <p>
-          <label htmlFor="rotate">Rotate</label>
+          <label htmlFor='rotate'>Rotate</label>
           <input
-            type="number"
-            id="rotate"
+            type='number'
+            id='rotate'
             onChange={(event) => setRotate(+event.target.value)}
           />
         </p>
