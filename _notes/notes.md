@@ -5440,6 +5440,33 @@ Another important *prop* is `transition` prop which is a prop that can be used t
 Animating to a different value in our `modal.jsx` file will be tricky  because we got no indicator for whether this modal was just added to the DOM or if it's already visible. So unlike in `challenge-item.jsx`, where we had this `isExpanded` prop that could be used to switch between different values. We have no such prop or state in here.
 
 But *Frame motion* also give us access to another pretty useful prop that we can set on them. We can set the `initial` prop, and this initial prop allows us to define an **initial state for the to-be-performed animations that will be assumed immediately after this element has been added to the DOM.**
+
+### Animating Element Disappearances / Removal
+
+*React* handles elements such that if they're not returned by a component function anymore, it's instantly removed from the *DOM*.
+
+*Framer Motion* will make sure that when below code here executes the elements that are rendered by that code, so also that modal are not removed instantly, but instead it will check if there's some element that has an **exit animation**.
+
+**<span style='color: #a8c62c'> /components/Header.jsx**
+
+```javascript
+<AnimatePresence>
+  {isCreatingNewChallenge && <NewChallenge onDone={handleDone} />}
+</AnimatePresence>
+```
+
+**<span style='color: #a8c62c'> /components/Modal.jsx**
+
+```javascript
+<motion.dialog
+  initial={{ opacity: 0, y: 60 }}
+  animate={{ opacity: 1, y: 0 }}
+  exit={{ opacity: 0, y: 60 }}
+  open
+  className='modal'
+>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
