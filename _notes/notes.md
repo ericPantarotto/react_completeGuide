@@ -5467,6 +5467,37 @@ But *Frame motion* also give us access to another pretty useful prop that we can
 >
 ```
 
+### Nested Animations & Variants
+
+If `variants` are activated in the parent or wrapping component (as in the *modal* component), they will automatically be activated in the child component.
+
+**<span style='color: #9e5231'>Error:** commented by *Spencer*
+I found a solution to this problem. I was having the exact same issue. After adding the exit attribute, my backdrop would not go away. I had no differences in my code compared to the one in the video. However, after reading the Framer Motion docs and doing a little experimentation, I found a working solution.
+
+At about 4 minutes into lesson 498, Max shows that the backdrop disappearing is delayed. The cause of that issue starts immediately after setting the transition type to "spring". Setting the transition attribute in the motion.li element means that that element will enter AND EXIT using those transition properties. The added bounce that is created by the "spring" animation (which looks great on entry) is what is causing the delay on the backdrop's disappearance. We can't see it happening, but Framer Motion is waiting for the children elements to finish bouncing before removing the backdrop.
+
+So instead of adding `transition: { type: 'spring' }` to the whole motion.li attribute, simply add it to the visible variant (as shown in the code below). That means motion.li elements will only "spring" on entry. Then you can simply delete the `exit={{ opacity: 1, scale: 1 }}` which for some reason is breaking the backdrop.
+
+```javascript
+<motion.li
+  variants={{
+    hidden: { opacity: 0, scale: 0.5 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { type: 'spring' },
+    },
+  }}
+  // exit={ {opacity: 1, scale: 1 }}
+  // transition={{ type: 'spring' }}
+  key={image.alt}
+  onClick={() => handleSelectImage(image)}
+  className={selectedImage === image ? 'selected' : undefined}
+>
+  <img {...image} />
+</motion.li>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
