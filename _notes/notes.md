@@ -5587,6 +5587,10 @@ we need both `initial` & `animate` to solve this display issue when we expand, a
 </AnimatePresence>
 ```
 
+### Animating Shared Elements
+
+for our `<div className="active-tab-indicator" />`  it's technically not one DOM element that moves around, but instead, we have three DOM elements that are added or removed from the DOM depending on which tab is selected. And still, *Framer Motion* has a built-in feature that makes animating use cases like this, with `layoutId` prop.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
