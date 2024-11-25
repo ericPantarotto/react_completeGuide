@@ -5518,6 +5518,23 @@ You can set the `staggerChildren` prop inside the  specific `variants/transition
 And it's just important to be aware of the fact that you're not limited to animating just the scale, opacity, or position with numbers, but that you can also animate more complex things like colors with Framer Motion.
 
 Instead of setting a single value to a property such as the `scale`, we can actually also set an array of values. You're creating an array of key frames through which *Framer Motion* will go as it animates this item.
+
+### Imperative Animations
+
+```javascript
+const [scope, animate] = useAnimate();
+```
+
+The second element, `animate`, will be a function you can use in your code to imperatively trigger a certain animation.
+
+When calling this `animate()` function, you can target *CSS classes*, *HTML elements*
+
+the `scope` is a *ref* as we could create it ourselves with `useRef` that should be connected to a JSX element that's scopes the selector we're setting up here in the animate function.
+
+```javascript
+<form id='new-challenge' onSubmit={handleSubmit} ref={scope}>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
