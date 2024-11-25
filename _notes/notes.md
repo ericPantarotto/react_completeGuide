@@ -5478,6 +5478,8 @@ At about 4 minutes into lesson 498, Max shows that the backdrop disappearing is 
 
 So instead of adding `transition: { type: 'spring' }` to the whole motion.li attribute, simply add it to the visible variant (as shown in the code below). That means motion.li elements will only "spring" on entry. Then you can simply delete the `exit={{ opacity: 1, scale: 1 }}` which for some reason is breaking the backdrop.
 
+**<span style='color: #a8c62c'> /components/NewChallenge.jsx**
+
 ```javascript
 <motion.li
   variants={{
@@ -5498,6 +5500,18 @@ So instead of adding `transition: { type: 'spring' }` to the whole motion.li att
 </motion.li>
 ```
 
+### Animating Staggered Lists
+
+**<span style='color: #a8c62c'> /components/NewChallenge.jsx**
+
+```javascript
+<motion.ul
+  id='new-challenge-images'
+  variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+>
+```
+
+You can set the `staggerChildren` prop inside the  specific `variants/transition` of the parent element.
 <!---
 [comment]: it works with text, you can rename it how you want
 
