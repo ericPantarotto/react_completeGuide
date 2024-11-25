@@ -5551,6 +5551,42 @@ So what we would have to do here to make sure that the last item also kind of is
 - and then convert this ordered list to a *motion ordered list*.
 
 **<span style='color: #875c5c'>IMPORTANT:** whenever you have more than one component, you should add a key to every element here in `AnimatePresence` to help *Framer Motion* tell them apart.
+
+### Combining Animations With Layout Animations
+
+If the list has at least two items, and I view the details of one of these items, you see that it wobbles around strangely like this image gets distorted briefly.
+
+Now we got this strange behavior where everything wobbles around with layout added here because `layout` gets *Framer Motion* to animate layout changes of this list item.
+
+- change in position of one of the item is placed
+- change in height of the component; that's what is happening here
+
+**<span style='color: #a8c62c'> /components/ChallengeItem.jsx**
+
+```javascript
+<motion.li layout exit={{ y: -30, opacity: 0 }}>
+```
+
+A solution to this problem here is to animate this occurrence of this description text. Because if we explicitly animate the appearance of this item, this change in height doesn't occur suddenly and doesn't trigger this layout animation.
+
+we need both `initial` & `animate` to solve this display issue when we expand, and `AnimatePresence` when we hide the description
+
+```javascript
+<AnimatePresence>
+  {isExpanded && (
+    <motion.div
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: 'auto', opacity: 1 }}
+      exit={{ height: 0, opacity: 0 }}
+    >
+      <p className='challenge-item-description'>
+        {challenge.description}
+      </p>
+    </motion.div>
+  )}
+</AnimatePresence>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
