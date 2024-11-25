@@ -5512,6 +5512,12 @@ So instead of adding `transition: { type: 'spring' }` to the whole motion.li att
 ```
 
 You can set the `staggerChildren` prop inside the  specific `variants/transition` of the parent element.
+
+### Animating Colors & Working with Keyframes
+
+And it's just important to be aware of the fact that you're not limited to animating just the scale, opacity, or position with numbers, but that you can also animate more complex things like colors with Framer Motion.
+
+Instead of setting a single value to a property such as the `scale`, we can actually also set an array of values. You're creating an array of key frames through which *Framer Motion* will go as it animates this item.
 <!---
 [comment]: it works with text, you can rename it how you want
 

@@ -26,7 +26,7 @@ export default function Header() {
           Add Challenge
         </button> */}
         <motion.button
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.1, backgroundColor: '#8b11f0' }}
           transition={{
             type: 'spring',
             stiffness: 500,
