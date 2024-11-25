@@ -5591,6 +5591,15 @@ we need both `initial` & `animate` to solve this display issue when we expand, a
 
 for our `<div className="active-tab-indicator" />`  it's technically not one DOM element that moves around, but instead, we have three DOM elements that are added or removed from the DOM depending on which tab is selected. And still, *Framer Motion* has a built-in feature that makes animating use cases like this, with `layoutId` prop.
 
+### Re-triggering Animations via Keys
+
+to animate whenever an element appears on the screen, we could do this with `initial` and `animate` as we did it multiple times before, or actually with just `animate` since we can also **set key frames** to define multiple steps.
+
+You can actually restart this animation, you can reset this component so to say and kind of make *React* think that it just appeared. And you can easily do that from inside `ChallengeTabs` which is where I'm using this `Badge` component, by adding a `key` to it.
+
+**<span style='color: #875c5c'>IMPORTANT:** But in *React*, **even if you're not using Framer Motion**, keys also have another purpose. When you add them on an element and you then change the value that's assigned to the key. For example, because of some state change, *React* will basically destroy the old component instance and render a new one instead.
+
+So you can add that key prop to any component of your choice and change that value then to get React to recreate that component. And that will reset any internal state stored in that component, and also therefore re-trigger any entry animations that should be played.
 <!---
 [comment]: it works with text, you can rename it how you want
 
