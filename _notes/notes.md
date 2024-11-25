@@ -5600,6 +5600,10 @@ You can actually restart this animation, you can reset this component so to say 
 **<span style='color: #875c5c'>IMPORTANT:** But in *React*, **even if you're not using Framer Motion**, keys also have another purpose. When you add them on an element and you then change the value that's assigned to the key. For example, because of some state change, *React* will basically destroy the old component instance and render a new one instead.
 
 So you can add that key prop to any component of your choice and change that value then to get React to recreate that component. And that will reset any internal state stored in that component, and also therefore re-trigger any entry animations that should be played.
+
+### Scroll-based Animations
+
+`useTransform` returns the transformed value, it actually wraps this in a so-called motion value object so that it does not re-render this component function every time we scroll, but instead manages this transformed value behind the scenes without causing the component function to re-render. **So that this entire animation does not impact the component render cycle**.
 <!---
 [comment]: it works with text, you can rename it how you want
 
