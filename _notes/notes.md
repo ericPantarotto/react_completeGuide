@@ -5535,6 +5535,22 @@ the `scope` is a *ref* as we could create it ourselves with `useRef` that should
 <form id='new-challenge' onSubmit={handleSubmit} ref={scope}>
 ```
 
+### Orchestrating Multi-Element Animations
+
+**<span style='color: #a8c62c'> /components/ChallengeItem.jsx**
+
+```javascript
+<motion.li layout exit={{ y: -30, opacity: 0 }}>
+```
+
+if I remove the last item, that still disappears instantly because the  entire ordered list is removed from the DOM.  So `AnimatePresence` has no effect then because this is all removed because it's part of this conditional rendering block.
+
+So what we would have to do here to make sure that the last item also kind of is animated
+
+- we would have to wrap this entire list with `AnimatePresence` as well
+- and then convert this ordered list to a *motion ordered list*.
+
+**<span style='color: #875c5c'>IMPORTANT:** whenever you have more than one component, you should add a key to every element here in `AnimatePresence` to help *Framer Motion* tell them apart.
 <!---
 [comment]: it works with text, you can rename it how you want
 
