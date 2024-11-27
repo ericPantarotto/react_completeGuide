@@ -5610,6 +5610,21 @@ So you can add that key prop to any component of your choice and change that val
 ### Sharing Cross-Components State when working with Compound Components
 
 **<span style='color: #495fcb'> Note:** If we wanted to make sure that such components as `AccordionTitle`, `AccordionContent`, `AccordionItem` could never be used outside of the `Accordion` context, and not be accessed by other components, we would merge all these components in a single file, and be accessed only through `Accordion` component function.
+
+### Adding Search to a React App
+
+our `SearchableList` component works great for searching, but not for outputting the result, and we want it to be usable with all kind of data.
+
+the simple `item.toString()}` we're currently using works fine with *strings* but can't work if we want to display more complex objects such as `PLACES`. That's where **Render props** can help
+
+### Implementing a Search Functionality with help of Render Props
+
+if we want the same **markup** with different text inside of it, `children` must be some sort of **function** to which to which we can pass the item, so that this function will be executed for every item, so the `children` prop is called a function, which haven't done yet, but is allowed, if the result of that function is something that can be rendered, since you're calling it inside a `.jsx`.
+
+```javascript
+<li key={index}>{children(item)}</li>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
