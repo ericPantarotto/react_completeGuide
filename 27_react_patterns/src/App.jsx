@@ -63,7 +63,8 @@ function App() {
             </article>
           </Accordion.Item>
         </Accordion> */}
-        <Accordion className='accordion'>
+
+        {/* <Accordion className='accordion'>
           <Accordion.Item className='accordion-item'>
             <Accordion.Title className='accordion-item-title' id='experience'>
               We have got 20 years of experience
@@ -89,6 +90,37 @@ function App() {
               className='accordion-item-content'
               id='local-guides'
             >
+              <article>
+                <p>We are not doing this along from our office.</p>
+                <p>
+                  Instead, we are working with local guides to ensure a safe and
+                  pleasant vacation.
+                </p>
+              </article>
+            </Accordion.Content>
+          </Accordion.Item>
+        </Accordion> */}
+
+        <Accordion className='accordion'>
+          <Accordion.Item className='accordion-item' id='experience'>
+            <Accordion.Title className='accordion-item-title'>
+              We have got 20 years of experience
+            </Accordion.Title>
+            <Accordion.Content className='accordion-item-content'>
+              <article>
+                <p>You cannot go wrong with us.</p>
+                <p>
+                  We are in the business of planning highly individualized
+                  vacation trips for more than 20 years.
+                </p>
+              </article>
+            </Accordion.Content>
+          </Accordion.Item>
+          <Accordion.Item className='accordion-item' id='local-guides'>
+            <Accordion.Title className='accordion-item-title'>
+              We are working with local guides
+            </Accordion.Title>
+            <Accordion.Content className='accordion-item-content'>
               <article>
                 <p>We are not doing this along from our office.</p>
                 <p>

@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import { useAccordionContext } from './UseAccordionContext';
+import { useAccordionItemContext } from './UseAccordionItemContext';
 
-export default function AccordionContent({ id, children, className }) {
+export default function AccordionContent({ children, className }) {
   const { openItemId } = useAccordionContext();
+  const id = useAccordionItemContext();
   const isOpen = openItemId === id;
 
   return (
@@ -16,7 +18,6 @@ export default function AccordionContent({ id, children, className }) {
   );
 }
 AccordionContent.propTypes = {
-  id: PropTypes.string.isRequired,
   children: PropTypes.node,
   className: PropTypes.string,
 };

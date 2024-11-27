@@ -5604,6 +5604,12 @@ So you can add that key prop to any component of your choice and change that val
 ### Scroll-based Animations
 
 `useTransform` returns the transformed value, it actually wraps this in a so-called motion value object so that it does not re-render this component function every time we scroll, but instead manages this transformed value behind the scenes without causing the component function to re-render. **So that this entire animation does not impact the component render cycle**.
+
+## React Patterns & Best Practices
+
+### Sharing Cross-Components State when working with Compound Components
+
+**<span style='color: #495fcb'> Note:** If we wanted to make sure that such components as `AccordionTitle`, `AccordionContent`, `AccordionItem` could never be used outside of the `Accordion` context, and not be accessed by other components, we would merge all these components in a single file, and be accessed only through `Accordion` component function.
 <!---
 [comment]: it works with text, you can rename it how you want
 

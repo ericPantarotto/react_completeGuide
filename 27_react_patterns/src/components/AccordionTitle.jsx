@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import { useAccordionContext } from './UseAccordionContext';
+import { useAccordionItemContext } from './UseAccordionItemContext';
 
-export default function AccordionTitle({ id, children, className }) {
+export default function AccordionTitle({ children, className }) {
   const { toggleItem } = useAccordionContext();
+  const id  = useAccordionItemContext()
   return (
     <h3 className={className} onClick={() => toggleItem(id)}>
       {children}
@@ -10,7 +12,6 @@ export default function AccordionTitle({ id, children, className }) {
   );
 }
 AccordionTitle.propTypes = {
-  id: PropTypes.string.isRequired,
   children: PropTypes.node,
   className: PropTypes.string,
 };
