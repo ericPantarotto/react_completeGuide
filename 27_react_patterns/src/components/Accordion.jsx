@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import { createContext, useState } from 'react';
-import AccordionItem from './AccordionItem';
+// import AccordionItem from './AccordionItem';
+import AccordionContent from './AccordionContent';
+import AccordionItemReusable from './AccordionItemReusable';
+import AccordionTitle from './AccordionTitle';
 
 const AccordionContext = createContext();
 
@@ -30,7 +33,10 @@ Accordion.propTypes = {
   className: PropTypes.string.isRequired,
 };
 
-Accordion.Item = AccordionItem;
+// Accordion.Item = AccordionItem;
+Accordion.Item = AccordionItemReusable;
+Accordion.Title = AccordionTitle;
+Accordion.Content = AccordionContent;
 
 export default Accordion;
 export { AccordionContext };
