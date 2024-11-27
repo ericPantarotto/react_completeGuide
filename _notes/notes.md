@@ -5632,6 +5632,18 @@ if we want the same **markup** with different text inside of it, `children` must
 As the data received is different you can't hardcode a specific prop.
 
 Instead we need with `props` again and expect to receive as key function, to dynamically generate a key for a specific item.
+
+### Working with Debouncing
+
+in `SearchableList` component, whenever we type something into the input field, so on every keystroke, `setSearchTerm` gets updated, which in turn leads to this component being rendered again, which leads to new search results being produced.
+
+Now for this demo app where we're only dealing with very simple local dummy data, that's not really a big problem, but it could become problematic if with every update, we, for example, needed to send a new HTTP request, or if this filtering logic here would be more complex and more performance intensive.
+
+In such scenarios, executing this entire component function and producing a new derived state on every keystroke in the end, can quickly become inefficient.
+
+Debouncing is a technique where we don't update the state on every keystroke but define a timing threshold, and only update the state if the user stopped typing for a certain time.
+
+And therefore back here in the application, you can see that as I type, as long as I keep on typing, nothing happens. But once I stop typing, the filter is applied.
 <!---
 [comment]: it works with text, you can rename it how you want
 
