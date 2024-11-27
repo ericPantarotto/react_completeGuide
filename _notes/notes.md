@@ -5625,6 +5625,13 @@ if we want the same **markup** with different text inside of it, `children` must
 <li key={index}>{children(item)}</li>
 ```
 
+### Handling Keys Dynamically
+
+`index` is not a good key, cause it's not directly linked to the data.
+
+As the data received is different you can't hardcode a specific prop.
+
+Instead we need with `props` again and expect to receive as key function, to dynamically generate a key for a specific item.
 <!---
 [comment]: it works with text, you can rename it how you want
 
