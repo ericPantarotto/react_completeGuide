@@ -5644,6 +5644,10 @@ In such scenarios, executing this entire component function and producing a new 
 Debouncing is a technique where we don't update the state on every keystroke but define a timing threshold, and only update the state if the user stopped typing for a certain time.
 
 And therefore back here in the application, you can see that as I type, as long as I keep on typing, nothing happens. But once I stop typing, the filter is applied.
+
+## Replacing Redux with React Hooks
+
+you don't have to replace *Redux*, but the advantage is that you don't have to rely on an external library to your app anymore
 <!---
 [comment]: it works with text, you can rename it how you want
 
