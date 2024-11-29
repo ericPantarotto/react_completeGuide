@@ -5727,6 +5727,18 @@ return (
 ```
 
 **<span style='color: #875c5c'>IMPORTANT:** we can call this `toggleFav` function and then this function will change something in that file, will change our state and therefore emit a new state, a new value, to all components that are listening.
+
+### Context API Summary (and why NOT to use it instead of Redux)
+
+That means if you have something which changes rarely, let's say the user authentication status or just the example I used in the React Hooks module, that is fine to be covered with the `context` API.
+
+Now, obviously users might not be tapping these buttons every second but still switching the favorite status of something will very likely occur way more often than logging in or changing the theme of a page and therefore I would argue that this is more on the high-frequency side.
+
+**<span style='color: #495fcb'> Notes:**
+
+- the way the react context API works is such that whenever something changes in your context it has no way of cleverly figuring out which component that uses this context really is concerned and which component is not. Which means that every component that uses use context will rebuild, will re-render when you switch something in that context. No matter if it's directly effected or not.
+- in general the react context API is simply not optimized and not meant to be your Global State Management tool in your app.
+- it's meant for some states, like authentication status, like the theme but not for all your states because of these missing optimizations
 <!---
 [comment]: it works with text, you can rename it how you want
 
