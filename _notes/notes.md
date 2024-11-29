@@ -5650,6 +5650,42 @@ And therefore back here in the application, you can see that as I type, as long 
 ### Module Introduction
 
 you don't have to replace *Redux*, but the advantage is that you don't have to rely on an external library to your app anymore
+
+### Why would you replace Redux
+
+I use *Redux* in this project because we need to state in two different pages and that would be harder to do with *props* only.
+
+I don't want to pass all the state through multiple layers of components, just so that I have it everywhere where I need it. And Redux is really convenient for such cases, it's a great state management tool when you have some global state.
+
+**<span style='color: #a8c62c'> containers/Products.jsx**
+
+```javascript
+const Products = () => {
+  const productList = useSelector((state) => state.shop.products);
+  // ...
+};
+```
+
+**<span style='color: #a8c62c'> main.jsx**
+
+```javascript
+const rootReducer = combineReducers({
+  shop: productReducer,
+});
+
+const store = createStore(rootReducer);
+```
+
+`state.shop.products`: `shop` is defined in `store/reducers/products.jsx`
+
+for the *toggle* action defined in `store/actions/products.jsx`, we use the `useDispatch()` function
+
+>there's nothing wrong with that approach. You don't need to switch away from *Redux* at all. But maybe you want to. And why would you?
+
+- you want to stay in the *React*-only world, so that you don't need to learn *Redux*.
+- you also simply don't want to add that extra Redux and react-redux library to your project. Hence, you would end up with a smaller bundle, because if you don't have these extra libraries included, you then ship less code when you deploy your application Though if you have a really large application, it might not matter that much if it's included or not.
+- you simply want to explore how you can manage your state globally without passing everything through props
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

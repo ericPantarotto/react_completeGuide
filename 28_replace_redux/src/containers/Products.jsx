@@ -5,6 +5,7 @@ import './Products.css';
 
 const Products = () => {
   const productList = useSelector((state) => state.shop.products);
+  
   return (
     <ul className='products-list'>
       {productList.map((prod) => (
