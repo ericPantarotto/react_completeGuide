@@ -5686,6 +5686,23 @@ for the *toggle* action defined in `store/actions/products.jsx`, we use the `use
 - you also simply don't want to add that extra Redux and react-redux library to your project. Hence, you would end up with a smaller bundle, because if you don't have these extra libraries included, you then ship less code when you deploy your application Though if you have a really large application, it might not matter that much if it's included or not.
 - you simply want to explore how you can manage your state globally without passing everything through props
 
+### Using the Context API
+
+**<span style='color: #a8c62c'> main.jsx**
+
+```javascript
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <ProductsProvider >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ProductsProvider>
+  </StrictMode>
+);
+```
+
+So now I'm providing my *context*, and anywhere in this component tree, so in any child component, I can listen to that context.
 <!---
 [comment]: it works with text, you can rename it how you want
 
