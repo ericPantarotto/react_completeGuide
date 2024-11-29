@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import './index.css';
 // import productReducer from './store/reducers/products';
-import ProductsProvider from './context/product-context.jsx';
+import ProductsProvider from './context/product-ctx-provider.jsx';
 
 // const rootReducer = combineReducers({
 //   shop: productReducer,
