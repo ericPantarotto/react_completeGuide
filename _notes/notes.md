@@ -5703,6 +5703,30 @@ createRoot(document.getElementById('root')).render(
 ```
 
 So now I'm providing my *context*, and anywhere in this component tree, so in any child component, I can listen to that context.
+
+### Toggling Favorites with the Context API
+
+**<span style='color: #495fcb'> Note:** using that function form to be guaranteed that I'm working with most recent state.
+
+```javascript
+const toggleFavorite = productId => {
+  setProductsList(currentProdList => { })
+}
+```
+
+**<span style='color: #a8c62c'> context/product-context.jsx**
+
+```javascript
+return (
+    <ProductsContext.Provider
+      value={{ products: productsList, toggleFav: toggleFavorite }}
+    >
+      {props.children}
+    </ProductsContext.Provider>
+  );
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** we can call this `toggleFav` function and then this function will change something in that file, will change our state and therefore emit a new state, a new value, to all components that are listening.
 <!---
 [comment]: it works with text, you can rename it how you want
 
