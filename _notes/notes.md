@@ -5647,6 +5647,8 @@ And therefore back here in the application, you can see that as I type, as long 
 
 ## Replacing Redux with React Hooks
 
+### Module Introduction
+
 you don't have to replace *Redux*, but the advantage is that you don't have to rely on an external library to your app anymore
 <!---
 [comment]: it works with text, you can rename it how you want
