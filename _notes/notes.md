@@ -5739,6 +5739,44 @@ Now, obviously users might not be tapping these buttons every second but still s
 - the way the react context API works is such that whenever something changes in your context it has no way of cleverly figuring out which component that uses this context really is concerned and which component is not. Which means that every component that uses use context will rebuild, will re-render when you switch something in that context. No matter if it's directly effected or not.
 - in general the react context API is simply not optimized and not meant to be your Global State Management tool in your app.
 - it's meant for some states, like authentication status, like the theme but not for all your states because of these missing optimizations
+
+### Getting Started with a Custom Hook as a Store
+
+**<span style='color: #a8c62c'> hooks-store/store.jsx**
+
+```javascript
+import { useState, useEffect } from 'react';
+
+let globalState = {};
+
+export const useStore = () => {
+  const setState = useState(globalState)[1];
+// ...
+}
+```
+
+**<span style='color: #495fcb'> Note:** So I am using the variable `globalState` which is defined outside of my hook, and that's important. **It's defined outside of my hook. So it's global.** It's not recreated when we call `useStore`. It's not created separately for every component that consumes my custom hook.
+
+**<span style='color: #875c5c'>IMPORTANT:** It's not created separately for every component that consumes my custom hook. Instead it will be created once when this file is first imported, basically.
+
+And there after any other file that imports from the same file will all use that same state. And that's one important idea here we'll share data between all files that import from it.
+
+That's something we did before with *custom hooks*. The idea was the opposite that we could share logic but not data now will share logic and data by managing the data outside of the hook because inside of the hook it would not be shared. It would be inclusive to each component. Each component would get it's own data. But managing it outside of the hook every file imports this file or something from that file gets the same shared data.
+
+I'm interested in this `setState` function (`useState(globalState)[1]`) because whenever this function is called the component that uses my custom hook will re render and we'll need this later to re render our components when our state changes.
+
+Now of course it would be great that if a component is unmounted we get rid of its listeners, though. Therefore also use the `useEffect` hook here.
+
+```javascript
+ useEffect(() => {
+    listeners.push(setState);
+
+    return () => {
+      listeners = listeners.filter((li) => li !== setState);
+    };
+  }, [setState]);
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
