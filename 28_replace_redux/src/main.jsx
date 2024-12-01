@@ -39,8 +39,10 @@ import './index.css';
 // );
 
 import configureProductsStore from './hooks-store/products-store';
+import configureCounterStore from './hooks-store/counter-store';
 
 configureProductsStore();
+configureCounterStore();
 
 const root = createRoot(document.getElementById('root'));
 root.render(
