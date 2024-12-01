@@ -6,8 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import './index.css';
 // import productReducer from './store/reducers/products';
-import ProductsProvider from './context/product-ctx-provider.jsx';
 
+// NOTE: REDUX
 // const rootReducer = combineReducers({
 //   shop: productReducer,
 // });
@@ -24,12 +24,29 @@ import ProductsProvider from './context/product-ctx-provider.jsx';
 //   </StrictMode>
 // );
 
-createRoot(document.getElementById('root')).render(
+// NOTE: useContext()
+
+// import ProductsProvider from './context/product-ctx-provider.jsx';
+
+// createRoot(document.getElementById('root')).render(
+//   <StrictMode>
+//     <ProductsProvider>
+//       <BrowserRouter>
+//         <App />
+//       </BrowserRouter>
+//     </ProductsProvider>
+//   </StrictMode>
+// );
+
+import configureProductsStore from './hooks-store/products-store';
+
+configureProductsStore();
+
+const root = createRoot(document.getElementById('root'));
+root.render(
   <StrictMode>
-    <ProductsProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ProductsProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 );
