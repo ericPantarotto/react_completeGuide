@@ -5777,6 +5777,29 @@ Now of course it would be great that if a component is unmounted we get rid of i
   }, [setState]);
 ```
 
+### Finishing the Store Hook
+
+**<span style='color: #a8c62c'> hooks-store/store.jsx**
+
+```javascript
+const dispatch = (actionIdentifier, payload) => {
+  //NOTE: picking the specific action, which is a function and calling it and passing the arguments needed
+  const newState = actions[actionIdentifier](globalState, payload);
+  globalState = { ...globalState, ...newState };
+  for (const listener of listeners) {
+    listener(globalState);
+  }
+}
+```
+
+**<span style='color: #495fcb'> Note:** Picking the specific action registered in our object, which is a function and calling it and passing the arguments needed. that's essentially all what happened in Redux. In a *Redux* reducer we in the end also got a action, and the reducer then checked the action and returned a newState in the end.
+
+Our custom hook should also return something, an array with exactly two elements.
+
+- globalState
+- dispatch
+
+And if that looks familiar to you, then this is exactly what the built-in `useReducer` function always returned. **It's just not suited for managing state across components, which is why I have to build my own version**
 <!---
 [comment]: it works with text, you can rename it how you want
 
