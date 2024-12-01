@@ -5800,6 +5800,14 @@ Our custom hook should also return something, an array with exactly two elements
 - dispatch
 
 And if that looks familiar to you, then this is exactly what the built-in `useReducer` function always returned. **It's just not suited for managing state across components, which is why I have to build my own version**
+
+### Optimizing the Custom Hook Store
+
+if we change the status of one of our product, the `productItem` is re-rendered 4x instead of once.
+
+Wrapping with `react.memo()` in our `const productItem = React.memo(() => {})` definition  , which makes sure they don't rerender if their props didn't change. But this doesn't work.
+
+the reason is that in each productItem we're using `useStore()`, our custom hook, which uses `useState()`. So whenever `setState` is called (defined in `store.js`), the component that uses this hook will be rerendered. Make sense it's the intended behavior, it's the default behavior.
 <!---
 [comment]: it works with text, you can rename it how you want
 

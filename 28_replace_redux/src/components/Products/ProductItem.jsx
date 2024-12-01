@@ -6,8 +6,9 @@ import './ProductItem.css';
 // import { useContext } from 'react';
 // import { ProductsContext } from '../../context/product-context';
 import { useStore } from '../../hooks-store/store';
+import { memo } from 'react';
 
-const ProductItem = (props) => {
+const ProductItem = memo(function ProductItem(props){
   // const dispatch = useDispatch();
 
   // const toggleFavHandler = () => {
@@ -20,7 +21,9 @@ const ProductItem = (props) => {
   // toggleFav(props.id);
   // };
 
-  const dispatch = useStore()[1];
+  console.log('RENDERING');
+  
+  const dispatch = useStore(false)[1];
   const toggleFavHandler = () => dispatch('TOGGLE_FAV', props.id);
 
   return (
@@ -37,7 +40,7 @@ const ProductItem = (props) => {
       </div>
     </Card>
   );
-};
+})
 ProductItem.propTypes = {
   id: PropTypes.string.isRequired,
   isFav: PropTypes.bool,
