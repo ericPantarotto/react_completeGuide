@@ -5808,6 +5808,12 @@ if we change the status of one of our product, the `productItem` is re-rendered 
 Wrapping with `react.memo()` in our `const productItem = React.memo(() => {})` definition  , which makes sure they don't rerender if their props didn't change. But this doesn't work.
 
 the reason is that in each productItem we're using `useStore()`, our custom hook, which uses `useState()`. So whenever `setState` is called (defined in `store.js`), the component that uses this hook will be rerendered. Make sense it's the intended behavior, it's the default behavior.
+
+### Wrap-up & use-global-hook
+
+alternative is to use this out-of-the-box package that uses *React* and *React Hooks* only, so you don't have to write all this code yourself:
+
+**<span style='color: #9e5231'>Error:** [[npm i use-global-hook](https://www.npmjs.com/package/use-global-hook)]
 <!---
 [comment]: it works with text, you can rename it how you want
 
