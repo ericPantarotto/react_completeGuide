@@ -5814,6 +5814,14 @@ the reason is that in each productItem we're using `useStore()`, our custom hook
 alternative is to use this out-of-the-box package that uses *React* and *React Hooks* only, so you don't have to write all this code yourself:
 
 **<span style='color: #9e5231'>Error:** [[npm i use-global-hook](https://www.npmjs.com/package/use-global-hook)]
+
+## Testing React Apps
+
+### Running a First Test
+
+The module is using `create react app`, outdated, instead of `Vite` that we used so far.
+
+**<span style='color: #495fcb'> Note:** to run tests, `npm test`, which will watch for changes until you exit this *watch* mode.
 <!---
 [comment]: it works with text, you can rename it how you want
 
