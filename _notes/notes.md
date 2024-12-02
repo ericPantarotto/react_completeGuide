@@ -15,8 +15,8 @@ To some extent, it therefore feels like a mobile app, because in mobile apps, ge
 #### Using "just JavaScript" typically isn't a great option
 
 - writing complex JavaScript code quickly becomes cumbersome
-- complex JavaCcript code quickly become error-prone
-- complex JavaCcript code often is hard to maintain or edit
+- complex JavaScript code quickly become error-prone
+- complex JavaScript code often is hard to maintain or edit
 
 ### ReactJS vs "Vanilla JavaScript"
 
@@ -4175,7 +4175,7 @@ In order to use data from that loader and easily get access to it, I'll assign a
 
 You should make sure that you do add an extra `return null` statement in all `if` statement branches where nothing would be returned otherwise to avoid errors.
 
-To be precise, in the `checkAuthLoader()` function that will be added in the next lecture, you should add `return null` after the `if` statment:
+To be precise, in the `checkAuthLoader()` function that will be added in the next lecture, you should add `return null` after the `if` statement:
 
 ```javascript
 export function checkAuthLoader() {

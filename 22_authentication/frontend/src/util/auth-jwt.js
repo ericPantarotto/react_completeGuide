@@ -3,8 +3,8 @@ import { json } from 'react-router-dom';
 
 export function getTokenDurationJwt(token) {
   const decodedToken = jwtDecode(token);
-  // console.log(decodedToken);
-  const duration = decodedToken.exp - Math.round(new Date().getTime() / 1000);
+  const duration = decodedToken.exp - Math.round(new Date().getTime() / 1000); //HACK: for testing, using 'expiresIn' with numeric
+  // console.log(duration);
 
   return duration;
 }
