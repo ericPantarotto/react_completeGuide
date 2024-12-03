@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 import Greeting from './components/Greeting';
+import GreetingState from './components/Greeting-state';
 
 function App() {
   // return (
@@ -24,6 +25,7 @@ function App() {
   return (
     <div className='App'>
       <Greeting />
+      <GreetingState />
     </div>
   );
 }
