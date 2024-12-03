@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
+import Async from './components/Async';
 import Greeting from './components/Greeting';
 import GreetingState from './components/Greeting-state';
 
@@ -26,6 +27,7 @@ function App() {
     <div className='App'>
       <Greeting />
       <GreetingState />
+      <Async />
     </div>
   );
 }

@@ -5826,6 +5826,14 @@ The module is using `create react app`, outdated, instead of `Vite` that we used
 ### Writing our first test
 
 `const helloWorldElement = screen.getByText('Hello World!');` if the element is not found, it would thrown an error.
+
+### Testing Asynchronous Code
+
+**<span style='color: #a3842c'>Link:** [https://www.w3.org/TR/html-aria/#docconformance]
+
+`getAllByRole` is different from `findAllByRole` as it returns a promise and *React* testing library will re-evaluate a couple of time until the promise is resolved. so *findAllByRole* will wait for the *http* request to complete, provided that we prefix it with `await`. The callback function passed to `test()` needs to be marked as `async` also.
+
+**<span style='color: #495fcb'> Note:** You can pass a *timeout* as an argument, passed which it would fail.
 <!---
 [comment]: it works with text, you can rename it how you want
 
