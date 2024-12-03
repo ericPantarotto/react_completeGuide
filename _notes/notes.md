@@ -5821,6 +5821,8 @@ alternative is to use this out-of-the-box package that uses *React* and *React H
 
 The module is using `create react app`, outdated, instead of `Vite` that we used so far.
 
+**<span style='color: #495fcb'> Note:** to run the app, `npm start`
+
 **<span style='color: #495fcb'> Note:** to run tests, `npm test`, which will watch for changes until you exit this *watch* mode.
 
 ### Writing our first test
@@ -5862,6 +5864,14 @@ above mocks that line of code in our `async.js` component: `.then((response) => 
   <li key={post.id}>{post.title}</li>
 ))}
 ```
+
+### Further Resources
+
+**<span style='color: #a3842c'>Links:**
+
+- [https://jest.io/]
+- [https://testing-library.com/docs/react-testing-library/intro/]
+- [https://react-hooks-testing-library.com/]
 <!---
 [comment]: it works with text, you can rename it how you want
 
