@@ -5822,6 +5822,10 @@ alternative is to use this out-of-the-box package that uses *React* and *React H
 The module is using `create react app`, outdated, instead of `Vite` that we used so far.
 
 **<span style='color: #495fcb'> Note:** to run tests, `npm test`, which will watch for changes until you exit this *watch* mode.
+
+### Writing our first test
+
+`const helloWorldElement = screen.getByText('Hello World!');` if the element is not found, it would thrown an error.
 <!---
 [comment]: it works with text, you can rename it how you want
 
