@@ -5834,6 +5834,34 @@ The module is using `create react app`, outdated, instead of `Vite` that we used
 `getAllByRole` is different from `findAllByRole` as it returns a promise and *React* testing library will re-evaluate a couple of time until the promise is resolved. so *findAllByRole* will wait for the *http* request to complete, provided that we prefix it with `await`. The callback function passed to `test()` needs to be marked as `async` also.
 
 **<span style='color: #495fcb'> Note:** You can pass a *timeout* as an argument, passed which it would fail.
+
+### Working with Mocks
+
+When we run our tests, which we typically do a lot during development, we generally don't wanna send *http requests* to our servers. We don't wanna send requests because A:
+
+- that will cause a lot of network traffic, it will hammer our servers with requests
+- if you are not fetching data but you have some Component that sends a *post* request to a server, your tests might start inserting data into a database or they might start changing things on the server because of course you also wanna test components and scenarios where such kind of requests are being sent
+- we also avoid potential problems if the server is down and our tests would fail for that reason.
+
+We either don't even wanna send a real request or we wanna send it to some fake server, some testing server. when you write a test you don't wanna test code, which you haven't written. So in this case, I don't wanna test whether this fetch function works correctly and sends a request. The fetch function was not written by me, it's built into the browser. I rely on the browser vendors to have written that function correctly. **So therefore I don't wanna test whether fetch successfully sends a request technically behind the scenes.**
+
+This is such a common scenario that *Jest*, this testing tool which we're using under the hood has built in support for mocking such functions.
+
+`jest.fn` is a utility function, it creates a mock function.
+
+```javascript
+window.fetch.mockResolvedValueOnce({
+  json: async () => [{ id: 'p1', title: 'First post' }],
+});
+```
+
+above mocks that line of code in our `async.js` component: `.then((response) => response.json())` and the data that we expect to be returned such as:
+
+```javascript
+{posts.map((post) => (
+  <li key={post.id}>{post.title}</li>
+))}
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
