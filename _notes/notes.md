@@ -5872,6 +5872,27 @@ above mocks that line of code in our `async.js` component: `.then((response) => 
 - [https://jest.io/]
 - [https://testing-library.com/docs/react-testing-library/intro/]
 - [https://react-hooks-testing-library.com/]
+
+## React + TypeScript
+
+### Installing & Using TypeScript
+
+**<span style='color: #a3842c'>Links:**
+
+- [https://www.typescriptlang.org/]
+- [https://www.typescriptlang.org/download/]
+
+`npm install typescript --save-dev`
+
+`npx tsc`: you can then run the TypeScript compiler using one of the following commands:
+
+**<span style='color: #875c5c'>IMPORTANT:** During that compilation process:
+
+- all our type annotations will be removed because JavaScript doesn't know those annotations
+- but it's during this compilation step where we will be notified about errors
+- in addition to the notification we get in the IDE already
+
+`npx tsc` can only be run if you have a configuration file, else you have to pass the `.ts` file you want to compile
 <!---
 [comment]: it works with text, you can rename it how you want
 
