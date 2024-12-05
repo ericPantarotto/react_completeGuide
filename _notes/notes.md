@@ -6030,6 +6030,30 @@ In there, we generally got the same dependencies as before `react` and `react-do
 ```
 
 Now, in order to also work with them in TypeScript and get great TypeScript and IDE support, great auto completion, and so on, we need translations between these raw Vanilla JavaScript libraries, which are written for JavaScript, and the TypeScript project.
+
+### Working with Props & TypeScript
+
+because we have that base prop object which we get an every component, which for example includes this children prop, React and TypeScript gives us a different way here. We can use   **generic type**.
+
+A functional component out of the box can be turned, can be converted into a generic function. our functional component will be configured such that we make it clear that it will be our React component function and that it will have all those base props like children. And we can then define explicitly our own props like the items prop, for example, here that should be combined into the props object.
+
+```javascript
+function Todos(props: {items: Array<string> }) {}
+```
+
+becomes with a generic functional component
+
+```javascript
+import { FC } from 'react';
+const Todos: FC<{ items: string[] }> = (props) => {}
+```
+
+Here we're using it slightly differently. Here, `FC` already is a generic type. It describes a type defined by the React package that is actually generic. And here, when I also add angled brackets in our code, I'm not setting up a new generic type with some placeholder type T, but I'm plugging in a concrete value for that internally used generic type.
+
+We can't let TypeScript infer the type here because here we're not calling some generic function with some parameters where the values then could be used for the inference, but instead we're defining a function and we want to let TypeScript know how it should then treat this function internally that it should get some props to find by us and merge those with some base props like the children prop which all functional components have.
+
+And what you see here, therefore, is the other side of generic types that you use a generic type and you explicitly set the concrete type that should be used for this usage of this generic `FC` type.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
