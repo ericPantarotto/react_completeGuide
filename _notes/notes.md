@@ -5939,6 +5939,30 @@ function printOutput(value: any) {
   console.log(value);
 }
 ```
+
+### Diving into Generics
+
+```javascript
+function insertAtBeginning(array: any[], value: any) {
+  const newArray = [value, ...array];
+  return newArray;
+}
+```
+
+**<span style='color: #495fcb'> Note:** using `any` removes all kind of TypeScript support we might be getting after calling this function.
+
+```javascript
+const updatedArray = insertAtBeginning(demoArray, -1); // [-1, 1, 2, 3]
+updatedArray[0].split('');
+```
+
+We would get a runtime error with the above code, as TypeScript doesn't know that the values in the array are numbers, not string, hence we can not call `split` on the first element of the array.
+
+`function insertAtBeginning<T>(array: T[], value: T) {}`: this angel brackets is not a standard JS feature, but only can be used with *TypeScript*.
+
+**<span style='color: #875c5c'>IMPORTANT:** when calling this function, TypeScript now knows that it should look at the concrete values of the arguments. We're telling TypeScript is not of type of `any`, and will infer the type of the newly constructed array, and can raise useful warnings.
+
+**<span style='color: #495fcb'> Note:** TypeScript helps you write functions which are type-safe, yet flexible. They work with any type, but once a certain type is used for a given function execution, that type is locked in and known, allowing to have best of both world: flexibility and type-safety.
 <!---
 [comment]: it works with text, you can rename it how you want
 

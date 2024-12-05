@@ -62,7 +62,7 @@ type Person = {
 
 let peopleAlias: Person[];
 
-// Functions & types
+// NOTE: Functions & types
 
 function add(a: number, b: number) {
   return a + b; //NOTE: the return value type is inferred, you can see it if you hover the function name
@@ -72,3 +72,20 @@ function add(a: number, b: number) {
 function printOutput(value: any) {
   console.log(value);
 }
+
+// NOTE: Generics
+
+function insertAtBeginning<T>(array: T[], value: T) {
+  const newArray = [value, ...array];
+  return newArray;
+}
+
+const demoArray = [1, 2, 3];
+
+const updatedArray = insertAtBeginning(demoArray, -1); // [-1, 1, 2, 3]
+const stringArray = insertAtBeginning(['a', 'b', 'c'], 'd')
+
+// ERROR: with the use of generic, TypeScript will throw an error
+// updatedArray[0].split('');
+
+stringArray[0].split('');
