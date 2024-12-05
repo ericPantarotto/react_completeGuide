@@ -53,3 +53,11 @@ peopleAlt = [
 // NOTE: Union Types
 let courseUnion: string | number = 'React - The Complete Guide';
 courseUnion = 12341;
+
+// NOTE: Type Alias
+type Person = {
+  name: string;
+  age: number;
+};
+
+let peopleAlias: Person[];
