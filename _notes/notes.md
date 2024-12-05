@@ -5922,6 +5922,23 @@ By default, TypeScript tries to infer types, when the type is not defined.
 you could write `let course: string = 'React - complete guide';` but this would be redudant as `course` is immediately initialized and the type is then inferred.
 
 It is considered a good practise to use **type inference** and not unnecessarily state the type.
+
+### Functions & Function Types
+
+Type inference applies to parameters of a function but also to the return type.
+the same rule applied, only define the type if necessary.
+
+```javascript
+function add(a: number, b: number): number  | string { }
+```
+
+This function returns `void` which only exists in conjunction with functions
+
+```javascript
+function printOutput(value: any) {
+  console.log(value);
+}
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 

@@ -61,3 +61,14 @@ type Person = {
 };
 
 let peopleAlias: Person[];
+
+// Functions & types
+
+function add(a: number, b: number) {
+  return a + b; //NOTE: the return value type is inferred, you can see it if you hover the function name
+}
+
+// NOTE: this function returns void which only exists in conjunction with functions
+function printOutput(value: any) {
+  console.log(value);
+}
