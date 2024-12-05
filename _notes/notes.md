@@ -5908,6 +5908,20 @@ let person: any
 ```
 
 **<span style='color: #495fcb'> Note:** `let person: {}` is a type assignment
+
+### Type inference
+
+```javascript
+let course = 'React - complete guide';
+// ERROR: typescript type inference
+course = 1234;
+```
+
+By default, TypeScript tries to infer types, when the type is not defined.
+
+you could write `let course: string = 'React - complete guide';` but this would be redudant as `course` is immediately initialized and the type is then inferred.
+
+It is considered a good practise to use **type inference** and not unnecessarily state the type.
 <!---
 [comment]: it works with text, you can rename it how you want
 
