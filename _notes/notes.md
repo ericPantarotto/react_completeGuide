@@ -6054,6 +6054,12 @@ We can't let TypeScript infer the type here because here we're not calling some 
 
 And what you see here, therefore, is the other side of generic types that you use a generic type and you explicitly set the concrete type that should be used for this usage of this generic `FC` type.
 
+### Adding a Data Model
+
+And please note that with all those type annotations, and all those classes we're using here, we are making it very clear which shape our data should have which shape our components should have. And that simply allows us as a developer to ensure that this code is clean, that it has a clear structure, and that's it's way harder to misuse our components or our data.
+
+And that errors can be prevented during development instead of at runtime, when we test the app.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
