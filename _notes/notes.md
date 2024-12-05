@@ -5893,6 +5893,21 @@ above mocks that line of code in our `async.js` component: `.then((response) => 
 - in addition to the notification we get in the IDE already
 
 `npx tsc` can only be run if you have a configuration file, else you have to pass the `.ts` file you want to compile
+
+### Working with Arrays & Object Types
+
+You can use `any` if you don't want to define a particular object, though you shouldn't use, as you are back to plain vanilla *JavaScript*.
+
+```javascript
+let person: {
+  name: string;
+  age: number;
+};
+
+let person: any
+```
+
+**<span style='color: #495fcb'> Note:** `let person: {}` is a type assignment
 <!---
 [comment]: it works with text, you can rename it how you want
 
