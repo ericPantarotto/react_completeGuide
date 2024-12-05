@@ -6009,6 +6009,27 @@ If we take the example from the previous lecture, we could've also set the concr
 `const stringArray = insertAtBeginning<string>(['a', 'b', 'c'], 'd');`
 
 So we can not just use the angle brackets to define a generic type but also to USE a generic type and explicitly set the placeholder type that should be used - sometimes this is required if TypeScript is not able to infer the (correct) type. We'll see this later in this course section!
+
+### Creating a React + TypeScript Project
+
+**<span style='color: #a3842c'>Link:** [https://vite.dev/guide/]
+
+`npm create vite@latest 30_typescript -- --template react-ts`
+
+one important word about that dev server,  that it's now doing one more thing behind the scenes. It's actually compiling our TypeScript code to JavaScript code, which then is taken an optimized further.
+
+Before with just React and Vanilla JavaScript, we just had this dev server, which takes our JavaScript code, bundles all the files together, and provides certain optimization steps. Now we still have all of that, but in addition, we have that extra TypeScript to JavaScript compilation step, which also takes place behind the scenes. So we don't need to convert our TypeScript files manually to JavaScript, and call the compiler manually.
+
+**<span style='color: #495fcb'> Note:** It would also happen automatically if you build your code for production by running npm run build.
+
+In there, we generally got the same dependencies as before `react` and `react-dom`, but we also see a couple of extra dependencies, specifically `typescript`
+
+```json
+"@types/react": "^18.3.12",
+"@types/react-dom": "^18.3.1",
+```
+
+Now, in order to also work with them in TypeScript and get great TypeScript and IDE support, great auto completion, and so on, we need translations between these raw Vanilla JavaScript libraries, which are written for JavaScript, and the TypeScript project.
 <!---
 [comment]: it works with text, you can rename it how you want
 
