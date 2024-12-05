@@ -49,3 +49,7 @@ peopleAlt = [
   { name: 'eric', age: 43 },
   { name: 'vero', age: 36 },
 ];
+
+// NOTE: Union Types
+let courseUnion: string | number = 'React - The Complete Guide';
+courseUnion = 12341;
