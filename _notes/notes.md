@@ -6060,6 +6060,17 @@ And please note that with all those type annotations, and all those classes we'r
 
 And that errors can be prevented during development instead of at runtime, when we test the app.
 
+### Working with refs & useRef
+
+**<span style='color: #a3842c'>Link:** [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input]
+
+`<input>` is based on the `HTMLInputElement` interface.
+
+```javascript
+ const todoTextInputRef = useRef<HTMLInputElement>(null);
+```
+
+**<span style='color: #495fcb'> Note:** Our IDE will add `?` by default as TypeScript cannot know if this `ref` will be initialized with a value, and that it can't be null and the connection will always be established. If we are certain,we can change `const enteredText = todoTextInputRef.current?.value;` to `const enteredText = todoTextInputRef.current!.value;`
 <!---
 [comment]: it works with text, you can rename it how you want
 
