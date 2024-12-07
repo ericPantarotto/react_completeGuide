@@ -3,19 +3,7 @@ import { FC, PropsWithChildren, useState } from 'react';
 import { TodosContext } from './todos-ctx';
 
 import Todo from '../models/todo';
-
-type TodosContextObj = {
-  items: Todo[];
-  addTodo: (text: string) => void;
-  removeTodo: (id: string) => void;
-};
-
-// export const TodosContext = createContext<TodosContextObj>({
-//   items: [],
-//   addTodo: () => {},
-//   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//   removeTodo: (id: string) => {},
-// });
+import { TodosContextObj } from './todosContextObj';
 
 const TodosContextProvider: FC<PropsWithChildren> = (props) => {
   const [todos, setTodos] = useState<Todo[]>([]);
