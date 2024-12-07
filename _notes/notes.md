@@ -6071,6 +6071,25 @@ And that errors can be prevented during development instead of at runtime, when 
 ```
 
 **<span style='color: #495fcb'> Note:** Our IDE will add `?` by default as TypeScript cannot know if this `ref` will be initialized with a value, and that it can't be null and the connection will always be established. If we are certain,we can change `const enteredText = todoTextInputRef.current?.value;` to `const enteredText = todoTextInputRef.current!.value;`
+
+### The Context API & TypeScript
+
+**<span style='color: #9e5231'>Error:** property 'children' does not exist on type ' '.ts(2339)
+
+using generics `FC<PropsWithChildren>`
+
+```javascript
+const TodosContextProvider : FC<PropsWithChildren> = (props) => {
+  // ...
+ return (
+    <TodosContext.Provider value={contextValue}>
+      {props.children}
+    </TodosContext.Provider>
+  );
+};
+```
+
+**<span style='color: #a3842c'>Link:** [https://www.youtube.com/watch?v=Knes9ih5ObM]
 <!---
 [comment]: it works with text, you can rename it how you want
 
