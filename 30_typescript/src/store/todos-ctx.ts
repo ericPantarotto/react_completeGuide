@@ -1,11 +1,5 @@
 import { createContext } from 'react';
-import Todo from '../models/todo';
-
-type TodosContextObj = {
-  items: Todo[];
-  addTodo: (text: string) => void;
-  removeTodo: (id: string) => void;
-};
+import { TodosContextObj } from './todosContextObj';
 
 export const TodosContext = createContext<TodosContextObj>({
   items: [],
