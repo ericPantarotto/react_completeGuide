@@ -6101,6 +6101,26 @@ But the React ecosystem is huge and there are tons of things you can do and buil
 - Build mobile Android & iOS apps with React Native: [https://acad.link/react-native]
 - Build fullstack MERN (MongoDB, ExpressJS, React, NodeJS) web apps: [https://acad.link/mern]
 - Or dive into one of the many other courses I have on web development, JavaScript etc: [https://academind.com/courses/]
+
+## React Summary &  Core Feature Walkthrough
+
+### Adding Event Listeners
+
+plain *JavaScript* is using the **imperative approach** where telling the browser that we want to get hold of the text area and add an event listener and what should happen then:
+
+`document.querySelector('textarea').addEventListener('change', function () {})`
+
+With *React*, we use a **declarative approach** instead. If you wanna add an event listener, you do that by adding a special *prop*, a prop that starts with `on` and then the name of the event to which you wanna listen. you can pass functions to props just as you can pass numbers or text to props.
+
+```javascript
+const changeBodyHandler = (event) => {
+  console.log(event.target.value);
+};
+
+<textarea id='body' required rows={3} onChange={changeBodyHandler} />
+```
+
+That's how you can set up event listeners. And whilst this is not directly related to this **state** concept, it's still kind of an important prerequisite because whilst you can use State without events you very often want to change to a different state upon the occurrence of a certain event, be that a value entered into an input or a button being pressed. Typically, you wanna change something on the screen after a certain event occurred. And that's why it's important to understand how you can set up event listeners.
 <!---
 [comment]: it works with text, you can rename it how you want
 
