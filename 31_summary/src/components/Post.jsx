@@ -1,14 +1,16 @@
-const names = ['Maximilian', 'Manuel'];
+import PropTypes from 'prop-types';
 
-const Post = () => {
-  const chosenName = Math.random() > 0.5 ? names[0] : names[1];
-
+const Post = (props) => {
   return (
     <div>
-      <p>{chosenName}</p>
-      <p>React.js is awesome!</p>
+      <p>{props.author}</p>
+      <p>{props.body}</p>
     </div>
   );
+};
+Post.propTypes = {
+  author: PropTypes.string,
+  body: PropTypes.string,
 };
 
 export default Post;
