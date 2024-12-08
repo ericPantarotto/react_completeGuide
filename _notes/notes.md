@@ -6090,6 +6090,17 @@ const TodosContextProvider : FC<PropsWithChildren> = (props) => {
 ```
 
 **<span style='color: #a3842c'>Link:** [https://www.youtube.com/watch?v=Knes9ih5ObM]
+
+## Course Roundup
+
+With this course, you learned a lot about React!
+
+But the React ecosystem is huge and there are tons of things you can do and build with React, for example:
+
+- Learn how to build server-side rendered (great for SEO!) or fullstack apps with Next.js & React: [https://acad.link/nextjs]
+- Build mobile Android & iOS apps with React Native: [https://acad.link/react-native]
+- Build fullstack MERN (MongoDB, ExpressJS, React, NodeJS) web apps: [https://acad.link/mern]
+- Or dive into one of the many other courses I have on web development, JavaScript etc: [https://academind.com/courses/]
 <!---
 [comment]: it works with text, you can rename it how you want
 
