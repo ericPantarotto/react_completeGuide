@@ -6121,6 +6121,31 @@ const changeBodyHandler = (event) => {
 ```
 
 That's how you can set up event listeners. And whilst this is not directly related to this **state** concept, it's still kind of an important prerequisite because whilst you can use State without events you very often want to change to a different state upon the occurrence of a certain event, be that a value entered into an input or a button being pressed. Typically, you wanna change something on the screen after a certain event occurred. And that's why it's important to understand how you can set up event listeners.
+
+### Working with State
+
+**<span style='color: #a8c62c'> NewPost.jsx**
+
+![image info](./31_sc1.png)
+
+What I type here is not being output in that paragraph. Now why is that the case? Well because there is something very important to understand.
+
+*React* executes your component functions like *NewPost* and it then takes the *JSX code* returned by those functions. So the current snapshot of the HTML content that should be output on the screen and it does render it to the screen.
+
+**<span style='color: #875c5c'>IMPORTANT:** But if thereafter in your component function you change some variable value that's being used in your JSX code, that won't be picked up by React because this JSX code is only taken once as a snapshot when this component function is executed for the first time.
+
+Indeed, if that component function would be executed by a React again, it would also consider any updates to that snapshot and update the rendered user interface. But React does by default not randomly execute *NewPost* again, or any other component function again just because you changed some variable or just because you have some event listener in that component. **This is ignored by React.**
+
+Of course it adds the event listener and this function executes, but it does not care about whether this would theoretically change your JSX code. Instead, you have to basically create this variable in a special way using a *special React feature* to let React know about any changes that should cause a UI update.
+
+**<span style='color: #495fcb'> Note:** So functions in React that start with use are considered **React Hooks**. The special thing about these hook functions is that you must execute them inside of component functions. You can't execute them in regular JavaScript functions.
+
+- the first element returned by `useState` is always the current state value
+- that second element in that array is a state updating function. A function which you can execute to assign a new value to your state, because that state value is stored in memory by React.
+
+**<span style='color: #875c5c'>IMPORTANT:** Now the special thing about that is, that if you call that state updating function, you don't just store a new value somewhere in memory but *React* will also re-execute that function in which this state was registered. So it will call this component function again, just as it did initially when it rendered that component for the first time. And you get the latest JSX snapshot. And if that deviates from the previously rendered JSX snapshot, *React* will update the parts in the UI that need updating.
+
+*React* will basically make a comparison between the different snapshots behind the scenes and only update the parts in the UI that must be updated so that you don't unnecessarily update the DOM, which is quite performance intensive.
 <!---
 [comment]: it works with text, you can rename it how you want
 
