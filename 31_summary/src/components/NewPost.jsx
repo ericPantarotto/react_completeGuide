@@ -1,5 +1,6 @@
 import classes from './NewPost.module.css';
 import PropTypes from 'prop-types';
+
 const NewPost = (props) => {
   return (
     <form className={classes.form}>
