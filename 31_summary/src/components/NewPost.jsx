@@ -1,5 +1,5 @@
-import classes from './NewPost.module.css';
 import PropTypes from 'prop-types';
+import classes from './NewPost.module.css';
 
 const NewPost = (props) => {
   return (
@@ -12,13 +12,17 @@ const NewPost = (props) => {
         <label htmlFor='name'>Your name</label>
         <input type='text' id='name' required onChange={props.onAuthorChange} />
       </p>
+      <p className={classes.actions}>
+        <button type='button' onClick={props.onCancel}>Cancel</button>
+        <button type='submit'>Submit</button>
+      </p>
     </form>
   );
 };
 NewPost.propTypes = {
   onBodyChange: PropTypes.func,
   onAuthorChange: PropTypes.func,
+  onCancel: PropTypes.func,
 };
-
 
 export default NewPost;

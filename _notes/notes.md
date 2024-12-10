@@ -6155,6 +6155,16 @@ So in this case, it's the `PostsList` component:
 
 - that needs the state to pass it to `<Post />` as a value for the body prop.
 - it's also the `PostsList` component that has access to the `NewPost` component which is the place where the state should be manipulated.
+
+### Adding Form Buttons
+
+By default, if you add buttons to a form, if they are pressed, they will submit that form.
+
+This means that a submit event will be generated and also that by default the browser will generate and send an HTTP request to the server that's serving the website.
+
+To make sure that the cancel button does not trigger form submission, we can and should give it a type attribute which we set to *button*.
+
+The alternative which we can set on the submit button is type *submit*. But this is not required since status to default anyways.
 <!---
 [comment]: it works with text, you can rename it how you want
 
