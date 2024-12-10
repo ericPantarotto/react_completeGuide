@@ -1,23 +1,32 @@
 import PropTypes, { bool } from 'prop-types';
+import { useState } from 'react';
 import Modal from './Modal';
 import NewPost from './NewPost';
 import Post from './Post';
 
 import classes from './PostsList.module.css';
 
-const PostList = ({ isPosting, onStopPosting }) => (
-  <>
-    {isPosting && (
-      <Modal onClose={onStopPosting}>
-        <NewPost onCancel={onStopPosting} />
-      </Modal>
-    )}
+const PostList = ({ isPosting, onStopPosting }) => {
+  const [posts, setPosts] = useState([]);
 
-    <ul className={classes.posts}>
-      <Post author='Manuel' body='Check out the full course!' />
-    </ul>
-  </>
-);
+    function addPostHandler(postData) {
+      setPosts((existingPosts) => [postData, ...existingPosts]);
+    }
+  
+  return (
+    <>
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
+          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
+        </Modal>
+      )}
+
+      <ul className={classes.posts}>
+        <Post author='Manuel' body='Check out the full course!' />
+      </ul>
+    </>
+  );
+};
 
 PostList.propTypes = {
   onStopPosting: PropTypes.func,

@@ -6165,6 +6165,31 @@ This means that a submit event will be generated and also that by default the br
 To make sure that the cancel button does not trigger form submission, we can and should give it a type attribute which we set to *button*.
 
 The alternative which we can set on the submit button is type *submit*. But this is not required since status to default anyways.
+
+### Updating State Based On Previous State
+
+**<span style='color: #a8c62c'> PostsList.jsx**
+
+```javascript
+const [posts, setPosts] = useState([]);
+
+function addPostHandler(postData) {
+  setPosts([postData, ...posts]);
+}
+```
+
+this code here isn't ideal because there is a rule if you update state and that new state is based on that previous state value, you should actually pass a function, an arrow function. And this function here will be called automatically by React whenever you call *set* of `useState()`. And this function will automatically receive the current state snapshot.
+
+Now this looks very similar to what we had before but it's the technically better way of updating your state if it depends on the previous state snapshot. The reason for data is that internally React does actually not execute your state updating functions instantly. At least it's not guaranteed that it will do so. But it schedules those state updates and in case you have multiple state updates after each other, you could potentially update your state based on some old state.
+
+And therefore, this way is a way of making sure that React ensures that you get the latest correct state for this state update even if you have multiple pending state updates.
+
+```javascript
+function addPostHandler(postData) {
+  setPosts((existingPosts) => [postData, ...existingPosts]);
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

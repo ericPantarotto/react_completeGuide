@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import classes from './NewPost.module.css';
 
-const NewPost = ({ onCancel }) => {
+const NewPost = ({ onCancel, onAddPost }) => {
   const [enteredBody, setEnteredBody] = useState('');
   const [enteredAuthor, setEnteredAuthor] = useState('');
 
@@ -16,13 +16,13 @@ const NewPost = ({ onCancel }) => {
 
   function submitHandler(event) {
     event.preventDefault();
-    
+
     const postData = {
       body: enteredBody,
       author: enteredAuthor,
     };
-    console.log(postData);
-    
+
+    onAddPost(postData);
     onCancel();
   }
 
@@ -47,6 +47,7 @@ const NewPost = ({ onCancel }) => {
 };
 NewPost.propTypes = {
   onCancel: PropTypes.func,
+  onAddPost: PropTypes.func,
 };
 
 export default NewPost;
