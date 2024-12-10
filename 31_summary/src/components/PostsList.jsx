@@ -1,3 +1,4 @@
+import PropTypes, { bool } from 'prop-types';
 import { useState } from 'react';
 import Modal from './Modal';
 import NewPost from './NewPost';
@@ -5,8 +6,7 @@ import Post from './Post';
 
 import classes from './PostsList.module.css';
 
-const PostList = () => {
-  const [modalIsVisible, setModalIsVisible] = useState(true);
+const PostList = ({ isPosting, onStopPosting }) => {
   const [enteredBody, setEnteredBody] = useState('');
   const [enteredAuthor, setEnteredAuthor] = useState('');
 
@@ -16,10 +16,6 @@ const PostList = () => {
 
   function authorChangeHandler(event) {
     setEnteredAuthor(event.target.value);
-  }
-
-  function hideModalHandler() {
-    setModalIsVisible(false);
   }
 
   // let modalContent;
@@ -37,8 +33,8 @@ const PostList = () => {
 
   return (
     <>
-      {modalIsVisible && (
-        <Modal onClose={hideModalHandler}>
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
           <NewPost
             onBodyChange={bodyChangeHandler}
             onAuthorChange={authorChangeHandler}
@@ -52,6 +48,11 @@ const PostList = () => {
       </ul>
     </>
   );
+};
+
+PostList.propTypes = {
+  onStopPosting: PropTypes.func,
+  isPosting: bool
 };
 
 export default PostList;
