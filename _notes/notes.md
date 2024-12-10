@@ -6146,6 +6146,15 @@ Of course it adds the event listener and this function executes, but it does not
 **<span style='color: #875c5c'>IMPORTANT:** Now the special thing about that is, that if you call that state updating function, you don't just store a new value somewhere in memory but *React* will also re-execute that function in which this state was registered. So it will call this component function again, just as it did initially when it rendered that component for the first time. And you get the latest JSX snapshot. And if that deviates from the previously rendered JSX snapshot, *React* will update the parts in the UI that need updating.
 
 *React* will basically make a comparison between the different snapshots behind the scenes and only update the parts in the UI that must be updated so that you don't unnecessarily update the DOM, which is quite performance intensive.
+
+### Lifting State Up
+
+If you have state that's manipulated in component A but needed in component B, you should lift the state up to a component that has access to both components that need the state.
+
+So in this case, it's the `PostsList` component:
+
+- that needs the state to pass it to `<Post />` as a value for the body prop.
+- it's also the `PostsList` component that has access to the `NewPost` component which is the place where the state should be manipulated.
 <!---
 [comment]: it works with text, you can rename it how you want
 
