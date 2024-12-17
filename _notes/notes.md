@@ -6196,6 +6196,35 @@ what we're building with ReactJS in most cases is a so-called **single page appl
 
 So if we open a *modal*, that's not a new page, not a new HTML file that's being downloaded or opened. Instead it's the existing page being edited by JavaScript, the DOM being edited by JavaScript. If I view this page source, I just see the basically empty HTML file, this index html file that was downloaded initially.
 
+### Handling Side Effects with useEffect()
+
+Your component functions must return JSX code or some other values but **promises should not be returned**, at least for this standard component here without using any extra framework on top of React.
+
+So promises may not be returned and since adding async in front of a function always ensures that this function returns a promise because any data returned by the function gets wrapped into a promise, we must not use async.
+
+You should also not write `fetch().then()` and set the state inside `then` block.
+
+it theoretically would update the state with the new posts but it would cause an infinite loop, Well, simply because whenever you update your state, as you learned, your component function gets executed again by React. However, if this component function executes again, this fetch request also gets sent again. So we sent another request, we get data, we update the state and the loop begins again.
+
+Well, this is, of course, a common problem and therefore, React has a solution. It has another hook we can use. and that would be the `useEffect` hook, which is there to wrap side effects.
+
+`useEffect` allows you to safely run code without causing an infinite loop
+
+we created this extra function in this effect function, instead of turning the effect function itself into an async function because useEffect takes a function that should not return a promise itself but that instead should return nothing or a cleanup function.
+
+Instead, I create an inner nested function, which I then simply immediately execute inside of this effect function, And this trick allows me to use `async/await` inside the inner function.
+
+React will now decide when this function gets executed and therefore, when this function gets executed indirectly. And I can tell you that now with this setup here, it will not always get executed when this component function executes.
+
+This useEffect function here, this hook is now preventing an infinite loop from occurring by simply making sure that this effect function does not always execute when the component function executes.
+
+It executes sometimes when the component function executes. Otherwise we wouldn't have fetched the posts but not always.
+
+But when does it execute? that's controlled with this second argument that's passed to useEffect, this array.
+
+This array in the end specifies the dependencies of your effect function. And a dependency is simply any variable or function that might be defined outside of this effect function anywhere in your React components, in this component or some parent component passed down through props. And whenever such a variable or function defined outside of the effect function changes, receives a new value, for example, this effect function will be executed again.
+
+Now, if we have an empty array, it simply means this function has no dependencies and therefore, it will never be executed again. Instead, React will only execute it once and that's when this component is first rendered.
 <!---
 [comment]: it works with text, you can rename it how you want
 
