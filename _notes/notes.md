@@ -6190,6 +6190,12 @@ function addPostHandler(postData) {
 }
 ```
 
+### Adding a Backend to the React SPA
+
+what we're building with ReactJS in most cases is a so-called **single page application**: a website where we in the end have only one single HTML file, this index html file, and then everything that happens on the screen is powered by JavaScript.
+
+So if we open a *modal*, that's not a new page, not a new HTML file that's being downloaded or opened. Instead it's the existing page being edited by JavaScript, the DOM being edited by JavaScript. If I view this page source, I just see the basically empty HTML file, this index html file that was downloaded initially.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
