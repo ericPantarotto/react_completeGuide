@@ -6225,6 +6225,13 @@ But when does it execute? that's controlled with this second argument that's pas
 This array in the end specifies the dependencies of your effect function. And a dependency is simply any variable or function that might be defined outside of this effect function anywhere in your React components, in this component or some parent component passed down through props. And whenever such a variable or function defined outside of the effect function changes, receives a new value, for example, this effect function will be executed again.
 
 Now, if we have an empty array, it simply means this function has no dependencies and therefore, it will never be executed again. Instead, React will only execute it once and that's when this component is first rendered.
+
+### Understanding & Adding Routing
+
+`Routing` simply means that you wanna support different paths and load different pages, different components in the end, for those different paths.
+
+We're building a single page application with React, so we have only one page, only one HTML file. But the idea behind routing is that we can still support multiple paths by simply listening to URL changes whilst the app is running or by evaluating the URL when it's first loaded, and by then loading different components for different paths that are encoded in the URL.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
