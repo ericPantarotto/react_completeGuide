@@ -2956,6 +2956,12 @@ Passing `action` prop to a `form` failed with React 18 but above code was succes
 },
 ```
 
+### User Input
+
+HTML `Select` element seems to be buggy with React v19 Form Actions, as `defaultValue` is not working.
+
+`Reset` would now reset to the last submitted values instead of emptying the form.
+
 ## Practice App: Building a Food Order App
 
 ### Fetching Meals Data (get Http request)
