@@ -1,12 +1,10 @@
 import PropTypes, { bool } from 'prop-types';
 import { useEffect, useState } from 'react';
-import Modal from './Modal';
-import NewPost from './NewPost';
 import Post from './Post';
 
 import classes from './PostsList.module.css';
 
-const PostList = ({ isPosting, onStopPosting }) => {
+const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -22,26 +20,20 @@ const PostList = ({ isPosting, onStopPosting }) => {
     fetchPosts();
   }, []);
 
-  function addPostHandler(postData) {
-    fetch('http://localhost:8080/posts', {
-      method: 'POST',
-      body: JSON.stringify(postData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  // function addPostHandler(postData) {
+  //   fetch('http://localhost:8080/posts', {
+  //     method: 'POST',
+  //     body: JSON.stringify(postData),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
 
-    setPosts((existingPosts) => [postData, ...existingPosts]);
-  }
+  //   setPosts((existingPosts) => [postData, ...existingPosts]);
+  // }
 
   return (
     <>
-      {isPosting && (
-        <Modal onClose={onStopPosting}>
-          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
-        </Modal>
-      )}
-
       {!isFetching && posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map((post) => (
