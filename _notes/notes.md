@@ -2928,7 +2928,35 @@ And how could we do that? with help of a **custom hook**. And we need a custom h
 - React Hook Form
 - Formik
 
-## Practise App: Building a Food Order App
+## Handling Forms via Forms Actions
+
+### Module Introduction
+
+**<span style='color: #9e5231'>Error:** Invalid value for prop action on <form> tag
+
+```javascript
+export default function Signup() {
+  function signupAction(formData) {
+    const enteredEmail = formData.get('email');
+    console.log(enteredEmail);
+  }
+
+  return (
+    <form action={signupAction}>
+// ...
+  )}
+```
+
+Passing `action` prop to a `form` failed with React 18 but above code was succesful in the browser as soon as `package.json` was upgraded to **React 19**:
+
+```json
+"dependencies": {
+  "react": "^19.0.0",
+  "react-dom": "^19.0.0"
+},
+```
+
+## Practice App: Building a Food Order App
 
 ### Fetching Meals Data (get Http request)
 
