@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { MdMessage, MdPostAdd } from 'react-icons/md';
-
+import { Link } from 'react-router-dom';
 import classes from './MainHeader.module.css';
 
-function MainHeader({ onCreatePost }) {
+function MainHeader() {
   return (
     <header className={classes.header}>
       <h1 className={classes.logo}>
@@ -11,16 +11,16 @@ function MainHeader({ onCreatePost }) {
         React Poster
       </h1>
       <p>
-        <button className={classes.button} onClick={onCreatePost}>
+        <Link className={classes.button} to='/create-post'>
           <MdPostAdd size={18} />
           New Post
-        </button>
+        </Link>
       </p>
     </header>
   );
 }
 
-MainHeader.propTypes = {
-  onCreatePost: PropTypes.func,
-};
+// MainHeader.propTypes = {
+//   onCreatePost: PropTypes.func,
+// };
 export default MainHeader;

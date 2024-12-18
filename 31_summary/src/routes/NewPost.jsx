@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Modal from '../components/Modal';
 import classes from './NewPost.module.css';
+import { Link } from 'react-router-dom';
 
-const NewPost = ({ onCancel, onAddPost }) => {
+const NewPost = ({ onAddPost }) => {
   const [enteredBody, setEnteredBody] = useState('');
   const [enteredAuthor, setEnteredAuthor] = useState('');
 
@@ -24,7 +25,7 @@ const NewPost = ({ onCancel, onAddPost }) => {
     };
 
     onAddPost(postData);
-    onCancel();
+    // onCancel();
   }
 
   return (
@@ -44,9 +45,9 @@ const NewPost = ({ onCancel, onAddPost }) => {
           />
         </p>
         <p className={classes.actions}>
-          <button type='button' onClick={onCancel}>
+          <Link type='button' to='..'>
             Cancel
-          </button>
+          </Link>
           <button type='submit'>Submit</button>
         </p>
       </form>
@@ -54,7 +55,7 @@ const NewPost = ({ onCancel, onAddPost }) => {
   );
 };
 NewPost.propTypes = {
-  onCancel: PropTypes.func,
+  // onCancel: PropTypes.func,
   onAddPost: PropTypes.func,
 };
 

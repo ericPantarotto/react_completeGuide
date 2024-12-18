@@ -1,4 +1,4 @@
-import PropTypes, { bool } from 'prop-types';
+// import PropTypes, { bool } from 'prop-types';
 import { useEffect, useState } from 'react';
 import Post from './Post';
 
@@ -56,10 +56,10 @@ const PostList = () => {
   );
 };
 
-PostList.propTypes = {
-  onStopPosting: PropTypes.func,
-  isPosting: bool,
-};
+// PostList.propTypes = {
+//   onStopPosting: PropTypes.func,
+//   isPosting: bool,
+// };
 
 export default PostList;
 
