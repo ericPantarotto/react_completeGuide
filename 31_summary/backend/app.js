@@ -1,3 +1,4 @@
+const { uuid } = require('uuidv4');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -34,7 +35,8 @@ app.post('/posts', async (req, res) => {
   const postData = req.body;
   const newPost = {
     ...postData,
-    id: Math.random().toString(),
+    // id: Math.random().toString(),
+    id: uuid(),
   };
   const updatedPosts = [newPost, ...existingPosts];
   await storePosts(updatedPosts);
