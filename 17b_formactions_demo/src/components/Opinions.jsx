@@ -1,7 +1,7 @@
 import { use } from 'react';
 
 import { Opinion } from './Opinion';
-import { OpinionsContext } from '../store/opinions-context';
+import { OpinionsContext } from '../store/OpinionsCtx.js';
 
 export function Opinions() {
   const { opinions } = use(OpinionsContext);

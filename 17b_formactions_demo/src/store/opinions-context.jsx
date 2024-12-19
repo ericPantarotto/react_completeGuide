@@ -1,11 +1,6 @@
-import { createContext, useEffect, useState } from 'react';
-
-export const OpinionsContext = createContext({
-  opinions: null,
-  addOpinion: (opinion) => {},
-  upvoteOpinion: (id) => {},
-  downvoteOpinion: (id) => {},
-});
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { OpinionsContext } from './OpinionsCtx.js';
 
 export function OpinionsContextProvider({ children }) {
   const [opinions, setOpinions] = useState();
@@ -68,3 +63,6 @@ export function OpinionsContextProvider({ children }) {
 
   return <OpinionsContext value={contextValue}>{children}</OpinionsContext>;
 }
+OpinionsContextProvider.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.node),
+};
