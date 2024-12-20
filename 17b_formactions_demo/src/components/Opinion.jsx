@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { use } from 'react';
+import { use, useActionState } from 'react';
 import { OpinionsContext } from '../store/OpinionsCtx';
 
 export function Opinion({ opinion: { id, title, body, userName, votes } }) {
@@ -9,6 +9,13 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
 
   const downvoteAction = async () => await downvoteOpinion(id);
 
+  // eslint-disable-next-line no-unused-vars
+  const [upvoteFormState, upvoteFormAction, upvotePending] =
+    useActionState(upvoteAction);
+  // eslint-disable-next-line no-unused-vars
+  const [downvoteFormState, downvoteFormAction, downvotePending] =
+    useActionState(downvoteAction);
+
   return (
     <article>
       <header>
@@ -17,7 +24,10 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
       </header>
       <p>{body}</p>
       <form className='votes'>
-        <button formAction={upvoteAction}>
+        <button
+          formAction={upvoteFormAction}
+          disabled={upvotePending || downvotePending}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='24'
@@ -37,7 +47,10 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
 
         <span>{votes}</span>
 
-        <button formAction={downvoteAction}>
+        <button
+          formAction={downvoteFormAction}
+          disabled={upvotePending || downvotePending}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='24'
