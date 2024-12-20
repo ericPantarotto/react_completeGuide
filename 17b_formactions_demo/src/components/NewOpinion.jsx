@@ -1,5 +1,6 @@
 import { use, useActionState } from 'react';
 import { OpinionsContext } from '../store/OpinionsCtx.js';
+import Submit from './Submit';
 
 function isNotEmpty(value) {
   return value.trim() !== '';
@@ -92,9 +93,7 @@ export function NewOpinion() {
           </ul>
         )}
 
-        <p className='actions'>
-          <button type='submit'>Submit</button>
-        </p>
+        <Submit />
       </form>
     </div>
   );
