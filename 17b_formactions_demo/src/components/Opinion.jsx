@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
+import { use } from 'react';
+import { OpinionsContext } from '../store/OpinionsCtx';
 
-export function Opinion({ opinion: { title, body, userName, votes } }) {
-  function upvoteAction() {
-    console.log('UPVOTE');
-  }
+export function Opinion({ opinion: { id, title, body, userName, votes } }) {
+  const { upvoteOpinion, downvoteOpinion } = use(OpinionsContext);
 
-  function downvoteAction() {
-    console.log('DOWNVOTE');
-  }
+  const upvoteAction = async () => await upvoteOpinion(id);
+
+  const downvoteAction = async () => await downvoteOpinion(id);
 
   return (
     <article>
