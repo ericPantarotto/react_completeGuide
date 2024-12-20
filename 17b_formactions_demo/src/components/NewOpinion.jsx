@@ -93,6 +93,7 @@ export function NewOpinion() {
           </ul>
         )}
 
+
         <Submit />
       </form>
     </div>
