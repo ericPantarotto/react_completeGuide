@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useActionState, useContext } from 'react';
 import useHttp from '../hooks/useHttp';
 import CartContext from '../store/CartContext';
 import UserProgressContext from '../store/UserProgressContext';
@@ -27,7 +27,7 @@ export default function Checkout() {
 
   const {
     data,
-    isLoading: isSending,
+    // isLoading: isSending,
     error,
     sendRequest,
     clearData,
@@ -84,7 +84,7 @@ export default function Checkout() {
     // });
   };
 
-  const checkoutAction = async (fd) => {
+  const checkoutAction = async (prevState, fd) => {
     const customerData = Object.fromEntries(fd.entries());
 
     await sendRequest(
@@ -96,6 +96,9 @@ export default function Checkout() {
       })
     );
   };
+
+  // eslint-disable-next-line no-unused-vars
+  const [formState, formAction, isSending] = useActionState(checkoutAction, null);
 
   let actions = (
     <>
@@ -109,6 +112,7 @@ export default function Checkout() {
   if (isSending) {
     actions = <span>Sending order data...</span>;
   }
+
   if (data && !error) {
     return (
       <Modal
@@ -130,7 +134,7 @@ export default function Checkout() {
   return (
     <Modal open={userProgressCtx.progress === 'checkout'} onClose={handleClose}>
       {/* <form onSubmit={handleSubmit}> */}
-      <form action={checkoutAction}>
+      <form action={formAction}>
         <h2>Checkout</h2>
         <p>Total Amount: {currencyFormatter.format(cartTotal)} </p>
         <Input
